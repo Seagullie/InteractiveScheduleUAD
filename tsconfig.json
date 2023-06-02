@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "jsx": "react",
+    "strict": true, 
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "resolveJsonModule": true
+  }
+}

@@ -1,0 +1,150 @@
+{
+    "monday": {
+        "classes": [
+            {
+                "index": 4,
+                "isBiweekly": false,
+                "name": "Системи керування контентом",
+                "teacher": "проф. Піх",
+                "room": "а. 401",
+                "isSharedClass": true
+            },
+            {
+                "index": 5,
+                "isBiweekly": true,
+                "week": 2,
+                "name": "Системи керування контентом",
+                "teacher": "проф. Піх",
+                "room": "а. 303"
+            }
+        ]
+        
+    },
+    "tuesday": {
+        "classes": [
+            {
+                "index": 2,
+                "isBiweekly": false,
+                "name": "Створення інтерактивних медіа",
+                "teacher": "доц. Кудряшова",
+                "room": "а. 401",
+                "isSharedClass": true
+            },
+            {
+                "index": 3,
+                "isBiweekly": true,
+                "week": 1,
+                "name": "Проектування аудіо та відео",
+                "teacher": "доц. Сабат",
+                "room": "а. 405",
+                "isSharedClass": true
+            },
+            {
+                "index": 3,
+                "isBiweekly": true,
+                "week": 2,
+                "name": "Створення інтерактивних медіа",
+                "teacher": "доц. Кудряшова",
+                "room": "а. 303",
+                "isSharedClass": true
+            },
+            {
+                "index": 4,
+                "isBiweekly": false,
+                "name": "Методи і засоби візуалізації даних",
+                "teacher": "доц. Кудряшова",
+                "room": "а. 401",
+                "isSharedClass": true
+            },
+            {
+                "index": 5,
+                "isBiweekly": true,
+                "week": 2,
+                "name": "Методи і засоби візуалізації даних",
+                "teacher": "доц. Кудряшова",
+                "room": "а. 301"
+            }
+        ]
+    },
+    "wednesday": 
+       {"classes": [{
+            "index": 1,
+            "name": "Інтелектуальна власність",
+            "teacher": "ст. в. Кравчук",
+            "room": "а. 325",
+            "isSharedClass": true
+        }, 
+        {
+            "index": 2,
+            "name": "Мультимедійне видавництво",
+            "teacher": "доц. Миклушка",
+            "room": "а. 305",
+            "isSharedClass": true
+        },
+        {
+            "index": 3,
+            "name": "Мультимедійне видавництво",
+            "teacher": "доц. Миклушка",
+            "room": "а. 317",
+            "isSharedClass": true
+        },
+        {
+            "index": 4,
+            "name": "КП 'Мультимедійне видавництво'",
+            "teacher": "доц. Миклушка",
+            "room": "а. 317",
+            "isSharedClass": true
+        }
+    ]}
+    ,
+    "thursday": {
+        "classes": [
+            {
+                "index": 1,
+                "name": "Проектування аудіо та відео",
+                "teacher": "доц. Сабат",
+                "room": "a. 305",
+                "isSharedClass": true,
+                "isBiweekly": true,
+                "week": 1
+            }, 
+            {
+                "index": 2,
+                "name": "Формування наукових публiкацiй",
+                "teacher": "проф. Огірко",
+                "room": "а. 321",
+                "isSharedClass": true,
+                "isBiweekly": true,
+                "week": 1
+            },
+            {
+                "index": 3,
+                "name": "Системи комп'ютерного зору",
+                "teacher": "доц. Ратушняк",
+                "room": "а. 401",
+                "isSharedClass": true
+            },
+            {
+                "index": 4,
+                "name": "Формування наукових публiкацiй",
+                "teacher": "проф. Огірко",
+                "room": "a. 321",
+                "isSharedClass": true,
+                "isBiweekly": true,
+                "week": 1
+            },
+            {
+                "index": 5,
+                "name": "Системи комп'ютерного зору",
+                "teacher": "доц. Ратушняк",
+                "room": "a. 321",
+                "isSharedClass": true,
+                "isBiweekly": true,
+                "week": 2
+            }
+        ]
+    },
+    "friday": {
+        "classes": []
+    }
+}

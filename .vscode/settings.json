@@ -1,0 +1,10 @@
+{
+    "gitdoc.enabled": true,
+    "notebook.consolidatedRunButton": false,
+
+    "actionButtons": {
+        "loadNpmCommands":true,
+        "useScripts": true,
+        "npmClient": "npm",
+    }
+}

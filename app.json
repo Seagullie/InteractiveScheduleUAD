@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "name": "Інтеракт. Розклад",
+    "slug": "InteractiveSchedule",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "jsEngine": "hermes",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.noid.InteractiveSchedule"
+    },
+
+    "notification": {
+      "icon": "./assets/images/notification-icon.png",
+      "color": "#1C5D8F"
+    },
+
+    "androidStatusBar": {
+      "backgroundColor": "#1C5D8F",
+      "barStyle": "light-content"
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "78051180-c2bf-42d2-b55b-1dd5bf876ea5"
+      }
+    }
+  },
+
+  "keys": {
+    "contentful": {
+      "deliveryKey": "hQc8OI2VQrAnLLSWSpflQyByQUZ_t5ct1Ed8axAu7M0",
+      "space": "ude6y2h1h61l"
+    } 
+  }
+}

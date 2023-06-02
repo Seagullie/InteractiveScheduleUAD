@@ -1,0 +1,113 @@
+{
+    "monday": {
+        "classes": [
+            {
+                "index": 3,
+                "name": "Рекламні медійні технології (ДВВ)",
+                "room": "Л.2а",
+                "qualification": "доц.",
+                "teacher": "Голубник",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            },
+            {
+                "index": 3,
+                "name": "Рекламні медійні технології (ДВВ)",
+                "room": "Л.1",
+                "qualification": "доц.",
+                "teacher": "Голубник",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            },
+            {
+                "index": 4,
+                "name": "Рекламні медійні технології (ДВВ)",
+                "room": "Л.2а",
+                "qualification": "доц.",
+                "teacher": "Голубник",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            }
+        ]
+    },
+    "tuesday": {
+        "classes": [
+            {
+                "index": 1,
+                "name": "МіМПР (ДВВ)",
+                "room": "а.305",
+                "qualification": "проф.",
+                "teacher": "Піх",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            },
+            {
+                "index": 2,
+                "name": "Моделі і методи прийняття рішень (МіМПР) (ДВВ)",
+                "room": "а.201",
+                "qualification": "проф.",
+                "teacher": "Піх",
+                "label": null
+            },
+            {
+                "index": 3,
+                "name": "Охорона праці і БЖД",
+                "room": "К.19",
+                "qualification": "доц.",
+                "teacher": "Бернацек",
+                "label": null
+            },
+            {
+                "index": 4,
+                "name": "Охорона праці і БЖД",
+                "room": "К.19",
+                "qualification": "доц.",
+                "teacher": "Бернацек",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            }
+        ]
+    },
+    "wednesday": {
+        "classes": [
+            {
+                "index": 2,
+                "name": "Управління ІТ-проектами (УІТП)",
+                "room": "а.401",
+                "qualification": "проф.",
+                "teacher": "Тимченко",
+                "label": null
+            },
+            {
+                "index": 3,
+                "name": "УІТП",
+                "room": "а.419",
+                "qualification": "проф.",
+                "teacher": "Тимченко",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            }
+        ]
+    },
+    "thursday": {
+        "classes": [
+            {
+                "index": 2,
+                "name": "Виконання бакалаврської кваліфікаційної роботи",
+                "room": null,
+                "qualification": null,
+                "teacher": null,
+                "label": null
+            }
+        ]
+    },
+    "friday": {
+        "classes": []
+    }
+}

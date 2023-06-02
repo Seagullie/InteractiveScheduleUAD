@@ -1,0 +1,216 @@
+{
+    "monday": {
+        "classes": [
+            {
+                "index": 1,
+                "name": "ПАВК",
+                "room": "а.304",
+                "qualification": "доц.",
+                "teacher": "Сабат",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            },
+            {
+                "index": 2,
+                "name": "ПАВК",
+                "room": "а.304",
+                "qualification": "доц.",
+                "teacher": "Сабат",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            },
+            {
+                "index": 3,
+                "name": "Мультимедійні мережі",
+                "room": "а.312",
+                "qualification": "доц.",
+                "teacher": "Сабат",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            },
+            {
+                "index": 4,
+                "name": "Проектування аудіо і відео контенту (ПАВК)",
+                "room": "а.312",
+                "qualification": "доц.",
+                "teacher": "Сабат",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            },
+            {
+                "index": 5,
+                "name": "Мультимедійні мережі",
+                "room": "а.304",
+                "qualification": "доц.",
+                "teacher": "Сабат",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            }
+        ]
+    },
+    "tuesday": {
+        "classes": [
+            {
+                "index": 1,
+                "name": "Дизайн контенту",
+                "room": "а.302",
+                "qualification": "доц.",
+                "teacher": "Васюта",
+                "label": null
+            },
+            {
+                "index": 2,
+                "name": "Створення інтерактивних медіа (СІМ)",
+                "room": "а.401",
+                "qualification": "доц.",
+                "teacher": "Кудрящова",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            },
+            {
+                "index": 3,
+                "name": "СІМ",
+                "room": "а.303",
+                "qualification": "доц.",
+                "teacher": "Кудрящова",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            }
+        ]
+    },
+    "wednesday": {
+        "classes": [
+            {
+                "index": 1,
+                "name": "МВ",
+                "room": "а.305",
+                "qualification": "доц.",
+                "teacher": "Миклушка",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            },
+            {
+                "index": 2,
+                "name": "МВ",
+                "room": "а.305",
+                "qualification": "доц.",
+                "teacher": "Миклушка",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            },
+            {
+                "index": 3,
+                "name": "Мультимедійне видавництво (МВ)",
+                "room": "а.317",
+                "qualification": "доц.",
+                "teacher": "Миклушка",
+                "label": null
+            },
+            {
+                "index": 4,
+                "name": "КП «Мультимедійне видавництво»",
+                "room": "а.305",
+                "qualification": "доц.",
+                "teacher": "Миклушка",
+                "label": null
+            },
+            {
+                "index": 5,
+                "name": "ТЦЗ",
+                "room": "Л.2а",
+                "qualification": "доц.",
+                "teacher": "Семенів М.",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            },
+            {
+                "index": 6,
+                "name": "ТЦЗ",
+                "room": "Л.2а",
+                "qualification": "доц.",
+                "teacher": "Семенів М.",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            }
+        ]
+    },
+    "thursday": {
+        "classes": [
+            {
+                "index": 2,
+                "name": "Електронні ЗМІ (Е ЗМІ)",
+                "room": "а.317",
+                "qualification": "доц.",
+                "teacher": "Миклушка",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            },
+            {
+                "index": 2,
+                "name": "Управління проектами",
+                "room": "а.304",
+                "qualification": "проф.",
+                "teacher": "Огірко",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            },
+            {
+                "index": 3,
+                "name": "Управління проектами",
+                "room": "а.317",
+                "qualification": "проф.",
+                "teacher": "Огірко",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            },
+            {
+                "index": 3,
+                "name": "Е ЗМІ",
+                "room": "а.301",
+                "qualification": "доц.",
+                "teacher": "Миклушка",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            },
+            {
+                "index": 4,
+                "name": "Дизайн контенту",
+                "room": "а.312",
+                "qualification": "доц.",
+                "teacher": "Васюта",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            }
+        ]
+    },
+    "friday": {
+        "classes": [
+            {
+                "index": 1,
+                "name": "Теорія цифрових зображень (ТЦЗ)",
+                "room": "Л.3",
+                "qualification": "доц.",
+                "teacher": "Семенів М.",
+                "label": 1.0,
+                "isBiweekly": true,
+                "week": 1
+            }
+        ]
+    }
+}

@@ -1,0 +1,90 @@
+{
+    "monday": {
+        "classes": []
+    },
+    "tuesday": {
+        "classes": [
+            {
+                "index": 1,
+                "name": "МіМПР (ДВВ)",
+                "room": "а.305",
+                "qualification": "проф.",
+                "teacher": "Піх",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            },
+            {
+                "index": 2,
+                "name": "Моделі і методи прийняття рішень (МіМПР) (ДВВ)",
+                "room": "а.201",
+                "qualification": "проф.",
+                "teacher": "Піх",
+                "label": null
+            },
+            {
+                "index": 3,
+                "name": "Охорона праці і БЖД",
+                "room": "К.19",
+                "qualification": "доц.",
+                "teacher": "Бернацек",
+                "label": null
+            },
+            {
+                "index": 4,
+                "name": "Охорона праці і БЖД",
+                "room": "К.19",
+                "qualification": "доц.",
+                "teacher": "Бернацек",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            }
+        ]
+    },
+    "wednesday": {
+        "classes": [
+            {
+                "index": 2,
+                "name": "Управління ІТ-проектами (УІТП)",
+                "room": "а.401",
+                "qualification": "проф.",
+                "teacher": "Тимченко",
+                "label": null
+            },
+            {
+                "index": 3,
+                "name": "УІТП",
+                "room": "а.419",
+                "qualification": "проф.",
+                "teacher": "Тимченко",
+                "label": 2.0,
+                "isBiweekly": true,
+                "week": 2
+            }
+        ]
+    },
+    "thursday": {
+        "classes": [
+            {
+                "index": 2,
+                "name": "Виконання бакалаврської кваліфікаційної роботи",
+                "room": null,
+                "qualification": null,
+                "teacher": null,
+                "label": null
+            },
+            {
+                "index": 3,
+                "name": "Іноземна мова професійного спрямування (ДВВ)",
+                "room": "а.321",
+                "qualification": "доц.",
+                "teacher": "Мусійовська",
+                "label": null
+            }
+        ]
+    },
+    "friday": {
+        "classes": []
+    }
+}
