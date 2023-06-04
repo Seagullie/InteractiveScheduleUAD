@@ -115,7 +115,7 @@ export default function ScheduleClassForm() {
 
   const classEnd: string = reglamentClass[2]
 
-  const teacher = scheduleClass.teacher
+  const teacher = scheduleClass.teacher ?? ""
 
   const dayUkrIndex = workDaysEnLower.findIndex((d) => scheduleClass.day == d)
   console.log("|" + scheduleClass.day + "|")
@@ -129,7 +129,7 @@ export default function ScheduleClassForm() {
 
   const initialFormikValues: ScheduleClassEditables = {
     ...scheduleClassEditables,
-    teacher: teacher? (typeof teacher == "string"? : teacher.join(", "): "") : "",
+    teacher: typeof teacher !== "string" ? teacher.join(", ") : teacher,
     room: formatRoomName(scheduleClass, true),
   }
 
