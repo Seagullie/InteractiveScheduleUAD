@@ -129,7 +129,7 @@ export default function ScheduleClassForm() {
 
   const initialFormikValues: ScheduleClassEditables = {
     ...scheduleClassEditables,
-    teacher: typeof teacher == "string" ? teacher : teacher.join(", "),
+    teacher: teacher && typeof teacher == "string" ? teacher : teacher.join(", "),
     room: formatRoomName(scheduleClass, true),
   }
 
