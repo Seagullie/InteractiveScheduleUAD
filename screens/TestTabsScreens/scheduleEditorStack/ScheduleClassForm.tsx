@@ -1,29 +1,14 @@
-import { useNavigation, useRoute } from "@react-navigation/native"
-import React, { useCallback, useEffect, useState } from "react"
-import { SafeAreaView } from "react-native-safe-area-context"
+import { useRoute } from "@react-navigation/native"
+import React, { useCallback } from "react"
 import AppText from "../../../shared/AppText"
-import {
-  Text,
-  View,
-  StyleSheet,
-  ActivityIndicator,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
-  TextProps,
-  TextInputProps,
-} from "react-native"
-import { Button, Input } from "react-native-elements"
-import Autocomplete from "react-native-autocomplete-input"
+import { View, StyleSheet, TextInput, Platform, TextInputProps } from "react-native"
 import { palette } from "../../../styles/global"
-import { AutocompleteDropdown } from "react-native-autocomplete-dropdown"
-import TeacherTableModel from "../../../models/TeacherTableModel"
 import CustomSwitch from "../../../shared/Switch"
 import { CLASS_TYPE, ScheduleClass, ScheduleClassProps } from "../../../models/ScheduleModel"
-import { Form, Formik, useFormikContext } from "formik"
-import { REGLAMENT_DATA, suffixesForNumbers } from "../../../constants/Constants"
+import { Formik, useFormikContext } from "formik"
+import { REGLAMENT_DATA } from "../../../constants/Constants"
 import getStrict from "../../../utilities/getStrict"
-import { formatTeacherName, formatRoomName } from "../../../components/ScheduleComponents/ScheduleClass"
+import { formatRoomName } from "../../../components/ScheduleComponents/ScheduleClass"
 import _ from "lodash"
 import { workDays, workDaysEnLower } from "../../../constants/Days"
 import { WeekType } from "../../../utilities/getWeekType"
