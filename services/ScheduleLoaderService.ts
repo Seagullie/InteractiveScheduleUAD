@@ -169,7 +169,6 @@ export default class ScheduleLoaderService {
 
   // checks for updates and updates schedules if they are outdated
   async checkForUpdatesAsync() {
-    // let networkState = await Network.getNetworkStateAsync()
     let netInfo = await NetInfo.fetch()
 
     if (!netInfo.isConnected || !netInfo.isInternetReachable) {
