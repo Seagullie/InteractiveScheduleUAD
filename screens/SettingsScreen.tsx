@@ -237,6 +237,16 @@ export default function Settings() {
                     </TouchableOpacity>
                   </View>
                 </View>
+                {constructSettingsRow(
+                  "Звук, місце появи сповіщення та ін.",
+                  <View style={[styles.settingValueContainer, { marginRight: 3 }]}>
+                    {/* TODO: Unhardcode margin right */}
+
+                    <TouchableOpacity onPress={settingsServiceRef.current?.openSystemSettingsForNotifications}>
+                      <Ionicons name="open" size={14} color={palette.navigationBackground} />
+                    </TouchableOpacity>
+                  </View>
+                )}
               </View>
             </View>
           </View>
