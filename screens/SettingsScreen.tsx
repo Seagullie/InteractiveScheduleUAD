@@ -222,11 +222,36 @@ export default function Settings() {
                 }}
               />
             </View>
-            {
-              constructSettingsRow(
-                "Сповіщати заздалегідь", 
-              )
-            }
+            {constructSettingsRow(
+              "Сповіщати заздалегідь",
+              <View>
+                <TouchableOpacity onPress={() => setNotifyBeforehandModalVisible(true)}>
+                  <View style={styles.settingValueContainer}>
+                    <AppText style={styles.settingValue}>
+                      {settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
+                    </AppText>
+                    <EntypoIcon name="chevron-small-right" style={styles.grayIcon}></EntypoIcon>
+                  </View>
+                </TouchableOpacity>
+
+                <OptionPickerModal
+                  hasSearchBar={false}
+                  isOpen={notifyBeforehandModalVisible}
+                  initialOptions={[0, 5, 10, 15, 20].map((n) => n + " хв.")}
+                  initialSelectedOption={settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
+                  closeModal={() => setNotifyBeforehandModalVisible(false)}
+                  onSelected={(selected) => {
+                    let selectedInt = parseInt(selected)
+                    setSettingsValues({
+                      ...settingsValues,
+                      notifyBeforeClassOffsetMinutes: selectedInt,
+                    })
+
+                    toggleNotifs(settingsValues.notifyBeforeClass)
+                  }}
+                />
+              </View>
+            )}
 
             <View style={styles.separator}></View>
 
