@@ -309,8 +309,8 @@ export default function Settings() {
 
                 <View style={styles.separator} />
 
-                <View style={styles.settingRow}>
-                  <AppText style={styles.settingName}>Відображати номер аудиторії</AppText>
+                {constructSettingsRow(
+                  "Відображати номер аудиторії",
                   <CustomSwitch
                     initVal={settingsValues.displayRoomNumber}
                     onValueChange={(nv) => {
@@ -321,7 +321,7 @@ export default function Settings() {
                     }}
                     disabled={false}
                   />
-                </View>
+                )}
 
                 <View style={styles.separator} />
 
