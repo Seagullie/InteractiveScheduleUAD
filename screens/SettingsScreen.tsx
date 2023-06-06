@@ -169,7 +169,7 @@ export default function Settings() {
           <View style={styles.settingsCategory}>
             <View>
               <View>
-                <View style={{ ...styles.settingRow, ...{ alignItems: "center" } }}>
+                <View style={ [styles.settingRow, { alignItems: "center" }] }>
                   <AppText style={styles.settingName}>Нагадувати про початок пари</AppText>
                   <CustomSwitch
                     onValueChange={(nv) => {
