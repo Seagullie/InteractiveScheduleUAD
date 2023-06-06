@@ -24,11 +24,13 @@ import { useFocusEffect } from "@react-navigation/native"
 import AppText from "../shared/AppText"
 import ScheduleHeader from "../components/ScheduleComponents/ScheduleHeader"
 
+// TODO: scroll to current day on mount only instead of doing so on every rerender
+
 export default function ScheduleScreen({ isEditable = false }: { isEditable: boolean }) {
   // const { showBoundary } = useErrorBoundary()
   const todayIndex = _.clamp(new Date().getDay() - 1, 0, 4)
 
-  // state for uncoditional rerendering
+  // state for unconditional rerendering
   const [state, setState] = useState({})
   const [isFirstTimeLaunch, setIsFirstTimeLaunch] = useState<string | null>("false") // async storage can't store anything other than strings
 
