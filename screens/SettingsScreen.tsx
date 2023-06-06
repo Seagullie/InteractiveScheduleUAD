@@ -176,21 +176,6 @@ export default function Settings() {
             <AppText style={styles.settingsSectionName}>Сповіщення</AppText>
           </View>
           <View style={styles.settingsCategory}>
-            <View style={styles.settingRow}>
-              <AppText style={styles.settingName}>Нагадувати про початок пари</AppText>
-              <CustomSwitch
-                onValueChange={(nv) => {
-                  setSettingsValues({
-                    ...settingsValues,
-                    notifyBeforeClass: nv,
-                  })
-
-                  toggleNotifs(nv)
-                }}
-                initVal={settingsValues.notifyBeforeClass}
-                disabled={false}
-              />
-            </View>
             {constructSettingsRow(
               "Нагадувати про початок пари",
               <CustomSwitch
