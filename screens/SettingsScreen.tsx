@@ -246,10 +246,10 @@ export default function Settings() {
               </View>
             )}
           </View>
-          <View style={styles.categoryHeader}>
+          {constructCategoryHeader(
+            "Розклад",
             <FontAwesomeIcon name="calendar-o" style={styles.settingsSectionIcon}></FontAwesomeIcon>
-            <AppText style={styles.settingsSectionName}>Розклад</AppText>
-          </View>
+          )}
           <View style={styles.settingsCategory}>
             <View>
               <View>
