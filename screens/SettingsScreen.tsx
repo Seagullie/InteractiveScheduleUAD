@@ -380,7 +380,6 @@ export default function Settings() {
 export const styles = StyleSheet.create({
   scrollViewContentContainer: {
     // backgroundColor: "green",
-    // so this is a...
   },
 
   loadingIndicatorOverlay: {
