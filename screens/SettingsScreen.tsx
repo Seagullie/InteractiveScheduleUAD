@@ -176,69 +176,65 @@ export default function Settings() {
             <AppText style={styles.settingsSectionName}>Сповіщення</AppText>
           </View>
           <View style={styles.settingsCategory}>
-            <View>
-              <View>
-                <View style={[styles.settingRow, { alignItems: "center" }]}>
-                  <AppText style={styles.settingName}>Нагадувати про початок пари</AppText>
-                  <CustomSwitch
-                    onValueChange={(nv) => {
-                      setSettingsValues({
-                        ...settingsValues,
-                        notifyBeforeClass: nv,
-                      })
+            <View style={[styles.settingRow]}>
+              <AppText style={styles.settingName}>Нагадувати про початок пари</AppText>
+              <CustomSwitch
+                onValueChange={(nv) => {
+                  setSettingsValues({
+                    ...settingsValues,
+                    notifyBeforeClass: nv,
+                  })
 
-                      toggleNotifs(nv)
-                    }}
-                    initVal={settingsValues.notifyBeforeClass}
-                    disabled={false}
-                  />
-                </View>
-                <View style={styles.separator}></View>
-
-                <View style={styles.settingRow}>
-                  <AppText style={styles.settingName}>Сповіщати заздалегідь</AppText>
-
-                  <TouchableOpacity onPress={() => setNotifyBeforehandModalVisible(true)}>
-                    <View style={styles.settingValueContainer}>
-                      <AppText style={styles.settingValue}>
-                        {settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
-                      </AppText>
-                      <EntypoIcon name="chevron-small-right" style={styles.grayIcon}></EntypoIcon>
-                    </View>
-                  </TouchableOpacity>
-
-                  <OptionPickerModal
-                    hasSearchBar={false}
-                    isOpen={notifyBeforehandModalVisible}
-                    initialOptions={[0, 5, 10, 15, 20].map((n) => n + " хв.")}
-                    initialSelectedOption={settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
-                    closeModal={() => setNotifyBeforehandModalVisible(false)}
-                    onSelected={(selected) => {
-                      let selectedInt = parseInt(selected)
-                      setSettingsValues({
-                        ...settingsValues,
-                        notifyBeforeClassOffsetMinutes: selectedInt,
-                      })
-
-                      toggleNotifs(settingsValues.notifyBeforeClass)
-                    }}
-                  />
-                </View>
-
-                <View style={styles.separator}></View>
-
-                {constructSettingsRow(
-                  "Звук, місце появи сповіщення та ін.",
-                  <View style={[styles.settingValueContainer, { marginRight: 3 }]}>
-                    {/* TODO: Unhardcode margin right */}
-
-                    <TouchableOpacity onPress={settingsServiceRef.current?.openSystemSettingsForNotifications}>
-                      <Ionicons name="open" size={14} color={palette.navigationBackground} />
-                    </TouchableOpacity>
-                  </View>
-                )}
-              </View>
+                  toggleNotifs(nv)
+                }}
+                initVal={settingsValues.notifyBeforeClass}
+                disabled={false}
+              />
             </View>
+            <View style={styles.separator}></View>
+
+            <View style={styles.settingRow}>
+              <AppText style={styles.settingName}>Сповіщати заздалегідь</AppText>
+
+              <TouchableOpacity onPress={() => setNotifyBeforehandModalVisible(true)}>
+                <View style={styles.settingValueContainer}>
+                  <AppText style={styles.settingValue}>
+                    {settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
+                  </AppText>
+                  <EntypoIcon name="chevron-small-right" style={styles.grayIcon}></EntypoIcon>
+                </View>
+              </TouchableOpacity>
+
+              <OptionPickerModal
+                hasSearchBar={false}
+                isOpen={notifyBeforehandModalVisible}
+                initialOptions={[0, 5, 10, 15, 20].map((n) => n + " хв.")}
+                initialSelectedOption={settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
+                closeModal={() => setNotifyBeforehandModalVisible(false)}
+                onSelected={(selected) => {
+                  let selectedInt = parseInt(selected)
+                  setSettingsValues({
+                    ...settingsValues,
+                    notifyBeforeClassOffsetMinutes: selectedInt,
+                  })
+
+                  toggleNotifs(settingsValues.notifyBeforeClass)
+                }}
+              />
+            </View>
+
+            <View style={styles.separator}></View>
+
+            {constructSettingsRow(
+              "Звук, місце появи сповіщення та ін.",
+              <View style={[styles.settingValueContainer, { marginRight: 3 }]}>
+                {/* TODO: Unhardcode margin right */}
+
+                <TouchableOpacity onPress={settingsServiceRef.current?.openSystemSettingsForNotifications}>
+                  <Ionicons name="open" size={14} color={palette.navigationBackground} />
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
           <View style={styles.notificationHeader}>
             <FontAwesomeIcon name="calendar-o" style={styles.settingsSectionIcon}></FontAwesomeIcon>
