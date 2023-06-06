@@ -319,7 +319,6 @@ export default function Settings() {
                         displayRoomNumber: nv,
                       })
                     }}
-                    disabled={false}
                   />
                 )}
 
