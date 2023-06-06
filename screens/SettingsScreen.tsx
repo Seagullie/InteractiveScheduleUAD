@@ -176,7 +176,7 @@ export default function Settings() {
             <AppText style={styles.settingsSectionName}>Сповіщення</AppText>
           </View>
           <View style={styles.settingsCategory}>
-            <View style={[styles.settingRow]}>
+            <View style={styles.settingRow}>
               <AppText style={styles.settingName}>Нагадувати про початок пари</AppText>
               <CustomSwitch
                 onValueChange={(nv) => {
