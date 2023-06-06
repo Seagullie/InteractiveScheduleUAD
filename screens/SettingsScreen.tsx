@@ -191,6 +191,21 @@ export default function Settings() {
                 disabled={false}
               />
             </View>
+            {constructSettingsRow(
+              "Нагадувати про початок пари",
+              <CustomSwitch
+                onValueChange={(nv) => {
+                  setSettingsValues({
+                    ...settingsValues,
+                    notifyBeforeClass: nv,
+                  })
+
+                  toggleNotifs(nv)
+                }}
+                initVal={settingsValues.notifyBeforeClass}
+                disabled={false}
+              />
+            )}
             <View style={styles.separator}></View>
 
             <View style={styles.settingRow}>
