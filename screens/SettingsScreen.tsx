@@ -326,31 +326,36 @@ export default function Settings() {
 
                 <View style={styles.settingRow}>
                   <AppText style={styles.settingName}>Відображати викладача</AppText>
-                  <TouchableOpacity
-                    onPress={() => setDisplayTeacherModeModalVisible(true)}
-                    style={styles.centeredTextAndIcon}
-                  >
-                    <AppText style={styles.settingValue}>{settingsValues.displayTeacherName}</AppText>
-                    <EntypoIcon name="chevron-small-right" style={styles.grayIcon}></EntypoIcon>
-                  </TouchableOpacity>
-                  <OptionPickerModal
-                    hasSearchBar={false}
-                    isOpen={displayTeacherModeModalVisible}
-                    initialOptions={[
-                      DisplayTeacherMode.Full,
-                      DisplayTeacherMode.SurnameAndInitials,
-                      DisplayTeacherMode.Hide,
-                    ]}
-                    initialSelectedOption={settingsValues.displayTeacherName}
-                    closeModal={() => setDisplayTeacherModeModalVisible(false)}
-                    onSelected={(selected) => {
-                      setSettingsValues({
-                        ...settingsValues,
-                        displayTeacherName: selected,
-                      })
-                    }}
-                  />
                 </View>
+                {constructSettingsRow(
+                  "Відображати викладача",
+                  <View>
+                    <TouchableOpacity
+                      onPress={() => setDisplayTeacherModeModalVisible(true)}
+                      style={styles.centeredTextAndIcon}
+                    >
+                      <AppText style={styles.settingValue}>{settingsValues.displayTeacherName}</AppText>
+                      <EntypoIcon name="chevron-small-right" style={styles.grayIcon}></EntypoIcon>
+                    </TouchableOpacity>
+                    <OptionPickerModal
+                      hasSearchBar={false}
+                      isOpen={displayTeacherModeModalVisible}
+                      initialOptions={[
+                        DisplayTeacherMode.Full,
+                        DisplayTeacherMode.SurnameAndInitials,
+                        DisplayTeacherMode.Hide,
+                      ]}
+                      initialSelectedOption={settingsValues.displayTeacherName}
+                      closeModal={() => setDisplayTeacherModeModalVisible(false)}
+                      onSelected={(selected) => {
+                        setSettingsValues({
+                          ...settingsValues,
+                          displayTeacherName: selected,
+                        })
+                      }}
+                    />
+                  </View>
+                )}
 
                 <View style={styles.separator}></View>
 
