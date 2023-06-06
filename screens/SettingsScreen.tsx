@@ -222,6 +222,11 @@ export default function Settings() {
                 }}
               />
             </View>
+            {
+              constructSettingsRow(
+                "Сповіщати заздалегідь", 
+              )
+            }
 
             <View style={styles.separator}></View>
 
