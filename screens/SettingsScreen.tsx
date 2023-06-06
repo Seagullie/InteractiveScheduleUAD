@@ -52,7 +52,7 @@ export default function Settings() {
   const [isReady, setIsReady] = useState(false)
 
   useEffect(() => {
-    async function initSettingsScreen() {
+    async function onMount() {
       const settingsService = await SettingsService.GetInstance()
       settingsServiceRef.current = settingsService
 
@@ -96,12 +96,11 @@ export default function Settings() {
       let scheduleLodaderInstance = await ScheduleLoaderService.GetInstance()
 
       let schedulePickerData = scheduleLodaderInstance.scheduleFiles.map((f) => ensureNoExtension(f.filename, ".json"))
-      // schedulePickerData.sort()
       setSchedulePickerData(schedulePickerData)
 
       setIsReady(true)
     }
-    initSettingsScreen()
+    onMount()
   }, [])
 
   // write settings to disk on each update to make sure they aren't lost
