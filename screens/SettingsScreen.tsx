@@ -320,7 +320,7 @@ export default function Settings() {
                       })
                     }}
                     disabled={false}
-                  ></CustomSwitch>
+                  />
                 </View>
 
                 <View style={styles.separator} />
