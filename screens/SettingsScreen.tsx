@@ -297,7 +297,7 @@ export default function Settings() {
                   </TouchableOpacity>
                 </View>
 
-                <View style={styles.separator}></View>
+                <View style={styles.separator} />
 
                 <View style={styles.settingRow}>
                   <AppText style={styles.settingName}>Відображати номер аудиторії</AppText>
@@ -313,7 +313,7 @@ export default function Settings() {
                   ></CustomSwitch>
                 </View>
 
-                <View style={styles.separator}></View>
+                <View style={styles.separator} />
 
                 <View style={styles.settingRow}>
                   <AppText style={styles.settingName}>Відображати викладача</AppText>
