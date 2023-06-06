@@ -141,7 +141,12 @@ export default function Settings() {
   }
 
   function constructSettingsRow(settingDescription: string, changeSettingComponent: JSX.Element) {
-    return ()
+    return (
+      <View style={styles.settingRow}>
+        <AppText style={styles.settingName}>{settingDescription}</AppText>
+        {changeSettingComponent}
+      </View>
+    )
   }
 
   if (!isReady) {
@@ -173,7 +178,7 @@ export default function Settings() {
           <View style={styles.settingsCategory}>
             <View>
               <View>
-                <View style={ [styles.settingRow, { alignItems: "center" }] }>
+                <View style={[styles.settingRow, { alignItems: "center" }]}>
                   <AppText style={styles.settingName}>Нагадувати про початок пари</AppText>
                   <CustomSwitch
                     onValueChange={(nv) => {
