@@ -140,6 +140,13 @@ export default function Settings() {
     }
   }
 
+  function constructCategoryHeader(categoryName: string, categoryIcon: JSX.Element) {
+
+    return(
+      
+    )
+  }
+
   function constructSettingsRow(settingDescription: string, changeSettingComponent: JSX.Element) {
     return (
       <View style={styles.settingRow}>
