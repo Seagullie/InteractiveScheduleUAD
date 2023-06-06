@@ -489,6 +489,8 @@ export const styles = StyleSheet.create({
   settingRow: {
     flexDirection: "row",
     justifyContent: "space-between",
+    // alignItems: "center",
+    // ^ doesn't work as expected
 
     marginVertical: 10,
   },
