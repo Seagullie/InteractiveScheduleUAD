@@ -24,7 +24,7 @@ import { useFocusEffect } from "@react-navigation/native"
 import AppText from "../shared/AppText"
 import ScheduleHeader from "../components/ScheduleComponents/ScheduleHeader"
 
-// TODO: scroll to current day on mount only instead of doing so on every rerender
+// TODO: scroll to current day on mount only instead of doing so on every rerender?
 
 export default function ScheduleScreen({ isEditable = false }: { isEditable: boolean }) {
   // const { showBoundary } = useErrorBoundary()
