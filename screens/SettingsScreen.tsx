@@ -354,33 +354,6 @@ export default function Settings() {
 
                 <View style={styles.separator}></View>
 
-                <View style={styles.settingRow}>
-                  <AppText style={styles.settingName}>Порожні дні</AppText>
-                  <TouchableOpacity
-                    onPress={() => setEmptyDayDisplayModalVisible(true)}
-                    style={styles.centeredTextAndIcon}
-                  >
-                    <AppText style={styles.settingValue}>{settingsValues.displayEmptyDays}</AppText>
-                    <EntypoIcon name="chevron-small-right" style={styles.grayIcon}></EntypoIcon>
-                  </TouchableOpacity>
-                  <OptionPickerModal
-                    hasSearchBar={false}
-                    isOpen={emptyDayDisplayModalVisible}
-                    initialOptions={[
-                      DisplayEmptyDaysMode.Display,
-                      DisplayEmptyDaysMode.Darken,
-                      DisplayEmptyDaysMode.Hide,
-                    ]}
-                    initialSelectedOption={settingsValues.displayEmptyDays}
-                    closeModal={() => setEmptyDayDisplayModalVisible(false)}
-                    onSelected={(selected) => {
-                      setSettingsValues({
-                        ...settingsValues,
-                        displayEmptyDays: selected,
-                      })
-                    }}
-                  />
-                </View>
                 {constructSettingsRow(
                   "Порожні дні",
                   <View>
