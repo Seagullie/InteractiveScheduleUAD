@@ -324,9 +324,6 @@ export default function Settings() {
 
                 <View style={styles.separator} />
 
-                <View style={styles.settingRow}>
-                  <AppText style={styles.settingName}>Відображати викладача</AppText>
-                </View>
                 {constructSettingsRow(
                   "Відображати викладача",
                   <View>
