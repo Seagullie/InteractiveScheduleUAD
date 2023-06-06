@@ -434,12 +434,7 @@ export const styles = StyleSheet.create({
 
     marginLeft: 6,
   },
-  iconRow: {
-    height: 16,
-    flexDirection: "row",
-    flex: 1,
-    marginRight: -88,
-  },
+
   settingsCategory: {
     padding: 10,
     paddingBottom: 5,
@@ -460,19 +455,6 @@ export const styles = StyleSheet.create({
   centeredTextAndIcon: {
     flexDirection: "row",
     alignItems: "center",
-  },
-
-  розклад: {
-    fontFamily: "raleway-600",
-    color: "rgba(90,90,90,1)",
-    fontSize: 14,
-    marginLeft: 7,
-  },
-  icon6Row: {
-    height: 16,
-    flexDirection: "row",
-    flex: 1,
-    marginLeft: -21,
   },
 
   settingName: {
