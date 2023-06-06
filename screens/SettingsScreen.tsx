@@ -17,7 +17,7 @@ import FlatButton from "../shared/Button"
 import OutlinedButton from "../shared/OutlinedButton"
 import { Ionicons } from "@expo/vector-icons"
 
-// TODO: Fix settings page spazzing out on first render
+// TODO: Fix settings page visually spazzing out on mount
 // it's not the switches
 // it's not the effect that saves updated settings to disk
 // it's not notification events updating state
