@@ -106,6 +106,7 @@ export default class ScheduleLoaderService {
 
     const client = getContentfulClient()
     const assets = await client.getAssets()
+    console.log(`[Schedule Loader] retrieved ${assets.items.length} schedule assets from contentful`)
 
     // iterate over assets and download them
 
