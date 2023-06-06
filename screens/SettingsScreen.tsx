@@ -141,7 +141,12 @@ export default function Settings() {
   }
 
   function constructCategoryHeader(categoryName: string, categoryIcon: JSX.Element) {
-    return <View></View>
+    return (
+      <View style={styles.categoryHeader}>
+        {categoryIcon}
+        <AppText style={styles.settingsSectionName}>{categoryName}</AppText>
+      </View>
+    )
   }
 
   function constructSettingsRow(settingDescription: string, changeSettingComponent: JSX.Element) {
@@ -175,10 +180,10 @@ export default function Settings() {
     <View style={{ flex: 1 }}>
       <ScrollView style={styles.scrollViewDirect} contentContainerStyle={styles.scrollViewContentContainer}>
         <View style={styles.pageBackground}>
-          <View style={styles.categoryHeader}>
+          {constructCategoryHeader(
+            "Сповіщення",
             <FontAwesomeIcon name="bell-o" style={styles.settingsSectionIcon}></FontAwesomeIcon>
-            <AppText style={styles.settingsSectionName}>Сповіщення</AppText>
-          </View>
+          )}
           <View style={styles.settingsCategory}>
             {constructSettingsRow(
               "Нагадувати про початок пари",
