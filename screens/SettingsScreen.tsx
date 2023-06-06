@@ -141,10 +141,7 @@ export default function Settings() {
   }
 
   function constructCategoryHeader(categoryName: string, categoryIcon: JSX.Element) {
-
-    return(
-      
-    )
+    return <View></View>
   }
 
   function constructSettingsRow(settingDescription: string, changeSettingComponent: JSX.Element) {
@@ -178,7 +175,7 @@ export default function Settings() {
     <View style={{ flex: 1 }}>
       <ScrollView style={styles.scrollViewDirect} contentContainerStyle={styles.scrollViewContentContainer}>
         <View style={styles.pageBackground}>
-          <View style={styles.notificationHeader}>
+          <View style={styles.categoryHeader}>
             <FontAwesomeIcon name="bell-o" style={styles.settingsSectionIcon}></FontAwesomeIcon>
             <AppText style={styles.settingsSectionName}>Сповіщення</AppText>
           </View>
@@ -244,7 +241,7 @@ export default function Settings() {
               </View>
             )}
           </View>
-          <View style={styles.notificationHeader}>
+          <View style={styles.categoryHeader}>
             <FontAwesomeIcon name="calendar-o" style={styles.settingsSectionIcon}></FontAwesomeIcon>
             <AppText style={styles.settingsSectionName}>Розклад</AppText>
           </View>
@@ -420,7 +417,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  notificationHeader: {
+  categoryHeader: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 24,
