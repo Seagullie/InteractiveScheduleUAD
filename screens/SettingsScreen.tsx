@@ -140,6 +140,10 @@ export default function Settings() {
     }
   }
 
+  function constructSettingsRow(settingDescription: string, changeSettingComponent: JSX.Element) {
+    return ()
+  }
+
   if (!isReady) {
     return (
       <View
