@@ -19,7 +19,4 @@ export const suffixesForNumbers = {
   6: "-та",
 }
 
-console.log("Creating REGLAMENT_DATA")
-
-
 export const NOTIFICATIONS_CHANNEL_ID = "interactive-schedule-notifications"

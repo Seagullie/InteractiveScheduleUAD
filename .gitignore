@@ -21,3 +21,6 @@ package-lock.json
 
 # API keys 
 .env
+
+# compiled apk files
+build/

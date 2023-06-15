@@ -137,10 +137,10 @@ export default class SettingsService implements ISettingsService, ISingleton {
     }
   }
 
-  async openSystemSettingsForNotifications() {
+  async openAndroidSystemSettingsForNotifications() {
     const pkg = Constants.manifest.android.package
+    const channel = await Notifications.getNotificationChannelAsync(NOTIFICATIONS_CHANNEL_ID)
     const allChannels = await Notifications.getNotificationChannelsAsync()
-    const channel = await Notifications.getNotificationChannelAsync(NOTIFICATIONS_CHANNEL_ID) // TODO: unhardcode
     console.log("[Notification Tests] All channels of this app: ")
     console.log(allChannels)
     console.log("[Notification Tests] Channel id for main channel: " + channel?.id)

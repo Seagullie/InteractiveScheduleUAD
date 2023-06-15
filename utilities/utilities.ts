@@ -4,6 +4,9 @@ import { REGLAMENT_DATA_ELEM_TYPE, REGLAMENT_DATA } from "../constants/Constants
 import { createClient } from "contentful/dist/contentful.browser.min.js"
 import { ContentfulClientApi } from "contentful"
 import { ContentfulContentDeliveryAccessToken, ContentfulSpace } from "../constants/Keys"
+import { Platform } from "react-native"
+import * as FileSystem from "expo-file-system"
+import constants, { ExecutionEnvironment } from "expo-constants"
 
 export const GetTimeDifference = (earlier: Date, later: Date) => {
   let momentA = moment(earlier)
@@ -31,9 +34,6 @@ export function createEvenlySpacedTimeSequence(sequenceSize: number, spacingInSe
     index += 1
   }
 
-  // TODO: move to tests
-  if (sequence.length !== sequenceSize) throw new Error("Sequence size is not equal to the expected size")
-
   return sequence
 }
 
@@ -49,7 +49,7 @@ function liesInRange(value: Date, start: Date, end: Date) {
   return value <= end && value >= start
 }
 
-export function determineInterval(): false | REGLAMENT_DATA_ELEM_TYPE {
+export function determineInterval(timepoint = new Date()): false | REGLAMENT_DATA_ELEM_TYPE {
   let interval: false | REGLAMENT_DATA_ELEM_TYPE = false
 
   REGLAMENT_DATA.forEach((class_) => {
@@ -62,7 +62,7 @@ export function determineInterval(): false | REGLAMENT_DATA_ELEM_TYPE {
     let minuteEnd = hourAndMinuteEnd.split(":")[1]
 
     let now = new Date()
-    let timepoint = now
+    // TODO: annotate
     let earlier = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hourStart), parseInt(minuteStart))
     let later = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hourEnd), parseInt(minuteEnd))
 
@@ -100,4 +100,25 @@ export function ensureNoExtension(filename: string, extension: string) {
 
 export const isMail = (text: string) => {
   return text.includes("@") && !text.includes("http")
+}
+
+export function isRunningInExpoGo() {
+  const isRunningInExpo = constants.executionEnvironment == ExecutionEnvironment.StoreClient
+  return isRunningInExpo
+}
+
+export const loadJSON = async (pathToJSONFile: string) => {
+  debugger
+  const fileName = pathToJSONFile // Replace with the name of your JSON file
+  const filePath =
+    Platform.OS === "android" ? FileSystem.documentDirectory + fileName : FileSystem.documentDirectory + "/" + fileName
+
+  try {
+    const fileContents = await FileSystem.readAsStringAsync(filePath)
+
+    const data = JSON.parse(fileContents)
+    return data
+  } catch (e) {
+    console.log(e)
+  }
 }

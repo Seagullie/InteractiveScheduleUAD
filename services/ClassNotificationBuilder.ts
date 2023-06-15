@@ -14,6 +14,7 @@ export default class ClassNotificationBuilder {
 
   notificationsService: LocalNotificationsService
   schedule: ScheduleModel
+  // scheduleDayIndex: number
   class_: ScheduleClass
 
   teachersTable = TeacherTableModel.GetInstance()
@@ -27,6 +28,7 @@ export default class ClassNotificationBuilder {
     this.notificationsService = notificationsService
 
     this.schedule = schedule
+    // this.scheduleDayIndex = schedule.dayNames.indexOf(scheduleDay.name)
     this.class_ = class_
 
     this.signature = class_.getUniqueStringSignature()

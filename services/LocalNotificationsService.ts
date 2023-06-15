@@ -1,6 +1,5 @@
 import * as Notifications from "expo-notifications"
 import { Platform } from "react-native"
-import ScheduleModel from "../models/ScheduleModel"
 
 // expo notifications docs: https://docs.expo.dev/versions/latest/sdk/notifications/
 // Expo's Push Notification Tool: https://expo.dev/notifications
@@ -88,7 +87,6 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
   }
 
   async sendNotification(content: Notifications.NotificationContentInput) {
-    let expoPushToken = undefined
 
     const message: Notifications.NotificationRequestInput = {
       identifier: this.notificationChannelId,

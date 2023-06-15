@@ -284,7 +284,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
               const shouldDisplayEmptyDay = settingsServiceRef.current!.displayEmptyDays != DisplayEmptyDaysMode.Hide
 
               if (!isEditable && isEmpty && !shouldDisplayEmptyDay) {
-                return <View style={globalStyles.noDisplay} key={idx}></View>
+                return <View style={globalStyles.noDisplay} key={day + weekType}></View>
               }
 
               let scheduleDay = scheduleRef.current!.scheduleDays[idx]
@@ -293,7 +293,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
               return (
                 <View
                   style={styles.cardContainer}
-                  key={idx}
+                  key={day + weekType}
                   onLayout={(event) => {
                     const layout = event.nativeEvent.layout
                     dataSourceCords[idx] = layout.y

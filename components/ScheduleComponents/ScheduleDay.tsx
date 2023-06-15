@@ -131,7 +131,7 @@ export default function ScheduleDayComponent({
   const ListComponent = isEditable ? DraggableFlatList : FlatList
 
   return (
-    <View key={dayName}>
+    <View key={dayName + weekType}>
       <Text style={styles.dayNameHeader}>{dayName}</Text>
       <View
         style={[
@@ -143,7 +143,7 @@ export default function ScheduleDayComponent({
       >
         <ListComponent
           data={classes}
-          keyExtractor={(item) => item.index.toString()}
+          keyExtractor={(item) => item.index + "" + item.week}
           onDragEnd={({ data }) => {
             // reindex
             data = data.map((class_, idx) => {
@@ -158,7 +158,6 @@ export default function ScheduleDayComponent({
           ListEmptyComponent={() => {
             return (
               <AppText style={styles.noClassesText}>
-                {/* <Ionicons name="ellipsis-horizontal-outline" size={28} /> */}
                 {_.sample(NoClassesText)}
               </AppText>
             )
@@ -177,6 +176,7 @@ export default function ScheduleDayComponent({
               <ScheduleClassComponent
                 displayRoomNumber={displayRoomNumber}
                 idx={idx}
+                key={idx + "" + class_.week}
                 scheduleClassInstance={class_}
                 isEditable={isEditable}
                 noTeacherText="Викладач"
@@ -194,7 +194,7 @@ export default function ScheduleDayComponent({
             // editable class component
             let editableScheduleClassWrapper = (
               <SwipeableItem
-                key={idx}
+                key={idx + "" + class_.week}
                 // item={item}
                 renderUnderlayLeft={() => (
                   <UnderlayRightSide

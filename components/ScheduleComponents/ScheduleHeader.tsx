@@ -6,6 +6,8 @@ import { globalStyles, palette } from "../../styles/global"
 import GetWeekType, { WeekType } from "../../utilities/getWeekType"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
+import { ExecutionEnvironment, NativeConstants, Constants, PlatformManifest, AndroidManifest } from "expo-constants"
+import constants from "expo-constants"
 
 // TODO: Dry up. I simply copypasted this code from Header.tsx
 // TODO: Display activity indicator during changing week type

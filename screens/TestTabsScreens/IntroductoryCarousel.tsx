@@ -164,7 +164,11 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
               setSchedulePickerModalVisible(true)
             }}
           >
-            <AppText style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}>
+            <AppText
+              accessibilityLabel="selectSchedule"
+              
+              style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}
+            >
               Обрати розклад
             </AppText>
           </TouchableOpacity>

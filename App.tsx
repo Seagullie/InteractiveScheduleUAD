@@ -15,7 +15,6 @@ import AboutScreen from "./screens/AboutScreen"
 import Header from "./components/Header"
 import ReglamentScreen from "./screens/ReglamentScreen"
 import ScheduleScreen from "./screens/ScheduleScreen"
-import TestTabs from "./routes/testTabs"
 
 import { ErrorBoundary } from "react-error-boundary"
 import { ScrollView } from "react-native-gesture-handler"
@@ -28,7 +27,8 @@ import ContactsScreen from "./screens/ContactsScreen"
 import ContactsTestStack from "./routes/ContactsTestStack"
 import ContactsStack from "./routes/ContactsStack"
 import NewsScreen from "./screens/NewsScreen"
-;("use client")
+;import TestTabs from "./routes/testTabs"
+("use client")
 
 function fallbackRender({ error, resetErrorBoundary }) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
@@ -100,13 +100,13 @@ export default function App() {
             <Drawer.Screen name={DrawerRoutes.CONTACTS} component={ContactsStack} />
             <Drawer.Screen name={DrawerRoutes.NEWS} component={NewsScreen} />
 
-            {/* <Drawer.Screen
+            <Drawer.Screen
               name={DrawerRoutes.TESTS}
               component={TestTabs}
               options={{
                 header: (props) => <View />,
               }}
-            /> */}
+            />
             <Drawer.Screen
               name={DrawerRoutes.EDITOR}
               options={{

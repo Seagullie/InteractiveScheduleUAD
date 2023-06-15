@@ -240,7 +240,7 @@ export default function Settings() {
               <View style={[styles.settingValueContainer, { marginRight: 3 }]}>
                 {/* TODO: Unhardcode margin right */}
 
-                <TouchableOpacity onPress={settingsServiceRef.current?.openSystemSettingsForNotifications}>
+                <TouchableOpacity onPress={settingsServiceRef.current?.openAndroidSystemSettingsForNotifications}>
                   <Ionicons name="open" size={14} color={palette.navigationBackground} />
                 </TouchableOpacity>
               </View>

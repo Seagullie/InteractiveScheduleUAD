@@ -11,7 +11,7 @@ export type NewsArticle = {
 export default class NewsLoaderService {
   protected static instance: NewsLoaderService
 
-  private _newsCached: NewsArticle[] = []
+  protected _newsCached: NewsArticle[] = []
 
   static async GetInstance(): Promise<NewsLoaderService> {
     if (!this.instance) {
@@ -37,12 +37,7 @@ export default class NewsLoaderService {
       return this._newsCached
     }
 
-    const client = getContentfulClient()
-
-    const content_type = "newsArticle"
-    const entries = await client.getEntries({
-      content_type,
-    })
+    const entries = await this.fetchContentfulEntries()
 
     let news = entries.items.map((entry) => {
       const {
@@ -71,6 +66,17 @@ export default class NewsLoaderService {
     return news
   }
 
+  async fetchContentfulEntries() {
+    const client = getContentfulClient()
+
+    const content_type = "newsArticle"
+    const entries = await client.getEntries({
+      content_type,
+    })
+
+    return entries
+  }
+
   getExampleNews(): NewsArticle[] {
     return [
       {
@@ -91,6 +97,7 @@ export default class NewsLoaderService {
     ]
   }
 
+  // TODO: move to utilities
   async getNewestArticleDate(): Promise<Date> {
     let news = await this.getNewsFromContentful()
     return new Date(news[0].createdAt)

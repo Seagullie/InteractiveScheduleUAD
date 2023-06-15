@@ -9,6 +9,8 @@ import { DrawerRoutes } from "../routes/DrawerRoutes"
 import useEffect from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NewsLoaderService from "../services/NewsLoaderService"
+import { isRunningInExpoGo } from "../utilities/utilities"
+import _ from "lodash"
 
 // let allIcons = Object.keys(Ionicons.getRawGlyphMap())
 // console.log(allIcons)
@@ -77,11 +79,16 @@ export default function DrawerMenu() {
   //   console.log("routes", routesContainer)
 
   if (routesContainer && routesContainer.routes) {
+    const isRunningInExpoGo_ = isRunningInExpoGo()
+
     let routes = routesContainer.routes
 
-    let breakpoint = routes.length - 3
+    let breakpoint = routes.length - 4
     let topRoutes = routes.slice(0, breakpoint)
     let bottomRoutes = routes.slice(breakpoint, routes.length)
+    if (!isRunningInExpoGo_) {
+      _.remove(bottomRoutes, (route) => route.name == DrawerRoutes.TESTS)
+    }
 
     let currentRouteIndex = routesContainer.index
     let currentRoute = routes[currentRouteIndex]
@@ -93,10 +100,6 @@ export default function DrawerMenu() {
 
       const yellowCircle =
         shouldDisplayYellowCircle && isNewsRoute ? <YellowCircle /> : <View style={globalStyles.noDisplay} />
-
-      // React.useEffect(() => {
-      //   console.log("route button mounted")
-      // }, [])
 
       return (
         <TouchableOpacity
@@ -193,10 +196,7 @@ const styles = StyleSheet.create({
 
     paddingHorizontal: 20,
 
-    // elevation: 10,
     borderBottomColor: "rgba(0,0,0,0.1)",
     borderBottomWidth: 1,
-
-    // elevation: 4,
   },
 })

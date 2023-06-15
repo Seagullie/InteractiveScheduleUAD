@@ -1,5 +1,4 @@
 import { Platform, ToastAndroid } from "react-native"
-import * as FileSystem from "expo-file-system"
 import GetWeekType from "../utilities/getWeekType"
 import { determineInterval, ensureNoExtension } from "../utilities/utilities"
 import getStrict from "../utilities/getStrict"
@@ -257,18 +256,4 @@ export class ScheduleClass implements IScheduleClass {
   }
 }
 
-const loadJSON = async (pathToJSONFile: string) => {
-  debugger
-  const fileName = pathToJSONFile // Replace with the name of your JSON file
-  const filePath =
-    Platform.OS === "android" ? FileSystem.documentDirectory + fileName : FileSystem.documentDirectory + "/" + fileName
 
-  try {
-    const fileContents = await FileSystem.readAsStringAsync(filePath)
-
-    const data = JSON.parse(fileContents)
-    return data
-  } catch (e) {
-    console.log(e)
-  }
-}
