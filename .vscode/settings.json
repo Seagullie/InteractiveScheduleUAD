@@ -6,5 +6,7 @@
         "loadNpmCommands":true,
         "useScripts": true,
         "npmClient": "npm",
-    }
+    },
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.configuration.updateBuildConfiguration": "disabled"
 }
