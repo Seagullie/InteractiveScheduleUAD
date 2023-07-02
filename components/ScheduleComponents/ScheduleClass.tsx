@@ -30,7 +30,9 @@ export const formatRoomName = (scheduleClassInstance: ScheduleClass, unfoldClass
     }
   }
 
+  // pad dots with spaces
   room = room.replace(/\.(?!\s)/g, ". ")
+
   if (!unfoldClassText) {
     room = room.split("\n")[0]
   }
@@ -74,14 +76,12 @@ export default function ScheduleClassComponent({
   idx,
   displayRoomNumber,
   isEditable = false,
-  noTeacherText = false,
   highlightAsOngoing = false,
 }: {
   scheduleClassInstance: ScheduleClass
   idx: number
   displayRoomNumber: boolean
   isEditable?: boolean
-  noTeacherText?: boolean | string
   highlightAsOngoing?: boolean
 }) {
   let [state, setState] = React.useState({})

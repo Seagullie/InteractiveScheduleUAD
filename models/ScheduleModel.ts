@@ -6,11 +6,14 @@ import { workDaysEnLower } from "../constants/Days"
 import { REGLAMENT_DATA } from "../constants/Constants"
 import ScheduleLoaderService from "../services/ScheduleLoaderService"
 
+// TODO: separate other models into own files
+
 export default class ScheduleModel {
   name: string
   specialtyName: string
   year: number
 
+  // TODO: move to constants
   dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map((day) =>
     day.toLowerCase()
   )
@@ -51,6 +54,7 @@ export default class ScheduleModel {
 
     if (!scheduleFile) {
       console.log(`[Schedule Model] schedule file ${scheduleFileName} not found`)
+      // TODO: move out of the model and to UI
       ToastAndroid.show("Не вдалось завантажити розклад", ToastAndroid.SHORT)
 
       return
@@ -68,14 +72,12 @@ export default class ScheduleModel {
   }
 
   getCurrentClass(): ScheduleClass | null {
-    // debugger
     const dayIndex = new Date().getDay()
     const isWeekEnd = dayIndex == 0 || dayIndex == 6
 
     if (isWeekEnd) return null
 
     const todayClasses = this.scheduleDays[dayIndex - 1].classes
-
     if (todayClasses.length == 0) return null
 
     let currentClass = null
@@ -255,5 +257,3 @@ export class ScheduleClass implements IScheduleClass {
     return isSample
   }
 }
-
-

@@ -20,15 +20,12 @@ import { ErrorBoundary } from "react-error-boundary"
 import { ScrollView } from "react-native-gesture-handler"
 import DrawerMenu from "./components/DrawerMenu"
 import TeachersScreen from "./screens/TeachersScreen"
-import ScheduleEditorScreen from "./screens/ScheduleEditorScreen"
 import EditorStack from "./routes/EditorStack"
 import { DrawerRoutes } from "./routes/DrawerRoutes"
-import ContactsScreen from "./screens/ContactsScreen"
-import ContactsTestStack from "./routes/ContactsTestStack"
 import ContactsStack from "./routes/ContactsStack"
 import NewsScreen from "./screens/NewsScreen"
-;import TestTabs from "./routes/testTabs"
-("use client")
+import TestTabs from "./routes/testTabs"
+;("use client")
 
 function fallbackRender({ error, resetErrorBoundary }) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.

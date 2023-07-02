@@ -10,9 +10,9 @@ export enum WeekType {
 const SEMESTER_START = new Date(2022, 9, 3) // month is 0-based
 const SEMESTER_START_TYPE = WeekType.Denominator
 
-export default function GetWeekType(): WeekType {
-  let now = new Date()
-  let timeDifferenceInHours = GetTimeDifference(SEMESTER_START, now).hours
+export default function GetWeekType(timepoint = new Date()): WeekType {
+  // let timepoint = new Date()
+  let timeDifferenceInHours = GetTimeDifference(SEMESTER_START, timepoint).hours
   let timeDifferenceInDays = timeDifferenceInHours / 24
   let timeDifferenceInWeeks = Math.trunc(timeDifferenceInDays / 7)
 

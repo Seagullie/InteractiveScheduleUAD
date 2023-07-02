@@ -1,5 +1,7 @@
 import { REGLAMENT_DATA } from "../../constants/Constants"
-import { createEvenlySpacedTimeSequence, determineInterval, ensureExtension } from "../utilities"
+import { createEvenlySpacedTimeSequence, determineInterval, ensureExtension, getContentfulClient } from "../utilities"
+
+// jest.mock("../utilities")
 
 describe("utility function ensureExtension", () => {
   it("adds extension to string if it doesn't end with that extension", () => {
@@ -40,5 +42,15 @@ describe("utility function createEvenlySpacedTimeSequence", () => {
 
     const interval2 = createEvenlySpacedTimeSequence(0, 10, new Date())
     expect(interval2.length).toBe(0)
+  })
+})
+
+describe("utility function createContentfulClient", () => {
+  it("creates client and client fetches example entries", async () => {
+    console.log("contentful client:", getContentfulClient)
+    const client = getContentfulClient()
+    const entries = await client.getEntries()
+    expect(entries.items[0].fields.title).toBe("test title")
+    expect(entries.items[0].fields.body).toBe("test body")
   })
 })

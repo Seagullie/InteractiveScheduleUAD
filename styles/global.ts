@@ -1,7 +1,5 @@
 import { StyleSheet } from "react-native"
 
-// TODO: Figure out whether flex: 1 can be used in container
-
 export const previewImages = {
   schedule: require("../assets/images/previews/schedule-preview.png"),
   scheduleCropped: require("../assets/images/previews/schedule-view-cropped-preview-3.png"),

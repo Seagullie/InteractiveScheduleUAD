@@ -1,12 +1,11 @@
 import * as FileSystem from "expo-file-system"
 import { AssetFile } from "contentful"
-import { ensureExtension, getContentfulClient } from "../utilities/utilities"
+import _ from "lodash"
+import NetInfo from "@react-native-community/netinfo"
+
 import ScheduleModel, { ScheduleDay } from "../models/ScheduleModel"
 import { workDaysEnLower } from "../constants/Days"
-import _ from "lodash"
-
-import * as Network from "expo-network"
-import NetInfo from "@react-native-community/netinfo"
+import { ensureExtension, getContentfulClient } from "../utilities/utilities"
 import ExampleScheduleKN from "../assets/example_schedules/КН-example.json"
 import ExampleScheduleIST from "../assets/example_schedules/ІСТ-example.json"
 
@@ -39,6 +38,7 @@ export default class ScheduleLoaderService {
       this.instance = new this()
       await this.instance.init()
 
+      // log loaded schedule files
       console.log(`[${this.name}] schedule loader service instance constructed successfully`)
       console.log(`[${this.name}] schedule loader files:`)
       this.instance.scheduleFiles.forEach((file) => console.log(`[${this.name}] file: ${file.filename}`))
@@ -52,33 +52,11 @@ export default class ScheduleLoaderService {
   protected async init() {
     // check whether schedules are available locally
     const schedulesAvailableLocally = (await FileSystem.getInfoAsync(this.pathToScheduleFolder)).exists
-
+    
     if (schedulesAvailableLocally) {
-      console.log(`[Schedule Loader] schedules are available locally. loading...`)
-      let allScheduleFileNames = await FileSystem.readDirectoryAsync(this.pathToScheduleFolder)
-      // sort the filenames alphabetically
-      allScheduleFileNames.sort()
-
-      console.log(`[Schedule Loader] allScheduleFileNames: ${allScheduleFileNames}`)
-      const scheduleFiles: ScheduleFile[] = await Promise.all(
-        allScheduleFileNames.map(async (filename) => {
-          let file = await FileSystem.readAsStringAsync(`${this.pathToScheduleFolder}${filename}`)
-          let json = JSON.parse(file)
-          let { revision, createdAt, updatedAt, json_parsed } = json
-          return {
-            filename,
-            revision,
-            createdAt,
-            updatedAt,
-            json_parsed,
-          }
-        })
-      )
-
-      this.scheduleFiles = scheduleFiles
+      await this.getSchedulesFromFileSystem()
 
       // check for updates
-
       try {
         await this.checkForUpdatesAsync()
       } catch (e) {
@@ -95,7 +73,34 @@ export default class ScheduleLoaderService {
       }
     }
 
+
     this.scheduleFiles = _.sortBy(this.scheduleFiles, (sf) => sf.filename)
+  }
+
+  async getSchedulesFromFileSystem() {
+    console.log(`[Schedule Loader] schedules are available locally. loading...`)
+    let allScheduleFileNames = await FileSystem.readDirectoryAsync(this.pathToScheduleFolder)
+    // sort the filenames alphabetically
+    allScheduleFileNames.sort()
+
+    console.log(`[Schedule Loader] allScheduleFileNames: ${allScheduleFileNames}`)
+    const scheduleFiles: ScheduleFile[] = await Promise.all(
+      allScheduleFileNames.map(async (filename) => {
+        let file = await FileSystem.readAsStringAsync(`${this.pathToScheduleFolder}${filename}`)
+        let json = JSON.parse(file)
+        let { revision, createdAt, updatedAt, json_parsed } = json
+        return {
+          filename,
+          revision,
+          createdAt,
+          updatedAt,
+          json_parsed,
+        }
+      })
+    )
+
+    this.scheduleFiles = scheduleFiles
+    return scheduleFiles
   }
 
   // downloads schedules and sets them to .scheduleFiles
@@ -162,6 +167,8 @@ export default class ScheduleLoaderService {
     ]
 
     this.scheduleFiles = scheduleFiles
+
+    return scheduleFiles
   }
 
   getScheduleFileByFileName(fileName: string): ScheduleFile | undefined {
@@ -188,17 +195,17 @@ export default class ScheduleLoaderService {
     // TODO: dry up the duplicate
 
     const scheduleFileMetadatas: (ScheduleFileMetadata & { linkToFile: string })[] = await Promise.all(
-      assets.items.map(async (a) => {
-        const file: AssetFile = a.fields.file
+      assets.items.map(async (itm) => {
+        const file: AssetFile = itm.fields.file
 
         const protocol = "https:"
         const linkToFile = protocol + file.url
 
         let scheduleFileMetadata: ScheduleFileMetadata & { linkToFile: string } = {
           filename: file.fileName,
-          revision: a.sys.revision,
-          createdAt: a.sys.createdAt,
-          updatedAt: a.sys.updatedAt,
+          revision: itm.sys.revision,
+          createdAt: itm.sys.createdAt,
+          updatedAt: itm.sys.updatedAt,
           linkToFile,
         }
 

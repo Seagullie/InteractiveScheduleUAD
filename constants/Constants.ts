@@ -19,4 +19,6 @@ export const suffixesForNumbers = {
   6: "-та",
 }
 
+export const SEMESTER_MONTHS = 6
+
 export const NOTIFICATIONS_CHANNEL_ID = "interactive-schedule-notifications"

@@ -5,8 +5,8 @@ import Constants from "expo-constants"
 import * as Notifications from "expo-notifications"
 import * as IntentLauncher from "expo-intent-launcher"
 import { NOTIFICATIONS_CHANNEL_ID } from "../constants/Constants"
-
-const STORAGE_KEY = "@noid_schedule_app_settings103"
+import { STORAGE_KEY } from "../constants/Keys"
+import { Event } from "../constants/Events"
 
 // TODO: avoid creating duplicate handlers for "settings updated" event
 
@@ -22,7 +22,8 @@ export enum DisplayTeacherMode {
   Hide = "Приховати",
 }
 
-type ScheduleAppSettings = {
+// update place 1 for new setting
+export type ScheduleAppSettings = {
   currentScheduleName: string
   notifyBeforeClass: boolean
   notifyBeforeClassOffsetMinutes: number
@@ -38,17 +39,15 @@ interface ISettingsService extends ScheduleAppSettings {
   readFromStorage: () => Promise<ScheduleAppSettings | null>
 }
 
-// TODO: figure out how to mark GetInstance method as static
-interface ISingleton {
-  GetInstance: () => Promise<SettingsService>
-}
-
-// as of now in order to add a new setting you have to modify ~3 places
+// // update place 2 for new setting
+// as of now in order to add a new setting you have to modify 3 places
 // that doesn't sound great.
-// make sure you start with ScheduleAppSettings
-export default class SettingsService implements ISettingsService, ISingleton {
+// make sure you start with ScheduleAppSettings type
+
+// loads and saves settings to async storage
+// also provides a way to subscribe to settings change event
+export default class SettingsService implements ISettingsService {
   displayEmptyDays: DisplayEmptyDaysMode = DisplayEmptyDaysMode.Display
-  GetInstance: () => Promise<SettingsService>
   currentScheduleName = "" // Object.keys(scheduleFilesJSON)[0] // this has to match the name of the file in assets/schedules
   notifyBeforeClass = true
   notifyBeforeClassOffsetMinutes = 0
@@ -58,7 +57,7 @@ export default class SettingsService implements ISettingsService, ISingleton {
 
   private static instance: SettingsService
 
-  onSettingsUpdated = new EventEmitter()
+  SettingsEventEmmiter = new EventEmitter()
 
   static async GetInstance(): Promise<SettingsService> {
     if (!SettingsService.instance) {
@@ -72,7 +71,6 @@ export default class SettingsService implements ISettingsService, ISingleton {
 
   private async init() {
     // get first schedule from ScheduleLoaderService and use it as default
-
     let scheduleLoader = await ScheduleLoaderService.GetInstance()
     this.currentScheduleName = scheduleLoader.scheduleFiles[0].filename
 
@@ -97,7 +95,8 @@ export default class SettingsService implements ISettingsService, ISingleton {
     }
   }
 
-  constructSettingsObjectFromProperteties(): ScheduleAppSettings {
+  // update place 3 for new setting
+  constructSettingsObjectFromProperties(): ScheduleAppSettings {
     return {
       currentScheduleName: this.currentScheduleName,
       notifyBeforeClass: this.notifyBeforeClass,
@@ -113,24 +112,24 @@ export default class SettingsService implements ISettingsService, ISingleton {
   // "settings updated" event should be emmitted every time they're updated, but not necessarily saved to storage
   async saveToStorage() {
     try {
-      const settingsObject = this.constructSettingsObjectFromProperteties()
+      const settingsObject = this.constructSettingsObjectFromProperties()
       const jsonValue = JSON.stringify(settingsObject)
       await AsyncStorage.setItem(STORAGE_KEY, jsonValue)
 
-      this.onSettingsUpdated.emit("settings updated", this)
+      this.SettingsEventEmmiter.emit(Event.SETTINGS_UPDATED, this)
     } catch (e) {
       // saving error
       console.error(e)
     }
   }
 
-  readFromStorage = async (): Promise<ScheduleAppSettings | null> => {
+  async readFromStorage(): Promise<ScheduleAppSettings | null> {
     try {
       console.log("trying to read settings from storage... storage key is: ", STORAGE_KEY)
       const jsonValue = await AsyncStorage.getItem(STORAGE_KEY)
       return jsonValue != null ? JSON.parse(jsonValue) : null
     } catch (e) {
-      console.log("failed to read settings from storage. returning null...")
+      console.log("failed to parse whatever was read from settings. returning null...")
       // error reading value
       console.error(e)
       return null
@@ -144,6 +143,8 @@ export default class SettingsService implements ISettingsService, ISingleton {
     console.log("[Notification Tests] All channels of this app: ")
     console.log(allChannels)
     console.log("[Notification Tests] Channel id for main channel: " + channel?.id)
+
+    // TODO: fix expo go notification settings not opening when the code is running in expo go
 
     IntentLauncher.startActivityAsync("android.settings.CHANNEL_NOTIFICATION_SETTINGS", {
       // data: "package:" + pkg,

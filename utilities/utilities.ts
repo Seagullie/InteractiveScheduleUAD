@@ -1,7 +1,10 @@
 import moment from "moment"
 import { REGLAMENT_DATA_ELEM_TYPE, REGLAMENT_DATA } from "../constants/Constants"
 
+import contentful from "contentful/dist/contentful.browser.min.js"
 import { createClient } from "contentful/dist/contentful.browser.min.js"
+// import { ContentType, createClient as createClientProper } from "contentful"
+
 import { ContentfulClientApi } from "contentful"
 import { ContentfulContentDeliveryAccessToken, ContentfulSpace } from "../constants/Keys"
 import { Platform } from "react-native"
@@ -49,6 +52,7 @@ function liesInRange(value: Date, start: Date, end: Date) {
   return value <= end && value >= start
 }
 
+// get time slot of a timepoint
 export function determineInterval(timepoint = new Date()): false | REGLAMENT_DATA_ELEM_TYPE {
   let interval: false | REGLAMENT_DATA_ELEM_TYPE = false
 
@@ -77,6 +81,9 @@ export function determineInterval(timepoint = new Date()): false | REGLAMENT_DAT
 console.log("[utilities] current interval is ", determineInterval())
 
 export function getContentfulClient() {
+  console.log("contentful module: ", contentful)
+  console.log("create contentful client: ", createClient)
+
   const client: ContentfulClientApi<undefiend> = createClient({
     space: ContentfulSpace,
     environment: "master", // defaults to 'master' if not set
@@ -108,7 +115,6 @@ export function isRunningInExpoGo() {
 }
 
 export const loadJSON = async (pathToJSONFile: string) => {
-  debugger
   const fileName = pathToJSONFile // Replace with the name of your JSON file
   const filePath =
     Platform.OS === "android" ? FileSystem.documentDirectory + fileName : FileSystem.documentDirectory + "/" + fileName

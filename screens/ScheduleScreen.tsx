@@ -23,6 +23,7 @@ import GetWeekType, { WeekType } from "../utilities/getWeekType"
 import { useFocusEffect } from "@react-navigation/native"
 import AppText from "../shared/AppText"
 import ScheduleHeader from "../components/ScheduleComponents/ScheduleHeader"
+import { Event } from "../constants/Events"
 
 // TODO: scroll to current day on mount only instead of doing so on every rerender?
 
@@ -123,9 +124,9 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
       console.log("[Schedule.tsx] schedule: ", schedule)
 
-      settingsService.onSettingsUpdated.on("settings updated", onSettingsUpdated)
+      settingsService.SettingsEventEmmiter.on(Event.SETTINGS_UPDATED, onSettingsUpdated)
       console.log("subscribed to settings updated event")
-      console.log("n of subscribers: ", settingsService.onSettingsUpdated.listenerCount("settings updated"))
+      console.log("n of subscribers: ", settingsService.SettingsEventEmmiter.listenerCount(Event.SETTINGS_UPDATED))
 
       scheduleRef.current = schedule
 
@@ -139,7 +140,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
     return () => {
       SettingsService.GetInstance().then((settingsService: SettingsService) => {
-        settingsService.onSettingsUpdated.removeListener("settings updated", onSettingsUpdated)
+        settingsService.SettingsEventEmmiter.removeListener(Event.SETTINGS_UPDATED, onSettingsUpdated)
       })
     }
   }, [])
@@ -204,7 +205,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
       <View style={styles.rootContainer}>
         <ScheduleHeader title="Розклад" onWeekTypeChanged={onWeekTypeChanged} />
         <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-          <ActivityIndicator size="large" color={palette.navigationBackground} />
+          <ActivityIndicator size="large" animating={true} color={palette.navigationBackground} />
         </View>
       </View>
     )

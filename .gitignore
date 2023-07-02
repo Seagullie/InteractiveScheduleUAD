@@ -24,3 +24,6 @@ package-lock.json
 
 # compiled apk files
 build/
+
+# test coverage
+coverage/

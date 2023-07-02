@@ -38,7 +38,7 @@
       "barStyle": "light-content"
     },
     "web": {
-      "bundler": "metro",
+      "bundler": "webpack",
       "favicon": "./assets/images/favicon.png"
     },
     "extra": {
@@ -46,12 +46,5 @@
         "projectId": "78051180-c2bf-42d2-b55b-1dd5bf876ea5"
       }
     }
-  },
-
-  "keys": {
-    "contentful": {
-      "deliveryKey": "hQc8OI2VQrAnLLSWSpflQyByQUZ_t5ct1Ed8axAu7M0",
-      "space": "ude6y2h1h61l"
-    } 
   }
 }

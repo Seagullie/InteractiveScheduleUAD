@@ -2,20 +2,13 @@
   "name": "interactiveschedule",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --no-dev",
     "start-dev": "expo start --dev-client",
     "start-clear": "expo start --clear-cache",
     "android": "expo run:android",
     "emulator": "C:\\Users\\main\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe -avd Nexus_5_API_27_480_DPI_",
-    "appium-server": "appium",
     "web": "expo start --web",
-    "test": "jest --watchAll --silent"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
-    ]
+    "test": "jest --watchAll --silent --noStackTrace"
   },
   "overrides": {
     "metro": "0.76.0",
@@ -24,6 +17,7 @@
   "dependencies": {
     "@config-plugins/detox": "^5.0.1",
     "@expo/vector-icons": "^13.0.0",
+    "@expo/webpack-config": "^18.1.0",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-native-community/netinfo": "9.3.7",
     "@react-navigation/bottom-tabs": "^6.5.7",
@@ -43,6 +37,7 @@
     "expo-font": "~11.1.1",
     "expo-intent-launcher": "~10.5.2",
     "expo-linking": "~4.0.1",
+    "expo-modules-core": "^1.2.7",
     "expo-network": "~5.2.1",
     "expo-notifications": "^0.18.1",
     "expo-splash-screen": "~0.18.2",
@@ -56,7 +51,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.3",
     "react-native": "0.71.8",
     "react-native-autocomplete-dropdown": "^2.1.1",
@@ -72,11 +67,14 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg-uri": "^1.2.3",
     "react-native-swipeable-item": "^2.0.9",
-    "react-native-web": "~0.18.10",
-    "rn-tooltip": "^3.0.3"
+    "react-native-web": "^0.18.12",
+    "rn-tooltip": "^3.0.3",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@babel/plugin-transform-export-namespace-from": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
     "@testing-library/jest-native": "^5.4.2",
     "@testing-library/react-native": "^12.1.2",
     "@types/jest": "^29.5.2",
@@ -84,6 +82,7 @@
     "@types/react": "~18.0.14",
     "@types/react-native": "^0.72.2",
     "@types/react-test-renderer": "^18.0.0",
+    "babel-loader": "^9.1.2",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "detox": "^20.9.1",
     "detox-expo-helpers": "^0.6.0",
@@ -91,8 +90,13 @@
     "jest-expo": "~48.0.0",
     "react-native-dotenv": "^3.4.8",
     "react-test-renderer": "18.2.0",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.4",
-    "webdriverio": "^8.11.2"
+    "url-loader": "^4.1.1",
+    "webdriverio": "^8.11.2",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "private": true
 }

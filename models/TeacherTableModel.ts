@@ -2,6 +2,8 @@ import teachersJson from "../assets/teachers.json"
 
 import Fuse from "fuse.js"
 
+// TODO: make teacher model
+
 type Teacher = {
   "ПІБ викладача": string
   Кваліфікаця: string
@@ -44,10 +46,6 @@ export default class TeacherTableModel {
     if (match.length == 0) return "Викладача не знайдено"
 
     return match[0].item
-
-    // let filterResults = this.teachers.filter((teacher) => teacher["ПІБ викладача"].includes(surname))
-    // if (filterResults.length == 0) throw new Error(`no teacher found with surname ${surname}`)
-    // return filterResults[0]
   }
 
   getFullNameBySurname(surname: string): string {

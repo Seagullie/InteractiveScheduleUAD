@@ -2,7 +2,6 @@ import React from "react"
 import { View } from "react-native"
 import renderer, { ReactTestRendererJSON } from "react-test-renderer"
 import ScheduleScreen from "../ScheduleScreen"
-import App from "../../App"
 
 function SampleApp() {
   return <View>Sample App</View>

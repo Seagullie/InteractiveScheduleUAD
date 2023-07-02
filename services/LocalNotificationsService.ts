@@ -87,7 +87,6 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
   }
 
   async sendNotification(content: Notifications.NotificationContentInput) {
-
     const message: Notifications.NotificationRequestInput = {
       identifier: this.notificationChannelId,
       content: {
@@ -143,6 +142,7 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
   }
 
   // - - - methods for testing - - -
+  // TODO: move to separate class
 
   async sendExampleNotification() {
     this.sendNotification(this.exampleNotificationContent)
