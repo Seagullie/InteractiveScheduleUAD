@@ -1,6 +1,5 @@
 {
   "expo": {
-    "plugins": ["@config-plugins/detox"],
     "name": "Розклад УАД",
     "slug": "InteractiveSchedule",
     "version": "1.0.1",

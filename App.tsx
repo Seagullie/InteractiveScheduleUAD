@@ -7,24 +7,27 @@ import { Text, View } from "react-native"
 import React, { useEffect, useState } from "react"
 
 import { NavigationContainer } from "@react-navigation/native"
-import SettingsScreen from "./screens/SettingsScreen"
 
 import { useFonts } from "expo-font"
 import { Drawer } from "./routes/globalDrawer"
-import AboutScreen from "./screens/AboutScreen"
 import Header from "./components/Header"
-import ReglamentScreen from "./screens/ReglamentScreen"
-import ScheduleScreen from "./screens/ScheduleScreen"
 
 import { ErrorBoundary } from "react-error-boundary"
 import { ScrollView } from "react-native-gesture-handler"
 import DrawerMenu from "./components/DrawerMenu"
+import { DrawerRoutes } from "./routes/DrawerRoutes"
+
+// screens
+
+import ScheduleScreen from "./screens/ScheduleScreen"
+import ReglamentScreen from "./screens/ReglamentScreen"
 import TeachersScreen from "./screens/TeachersScreen"
 import EditorStack from "./routes/EditorStack"
-import { DrawerRoutes } from "./routes/DrawerRoutes"
 import ContactsStack from "./routes/ContactsStack"
 import NewsScreen from "./screens/NewsScreen"
 import TestTabs from "./routes/testTabs"
+import SettingsScreen from "./screens/SettingsScreen"
+import AboutScreen from "./screens/AboutScreen"
 ;("use client")
 
 function fallbackRender({ error, resetErrorBoundary }) {
@@ -85,6 +88,7 @@ export default function App() {
             }}
             drawerContent={(props) => <DrawerMenu {...props} />}
           >
+            {/*  */}
             <Drawer.Screen
               name={DrawerRoutes.VIEWER}
               component={ScheduleScreen}
@@ -92,10 +96,25 @@ export default function App() {
                 header: (props) => <View />,
               }}
             />
+
+            <Drawer.Screen name={DrawerRoutes.CONTACTS} component={ContactsStack} />
+
+            {/* 
+           
+          
+           */}
             <Drawer.Screen name={DrawerRoutes.REGLAMENT} component={ReglamentScreen} />
             <Drawer.Screen name={DrawerRoutes.TEACHERS} component={TeachersScreen} />
-            <Drawer.Screen name={DrawerRoutes.CONTACTS} component={ContactsStack} />
+
             <Drawer.Screen name={DrawerRoutes.NEWS} component={NewsScreen} />
+
+            <Drawer.Screen
+              name={DrawerRoutes.EDITOR}
+              options={{
+                header: (props) => <View />,
+              }}
+              component={EditorStack}
+            />
 
             <Drawer.Screen
               name={DrawerRoutes.TESTS}
@@ -104,14 +123,9 @@ export default function App() {
                 header: (props) => <View />,
               }}
             />
-            <Drawer.Screen
-              name={DrawerRoutes.EDITOR}
-              options={{
-                header: (props) => <View />,
-              }}
-              component={EditorStack}
-            />
+
             <Drawer.Screen name={DrawerRoutes.SETTINGS} component={SettingsScreen} />
+
             <Drawer.Screen name={DrawerRoutes.ABOUT} component={AboutScreen} />
           </Drawer.Navigator>
         </NavigationContainer>

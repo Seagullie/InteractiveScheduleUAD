@@ -2,12 +2,13 @@
   "name": "interactiveschedule",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start --no-dev",
+    "start": "expo start",
     "start-dev": "expo start --dev-client",
     "start-clear": "expo start --clear-cache",
     "android": "expo run:android",
     "emulator": "C:\\Users\\main\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe -avd Nexus_5_API_27_480_DPI_",
     "web": "expo start --web",
+    "rm-cache": "del /S /Q .\\node_modules\\.cache\\web\\web-development\\* ",
     "test": "jest --watchAll --silent --noStackTrace"
   },
   "overrides": {
@@ -31,7 +32,6 @@
     "expo": "~48.0.18",
     "expo-clipboard": "^4.1.2",
     "expo-constants": "~14.2.1",
-    "expo-dev-client": "~2.2.1",
     "expo-device": "~5.2.1",
     "expo-file-system": "~15.2.2",
     "expo-font": "~11.1.1",

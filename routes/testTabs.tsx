@@ -11,7 +11,8 @@ import FileSystemScreen from "../screens/TestTabsScreens/FileSystemScreen"
 import ScheduleEditor from "../screens/TestTabsScreens/ScheduleEditor"
 import TestEditorStack from "./testEditorStack"
 import ContactsModalsTestScreen from "../screens/TestTabsScreens/ContactsModalsTestScreen"
-import ContactsTestStack, { ContactsStackRoutes } from "./ContactsTestStack"
+import ContactsTestStack from "./ContactsTestStack"
+import { ContactsStackRoutes } from "./ContactsStackRoutes"
 
 function DeviceInfoScreen() {
   const { height, width } = useWindowDimensions()

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, StyleSheet, Image, TouchableOpacity, ActivityIndicator, useWindowDimensions } from "react-native"
-import PagerView from "react-native-pager-view"
-import Card from "../../shared/card"
+// import PagerView from "react-native-pager-view"
 
 import appConfig from "../../app.json"
 import AppText from "../../shared/AppText"
@@ -24,8 +23,6 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
   let [isReady, setIsReady] = useState(false)
   let [isVisible, setIsVisible] = useState(true)
 
-  let { height, width } = useWindowDimensions()
-
   let [schedulePickerModalVisible, setSchedulePickerModalVisible] = useState(false)
 
   let [schedulePickerData, setSchedulePickerData] = useState<string[]>([])
@@ -41,7 +38,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
       let schedulePickerData = scheduleLodaderInstance.scheduleFiles.map((f) => ensureNoExtension(f.filename, ".json"))
       setSchedulePickerData(schedulePickerData)
 
-      setIsReady(true)
+      setIsReady(false) // for testing purposes
     }
 
     init()
@@ -166,7 +163,6 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           >
             <AppText
               accessibilityLabel="selectSchedule"
-              
               style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}
             >
               Обрати розклад

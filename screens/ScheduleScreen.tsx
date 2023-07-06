@@ -1,13 +1,13 @@
 import React from "react"
 
 import { useCallback, useRef, useState } from "react"
-import { Text, View, Keyboard, StyleSheet, ActivityIndicator, ToastAndroid, Image } from "react-native"
+import { View, StyleSheet, ActivityIndicator, ToastAndroid, Image } from "react-native"
 import { editorImages, globalStyles, palette } from "../styles/global"
 
 import ScheduleDayComponent from "../components/ScheduleComponents/ScheduleDay"
 import { useEffect } from "react"
 import SettingsService, { DisplayEmptyDaysMode } from "../services/SettingsService"
-import ScheduleModel, { ScheduleClass } from "../models/ScheduleModel"
+import ScheduleModel from "../models/ScheduleModel"
 
 import { useErrorBoundary } from "react-error-boundary"
 import { ScrollView } from "react-native-gesture-handler"

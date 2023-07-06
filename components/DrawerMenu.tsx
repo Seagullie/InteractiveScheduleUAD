@@ -84,6 +84,7 @@ export default function DrawerMenu() {
     let breakpoint = routes.length - 4
     let topRoutes = routes.slice(0, breakpoint)
     let bottomRoutes = routes.slice(breakpoint, routes.length)
+
     if (!isRunningInExpoGo_) {
       _.remove(bottomRoutes, (route) => route.name == DrawerRoutes.TESTS)
     }

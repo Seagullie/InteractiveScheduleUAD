@@ -114,6 +114,11 @@ export function isRunningInExpoGo() {
   return isRunningInExpo
 }
 
+export function isRunningInBrowser() {
+  const isRunningInBrowser = constants.executionEnvironment == ExecutionEnvironment.Bare
+  return isRunningInBrowser
+}
+
 export const loadJSON = async (pathToJSONFile: string) => {
   const fileName = pathToJSONFile // Replace with the name of your JSON file
   const filePath =
