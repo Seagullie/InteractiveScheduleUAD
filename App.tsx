@@ -3,7 +3,7 @@ import * as SplashScreen from "expo-splash-screen"
 SplashScreen.preventAutoHideAsync()
 
 import "react-native-gesture-handler"
-import { Text, View } from "react-native"
+import { Text, View, StyleSheet } from "react-native"
 import React, { useEffect, useState } from "react"
 
 import { NavigationContainer } from "@react-navigation/native"
@@ -28,6 +28,7 @@ import NewsScreen from "./screens/NewsScreen"
 import TestTabs from "./routes/testTabs"
 import SettingsScreen from "./screens/SettingsScreen"
 import AboutScreen from "./screens/AboutScreen"
+import { isRunningInBrowser } from "./utilities/utilities"
 ;("use client")
 
 function fallbackRender({ error, resetErrorBoundary }) {
@@ -81,53 +82,52 @@ export default function App() {
 
     const markdown = (
       <ErrorBoundary fallbackRender={fallbackRender}>
+        {/* <View style={style.root}></View> */}
+
         <NavigationContainer>
-          <Drawer.Navigator
-            screenOptions={{
-              header: (props) => <Header navigation={props.navigation} title={props.route.name} />,
-            }}
-            drawerContent={(props) => <DrawerMenu {...props} />}
-          >
-            {/*  */}
-            <Drawer.Screen
-              name={DrawerRoutes.VIEWER}
-              component={ScheduleScreen}
-              options={{
-                header: (props) => <View />,
+          <View style={styles.root}>
+            <Drawer.Navigator
+              screenOptions={{
+                header: (props) => <Header navigation={props.navigation} title={props.route.name} />,
               }}
-            />
+              drawerContent={(props) => <DrawerMenu {...props} />}
+            >
+              <Drawer.Screen
+                name={DrawerRoutes.VIEWER}
+                component={ScheduleScreen}
+                options={{
+                  header: (props) => <View />,
+                }}
+              />
 
-            <Drawer.Screen name={DrawerRoutes.CONTACTS} component={ContactsStack} />
+              <Drawer.Screen name={DrawerRoutes.CONTACTS} component={ContactsStack} />
 
-            {/* 
-           
-          
-           */}
-            <Drawer.Screen name={DrawerRoutes.REGLAMENT} component={ReglamentScreen} />
-            <Drawer.Screen name={DrawerRoutes.TEACHERS} component={TeachersScreen} />
+              <Drawer.Screen name={DrawerRoutes.REGLAMENT} component={ReglamentScreen} />
+              <Drawer.Screen name={DrawerRoutes.TEACHERS} component={TeachersScreen} />
 
-            <Drawer.Screen name={DrawerRoutes.NEWS} component={NewsScreen} />
+              <Drawer.Screen name={DrawerRoutes.NEWS} component={NewsScreen} />
 
-            <Drawer.Screen
-              name={DrawerRoutes.EDITOR}
-              options={{
-                header: (props) => <View />,
-              }}
-              component={EditorStack}
-            />
+              <Drawer.Screen
+                name={DrawerRoutes.EDITOR}
+                options={{
+                  header: (props) => <View />,
+                }}
+                component={EditorStack}
+              />
 
-            <Drawer.Screen
-              name={DrawerRoutes.TESTS}
-              component={TestTabs}
-              options={{
-                header: (props) => <View />,
-              }}
-            />
+              <Drawer.Screen
+                name={DrawerRoutes.TESTS}
+                component={TestTabs}
+                options={{
+                  header: (props) => <View />,
+                }}
+              />
 
-            <Drawer.Screen name={DrawerRoutes.SETTINGS} component={SettingsScreen} />
+              <Drawer.Screen name={DrawerRoutes.SETTINGS} component={SettingsScreen} />
 
-            <Drawer.Screen name={DrawerRoutes.ABOUT} component={AboutScreen} />
-          </Drawer.Navigator>
+              <Drawer.Screen name={DrawerRoutes.ABOUT} component={AboutScreen} />
+            </Drawer.Navigator>
+          </View>
         </NavigationContainer>
       </ErrorBoundary>
     )
@@ -157,3 +157,28 @@ export default function App() {
     )
   }
 }
+
+const drawerMenuWidthPx = 320
+
+const webStyles = StyleSheet.create({
+  root: {
+    width: "50%",
+    minWidth: "50%",
+    maxWidth: "50%",
+
+    maxHeight: "100%",
+
+    flexGrow: 1,
+    marginLeft: "33%", // free space divided by two and + drawerMenuWidthPx in % * 0.5
+    // TODO: unhardcode the percentage
+  },
+})
+
+const nativeStyles = StyleSheet.create({
+  root: {
+    width: "100%",
+    flex: 1,
+  },
+})
+
+const styles = isRunningInBrowser() ? webStyles : nativeStyles

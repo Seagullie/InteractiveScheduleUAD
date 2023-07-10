@@ -66,10 +66,11 @@ export default function DrawerMenu() {
   })
 
   const navigation = useNavigation()
+  console.log("navigation", navigation)
 
-  const handlePageLinkPress = (pageName: string) => {
-    console.log("handlePageLinkPress", pageName)
-    navigation.navigate(pageName)
+  const handleNavigationButtonPress = (screeName: string) => {
+    console.log("handlePageLinkPress", screeName)
+    navigation.navigate(screeName)
   }
 
   // Get all the routes from the navigation state
@@ -109,7 +110,7 @@ export default function DrawerMenu() {
               AsyncStorage.setItem("newsChecked", new Date().toString())
             }
 
-            handlePageLinkPress(route.name)
+            handleNavigationButtonPress(route.name)
           }}
         >
           <View

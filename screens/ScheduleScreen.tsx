@@ -16,11 +16,11 @@ import { workDays } from "../constants/Days"
 import ScheduleNotificationsService from "../services/ScheduleNotificationsService"
 import ScheduleLoaderService, { ScheduleFile } from "../services/ScheduleLoaderService"
 import { SettingsContext } from "../contexts/settingsContext"
-import { ensureExtension, ensureNoExtension } from "../utilities/utilities"
+import { ensureExtension, ensureNoExtension, isRunningInBrowser } from "../utilities/utilities"
 import IntroductoryCarousel from "./TestTabsScreens/IntroductoryCarousel"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import GetWeekType, { WeekType } from "../utilities/getWeekType"
-import { useFocusEffect } from "@react-navigation/native"
+import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import AppText from "../shared/AppText"
 import ScheduleHeader from "../components/ScheduleComponents/ScheduleHeader"
 import { Event } from "../constants/Events"
@@ -28,6 +28,14 @@ import { Event } from "../constants/Events"
 // TODO: scroll to current day on mount only instead of doing so on every rerender?
 
 export default function ScheduleScreen({ isEditable = false }: { isEditable: boolean }) {
+  // [web] a workaround to render drawer menu content without explicitly opening it
+
+  if (isRunningInBrowser()) {
+    const navigation = useNavigation()
+    navigation.openDrawer()
+    navigation.closeDrawer()
+  }
+
   // const { showBoundary } = useErrorBoundary()
   const todayIndex = _.clamp(new Date().getDay() - 1, 0, 4)
 
@@ -150,7 +158,10 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
     // display toast message if in editor
     // switching to it takes longer...
     if (isEditable) {
-      ToastAndroid.show("Завантаження...", ToastAndroid.LONG)
+      // TODO: make cross platform version of toast
+      if (!isRunningInBrowser()) {
+        ToastAndroid.show("Завантаження...", ToastAndroid.LONG)
+      }
     }
     setWeekType(weekType)
   }
@@ -211,7 +222,8 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
     )
   }
 
-  if (isFirstTimeLaunch != "false") {
+  // TODO: implement web version of Onboarding screen
+  if (!isRunningInBrowser() && isFirstTimeLaunch != "false") {
     return (
       <IntroductoryCarousel
         onClose={() => {
@@ -229,121 +241,123 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
       <View style={styles.rootContainer}>
         <ScheduleHeader title={scheduleName} onWeekTypeChanged={onWeekTypeChanged} />
 
-        <View style={{ padding: 0, paddingTop: 0 }}>
-          <ScrollView
-            contentContainerStyle={{ paddingBottom: 40 }}
-            ref={scrollViewContainerRef}
-            nestedScrollEnabled={false}
-          >
-            {/* explanatory card if in editor */}
+        <ScrollView
+          style={
+            {
+              // flex: 1
+              // ^breaks it on mobile
+            }
+          }
+          contentContainerStyle={{ paddingBottom: 0 }}
+          ref={scrollViewContainerRef}
+          // nestedScrollEnabled={false}
+        >
+          {/* explanatory card if in editor */}
 
-            {isEditable ? (
-              <View style={[styles.scheduleDayCard]}>
+          {isEditable ? (
+            <View style={[styles.scheduleDayCard]}>
+              <View
+                style={[
+                  {
+                    marginVertical: 5,
+                    paddingHorizontal: 10,
+                    paddingLeft: 5,
+                    paddingVertical: 3,
+                  },
+                  { flexDirection: "row" },
+                ]}
+              >
                 <View
                   style={[
                     {
-                      marginVertical: 5,
-                      paddingHorizontal: 10,
-                      paddingLeft: 5,
-                      paddingVertical: 3,
+                      marginRight: 5,
                     },
-                    { flexDirection: "row" },
                   ]}
                 >
-                  <View
-                    style={[
-                      {
-                        // backgroundColor: "aqua",
+                  <Image source={editorImages.lightbulb} style={{ height: 50, width: 50 }} />
+                </View>
+                <View>
+                  {/* TODO: bolden the action words */}
+                  <AppText style={{ fontFamily: "century-gothic", fontSize: 13, letterSpacing: 0.1 }}>
+                    Перемістити: затиснути та перетягнути
+                  </AppText>
 
-                        marginRight: 5,
-                      },
-                    ]}
-                  >
-                    <Image source={editorImages.lightbulb} style={{ height: 50, width: 50 }} />
-                  </View>
-                  <View>
-                    {/* TODO: bolden the action words */}
-                    <AppText style={{ fontFamily: "century-gothic", fontSize: 13, letterSpacing: 0.1 }}>
-                      Перемістити: затиснути та перетягнути
-                    </AppText>
+                  <AppText style={{ fontFamily: "century-gothic", fontSize: 13, letterSpacing: 0.1 }}>
+                    Видалити: свайп ліворуч
+                  </AppText>
 
-                    <AppText style={{ fontFamily: "century-gothic", fontSize: 13, letterSpacing: 0.1 }}>
-                      Видалити: свайп ліворуч
-                    </AppText>
-
-                    <AppText style={{ fontFamily: "century-gothic", fontSize: 13, letterSpacing: 0.1 }}>
-                      Редагувати: натиснути на пару
-                    </AppText>
-                  </View>
+                  <AppText style={{ fontFamily: "century-gothic", fontSize: 13, letterSpacing: 0.1 }}>
+                    Редагувати: натиснути на пару
+                  </AppText>
                 </View>
               </View>
-            ) : null}
-            {/* temp slice for performance reasons */}
-            {workDays.slice(0, 111).map((day, idx) => {
-              const item = day
-              const isEmpty = scheduleRef.current!.scheduleDays[idx].getCurrentWeekClasses().length === 0
-              const shouldDisplayEmptyDay = settingsServiceRef.current!.displayEmptyDays != DisplayEmptyDaysMode.Hide
+            </View>
+          ) : null}
+          {/* temp slice for performance reasons */}
+          {workDays.slice(0, 111).map((day, idx) => {
+            const item = day
+            const isEmpty = scheduleRef.current!.scheduleDays[idx].getCurrentWeekClasses().length === 0
+            const shouldDisplayEmptyDay = settingsServiceRef.current!.displayEmptyDays != DisplayEmptyDaysMode.Hide
 
-              if (!isEditable && isEmpty && !shouldDisplayEmptyDay) {
-                return <View style={globalStyles.noDisplay} key={day + weekType}></View>
-              }
+            if (!isEditable && isEmpty && !shouldDisplayEmptyDay) {
+              return <View style={globalStyles.noDisplay} key={day + weekType}></View>
+            }
 
-              let scheduleDay = scheduleRef.current!.scheduleDays[idx]
-              let classes = weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
+            let scheduleDay = scheduleRef.current!.scheduleDays[idx]
+            let classes = weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
 
-              return (
-                <View
-                  style={styles.cardContainer}
-                  key={day + weekType}
-                  onLayout={(event) => {
-                    const layout = event.nativeEvent.layout
-                    dataSourceCords[idx] = layout.y
-                    setDataSourceCords(dataSourceCords)
-                    // console.log("- - - component layout data (start) - - - ")
-                    // console.log(dataSourceCords)
-                    // console.log("height:", layout.height)
-                    // console.log("width:", layout.width)
-                    // console.log("x:", layout.x)
-                    // console.log("y:", layout.y)
-                    // console.log("- - - component layout data (end) - - - ")
+            return (
+              <View
+                style={styles.cardContainer}
+                key={day + weekType}
+                onLayout={(event) => {
+                  const layout = event.nativeEvent.layout
+                  dataSourceCords[idx] = layout.y
+                  setDataSourceCords(dataSourceCords)
+                  // console.log("- - - component layout data (start) - - - ")
+                  // console.log(dataSourceCords)
+                  // console.log("height:", layout.height)
+                  // console.log("width:", layout.width)
+                  // console.log("x:", layout.x)
+                  // console.log("y:", layout.y)
+                  // console.log("- - - component layout data (end) - - - ")
 
-                    if (dataSourceCords.length < todayIndex) return
-                    if (this.scrolledToToday == true) return
+                  if (dataSourceCords.length < todayIndex) return
+                  if (this.scrolledToToday == true) return
 
-                    // this should happen only once
-                    scrollViewContainerRef.current!.scrollTo({
-                      x: 0,
-                      y: dataSourceCords[todayIndex],
-                      animated: true,
-                    })
+                  // this should happen only once
+                  scrollViewContainerRef.current!.scrollTo({
+                    x: 0,
+                    y: dataSourceCords[todayIndex],
+                    animated: true,
+                  })
 
-                    // TODO: Refactor
-                    if (dataSourceCords.length == 5) {
-                      this.scrolledToToday = true
-                    }
-                  }}
-                >
-                  <ScheduleDayComponent
-                    classesCollection={classes}
-                    scheduleObject={scheduleRef.current!}
-                    dayName={item}
-                    dayIndex={idx}
-                    scheduleDay={scheduleRef.current!.scheduleDays[idx]}
-                    displayRoomNumber={!isEditable ? settingsServiceRef.current!.displayRoomNumber : true}
-                    showSeparator={idx !== workDays.length - 1}
-                    weekType={weekType}
-                    fade={
-                      !isEditable
-                        ? isEmpty && settingsServiceRef.current!.displayEmptyDays == DisplayEmptyDaysMode.Darken
-                        : false
-                    }
-                    isEditable={isEditable}
-                  ></ScheduleDayComponent>
-                </View>
-              )
-            })}
-          </ScrollView>
-        </View>
+                  // TODO: Refactor
+                  if (dataSourceCords.length == 5) {
+                    this.scrolledToToday = true
+                  }
+                }}
+              >
+                <ScheduleDayComponent
+                  classesCollection={classes}
+                  scheduleObject={scheduleRef.current!}
+                  dayName={item}
+                  dayIndex={idx}
+                  scheduleDay={scheduleRef.current!.scheduleDays[idx]}
+                  displayRoomNumber={!isEditable ? settingsServiceRef.current!.displayRoomNumber : true}
+                  showSeparator={idx !== workDays.length - 1}
+                  weekType={weekType}
+                  fade={
+                    !isEditable
+                      ? isEmpty && settingsServiceRef.current!.displayEmptyDays == DisplayEmptyDaysMode.Darken
+                      : false
+                  }
+                  isEditable={isEditable}
+                ></ScheduleDayComponent>
+              </View>
+            )
+          })}
+        </ScrollView>
       </View>
     </SettingsContext.Provider>
   )
@@ -351,9 +365,13 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
 const styles = StyleSheet.create({
   rootContainer: {
-    paddingBottom: 60,
+    // width: "70%",
+    // alignSelf: "center",
+
+    // paddingBottom: 60,
     ...globalStyles.screen,
 
+    // flex: 0,
     backgroundColor: "#F5F5F5",
   },
   modalToggle: {

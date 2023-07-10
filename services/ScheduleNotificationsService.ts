@@ -3,6 +3,7 @@ import ScheduleModel from "../models/ScheduleModel"
 import LocalNotificationsService from "./LocalNotificationsService"
 import SettingsService from "./SettingsService"
 import ClassNotificationBuilder from "./ClassNotificationBuilder"
+import { isRunningInBrowser } from "../utilities/utilities"
 
 // TODO: Read about override keyword in TypeScript
 
@@ -32,7 +33,7 @@ export default class ScheduleNotificationsService extends LocalNotificationsServ
     const settingsService = await SettingsService.GetInstance()
 
     // check whether notifications are enabled
-    if (settingsService.notifyBeforeClass) {
+    if (!isRunningInBrowser() && settingsService.notifyBeforeClass) {
       // if notifications are enabled, then schedule notifications for each class
       // make sure to not register duplicate notifications by either checking for duplicates or deleting all notifications before setting any
       await notificationsService.cancelAllScheduledNotificationsAsync()

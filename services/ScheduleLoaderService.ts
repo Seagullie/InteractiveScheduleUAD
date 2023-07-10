@@ -5,9 +5,10 @@ import NetInfo from "@react-native-community/netinfo"
 
 import ScheduleModel, { ScheduleDay } from "../models/ScheduleModel"
 import { workDaysEnLower } from "../constants/Days"
-import { ensureExtension, getContentfulClient } from "../utilities/utilities"
+import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../utilities/utilities"
 import ExampleScheduleKN from "../assets/example_schedules/КН-example.json"
 import ExampleScheduleIST from "../assets/example_schedules/ІСТ-example.json"
+import ExampleScheduleTE from "../assets/example_schedules/ТЕ-example.json"
 
 // This is a singleton service that loads schedules from local storage / contentful and provides it to the rest of the application
 // if no schedules are available (no schedules folder) it should retrieve them from contentful and store them locally
@@ -50,9 +51,15 @@ export default class ScheduleLoaderService {
   protected constructor() {}
 
   protected async init() {
+    // TODO: implement proper browser support
+    if (isRunningInBrowser()) {
+      this.getExampleSchedules()
+      return
+    }
+
     // check whether schedules are available locally
     const schedulesAvailableLocally = (await FileSystem.getInfoAsync(this.pathToScheduleFolder)).exists
-    
+
     if (schedulesAvailableLocally) {
       await this.getSchedulesFromFileSystem()
 
@@ -72,7 +79,6 @@ export default class ScheduleLoaderService {
         this.getExampleSchedules()
       }
     }
-
 
     this.scheduleFiles = _.sortBy(this.scheduleFiles, (sf) => sf.filename)
   }
@@ -110,7 +116,9 @@ export default class ScheduleLoaderService {
     console.log(`[Schedule Loader] retrieving schedules from contentful`)
 
     const client = getContentfulClient()
-    const assets = await client.getAssets()
+    const assets = await client.getAssets({
+      limit: 1000,
+    })
     console.log(`[Schedule Loader] retrieved ${assets.items.length} schedule assets from contentful`)
 
     // iterate over assets and download them
@@ -136,8 +144,10 @@ export default class ScheduleLoaderService {
           json_parsed: JSON.parse(scheduleClassesJson),
         }
 
-        // save schedule classes json together with metadata to schedules folder
-        await FileSystem.writeAsStringAsync(linkToDestFile, JSON.stringify(scheduleFile))
+        if (!isRunningInBrowser()) {
+          // save schedule classes json together with metadata to schedules folder
+          await FileSystem.writeAsStringAsync(linkToDestFile, JSON.stringify(scheduleFile))
+        }
 
         return scheduleFile
       })
@@ -163,6 +173,14 @@ export default class ScheduleLoaderService {
         createdAt: "",
         updatedAt: "",
         json_parsed: ExampleScheduleIST,
+      },
+
+      {
+        filename: "ТЕ-example.json",
+        revision: 0,
+        createdAt: "",
+        updatedAt: "",
+        json_parsed: ExampleScheduleTE,
       },
     ]
 
@@ -271,6 +289,7 @@ export default class ScheduleLoaderService {
     this.scheduleFiles = updatedScheduleFiles
   }
 
+  // persists schedule model into file
   dumpSchedule(schedule: ScheduleModel) {
     // get corresponding schedule file
     let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
@@ -283,6 +302,10 @@ export default class ScheduleLoaderService {
 
     // replace .json_parsed with schedule contents
     scheduleFile!.json_parsed = jsonToDump
+
+    if (isRunningInBrowser()) {
+      return Promise.resolve()
+    }
 
     console.log(`[Schedule Loader] dumping schedule ${scheduleFile?.filename} to file`)
     // write to file

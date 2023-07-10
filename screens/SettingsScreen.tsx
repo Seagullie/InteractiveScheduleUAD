@@ -11,7 +11,7 @@ import OptionPickerModal from "../components/OptionPickerModal"
 import ScheduleNotificationsService from "../services/ScheduleNotificationsService"
 import ScheduleModel from "../models/ScheduleModel"
 import ScheduleLoaderService from "../services/ScheduleLoaderService"
-import { ensureExtension, ensureNoExtension } from "../utilities/utilities"
+import { ensureExtension, ensureNoExtension, isRunningInBrowser } from "../utilities/utilities"
 import AppText from "../shared/AppText"
 import FlatButton from "../shared/Button"
 import OutlinedButton from "../shared/OutlinedButton"
@@ -176,76 +176,82 @@ export default function Settings() {
   //   setIsReady(true)
   // }, 500)
 
+  let notificationsSection = !isRunningInBrowser() ? (
+    <View>
+      {constructCategoryHeader(
+        "Сповіщення",
+        <FontAwesomeIcon name="bell-o" style={styles.settingsSectionIcon}></FontAwesomeIcon>
+      )}
+
+      <View style={styles.settingsCategory}>
+        {constructSettingsRow(
+          "Нагадувати про початок пари",
+          <CustomSwitch
+            onValueChange={(nv) => {
+              setSettingsValues({
+                ...settingsValues,
+                notifyBeforeClass: nv,
+              })
+
+              toggleNotifs(nv)
+            }}
+            initVal={settingsValues.notifyBeforeClass}
+            disabled={false}
+          />
+        )}
+        <View style={styles.separator}></View>
+
+        {constructSettingsRow(
+          "Сповіщати заздалегідь",
+          <View>
+            <TouchableOpacity onPress={() => setNotifyBeforehandModalVisible(true)}>
+              <View style={styles.settingValueContainer}>
+                <AppText style={styles.settingValue}>{settingsValues.notifyBeforeClassOffsetMinutes + " хв."}</AppText>
+                <EntypoIcon name="chevron-small-right" style={styles.grayIcon}></EntypoIcon>
+              </View>
+            </TouchableOpacity>
+
+            <OptionPickerModal
+              hasSearchBar={false}
+              isOpen={notifyBeforehandModalVisible}
+              initialOptions={[0, 5, 10, 15, 20].map((n) => n + " хв.")}
+              initialSelectedOption={settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
+              closeModal={() => setNotifyBeforehandModalVisible(false)}
+              onSelected={(selected) => {
+                let selectedInt = parseInt(selected)
+                setSettingsValues({
+                  ...settingsValues,
+                  notifyBeforeClassOffsetMinutes: selectedInt,
+                })
+
+                toggleNotifs(settingsValues.notifyBeforeClass)
+              }}
+            />
+          </View>
+        )}
+
+        <View style={styles.separator}></View>
+
+        {constructSettingsRow(
+          "Звук, місце появи сповіщення та ін.",
+          <View style={[styles.settingValueContainer, { marginRight: 3 }]}>
+            {/* TODO: Unhardcode margin right */}
+
+            <TouchableOpacity onPress={settingsServiceRef.current?.openAndroidSystemSettingsForNotifications}>
+              <Ionicons name="open" size={14} color={palette.navigationBackground} />
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+    </View>
+  ) : null
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={styles.scrollViewDirect} contentContainerStyle={styles.scrollViewContentContainer}>
         <View style={styles.pageBackground}>
-          {constructCategoryHeader(
-            "Сповіщення",
-            <FontAwesomeIcon name="bell-o" style={styles.settingsSectionIcon}></FontAwesomeIcon>
-          )}
-          <View style={styles.settingsCategory}>
-            {constructSettingsRow(
-              "Нагадувати про початок пари",
-              <CustomSwitch
-                onValueChange={(nv) => {
-                  setSettingsValues({
-                    ...settingsValues,
-                    notifyBeforeClass: nv,
-                  })
+          {notificationsSection}
 
-                  toggleNotifs(nv)
-                }}
-                initVal={settingsValues.notifyBeforeClass}
-                disabled={false}
-              />
-            )}
-            <View style={styles.separator}></View>
-
-            {constructSettingsRow(
-              "Сповіщати заздалегідь",
-              <View>
-                <TouchableOpacity onPress={() => setNotifyBeforehandModalVisible(true)}>
-                  <View style={styles.settingValueContainer}>
-                    <AppText style={styles.settingValue}>
-                      {settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
-                    </AppText>
-                    <EntypoIcon name="chevron-small-right" style={styles.grayIcon}></EntypoIcon>
-                  </View>
-                </TouchableOpacity>
-
-                <OptionPickerModal
-                  hasSearchBar={false}
-                  isOpen={notifyBeforehandModalVisible}
-                  initialOptions={[0, 5, 10, 15, 20].map((n) => n + " хв.")}
-                  initialSelectedOption={settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
-                  closeModal={() => setNotifyBeforehandModalVisible(false)}
-                  onSelected={(selected) => {
-                    let selectedInt = parseInt(selected)
-                    setSettingsValues({
-                      ...settingsValues,
-                      notifyBeforeClassOffsetMinutes: selectedInt,
-                    })
-
-                    toggleNotifs(settingsValues.notifyBeforeClass)
-                  }}
-                />
-              </View>
-            )}
-
-            <View style={styles.separator}></View>
-
-            {constructSettingsRow(
-              "Звук, місце появи сповіщення та ін.",
-              <View style={[styles.settingValueContainer, { marginRight: 3 }]}>
-                {/* TODO: Unhardcode margin right */}
-
-                <TouchableOpacity onPress={settingsServiceRef.current?.openAndroidSystemSettingsForNotifications}>
-                  <Ionicons name="open" size={14} color={palette.navigationBackground} />
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
           {constructCategoryHeader(
             "Розклад",
             <FontAwesomeIcon name="calendar-o" style={styles.settingsSectionIcon}></FontAwesomeIcon>

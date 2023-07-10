@@ -13,6 +13,8 @@ import { useNavigation } from "@react-navigation/native"
 import _ from "lodash"
 import { EditorStackRoutes } from "../../routes/EditorStackRoutes"
 
+import "setimmediate"
+
 // TODO: use this library to implement swipeable items
 // https://github.com/computerjazz/react-native-swipeable-item
 
