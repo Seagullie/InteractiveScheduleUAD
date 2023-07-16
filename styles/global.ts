@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import { isRunningInBrowser } from "../utilities/utilities"
 
 export const previewImages = {
   schedule: require("../assets/images/previews/schedule-preview.png"),
@@ -176,5 +177,20 @@ export const globalStyles = StyleSheet.create({
 
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  modalContentContainer: {
+    position: "absolute",
+    top: "10%",
+
+    margin: 30,
+    marginHorizontal: isRunningInBrowser() ? "33%" : "2%", // 25 + 8 for sidebar
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "80%",
+    width: isRunningInBrowser() ? "50%" : "95%",
   },
 })

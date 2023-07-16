@@ -17,7 +17,7 @@ import ScheduleNotificationsService from "../services/ScheduleNotificationsServi
 import ScheduleLoaderService, { ScheduleFile } from "../services/ScheduleLoaderService"
 import { SettingsContext } from "../contexts/settingsContext"
 import { ensureExtension, ensureNoExtension, isRunningInBrowser } from "../utilities/utilities"
-import IntroductoryCarousel from "./TestTabsScreens/IntroductoryCarousel"
+import IntroductoryCarousel from "./IntroductoryCarousel/IntroductoryCarousel"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import GetWeekType, { WeekType } from "../utilities/getWeekType"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
@@ -223,7 +223,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
   }
 
   // TODO: implement web version of Onboarding screen
-  if (!isRunningInBrowser() && isFirstTimeLaunch != "false") {
+  if (isFirstTimeLaunch != "false") {
     return (
       <IntroductoryCarousel
         onClose={() => {

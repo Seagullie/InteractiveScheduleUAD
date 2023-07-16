@@ -73,7 +73,7 @@ export default function OptionPickerModal({
         </View>
         <ScrollView style={{ width: "100%", height: 0.4 * height }}>
           {filteredOptions.map((option, idx) => (
-            <View key={idx} >
+            <View key={idx}>
               {renderItem ? (
                 renderItem(option, idx)
               ) : (
@@ -152,18 +152,8 @@ const styles = StyleSheet.create({
   },
 
   modalContentContainer: {
-    position: "absolute",
-    top: "10%",
-    // bottom: "15%",
-    width: "96%",
-
-    margin: 30,
-    marginHorizontal: "2%",
-    padding: 20,
-    borderRadius: 10,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
+    ...globalStyles.modalContentContainer,
+    top: "5%",
   },
 
   overlay: {

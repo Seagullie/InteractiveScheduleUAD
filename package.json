@@ -68,6 +68,7 @@
     "react-native-svg-uri": "^1.2.3",
     "react-native-swipeable-item": "^2.0.9",
     "react-native-web": "^0.18.12",
+    "react-responsive-carousel": "^3.2.23",
     "rn-tooltip": "^3.0.3",
     "setimmediate": "^1.0.5",
     "uuidv4": "^6.2.13"

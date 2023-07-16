@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, StyleSheet, Image, TouchableOpacity, ActivityIndicator, useWindowDimensions } from "react-native"
-// import PagerView from "react-native-pager-view"
+import PagerView from "react-native-pager-view"
 
 import appConfig from "../../app.json"
 import AppText from "../../shared/AppText"
@@ -38,7 +38,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
       let schedulePickerData = scheduleLodaderInstance.scheduleFiles.map((f) => ensureNoExtension(f.filename, ".json"))
       setSchedulePickerData(schedulePickerData)
 
-      setIsReady(false) // for testing purposes
+      setIsReady(true)
     }
 
     init()
@@ -70,7 +70,6 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           styles.overlay,
           {
             height: 9999,
-            // zIndex: 9998, // shouldn't obstruct the pager
             zIndex: -1,
             // backgroundColor: "red",
           },
@@ -195,7 +194,6 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
             style={[styles.navigationButton, styles.backButton]}
             onPress={() => {
               let newCurrentPage = _.clamp(currentPage - 1, 0, 999)
-              // setCurrentPage(newCurrentPage)
               pagerRef.current!.setPage(newCurrentPage)
             }}
           >

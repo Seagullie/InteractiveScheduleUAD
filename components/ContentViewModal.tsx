@@ -4,6 +4,7 @@ import AppText from "../shared/AppText"
 import { Modal } from "react-native"
 import { Pressable } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
+import { globalStyles } from "../styles/global"
 
 // TODO: Add types to props
 
@@ -36,18 +37,7 @@ const styles = StyleSheet.create({
   },
 
   modalContentContainer: {
-    position: "absolute",
-    top: "10%",
-    // bottom: "15%",
-    margin: 30,
-    marginHorizontal: "2%",
-    padding: 20,
-    borderRadius: 10,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "80%",
-    width: "95%",
+    ...globalStyles.modalContentContainer,
   },
 
   modalChildren: {
