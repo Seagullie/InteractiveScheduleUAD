@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 
   modalContentContainer: {
     ...globalStyles.modalContentContainer,
-    top: "5%",
+    // top: "5%",
   },
 
   overlay: {

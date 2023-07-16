@@ -184,13 +184,13 @@ export const globalStyles = StyleSheet.create({
     top: "10%",
 
     margin: 30,
-    marginHorizontal: isRunningInBrowser() ? "33%" : "2%", // 25 + 8 for sidebar
+    marginHorizontal: isRunningInBrowser() ? "35%" : "2%", // 25 + 8 for sidebar
     padding: 20,
     borderRadius: 10,
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    height: "80%",
-    width: isRunningInBrowser() ? "50%" : "95%",
+    // height: "80%",
+    width: isRunningInBrowser() ? "45%" : "95%",
   },
 })
