@@ -1,18 +1,13 @@
 import * as React from "react"
 import { PixelRatio, Text, View, useWindowDimensions } from "react-native"
-import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Ionicons } from "@expo/vector-icons"
 import NotificationTestsScreen from "../screens/TestTabsScreens/NotificationTests"
 import ScheduledNotificationsScreen from "../screens/TestTabsScreens/ScheduledNotificationsScreen"
-import InroductoryCarousel from "../screens/IntroductoryCarousel/IntroductoryCarousel"
 import InroductoryCarouselScreen from "../screens/IntroductoryCarousel/IntroductoryCarousel"
 import FileSystemScreen from "../screens/TestTabsScreens/FileSystemScreen"
-import ScheduleEditor from "../screens/TestTabsScreens/ScheduleEditor"
 import TestEditorStack from "./testEditorStack"
-import ContactsModalsTestScreen from "../screens/TestTabsScreens/ContactsModalsTestScreen"
 import ContactsTestStack from "./ContactsTestStack"
-import { ContactsStackRoutes } from "./ContactsStackRoutes"
 
 function DeviceInfoScreen() {
   const { height, width } = useWindowDimensions()

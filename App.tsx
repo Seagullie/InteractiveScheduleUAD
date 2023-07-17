@@ -100,10 +100,11 @@ export default function App() {
                 }}
               />
 
-              <Drawer.Screen name={DrawerRoutes.CONTACTS} component={ContactsStack} />
-
               <Drawer.Screen name={DrawerRoutes.REGLAMENT} component={ReglamentScreen} />
+
               <Drawer.Screen name={DrawerRoutes.TEACHERS} component={TeachersScreen} />
+
+              <Drawer.Screen name={DrawerRoutes.CONTACTS} component={ContactsStack} />
 
               <Drawer.Screen name={DrawerRoutes.NEWS} component={NewsScreen} />
 

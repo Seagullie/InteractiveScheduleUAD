@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { View, Button, StyleSheet, Text, Image, TouchableOpacity } from "react-native"
+import { View, Button, StyleSheet, Text, Image, TouchableOpacity, ActivityIndicator } from "react-native"
 import { palette, globalStyles, previewImages } from "../../styles/global"
 import AppText from "../../shared/AppText"
 
@@ -11,14 +11,17 @@ import { setStatusBarHidden } from "expo-status-bar"
 import OptionPickerModal from "../../components/OptionPickerModal"
 import { DrawerRoutes } from "../../routes/DrawerRoutes"
 import SettingsService from "../../services/SettingsService"
-import { ensureExtension } from "../../utilities/utilities"
+import { ensureExtension, ensureNoExtension } from "../../utilities/utilities"
 import { useNavigation } from "@react-navigation/native"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService"
+import { getPageFour, getPageOne, getPageThree, getPageTwo } from "./Pages"
 
 // TODO: move shared logic to a separate file. As of now, lots if it is a copypaste from IntroductoryCarousel.native.tsx
 
 export default function InroductoryCarouselScreen({ onClose }: { onClose?: () => void }) {
   const [currentPage, setCurrentPage] = React.useState(0)
   let [isVisible, setIsVisible] = useState(true)
+  let [isReady, setIsReady] = useState(false)
 
   let [schedulePickerModalVisible, setSchedulePickerModalVisible] = useState(false)
 
@@ -28,8 +31,30 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
 
   const lastPageIndex = 3
 
+  useEffect(() => {
+    async function init() {
+      let scheduleLodaderInstance = await ScheduleLoaderService.GetInstance()
+
+      let schedulePickerData = scheduleLodaderInstance.scheduleFiles.map((f) => ensureNoExtension(f.filename, ".json"))
+      setSchedulePickerData(schedulePickerData)
+
+      setIsReady(true)
+    }
+
+    init()
+  }, [])
+
+  if (!isReady) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color={palette.navigationBackground} />
+      </View>
+    )
+  }
+
   return (
-    <View style={{ ...styles.overlay, height: "800px" }}>
+    <View style={{ ...styles.overlay, height: "100%" }}>
+      {/* if ^height:100% stops working, the red overlay will peek out under the view */}
       <View
         style={[
           styles.overlay,
@@ -60,32 +85,27 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           onChange={(index) => setCurrentPage(index)}
           selectedItem={currentPage}
         >
-          <View style={styles.page} key="1">
-            <View style={styles.pageBody}>
-              <View style={styles.imageContainer}>
-                <img style={styles.previewImage} src={previewImages.scheduleCropped} />
-              </View>
-              <AppText style={styles.pageTitle}>Розклад</AppText>
-              <View style={styles.pageDescriptionText}>
-                <AppText style={styles.centeredDescriptionText}>
-                  Розклад занять в академії чергується тижнями: чисельник, знаменник.
-                </AppText>
-                <Text />
-                <AppText style={styles.centeredDescriptionText}>
-                  Якщо цього тижня – чисельник, то перемикач{" "}
-                  <Text style={{ color: palette.navigationBackground }}>Чис</Text> буде активним.
-                </AppText>
-              </View>
+          {getPageOne()}
+          {getPageTwo()}
+          {getPageThree()}
+          {getPageFour()}
+
+          {/* <div style={styles.imageContainer}>
+            <View>
+              <img
+                style={{
+                  height: "100px",
+                  width: "100px",
+                  maxHeight: "100px",
+                }}
+                src="https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/number_2_green-512.png"
+              />
             </View>
-          </View>
-          <div>
-            <img src="https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/number_2_green-512.png" />
-            <p>Legend 2</p>
           </div>
           <div>
             <img src="assets/3.jpeg" />
             <p className="legend">Legend 3</p>
-          </div>
+          </div> */}
         </Carousel>
         {currentPage == 0 ? (
           <View style={[styles.pagerNavigation, { justifyContent: "center" }]}>
@@ -170,9 +190,13 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: "100%",
-    // height: "100%",
+    height: "100%",
     flex: 1,
     zIndex: 9999,
+
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
 
   container: {
@@ -194,6 +218,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginVertical: 20,
+
+    width: "100%",
   },
 
   circle: {
@@ -230,7 +256,7 @@ const styles = StyleSheet.create({
   pagerNavigation: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginHorizontal: 30,
+    width: "90%",
     marginBottom: 20,
   },
 
@@ -246,9 +272,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: "65%",
     maxHeight: "65%",
+    width: "90%",
     // backgroundColor: "green",
 
-    overflow: "visible",
+    overflow: "auto",
 
     // borderColor: palette.navigationBackground,
     // borderWidth: 1,
