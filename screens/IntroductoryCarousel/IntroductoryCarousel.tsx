@@ -4,8 +4,12 @@ import { View, Button, StyleSheet, Text, Image, TouchableOpacity, ActivityIndica
 import { palette, globalStyles, previewImages } from "../../styles/global"
 import AppText from "../../shared/AppText"
 
-import "react-responsive-carousel/lib/styles/carousel.min.css" // requires a loader
-import { Carousel } from "react-responsive-carousel"
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react"
+
+// Import Swiper styles
+import "swiper/css"
+
 import _ from "lodash"
 import { setStatusBarHidden } from "expo-status-bar"
 import OptionPickerModal from "../../components/OptionPickerModal"
@@ -17,6 +21,7 @@ import ScheduleLoaderService from "../../services/ScheduleLoaderService"
 import { getPageFour, getPageOne, getPageThree, getPageTwo } from "./Pages"
 
 // TODO: move shared logic to a separate file. As of now, lots if it is a copypaste from IntroductoryCarousel.native.tsx
+// TODO: fix navigation falling out of viewport on firefox
 
 export default function InroductoryCarouselScreen({ onClose }: { onClose?: () => void }) {
   const [currentPage, setCurrentPage] = React.useState(0)
@@ -54,113 +59,95 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
 
   return (
     <View style={{ ...styles.overlay }}>
-      {/* if ^height:100% stops working, the red overlay will peek out under the view */}
-      <View
-        style={[
-          styles.overlay,
-          {
-            height: "100vh",
-            zIndex: -1,
-            backgroundColor: "red",
-          },
-        ]}
-      />
+      <View style={styles.paginationCircles}>
+        {_.times(lastPageIndex + 1, (i) => (
+          <View key={i} style={[styles.circle, currentPage == i ? styles.circleActive : {}]} />
+        ))}
+      </View>
 
-      <div className="carouselContainerDebug" style={styles.carouselContainer}>
-        <View style={styles.paginationCircles}>
-          {_.times(lastPageIndex + 1, (i) => (
-            <View key={i} style={[styles.circle, currentPage == i ? styles.circleActive : {}]} />
-          ))}
-        </View>
+      <Swiper
+        style={{ display: "flex", width: "95%", flex: 1 }}
+        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={(swiper) => {
+          setCurrentPage(swiper.activeIndex)
+        }}
+      >
+        {getPageOne()}
+        {getPageTwo()}
 
-        <Carousel
-          emulateTouch={true}
-          showArrows={false}
-          showThumbs={false}
-          showStatus={false}
-          renderIndicator={(onClickHandler, isSelected, index, label) => {
-            return <div key={index} style={styles.circle} />
-          }}
-          showIndicators={false}
-          onChange={(index) => setCurrentPage(index)}
-          selectedItem={currentPage}
-        >
-          {getPageOne()}
-          {getPageTwo()}
-          {getPageThree()}
-          {getPageFour()}
-        </Carousel>
-        {currentPage == 0 ? (
-          <View style={[styles.pagerNavigation, { justifyContent: "center" }]}>
-            <TouchableOpacity
-              style={[styles.navigationButton, { width: 150 }]}
-              onPress={() => {
-                setSchedulePickerModalVisible(true)
-              }}
+        {getPageThree()}
+        {getPageFour()}
+      </Swiper>
+      {currentPage == 0 ? (
+        <View style={[styles.pagerNavigation, { justifyContent: "center" }]}>
+          <TouchableOpacity
+            style={[styles.navigationButton, { width: 150 }]}
+            onPress={() => {
+              setSchedulePickerModalVisible(true)
+            }}
+          >
+            <AppText
+              accessibilityLabel="selectSchedule"
+              style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}
             >
-              <AppText
-                accessibilityLabel="selectSchedule"
-                style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}
-              >
-                Обрати розклад
-              </AppText>
-            </TouchableOpacity>
-            <OptionPickerModal
-              headerText="Вибери свою групу"
-              isOpen={schedulePickerModalVisible}
-              initialOptions={schedulePickerData}
-              initialSelectedOption={""}
-              closeModal={() => setSchedulePickerModalVisible(false)}
-              onSelected={(selected) => {
-                SettingsService.GetInstance().then((i) => {
-                  i.currentScheduleName = ensureExtension(selected, ".json")
-                  i.saveToStorage()
-
-                  let newCurrentPage = _.clamp(currentPage + 1, 0, lastPageIndex)
-                  setCurrentPage(newCurrentPage)
-                })
-              }}
-            />
-          </View>
-        ) : (
-          <View style={styles.pagerNavigation}>
-            <TouchableOpacity
-              style={[styles.navigationButton, styles.backButton]}
-              onPress={() => {
-                let newCurrentPage = _.clamp(currentPage - 1, 0, 999)
-
-                setCurrentPage(newCurrentPage)
-              }}
-            >
-              <AppText
-                style={{ color: palette.navigationBackground, fontFamily: "montserrat-600", color: palette.grayedOut }}
-              >
-                Назад
-              </AppText>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.navigationButton}
-              onPress={() => {
-                let isCloseButton = currentPage == lastPageIndex
-
-                if (isCloseButton) {
-                  setStatusBarHidden(false, "fade")
-                  setIsVisible(false)
-                  onClose?.()
-                  navigation.navigate(DrawerRoutes.VIEWER)
-                }
+              Обрати розклад
+            </AppText>
+          </TouchableOpacity>
+          <OptionPickerModal
+            headerText="Вибери свою групу"
+            isOpen={schedulePickerModalVisible}
+            initialOptions={schedulePickerData}
+            initialSelectedOption={""}
+            closeModal={() => setSchedulePickerModalVisible(false)}
+            onSelected={(selected) => {
+              SettingsService.GetInstance().then((i) => {
+                i.currentScheduleName = ensureExtension(selected, ".json")
+                i.saveToStorage()
 
                 let newCurrentPage = _.clamp(currentPage + 1, 0, lastPageIndex)
                 setCurrentPage(newCurrentPage)
-              }}
+              })
+            }}
+          />
+        </View>
+      ) : (
+        <View style={styles.pagerNavigation}>
+          <TouchableOpacity
+            style={[styles.navigationButton, styles.backButton]}
+            onPress={() => {
+              let newCurrentPage = _.clamp(currentPage - 1, 0, 999)
+
+              setCurrentPage(newCurrentPage)
+            }}
+          >
+            <AppText
+              style={{ color: palette.navigationBackground, fontFamily: "montserrat-600", color: palette.grayedOut }}
             >
-              <AppText style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}>
-                {currentPage != lastPageIndex ? "Далі" : "Закрити"}
-              </AppText>
-            </TouchableOpacity>
-          </View>
-        )}
-      </div>
+              Назад
+            </AppText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navigationButton}
+            onPress={() => {
+              let isCloseButton = currentPage == lastPageIndex
+
+              if (isCloseButton) {
+                setStatusBarHidden(false, "fade")
+                setIsVisible(false)
+                onClose?.()
+                navigation.navigate(DrawerRoutes.VIEWER)
+              }
+
+              let newCurrentPage = _.clamp(currentPage + 1, 0, lastPageIndex)
+              setCurrentPage(newCurrentPage)
+            }}
+          >
+            <AppText style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}>
+              {currentPage != lastPageIndex ? "Далі" : "Закрити"}
+            </AppText>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   )
 }
@@ -240,8 +227,9 @@ const styles = StyleSheet.create({
   pagerNavigation: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "90%",
     marginBottom: 20,
+    alignSelf: "center",
+    width: "95%",
   },
 
   pageTitle: {

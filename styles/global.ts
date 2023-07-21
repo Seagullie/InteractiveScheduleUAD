@@ -9,6 +9,13 @@ export const previewImages = {
   editorPreview: require("../assets/images/previews/editor-preview.png"),
 }
 
+export const previewImagesFull = {
+  schedule: require("../assets/images/previews/previews-full/schedule-view-highlight.png"),
+  reglamentPreview: require("../assets/images/previews/previews-full/reglament.png"),
+  editorPreview: require("../assets/images/previews/previews-full/editor-view-preview.png"),
+  settingsPreview: require("../assets/images/previews/previews-full/settings.png"),
+}
+
 export const images = {
   uad_logo_text: require("../assets/images/uad_logo_text.svg"),
   uad_logo_text_not_vector: require("../assets/images/uad_logo_text_not_vector.png"),

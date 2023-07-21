@@ -1,30 +1,36 @@
 import { View, Text, StyleSheet, ImageBackground } from "react-native"
 import AppText from "../../shared/AppText"
-import { previewImages, palette, globalStyles } from "../../styles/global"
+import { previewImages, palette, globalStyles, previewImagesFull } from "../../styles/global"
 import { isRunningInBrowser } from "../../utilities/utilities"
 
-// TODO: integrate with native carousel
+// Import Swiper React components
+import { SwiperSlide } from "swiper/react"
+
+// Import Swiper styles
+import "swiper/css"
+
+// TODO: integrate with native carousel (it uses cropped preview images)
 // TODO: get full size screenshots
 // TODO: adapt settings page to web
 
 export function getPageOne() {
   const pageOne = (
-    <View style={styles.page} key="1">
+    <SwiperSlide style={styles.page} key="1">
       <View style={styles.imageContainer}>
-        <img style={styles.previewImage} src={previewImages.scheduleCropped} />
+        <img style={styles.previewImage} src={previewImagesFull.schedule} />
       </View>
       <AppText style={styles.pageTitle}>Розклад</AppText>
       <View style={styles.pageDescriptionText}>
         <AppText style={styles.centeredDescriptionText}>
           Розклад занять в академії чергується тижнями: чисельник, знаменник.
         </AppText>
-        <Text />
+        <br />
         <AppText style={styles.centeredDescriptionText}>
           Якщо цього тижня – чисельник, то перемикач <Text style={{ color: palette.navigationBackground }}>Чис</Text>{" "}
           буде активним.
         </AppText>
       </View>
-    </View>
+    </SwiperSlide>
   )
 
   return pageOne
@@ -32,9 +38,9 @@ export function getPageOne() {
 
 export function getPageTwo() {
   const pageTwo = (
-    <View style={styles.page} key="2">
-      <View style={styles.imageContainer}>
-        <img style={styles.previewImage} src={previewImages.reglamentPreview} />
+    <SwiperSlide style={styles.page} key="2">
+      <View style={{ ...styles.imageContainer }}>
+        <img style={styles.previewImage} src={previewImagesFull.reglamentPreview} />
       </View>
       <AppText style={styles.pageTitle}>Регламент</AppText>
       <View style={styles.pageDescriptionText}>
@@ -43,7 +49,7 @@ export function getPageTwo() {
           <AppText style={{ color: palette.navigationBackground }}>підсвіткою поточної пари </AppText>✨
         </AppText>
       </View>
-    </View>
+    </SwiperSlide>
   )
 
   return pageTwo
@@ -51,9 +57,9 @@ export function getPageTwo() {
 
 export function getPageThree() {
   const pageThree = (
-    <View style={styles.page} key="3">
+    <SwiperSlide style={styles.page} key="3">
       <View style={styles.imageContainer}>
-        <img style={styles.previewImage} src={previewImages.editorPreview} />
+        <img style={styles.previewImage} src={previewImagesFull.editorPreview} />
       </View>
       <AppText style={styles.pageTitle}>Редактор</AppText>
       <View style={styles.pageDescriptionText}>
@@ -61,7 +67,7 @@ export function getPageThree() {
           Дозволяє виправити чи змінити розклад за власними побажаннями.
         </AppText>
       </View>
-    </View>
+    </SwiperSlide>
   )
 
   return pageThree
@@ -69,15 +75,15 @@ export function getPageThree() {
 
 export function getPageFour() {
   const pageFour = (
-    <View style={styles.page} key="4">
+    <SwiperSlide style={styles.page} key="4">
       <View style={styles.imageContainer}>
-        <img style={styles.previewImage} src={previewImages.settingsPreview} />
+        <img style={styles.previewImage} src={previewImagesFull.settingsPreview} />
       </View>
       <AppText style={styles.pageTitle}>Налаштування</AppText>
       <View style={styles.pageDescriptionText}>
         <AppText style={styles.centeredDescriptionText}>Вигляд розкладу та сповіщення можна налаштувати тут.</AppText>
       </View>
-    </View>
+    </SwiperSlide>
   )
 
   return pageFour
@@ -85,16 +91,20 @@ export function getPageFour() {
 
 const styles = StyleSheet.create({
   page: {
-    height: "80vh",
-    marginHorizontal: 20,
-    width: "90%",
-    marginLeft: "5%",
-    alignItems: "center",
+    // height: "80vh",
+    // width: "100vw",
+    // alignSelf: "stretch",
 
+    // marginHorizontal: "5%",
+    // marginLeft: "5%",
     marginBottom: 20,
-    flex: 1,
+    marginHorizontal: 20,
 
-    justifyContent: "center",
+    display: "flex",
+    flexDirection: "column",
+
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 
   pageTitle: {
@@ -108,10 +118,14 @@ const styles = StyleSheet.create({
   imageContainer: {
     borderRadius: 10,
     height: "55%",
-    width: "100%",
+    // width: "100%",
+    // flex: 1,
+    alignSelf: "stretch",
 
     overflow: "hidden",
     flexDirection: "row",
+
+    // backgroundColor: "orange",
   },
 
   previewImage: {
