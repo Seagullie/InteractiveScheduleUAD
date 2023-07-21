@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import { View, Button, StyleSheet, Text, Image, TouchableOpacity, ActivityIndicator } from "react-native"
 import { palette, globalStyles, previewImages } from "../../styles/global"
 import AppText from "../../shared/AppText"
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react"
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react"
 
 // Import Swiper styles
 import "swiper/css"
@@ -19,12 +19,15 @@ import { ensureExtension, ensureNoExtension } from "../../utilities/utilities"
 import { useNavigation } from "@react-navigation/native"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService"
 import { getPageFour, getPageOne, getPageThree, getPageTwo } from "./Pages"
+import { Swiper as SwiperType } from "swiper/types"
 
 // TODO: move shared logic to a separate file. As of now, lots if it is a copypaste from IntroductoryCarousel.native.tsx
 // TODO: fix navigation falling out of viewport on firefox
 
 export default function InroductoryCarouselScreen({ onClose }: { onClose?: () => void }) {
   const [currentPage, setCurrentPage] = React.useState(0)
+  const swiperRef = useRef<SwiperType>()
+
   let [isVisible, setIsVisible] = useState(true)
   let [isReady, setIsReady] = useState(false)
 
@@ -49,6 +52,12 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
     init()
   }, [])
 
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(currentPage)
+    }
+  }, [currentPage])
+
   if (!isReady) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -66,8 +75,9 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
       </View>
 
       <Swiper
+        initialSlide={currentPage}
         style={{ display: "flex", width: "95%", flex: 1 }}
-        onSwiper={(swiper) => console.log(swiper)}
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
         onSlideChange={(swiper) => {
           setCurrentPage(swiper.activeIndex)
         }}
