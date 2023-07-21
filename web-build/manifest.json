@@ -1,0 +1,17 @@
+{
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "lang": "en",
+  "name": "Розклад УАД",
+  "short_name": "Розклад УАД",
+  "start_url": "/?utm_source=web_app_manifest",
+  "orientation": "portrait",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "http://play.google.com/store/apps/details?id=com.noid.InteractiveSchedule",
+      "id": "com.noid.InteractiveSchedule"
+    }
+  ],
+  "prefer_related_applications": true
+}

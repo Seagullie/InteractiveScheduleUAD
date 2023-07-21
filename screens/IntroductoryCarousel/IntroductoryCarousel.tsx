@@ -24,7 +24,9 @@ import { Swiper as SwiperType } from "swiper/types"
 // TODO: move shared logic to a separate file. As of now, lots if it is a copypaste from IntroductoryCarousel.native.tsx
 // TODO: fix navigation falling out of viewport on firefox
 
-const swiperWidth = isLandscapeWeb() ? "40%" : "95%"
+// TODO: get replace document height with viewport height
+const documentHeight = window.innerHeight
+const swiperWidth = isLandscapeWeb() ? `${documentHeight / 2}px` : "95%"
 
 export default function InroductoryCarouselScreen({ onClose }: { onClose?: () => void }) {
   const [currentPage, setCurrentPage] = React.useState(0)
