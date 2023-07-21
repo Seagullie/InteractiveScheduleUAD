@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-import { isRunningInBrowser } from "../utilities/utilities"
+import { isLandscapeWeb, isRunningInBrowser } from "../utilities/utilities"
 
 export const previewImages = {
   schedule: require("../assets/images/previews/schedule-preview.png"),
@@ -184,12 +184,12 @@ export const globalStyles = StyleSheet.create({
     top: "10%",
 
     margin: 30,
-    marginHorizontal: isRunningInBrowser() ? "35%" : "2%", // 27 + 8 for sidebar
+    marginHorizontal: isLandscapeWeb() ? "35%" : "2%", // 27 + 8 for sidebar
     padding: 20,
     borderRadius: 10,
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    width: isRunningInBrowser() ? "45%" : "95%",
+    width: isLandscapeWeb() ? "45%" : "95%",
   },
 })

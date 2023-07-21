@@ -28,7 +28,7 @@ import NewsScreen from "./screens/NewsScreen"
 import TestTabs from "./routes/testTabs"
 import SettingsScreen from "./screens/SettingsScreen"
 import AboutScreen from "./screens/AboutScreen"
-import { isRunningInBrowser } from "./utilities/utilities"
+import { isLandscapeWeb, isRunningInBrowser } from "./utilities/utilities"
 ;("use client")
 
 function fallbackRender({ error, resetErrorBoundary }) {
@@ -161,7 +161,7 @@ export default function App() {
 
 const drawerMenuWidthPx = 320
 
-const webStyles = StyleSheet.create({
+const landscapeWebStyles = StyleSheet.create({
   root: {
     width: "50%",
     minWidth: "50%",
@@ -182,4 +182,4 @@ const nativeStyles = StyleSheet.create({
   },
 })
 
-const styles = isRunningInBrowser() ? webStyles : nativeStyles
+const styles = isLandscapeWeb() ? landscapeWebStyles : nativeStyles

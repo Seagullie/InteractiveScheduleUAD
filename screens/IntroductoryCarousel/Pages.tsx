@@ -85,10 +85,7 @@ export function getPageFour() {
 
 const styles = StyleSheet.create({
   page: {
-    // height: "100%",
-    // flex: 1,
     height: "80vh",
-    // width: "100vw",
     marginHorizontal: 20,
     width: "90%",
     marginLeft: "5%",
@@ -96,12 +93,9 @@ const styles = StyleSheet.create({
 
     marginBottom: 20,
     flex: 1,
-    // height: "100%",
 
     justifyContent: "center",
   },
-
-  pageBody: {},
 
   pageTitle: {
     fontSize: 24,

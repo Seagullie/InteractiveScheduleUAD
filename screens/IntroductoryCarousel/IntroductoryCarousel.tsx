@@ -53,7 +53,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
   }
 
   return (
-    <View style={{ ...styles.overlay, height: "100%" }}>
+    <View style={{ ...styles.overlay }}>
       {/* if ^height:100% stops working, the red overlay will peek out under the view */}
       <View
         style={[
@@ -89,23 +89,6 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           {getPageTwo()}
           {getPageThree()}
           {getPageFour()}
-
-          {/* <div style={styles.imageContainer}>
-            <View>
-              <img
-                style={{
-                  height: "100px",
-                  width: "100px",
-                  maxHeight: "100px",
-                }}
-                src="https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/number_2_green-512.png"
-              />
-            </View>
-          </div>
-          <div>
-            <img src="assets/3.jpeg" />
-            <p className="legend">Legend 3</p>
-          </div> */}
         </Carousel>
         {currentPage == 0 ? (
           <View style={[styles.pagerNavigation, { justifyContent: "center" }]}>
@@ -203,6 +186,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
   },
+
   viewPager: {
     flex: 1,
     padding: 0,

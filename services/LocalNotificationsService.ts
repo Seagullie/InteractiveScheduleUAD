@@ -1,5 +1,6 @@
 import * as Notifications from "expo-notifications"
 import { Platform } from "react-native"
+import { isRunningInBrowser } from "../utilities/utilities"
 
 // expo notifications docs: https://docs.expo.dev/versions/latest/sdk/notifications/
 // Expo's Push Notification Tool: https://expo.dev/notifications
@@ -63,10 +64,12 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
     })
     await this.registerNotificationsChannel()
 
-    let permissionsGranted = (await this.checkPermissionsAsync()).granted
-    if (!permissionsGranted) await Notifications.requestPermissionsAsync()
+    if (!isRunningInBrowser()) {
+      let permissionsGranted = (await this.checkPermissionsAsync()).granted
+      if (!permissionsGranted) await Notifications.requestPermissionsAsync()
 
-    console.log(`[Local Notifications] permissions granted: ${permissionsGranted}`)
+      console.log(`[Local Notifications] permissions granted: ${permissionsGranted}`)
+    }
 
     console.log("local notifications service initialized")
   }

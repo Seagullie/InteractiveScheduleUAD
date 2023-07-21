@@ -121,6 +121,21 @@ export function isRunningInBrowser() {
   return isRunningInBrowser
 }
 
+export function isHorizontalOrientation() {
+  if (isRunningInBrowser()) {
+    return window.innerWidth > window.innerHeight
+  }
+
+  return (
+    constants.platform.ios.interfaceOrientation === "landscape" ||
+    constants.platform.android.interfaceOrientation === "landscape"
+  )
+}
+
+export function isLandscapeWeb() {
+  return isRunningInBrowser() && isHorizontalOrientation()
+}
+
 export const loadJSON = async (pathToJSONFile: string) => {
   const fileName = pathToJSONFile // Replace with the name of your JSON file
   const filePath =
