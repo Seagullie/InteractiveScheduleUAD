@@ -15,7 +15,7 @@ import { setStatusBarHidden } from "expo-status-bar"
 import OptionPickerModal from "../../components/OptionPickerModal"
 import { DrawerRoutes } from "../../routes/DrawerRoutes"
 import SettingsService from "../../services/SettingsService"
-import { ensureExtension, ensureNoExtension } from "../../utilities/utilities"
+import { ensureExtension, ensureNoExtension, isLandscapeWeb } from "../../utilities/utilities"
 import { useNavigation } from "@react-navigation/native"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService"
 import { getPageFour, getPageOne, getPageThree, getPageTwo } from "./Pages"
@@ -23,6 +23,8 @@ import { Swiper as SwiperType } from "swiper/types"
 
 // TODO: move shared logic to a separate file. As of now, lots if it is a copypaste from IntroductoryCarousel.native.tsx
 // TODO: fix navigation falling out of viewport on firefox
+
+const swiperWidth = isLandscapeWeb() ? "40%" : "95%"
 
 export default function InroductoryCarouselScreen({ onClose }: { onClose?: () => void }) {
   const [currentPage, setCurrentPage] = React.useState(0)
@@ -76,7 +78,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
 
       <Swiper
         initialSlide={currentPage}
-        style={{ display: "flex", width: "95%", flex: 1 }}
+        style={{ display: "flex", width: swiperWidth, flex: 1 }}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         onSlideChange={(swiper) => {
           setCurrentPage(swiper.activeIndex)
@@ -239,7 +241,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 20,
     alignSelf: "center",
-    width: "95%",
+    width: swiperWidth,
   },
 
   pageTitle: {
