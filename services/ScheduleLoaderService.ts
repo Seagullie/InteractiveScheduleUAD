@@ -54,31 +54,29 @@ export default class ScheduleLoaderService {
     // TODO: implement proper browser support
     if (isRunningInBrowser()) {
       await this.getSchedulesFromContentful()
-      this.scheduleFiles = _.sortBy(this.scheduleFiles, (sf) => sf.filename)
-      return
-    }
-
-    // check whether schedules are available locally
-    const schedulesAvailableLocally = (await FileSystem.getInfoAsync(this.pathToScheduleFolder)).exists
-
-    // TODO: refactor try catches into one hoisted try catch
-    if (schedulesAvailableLocally) {
-      await this.getSchedulesFromFileSystem()
-
-      // check for updates
-      try {
-        await this.checkForUpdatesAsync()
-      } catch (e) {
-        this.getExampleSchedules()
-      }
     } else {
-      // create schedules folder
-      await FileSystem.makeDirectoryAsync(this.pathToScheduleFolder, { intermediates: true })
+      // check whether schedules are available locally
+      const schedulesAvailableLocally = (await FileSystem.getInfoAsync(this.pathToScheduleFolder)).exists
 
-      try {
-        await this.getSchedulesFromContentful()
-      } catch (e) {
-        this.getExampleSchedules()
+      // TODO: refactor try catches into one hoisted try catch
+      if (schedulesAvailableLocally) {
+        await this.getSchedulesFromFileSystem()
+
+        // check for updates
+        try {
+          await this.checkForUpdatesAsync()
+        } catch (e) {
+          this.getExampleSchedules()
+        }
+      } else {
+        // create schedules folder
+        await FileSystem.makeDirectoryAsync(this.pathToScheduleFolder, { intermediates: true })
+
+        try {
+          await this.getSchedulesFromContentful()
+        } catch (e) {
+          this.getExampleSchedules()
+        }
       }
     }
 

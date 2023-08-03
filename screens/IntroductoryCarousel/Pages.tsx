@@ -132,6 +132,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 
     width: "100%",
+
+    // to prevent squish on iOS phones
+    maxWidth: "100%",
+    minHeight: "100%",
+
     height: "max-content",
   },
 
