@@ -53,13 +53,15 @@ export default class ScheduleLoaderService {
   protected async init() {
     // TODO: implement proper browser support
     if (isRunningInBrowser()) {
-      this.getExampleSchedules()
+      await this.getSchedulesFromContentful()
+      this.scheduleFiles = _.sortBy(this.scheduleFiles, (sf) => sf.filename)
       return
     }
 
     // check whether schedules are available locally
     const schedulesAvailableLocally = (await FileSystem.getInfoAsync(this.pathToScheduleFolder)).exists
 
+    // TODO: refactor try catches into one hoisted try catch
     if (schedulesAvailableLocally) {
       await this.getSchedulesFromFileSystem()
 
@@ -110,7 +112,7 @@ export default class ScheduleLoaderService {
   }
 
   // downloads schedules and sets them to .scheduleFiles
-  // also saves them to schedules folder
+  // also saves them to schedules folder (android only)
   async getSchedulesFromContentful() {
     // retrieve schedules from contentful
     console.log(`[Schedule Loader] retrieving schedules from contentful`)
@@ -132,9 +134,20 @@ export default class ScheduleLoaderService {
 
         // get file located at url and temporarily store it in .json file as I don't know how to download it in memory
         const linkToDestFile = `${this.pathToScheduleFolder}${file.fileName}`
-        await FileSystem.downloadAsync(linkToFile, linkToDestFile)
 
-        const scheduleClassesJson = await FileSystem.readAsStringAsync(linkToDestFile)
+        var scheduleClassesJson: string
+
+        if (!isRunningInBrowser()) {
+          await FileSystem.downloadAsync(linkToFile, linkToDestFile)
+          scheduleClassesJson = await FileSystem.readAsStringAsync(linkToDestFile)
+        } else {
+          let res = await fetch(linkToFile)
+
+          const blob = await res.blob()
+          const data = await blob.text()
+
+          scheduleClassesJson = data
+        }
 
         let scheduleFile: ScheduleFile = {
           filename: file.fileName,
