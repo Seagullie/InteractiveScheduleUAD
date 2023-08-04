@@ -78,8 +78,6 @@ export default function Settings() {
 
       console.log("[settings screen init] settingsService.currentSchedule:", settingsService.currentScheduleName)
 
-      // setDisplayEmptyDayMode(settingsServiceRef.current.displayEmptyDays)
-
       // disable schedule picker modal when notifications are being configured
       const notifService = await ScheduleNotificationsService.GetInstance()
 
@@ -490,8 +488,7 @@ export const styles = StyleSheet.create({
   settingRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    // alignItems: "center",
-    // ^ doesn't work as expected
+    alignItems: "center",
 
     marginVertical: 10,
   },

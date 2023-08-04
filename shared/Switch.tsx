@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { View, Switch, StyleSheet } from "react-native"
 import { palette } from "../styles/global"
+import { isRunningInBrowser } from "../utilities/utilities"
 
 // TODO: find better colors for toggled state
 
@@ -22,8 +23,9 @@ export default function CustomSwitch({
     <Switch
       style={styles.switch}
       trackColor={{ false: "#767577", true: palette.navigationBackground }}
-      thumbColor={"#eeeeee"}
-      ios_backgroundColor="#3e3e3e"
+      // thumbColor={"#eeeeee"}
+      thumbColor="#eeeeee"
+      activeThumbColor="#eeeeee" // this prop is added and used by  react-native-web
       onValueChange={(newValue) => {
         if (disabled) return
         toggleSwitch()
@@ -36,7 +38,8 @@ export default function CustomSwitch({
 
 const styles = StyleSheet.create({
   switch: {
-    height: 24,
+    // react-native-web sets min width to half of height
+    height: isRunningInBrowser() ? 20 : 24,
     width: 44,
   },
 })
