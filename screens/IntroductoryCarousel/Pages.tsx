@@ -3,6 +3,8 @@ import AppText from "../../shared/AppText"
 import { previewImages, palette, globalStyles, previewImagesFull } from "../../styles/global"
 import { isRunningInBrowser } from "../../utilities/utilities"
 
+import * as Device from "expo-device"
+
 // Import Swiper React components
 import { SwiperSlide } from "swiper/react"
 
@@ -10,7 +12,6 @@ import { SwiperSlide } from "swiper/react"
 import "swiper/css"
 
 // TODO: integrate with native carousel (it uses cropped preview images)
-// TODO: get full size screenshots
 // TODO: adapt settings page to web
 
 export function getPageOne() {
@@ -134,10 +135,7 @@ const styles = StyleSheet.create({
     width: "100%",
 
     // to prevent squish on iOS phones
-    maxWidth: "100%",
-    minHeight: "100%",
-
-    height: "max-content",
+    height: Device.osName === "iOS" ? "180%" : "max-content",
   },
 
   centeredDescriptionText: {
