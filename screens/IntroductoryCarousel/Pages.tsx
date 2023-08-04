@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
 
     width: "100%",
 
-    // to prevent squish on iOS phones
-    height: Device.osName === "iOS" ? "180%" : "max-content",
+    objectFit: "cover",
+    objectPosition: "top",
   },
 
   centeredDescriptionText: {
