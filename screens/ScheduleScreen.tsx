@@ -24,6 +24,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import AppText from "../shared/AppText"
 import ScheduleHeader from "../components/ScheduleComponents/ScheduleHeader"
 import { Event } from "../constants/Events"
+import EditedSchedulesStorageService from "../services/EditedScheduleStorageService"
 
 // TODO: scroll to current day on mount only instead of doing so on every rerender?
 
@@ -118,9 +119,9 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
       scheduleFileRef.current = _.cloneDeep(scheduleFile ?? firstScheduleFile)
 
-      await schedule.getScheduleFromScheduleLoader(
-        scheduleFile ? settingsService.currentScheduleName : firstScheduleFile.filename
-      )
+      const nameOfScheduleToLoad = scheduleFile ? settingsService.currentScheduleName : firstScheduleFile.filename
+
+      await schedule.getScheduleFromScheduleLoader(nameOfScheduleToLoad)
 
       // configure notifications for schedule, but only if it's not in editor
       if (!isEditable) {

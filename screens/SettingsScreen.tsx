@@ -13,8 +13,6 @@ import ScheduleModel from "../models/ScheduleModel"
 import ScheduleLoaderService from "../services/ScheduleLoaderService"
 import { ensureExtension, ensureNoExtension, isRunningInBrowser } from "../utilities/utilities"
 import AppText from "../shared/AppText"
-import FlatButton from "../shared/Button"
-import OutlinedButton from "../shared/OutlinedButton"
 import { Ionicons } from "@expo/vector-icons"
 
 // TODO: Fix settings page visually spazzing out on mount

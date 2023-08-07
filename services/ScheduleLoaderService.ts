@@ -9,6 +9,7 @@ import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../uti
 import ExampleScheduleKN from "../assets/example_schedules/КН-example.json"
 import ExampleScheduleIST from "../assets/example_schedules/ІСТ-example.json"
 import ExampleScheduleTE from "../assets/example_schedules/ТЕ-example.json"
+import EditedSchedulesStorageService from "./EditedScheduleStorageService"
 
 // This is a singleton service that loads schedules from local storage / contentful and provides it to the rest of the application
 // if no schedules are available (no schedules folder) it should retrieve them from contentful and store them locally
@@ -16,7 +17,7 @@ import ExampleScheduleTE from "../assets/example_schedules/ТЕ-example.json"
 // for that we will have to rely on some additional field. Perhaps revision or perhaps creactedAt.
 // or perhaps both
 
-type ScheduleFileMetadata = {
+export type ScheduleFileMetadata = {
   filename: string
   revision: number
   createdAt: string
@@ -54,6 +55,8 @@ export default class ScheduleLoaderService {
     // TODO: implement proper browser support
     if (isRunningInBrowser()) {
       await this.getSchedulesFromContentful()
+      // replace contentful schedules with their user edited versions
+      await this.replaceContentfulSchedulesWithEditedVersions()
     } else {
       // check whether schedules are available locally
       const schedulesAvailableLocally = (await FileSystem.getInfoAsync(this.pathToScheduleFolder)).exists
@@ -81,6 +84,23 @@ export default class ScheduleLoaderService {
     }
 
     this.scheduleFiles = _.sortBy(this.scheduleFiles, (sf) => sf.filename)
+  }
+  async replaceContentfulSchedulesWithEditedVersions() {
+    const editedSchedulesStorage = await EditedSchedulesStorageService.GetInstance()
+
+    let editedCounterpartsPromises = this.scheduleFiles.map(async (sf) => {
+      // patch contentful schedules with edited versions
+      const editedSchedule = await editedSchedulesStorage.loadEditedSchedule(sf.filename)
+      if (editedSchedule) {
+        sf.json_parsed = editedSchedule.scheduleDays
+      }
+
+      return sf
+    })
+
+    let editedCounterparts = await Promise.all(editedCounterpartsPromises)
+
+    this.scheduleFiles = editedCounterparts
   }
 
   async getSchedulesFromFileSystem() {
@@ -300,8 +320,21 @@ export default class ScheduleLoaderService {
     this.scheduleFiles = updatedScheduleFiles
   }
 
+  getScheduleFileMetadata(scheduleFile: ScheduleFile): ScheduleFileMetadata | undefined {
+    if (!scheduleFile) {
+      return undefined
+    }
+
+    return {
+      filename: scheduleFile.filename,
+      revision: scheduleFile.revision,
+      createdAt: scheduleFile.createdAt,
+      updatedAt: scheduleFile.updatedAt,
+    }
+  }
+
   // persists schedule model into file
-  dumpSchedule(schedule: ScheduleModel) {
+  async dumpSchedule(schedule: ScheduleModel) {
     // get corresponding schedule file
     let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
 
@@ -315,6 +348,9 @@ export default class ScheduleLoaderService {
     scheduleFile!.json_parsed = jsonToDump
 
     if (isRunningInBrowser()) {
+      const editedScheduleStorage = await EditedSchedulesStorageService.GetInstance()
+      await editedScheduleStorage.saveEditedSchedule(schedule)
+
       return Promise.resolve()
     }
 

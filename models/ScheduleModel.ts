@@ -1,12 +1,14 @@
-import { Platform, ToastAndroid } from "react-native"
 import GetWeekType from "../utilities/getWeekType"
 import { determineInterval, ensureNoExtension } from "../utilities/utilities"
 import getStrict from "../utilities/getStrict"
 import { workDaysEnLower } from "../constants/Days"
 import { REGLAMENT_DATA } from "../constants/Constants"
 import ScheduleLoaderService from "../services/ScheduleLoaderService"
+import EditedSchedulesStorageService from "../services/EditedScheduleStorageService"
 
 // TODO: separate other models into own files
+
+export type ScheduleDaysJson = { [key: string]: ScheduleDay }
 
 export default class ScheduleModel {
   name: string
@@ -26,7 +28,7 @@ export default class ScheduleModel {
     this.year = year
   }
 
-  setSchedule(data: { [key: string]: { classes: IScheduleClass[] } }) {
+  setSchedule(data: ScheduleDaysJson) {
     // console.log("[Schedule Model] processing raw schedule data ", data)
 
     console.log(`[Schedule Model] setting schedule from the object:`)
@@ -55,7 +57,7 @@ export default class ScheduleModel {
     if (!scheduleFile) {
       console.log(`[Schedule Model] schedule file ${scheduleFileName} not found`)
       // TODO: move out of the model and to UI
-      ToastAndroid.show("Не вдалось завантажити розклад", ToastAndroid.SHORT)
+      // ToastAndroid.show("Не вдалось завантажити розклад", ToastAndroid.SHORT)
 
       return
     }
@@ -64,11 +66,22 @@ export default class ScheduleModel {
 
     console.log(`[Schedule Model] loading schedule from Schedule Loader: ${this.name}`)
 
-    let data: {
-      [key: string]: { classes: IScheduleClass[] }
-    } = scheduleFile.json_parsed
+    let data: ScheduleDaysJson = scheduleFile.json_parsed
 
     this.setSchedule(data)
+  }
+
+  async getScheduleFromEditedSchedulesStorage(scheduleFileName: string) {
+    let editedScheduleService = await EditedSchedulesStorageService.GetInstance()
+    let schedule = await editedScheduleService.loadEditedSchedule(scheduleFileName)
+
+    if (!schedule) {
+      console.log(`[Schedule Model] schedule file ${scheduleFileName} not found`)
+      return
+    }
+
+    this.name = ensureNoExtension(schedule.metadata.filename, ".json")
+    this.setSchedule(schedule.scheduleDays)
   }
 
   getCurrentClass(): ScheduleClass | null {

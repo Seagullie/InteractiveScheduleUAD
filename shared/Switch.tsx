@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
   switch: {
     // react-native-web sets min width to half of height
     height: isRunningInBrowser() ? 20 : 24,
-    width: 44,
+    width: isRunningInBrowser() ? 40 : 44,
   },
 })
