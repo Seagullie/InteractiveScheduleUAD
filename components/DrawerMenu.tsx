@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import NewsLoaderService from "../services/NewsLoaderService"
 import { isRunningInExpoGo } from "../utilities/utilities"
 import _ from "lodash"
+import RouteIcons from "../constants/RouteIcons"
 
 // let allIcons = Object.keys(Ionicons.getRawGlyphMap())
 // console.log(allIcons)
@@ -52,25 +53,14 @@ function YellowCircle({ filled = true }: { filled?: boolean }) {
 }
 
 export default function DrawerMenu() {
-  const routeNameToIconRef = useRef({
-    [DrawerRoutes.VIEWER]: <Ionicons name="calendar" color={"white"} size={18} />,
-    [DrawerRoutes.REGLAMENT]: <Ionicons name="time-sharp" color={"white"} size={18} />,
-    [DrawerRoutes.TEACHERS]: <FontAwesome5 name="user-graduate" color={"white"} size={18} />,
-    [DrawerRoutes.CONTACTS]: <Ionicons name="call" color={"white"} size={18} />,
-    [DrawerRoutes.NEWS]: <Ionicons name="chatbox-ellipses" color={"white"} size={18} />,
-
-    [DrawerRoutes.TESTS]: <Ionicons name="flask" color={"white"} size={18} />,
-    [DrawerRoutes.EDITOR]: <Ionicons name="options" color={"white"} size={18} />,
-    [DrawerRoutes.SETTINGS]: <FontAwesome5 name="cog" color={"white"} size={18} />,
-    [DrawerRoutes.ABOUT]: <Ionicons name="information-circle" color={"white"} size={18} />,
-  })
+  const routeNameToIconRef = useRef(RouteIcons)
 
   const navigation = useNavigation()
   console.log("navigation", navigation)
 
-  const handleNavigationButtonPress = (screeName: string) => {
-    console.log("handlePageLinkPress", screeName)
-    navigation.navigate(screeName)
+  const handleNavigationButtonPress = (screenName: string) => {
+    console.log("handlePageLinkPress", screenName)
+    navigation.navigate(screenName)
   }
 
   // Get all the routes from the navigation state

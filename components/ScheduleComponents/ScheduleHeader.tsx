@@ -8,6 +8,10 @@ import { TouchableOpacity } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
 import { ExecutionEnvironment, NativeConstants, Constants, PlatformManifest, AndroidManifest } from "expo-constants"
 import constants from "expo-constants"
+import { getIcon } from "../Header"
+import { DrawerRoutes } from "../../routes/DrawerRoutes"
+
+import { useRoute } from "@react-navigation/native"
 
 // TODO: Dry up. I simply copypasted this code from Header.tsx
 // TODO: Display activity indicator during changing week type
@@ -28,18 +32,17 @@ export default function ScheduleHeader({
 
   // extract current screen name from navigation state
   const headerText = title.split(".")[0]
+
+  const routeName = useRoute().name
+  console.log("[Schedule Header] routeName: ", routeName)
+
+  const icon = getIcon(navigation_, routeName)
+
   return (
     <SafeAreaView style={styles.header}>
       <View style={styles.headerContentContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <TouchableOpacity>
-            <MaterialIcons
-              onPress={() => navigation_.openDrawer()}
-              name="menu"
-              size={24}
-              style={globalStyles.navIcon}
-            />
-          </TouchableOpacity>
+          <TouchableOpacity>{icon}</TouchableOpacity>
 
           <Text style={styles.headerText}>{headerText}</Text>
         </View>
@@ -134,7 +137,6 @@ const styles = StyleSheet.create({
   weekTypeText: {
     fontSize: 16,
     ...baseStyles.text,
-    // marginHorizontal: 16,
   },
 
   weekTextContainer: {
@@ -143,9 +145,6 @@ const styles = StyleSheet.create({
   },
 
   selectedContainer: {
-    // fontWeight: "bold",
-    // fontSize: 17,
-    // marginHorizontal: 15,
     borderRadius: 5,
     backgroundColor: "white",
   },

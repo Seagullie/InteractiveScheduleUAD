@@ -9,7 +9,7 @@ import ScheduleEditorScreen from "../screens/ScheduleEditorScreen"
 const Stack = createStackNavigator()
 
 export enum EditorStackRoutes {
-  EDITOR = "Editor",
+  EDITOR = "Редактор",
   SCHEDULE_CLASS_FORM = "ScheduleClassForm",
 }
 
