@@ -7,7 +7,6 @@ import _ from "lodash"
 import ScheduleClassComponent from "./ScheduleClass"
 import Separator from "../../shared/Separator"
 import GetWeekType from "../../utilities/getWeekType"
-import { Ionicons } from "@expo/vector-icons"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
 import SwipeableItem, { useSwipeableItemParams } from "react-native-swipeable-item"
@@ -156,11 +155,7 @@ export default function ScheduleDayComponent({
             saveEditedClasses(data)
           }}
           ListEmptyComponent={() => {
-            return (
-              <AppText style={styles.noClassesText}>
-                {_.sample(NoClassesText)}
-              </AppText>
-            )
+            return <AppText style={styles.noClassesText}>{_.sample(NoClassesText)}</AppText>
           }}
           scrollEnabled={false}
           nestedScrollEnabled={false}

@@ -2,9 +2,9 @@ import React from "react"
 import { View, Text, StyleSheet, FlatList, Linking, Pressable } from "react-native"
 import Separator from "../shared/Separator"
 import EntypoIcon from "react-native-vector-icons/Entypo"
+import { Ionicons, Octicons } from "@expo/vector-icons"
 import { globalStyles, imageIcons, palette } from "../styles/global"
 import AppText from "../shared/AppText"
-import { Ionicons, Octicons } from "@expo/vector-icons"
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
 import { Image } from "react-native-elements"
 import OptionPickerModal from "../components/OptionPickerModal"
@@ -45,7 +45,7 @@ function Category({
     <View style={styles.category}>
       <View style={styles.categoryTitle}>
         {titleIcon}
-        <AppText style={[{ fontSize: 14, fontFamily: "montserrat-semibold", marginLeft: 5 }]}>{title}</AppText>
+        <AppText style={[{ fontSize: 14, fontFamily: "montserrat-600", marginLeft: 5 }]}>{title}</AppText>
       </View>
       <FlatList
         data={children}

@@ -9,6 +9,8 @@ import React, { useEffect, useState } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 
 import { useFonts } from "expo-font"
+import * as Font from "expo-font"
+
 import { Drawer } from "./routes/globalDrawer"
 import Header from "./components/Header"
 
@@ -29,6 +31,8 @@ import TestTabs from "./routes/testTabs"
 import SettingsScreen from "./screens/SettingsScreen"
 import AboutScreen from "./screens/AboutScreen"
 import { isLandscapeWeb, isRunningInBrowser } from "./utilities/utilities"
+import { Entypo, FontAwesome, Ionicons, Octicons } from "@expo/vector-icons"
+
 ;("use client")
 
 function fallbackRender({ error, resetErrorBoundary }) {
@@ -69,6 +73,15 @@ export default function App() {
       "century-gothic-bold": require("./assets/fonts/GOTHICB.ttf"),
       "century-gothic-italic": require("./assets/fonts/GOTHICI.ttf"),
     })
+
+
+    // preload icons to prevent text flicker effect on navigating to another page
+    if(isRunningInBrowser()) {
+      Font.loadAsync(FontAwesome.font)
+      Font.loadAsync(Entypo.font)
+      Font.loadAsync(Ionicons.font)
+      Font.loadAsync(Octicons.font)
+    }
 
     useEffect(() => {
       if (fontsLoaded) {
