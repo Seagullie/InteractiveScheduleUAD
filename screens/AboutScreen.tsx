@@ -213,6 +213,25 @@ export default function AboutScreen() {
               </View>
             </View>
           </View>
+          <View>
+            <AppText
+              style={{
+                fontFamily: "montserrat-600",
+                fontSize: 16,
+                marginVertical: 10,
+                marginTop: 25,
+                alignSelf: "center",
+              }}
+            >
+              Бета-тестувальники
+            </AppText>
+
+            <AppText style={styles.testerName}>Іваськів Роман</AppText>
+            <AppText style={styles.testerName}>Беницький Степан</AppText>
+            <AppText style={styles.testerName}>Астафурова Наталя</AppText>
+            <AppText style={styles.testerName}>Цюпа Вікторія</AppText>
+            <AppText style={styles.testerName}>Ступак Марко</AppText>
+          </View>
         </View>
       </View>
 
@@ -230,6 +249,24 @@ export default function AboutScreen() {
             style={styles.contactsEmail}
           >
             schedule.uad@gmail.com
+          </AppText>
+        </View>
+      </View>
+
+      <View style={[styles.card]}>
+        <AppText style={[styles.teamSectionHeader, { marginBottom: 10 }]}>Розвиток проекту</AppText>
+        <AppText style={[{ fontSize: 13, fontFamily: "montserrat-600", marginBottom: 5 }]}>
+          Якщо у тебе є досвід роботи з React Native та бажаєш розвивати проект, залишаємо посилання на код застосунку:
+        </AppText>
+        <View style={[globalStyles.centered, { flexDirection: "row", alignItems: "center" }]}>
+          <Ionicons name="logo-github" color={palette.navigationBackground} size={22} style={{ marginRight: 5 }} />
+          <AppText
+            onPress={() => {
+              Linking.openURL("https://github.com/Seagullie/InteractiveScheduleUAD")
+            }}
+            style={[styles.contactsEmail, { textDecorationLine: "none", marginBottom: 0 }]}
+          >
+            Репозиторій на GitHub
           </AppText>
         </View>
       </View>
@@ -332,6 +369,13 @@ const styles = StyleSheet.create({
   tileText: {
     fontFamily: "century-gothic",
     fontSize: 14,
+  },
+
+  testerName: {
+    fontFamily: "montserrat-500",
+    fontSize: 13,
+    color: palette.navigationBackground,
+    alignSelf: "center",
   },
 
   card: {
