@@ -24,10 +24,6 @@ import {
 import { isMail, isRunningInBrowser } from "../utilities/utilities"
 import { useNavigation } from "@react-navigation/native"
 
-// TODO: Fix faculties screen opening twice in browser, cause
-// "item.props.onPress = null"
-// throws in web and can't be used there
-
 function Category({
   title,
   titleIcon,
@@ -56,30 +52,18 @@ function Category({
         }}
         renderItem={({ item }) => {
           const itemOnPress = item.props.onPress
+          const ItemType = item.type
 
-          if (!isRunningInBrowser()) {
-            item.props.onPress = null
-          }
+          const itemWithoutOnPress = <ItemType {...item.props} onPress={() => null} />
 
           return (
             <TouchableOpacity
               onPress={(e) => {
-                // item.props.onPress()
-                // e ? e.stopPropagation() : null
-
-                // if (!e) return
-
-                // if (e) {
-                //   if (e.target != e.currentTarget || e.isPropagationStopped()) return
-                // }
-
-                // console.log("executing on press handler as parent")
-
-                itemOnPress() // hoist the onPress handler to the parent
+                itemOnPress() // hoist the onPress handler to parent for larger hitbox
               }}
               style={styles.subcategoryButtonContainer}
             >
-              <AppText style={[{ fontSize: 15 }]}>{item}</AppText>
+              <AppText style={[{ fontSize: 15 }]}>{itemWithoutOnPress}</AppText>
               <EntypoIcon name="chevron-small-right" style={globalStyles.grayIcon}></EntypoIcon>
             </TouchableOpacity>
           )
