@@ -1,6 +1,8 @@
 // web only.
 // service for saving edited schedules to local storage
 
+// TODO: resolve require cycle: EditedScheduleStorageService.ts -> services\ScheduleLoaderService.ts -> EditedScheduleStorageService.ts
+
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import ScheduleModel, { ScheduleDay, ScheduleDaysJson } from "../models/ScheduleModel"

@@ -6,7 +6,7 @@
     "start-dev": "expo start --dev-client",
     "start-clear": "expo start --clear-cache",
     "android": "expo run:android",
-    "emulator": "C:\\Users\\main\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe -avd Nexus_5_API_27_480_DPI_",
+    "emulator": "C:\\Users\\main\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe -avd Nexus_6_API_27_560_dpi_",
     "web": "expo start --web",
     "rm-cache": "del /S /Q .\\node_modules\\.cache\\web\\web-development\\* ",
     "test": "jest --watchAll --silent --noStackTrace"
