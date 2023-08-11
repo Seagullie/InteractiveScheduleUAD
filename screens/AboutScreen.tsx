@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native"
 import { DrawerRoutes } from "../routes/DrawerRoutes"
 
 export default function AboutScreen() {
-  const appVersion = "1.0.1"
+  const appVersion = "1.0.2"
   const navigation = useNavigation()
 
   return (
