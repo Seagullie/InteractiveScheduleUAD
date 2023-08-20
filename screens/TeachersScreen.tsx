@@ -34,7 +34,7 @@ export default function TeachersScreen() {
       <FlatList
         data={filteredTeachers}
         userSelect="text"
-        keyExtractor={(item) => item["№"]}
+        keyExtractor={(item) => item["ПІБ викладача"]}
         renderItem={({ item, index }) => {
           const teacher = item
           return (
