@@ -10,6 +10,7 @@ import SettingsService, { DisplayTeacherMode } from "../../services/SettingsServ
 import { SettingsContext } from "../../contexts/settingsContext"
 import ScheduleText from "./ScheduleText"
 import * as Clipboard from "expo-clipboard"
+import { isRunningInBrowser } from "../../utilities/utilities"
 
 export const formatRoomName = (scheduleClassInstance: ScheduleClass, unfoldClassText: boolean) => {
   let room = ""
@@ -142,7 +143,10 @@ export default function ScheduleClassComponent({
 
   return (
     <View key={idx}>
-      <View style={{ ...styles.classContainer, ...(isOngoingClass || highlightAsOngoing ? styles.ongoingClass : {}) }}>
+      <View
+        style={{ ...styles.classContainer, ...(isOngoingClass || highlightAsOngoing ? styles.ongoingClass : {}) }}
+        testID="schedule-class"
+      >
         <View style={styles.startAndEndTimesContainer}>
           <ScheduleText style={[styles.text, styles.classStartText]}>{classStart}</ScheduleText>
           <ScheduleText style={[styles.text, styles.classEndText]}>{classEnd} </ScheduleText>
@@ -158,6 +162,7 @@ export default function ScheduleClassComponent({
             onLongPress={() => {
               if (isEditable) return
               Clipboard.setStringAsync(className).then(() => {
+                if (isRunningInBrowser()) return
                 ToastAndroid.show("Скопійовано: предмет", ToastAndroid.SHORT)
               })
             }}
@@ -178,12 +183,14 @@ export default function ScheduleClassComponent({
             onLongPress={() => {
               if (isEditable) return
               Clipboard.setStringAsync(teacher).then(() => {
+                if (isRunningInBrowser()) return
                 ToastAndroid.show("Скопійовано: викладач", ToastAndroid.SHORT)
               })
             }}
             style={[styles.teacherNameText, !shouldDisplayTeacher || teacher == "..." ? globalStyles.noDisplay : {}]}
             ellipsizeMode="tail"
             numberOfLines={!unfoldTeacherText ? 1 : 0}
+            testID="teacher-text"
           >
             {teacher}
           </ScheduleText>
@@ -207,6 +214,7 @@ export default function ScheduleClassComponent({
                 if (isEditable) return
 
                 Clipboard.setStringAsync(room).then(() => {
+                  if (isRunningInBrowser()) return
                   ToastAndroid.show("Скопійовано: аудиторія", ToastAndroid.SHORT)
                 })
               }}
