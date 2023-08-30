@@ -18,7 +18,7 @@ export default class TeacherTableModel {
   teachers = teachersJson
   teachersFuse = new Fuse(this.teachers, {
     keys: ["ПІБ викладача"],
-    threshold: 0.1,
+    threshold: 0.3,
   })
 
   private static instance: TeacherTableModel

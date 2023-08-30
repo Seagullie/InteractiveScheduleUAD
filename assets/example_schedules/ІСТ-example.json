@@ -12,7 +12,7 @@
                 "teacher": "Піх",
                 "label": 2.0,
                 "isBiweekly": true,
-                "week": 2
+                "week": 1
             },
             {
                 "index": 2,
@@ -32,7 +32,7 @@
             },
             {
                 "index": 4,
-                "name": "Охорона праці і БЖД",
+                "name": "ОПіБЖД",
                 "room": "К.19",
                 "qualification": "доц.",
                 "teacher": "Бернацек",

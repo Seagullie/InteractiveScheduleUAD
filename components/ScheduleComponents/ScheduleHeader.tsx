@@ -39,24 +39,24 @@ export default function ScheduleHeader({
   const icon = getIcon(navigation_, routeName)
 
   return (
-    <SafeAreaView style={styles.header}>
-      <View style={styles.headerContentContainer}>
+    <SafeAreaView style={scheduleHeaderStyles.header}>
+      <View style={scheduleHeaderStyles.headerContentContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity>{icon}</TouchableOpacity>
 
-          <Text style={styles.headerText}>{headerText}</Text>
+          <Text style={scheduleHeaderStyles.headerText}>{headerText}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={[{ flexDirection: "row", alignItems: "center", marginRight: 12 }]}>
             <View
               style={[
-                styles.weekTextContainer,
-                weekTypeInUkrainian == "Чисельник" ? styles.selectedContainer : {},
+                scheduleHeaderStyles.weekTextContainer,
+                weekTypeInUkrainian == "Чисельник" ? scheduleHeaderStyles.selectedContainer : {},
                 { marginRight: 5 },
               ]}
             >
               <Text
-                style={[styles.weekTypeText, weekTypeInUkrainian == "Чисельник" ? styles.selectedText : {}]}
+                style={[scheduleHeaderStyles.weekTypeText, weekTypeInUkrainian == "Чисельник" ? scheduleHeaderStyles.selectedText : {}]}
                 onPress={() => {
                   onWeekTypeChanged(0)
                   setWeekType(0)
@@ -67,7 +67,7 @@ export default function ScheduleHeader({
             </View>
 
             <View
-              style={[styles.weekTextContainer, weekTypeInUkrainian == "Знаменник" ? styles.selectedContainer : {}]}
+              style={[scheduleHeaderStyles.weekTextContainer, weekTypeInUkrainian == "Знаменник" ? scheduleHeaderStyles.selectedContainer : {}]}
             >
               <Text
                 onPress={() => {
@@ -75,7 +75,7 @@ export default function ScheduleHeader({
                   onWeekTypeChanged(1)
                   setWeekType(1)
                 }}
-                style={[styles.weekTypeText, weekTypeInUkrainian == "Знаменник" ? styles.selectedText : {}]}
+                style={[scheduleHeaderStyles.weekTypeText, weekTypeInUkrainian == "Знаменник" ? scheduleHeaderStyles.selectedText : {}]}
               >
                 Знам
               </Text>
@@ -93,7 +93,7 @@ const baseStyles = StyleSheet.create({
   },
 })
 
-const styles = StyleSheet.create({
+export const scheduleHeaderStyles = StyleSheet.create({
   header: {
     paddingVertical: 15,
     width: "100%",

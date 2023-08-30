@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { Text, View, StyleSheet, ActivityIndicator } from "react-native"
-import Card from "../../shared/card"
 import { globalStyles, palette } from "../../styles/global"
 import ScheduleModel, { ScheduleClass, ScheduleClassProps, ScheduleDay } from "../../models/ScheduleModel"
 import _ from "lodash"
@@ -10,7 +9,6 @@ import GetWeekType from "../../utilities/getWeekType"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
 import SwipeableItem, { useSwipeableItemParams } from "react-native-swipeable-item"
-// import { EditorStackRoutes } from "../routes/editorStack"
 import UnderlayRightSide from "../ScheduleEditorComponents/ScheduleClassUnderlay"
 import DraggableFlatList from "react-native-draggable-flatlist"
 import AppText from "../../shared/AppText"
@@ -155,7 +153,7 @@ export default function ScheduleDayComponent({
             saveEditedClasses(data)
           }}
           ListEmptyComponent={() => {
-            return <AppText style={styles.noClassesText}>{_.sample(NoClassesText)}</AppText>
+            return <AppText style={styles.noClassesText} testID="noClassesText" >{_.sample(NoClassesText)}</AppText>
           }}
           scrollEnabled={false}
           nestedScrollEnabled={false}

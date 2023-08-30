@@ -54,8 +54,8 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
   const [scheduleName, setScheduleName] = useState("")
   const [dataSourceCords, setDataSourceCords] = useState<any[]>([])
 
-  const scheduleNameStateRef = useRef<string>()
-  scheduleNameStateRef.current = scheduleName
+  const scheduleNameRef = useRef<string>()
+  scheduleNameRef.current = scheduleName
 
   const [weekType, setWeekType] = React.useState<WeekType>(GetWeekType())
 
@@ -64,7 +64,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
       // if schedule didn't change then there is nothing to do here
       console.log(" - - - deciding whether to update schedule or not - - -")
       let settingsScheduleName = ensureNoExtension(settingsService.currentScheduleName, ".json")
-      let currentScheduleName = ensureNoExtension(scheduleNameStateRef.current, ".json")
+      let currentScheduleName = ensureNoExtension(scheduleNameRef.current, ".json")
       console.log("settings schedule name: ", settingsScheduleName)
       console.log("schedule name: ", currentScheduleName)
 
@@ -104,12 +104,11 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
   useEffect(() => {
     async function onMount() {
       let settingsService = await SettingsService.GetInstance()
+      settingsServiceRef.current = settingsService
 
       console.log("[Schedule.tsx] settingsService instance: ", settingsService)
 
       let scheduleLoaderInstance = await ScheduleLoaderService.GetInstance()
-
-      settingsServiceRef.current = settingsService
 
       let schedule = new ScheduleModel("groupname_groupyear", "groupname", 5)
 
@@ -139,7 +138,8 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
       scheduleRef.current = schedule
 
-      setIsFirstTimeLaunch(await AsyncStorage.getItem("isFirstTimeLaunch"))
+      const isFirstimeLaunch = await AsyncStorage.getItem("isFirstTimeLaunch")
+      setIsFirstTimeLaunch(isFirstimeLaunch)
 
       setScheduleName(schedule.name)
       setScheduleLoaded(true)
@@ -217,13 +217,17 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
       <View style={styles.rootContainer}>
         <ScheduleHeader title="Розклад" onWeekTypeChanged={onWeekTypeChanged} />
         <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-          <ActivityIndicator size="large" animating={true} color={palette.navigationBackground} />
+          <ActivityIndicator
+            testID="scheduleScreenActivityIndicator"
+            size="large"
+            animating={true}
+            color={palette.navigationBackground}
+          />
         </View>
       </View>
     )
   }
 
-  // TODO: implement web version of Onboarding screen
   if (isFirstTimeLaunch != "false") {
     return (
       <IntroductoryCarousel

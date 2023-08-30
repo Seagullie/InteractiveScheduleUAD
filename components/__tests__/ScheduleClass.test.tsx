@@ -1,6 +1,4 @@
 import React from "react"
-import renderer, { ReactTestRendererJSON } from "react-test-renderer"
-import { Button, Text, TextInput, View } from "react-native"
 import { render, screen, fireEvent } from "@testing-library/react-native"
 import ScheduleClassComponent from "../ScheduleComponents/ScheduleClass"
 import ScheduleModel, { ScheduleDay } from "../../models/ScheduleModel"
@@ -14,7 +12,7 @@ function isDayOff(day: ScheduleDay) {
   return day.classes.length === 0
 }
 
-async function getFirstSchedule() {
+export async function getFirstSchedule() {
   const scheduleLoader = await ScheduleLoaderService.GetInstance()
   const schedule = new ScheduleModel("test schedule", "test schedule description", 5)
   await schedule.getScheduleFromScheduleLoader(scheduleLoader.scheduleFiles[0].filename)
@@ -22,16 +20,17 @@ async function getFirstSchedule() {
   return schedule
 }
 
-async function getFirstClass(schedule: ScheduleModel) {
+export function getFirstNonBiweeklyClass(schedule: ScheduleModel) {
   const studyDay = schedule.scheduleDays.filter((day) => !isDayOff(day))[0]
 
-  const sampleClass = studyDay.classes[0]
+  // get sample class that isn't biweekly
+  const sampleClass = studyDay.classes.filter((scheduleClass) => !scheduleClass.isBiweekly)[0]
 
   return sampleClass
 }
 describe("<ScheduleClass />", () => {
   it("renders class name", async () => {
-    let sampleClass = await getFirstClass(await getFirstSchedule())
+    let sampleClass = getFirstNonBiweeklyClass(await getFirstSchedule())
     let sampleClassName = sampleClass.name
 
     let settingsService = await SettingsService.GetInstance()
@@ -54,7 +53,7 @@ describe("<ScheduleClass />", () => {
 
   // no idea how to test this behavior properly as the dom element's content stays the same whether it's expanded or not
   it("unfolds class name & room on press", async () => {
-    let sampleClass = await getFirstClass(await getFirstSchedule())
+    let sampleClass = await getFirstNonBiweeklyClass(await getFirstSchedule())
     sampleClass.room = ["а. 308", "К. 13"]
 
     // sampleClass.name =
@@ -94,7 +93,7 @@ describe("<ScheduleClass />", () => {
   })
 
   it("unfolds teacher name on press", async () => {
-    let sampleClass = await getFirstClass(await getFirstSchedule())
+    let sampleClass = await getFirstNonBiweeklyClass(await getFirstSchedule())
     sampleClass.teacher = ["Білецький А. В.", "Шевченко В. В."]
 
     let settingsService = await SettingsService.GetInstance()
@@ -122,7 +121,7 @@ describe("<ScheduleClass />", () => {
   })
 
   it("highlights ongoing class", async () => {
-    let sampleClass = await getFirstClass(await getFirstSchedule())
+    let sampleClass = await getFirstNonBiweeklyClass(await getFirstSchedule())
 
     let settingsService = await SettingsService.GetInstance()
 
@@ -147,42 +146,3 @@ describe("<ScheduleClass />", () => {
     })
   })
 })
-
-// function Example() {
-//   const [name, setUser] = React.useState("")
-//   const [show, setShow] = React.useState(false)
-
-//   return (
-//     <View>
-//       <TextInput value={name} onChangeText={setUser} testID="input" />
-//       <Button
-//         title="Print Username"
-//         onPress={() => {
-//           // let's pretend this is making a server request, so it's async
-//           // (you'd want to mock this imaginary request in your unit tests)...
-//           setTimeout(() => {
-//             setShow(true)
-//           }, Math.floor(Math.random() * 200))
-//         }}
-//       />
-//       {show && <Text testID="printed-username">{name}</Text>}
-//     </View>
-//   )
-// }
-
-// test("examples of some things", async () => {
-//   const expectedUsername = "Ada Lovelace"
-
-//   render(<Example />)
-
-//   fireEvent.changeText(screen.getByTestId("input"), expectedUsername)
-//   fireEvent.press(screen.getByText("Print Username"))
-
-//   // Using `findBy` query to wait for asynchronous operation to finish
-//   const usernameOutput = await screen.findByTestId("printed-username")
-
-//   // Using `toHaveTextContent` matcher from `@testing-library/jest-native` package.
-//   expect(usernameOutput).toHaveTextContent(expectedUsername)
-
-//   expect(screen.toJSON()).toMatchSnapshot()
-// })

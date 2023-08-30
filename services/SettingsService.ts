@@ -71,6 +71,7 @@ export default class SettingsService implements ISettingsService {
 
   private async init() {
     // get first schedule from ScheduleLoaderService and use it as default
+
     let scheduleLoader = await ScheduleLoaderService.GetInstance()
     this.currentScheduleName = scheduleLoader.scheduleFiles[0].filename
 

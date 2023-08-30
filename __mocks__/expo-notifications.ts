@@ -1,5 +1,3 @@
-// TODO: mock notification creation functions so that they populate internal storage. Make notification getters use the internal storage
-
 import { v4 as uuidv4 } from "uuid"
 
 import { NotificationPermissionsStatus, NotificationRequest, NotificationRequestInput } from "expo-notifications"

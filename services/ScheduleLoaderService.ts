@@ -52,7 +52,7 @@ export default class ScheduleLoaderService {
   protected constructor() {}
 
   protected async init() {
-    // TODO: implement proper browser support
+
     if (isRunningInBrowser()) {
       await this.getSchedulesFromContentful()
       // replace contentful schedules with their user edited versions

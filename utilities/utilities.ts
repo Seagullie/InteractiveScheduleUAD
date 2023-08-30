@@ -117,6 +117,8 @@ export function isRunningInExpoGo() {
 export function isRunningInBrowser() {
   // const isRunningInBrowser = constants.executionEnvironment == ExecutionEnvironment.Bare
 
+  // debugger
+
   const isRunningInBrowser = Platform.OS === "web"
   return isRunningInBrowser
 }
