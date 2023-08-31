@@ -43,10 +43,6 @@ describe("ScheduleModel", () => {
   it("gets current class", async () => {
     // -- arrange --
 
-    // const scheduleLoader = await ScheduleLoaderService.GetInstance()
-    // const schedule = new ScheduleModel("test schedule", "test schedule description", 5)
-    // await schedule.getScheduleFromScheduleLoader(scheduleLoader.scheduleFiles[0].filename)
-
     const schedule = await getSampleSchedule()
 
     const studyDay = schedule.scheduleDays.filter((day) => !isDayOff(day))[0]

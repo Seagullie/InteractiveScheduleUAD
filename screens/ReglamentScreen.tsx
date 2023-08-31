@@ -76,7 +76,10 @@ const ReglamentClass = ({ index }: { index: number }) => {
   return (
     <View style={styles.reglamentClassContainer}>
       <AppText style={styles.reglamentClassIndex}>{index + 1} пара</AppText>
-      <View style={[styles.timeDataCard, isCurrentClassRef.current ? styles.currentClass : {}]}>
+      <View
+        style={[styles.timeDataCard, isCurrentClassRef.current ? styles.currentClass : {}]}
+        testID={isCurrentClassRef.current ? "currentClass" + index : "class"}
+      >
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View style={{ alignItems: "flex-start" }}>
             <AppText style={styles.timePointText}>ПОЧАТОК</AppText>
