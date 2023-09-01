@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { View, Switch, StyleSheet } from "react-native"
 import { palette } from "../styles/global"
 import { isRunningInBrowser } from "../utilities/utilities"
+import { SwitchProps } from "react-native-elements"
 
 // TODO: find better colors for toggled state
 
@@ -9,10 +10,12 @@ export default function CustomSwitch({
   onValueChange,
   initVal = false,
   disabled = false,
+  ...otherProps
 }: {
   initVal?: boolean
   disabled?: boolean
   onValueChange?: (newValue: boolean) => void
+  otherProps: SwitchProps
 }): JSX.Element {
   const [isEnabled, setIsEnabled] = useState(initVal)
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState)
@@ -32,6 +35,7 @@ export default function CustomSwitch({
         onValueChange && onValueChange(newValue)
       }}
       value={isEnabled}
+      {...otherProps}
     />
   )
 }
