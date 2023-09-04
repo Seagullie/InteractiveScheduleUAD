@@ -42,16 +42,18 @@ export default function TeachersScreen() {
               <AppText
                 style={{
                   fontFamily: "montserrat-bold",
+                  ...styles.teacherDataText,
+                  fontSize: styles.teacherDataText.fontSize + 2,
                 }}
                 selectable
               >
                 {teacher["ПІБ викладача"]}
               </AppText>
-              <AppText style={[]} selectable>
+              <AppText style={[styles.teacherDataText]} selectable>
                 {teacher.Кваліфікаця}
               </AppText>
               <AppText
-                style={[globalStyles.link]}
+                style={[globalStyles.link, styles.teacherDataText]}
                 selectable
                 onPress={() => {
                   console.log("pressed")
@@ -63,7 +65,7 @@ export default function TeachersScreen() {
 
               {!teacher["E-mail"].endsWith(".ru") ? (
                 <AppText
-                  style={[globalStyles.underlinedLink]}
+                  style={[globalStyles.underlinedLink, styles.teacherDataText, { marginBottom: 0 }]}
                   selectable
                   onPress={() => {
                     console.log("pressed")
@@ -100,21 +102,20 @@ const styles = StyleSheet.create({
     backgroundColor: palette.background,
     borderRadius: 7,
     padding: 5,
-    paddingVertical: 2,
+    paddingVertical: 4,
 
     marginHorizontal: 10,
   },
 
   searchBar: {
+    ...globalStyles.searchBar,
     fontSize: 14,
-    flex: 1,
-    fontFamily: "montserrat-500",
   },
 
   teacherCard: {
     marginVertical: 5,
     marginHorizontal: 10,
-    padding: 10,
+    padding: 14,
     paddingVertical: 12,
     borderRadius: 7,
     backgroundColor: "white",
@@ -124,5 +125,10 @@ const styles = StyleSheet.create({
     shadowColor: "#333",
     shadowOpacity: 0.3,
     shadowRadius: 2,
+  },
+
+  teacherDataText: {
+    fontSize: 14,
+    marginBottom: 6,
   },
 })

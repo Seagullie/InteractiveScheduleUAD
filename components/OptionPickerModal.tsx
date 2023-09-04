@@ -146,9 +146,7 @@ const styles = StyleSheet.create({
   },
 
   searchBar: {
-    fontSize: 12,
-    flex: 1,
-    fontFamily: "montserrat-500",
+    ...globalStyles.searchBar,
   },
 
   modalContentContainer: {

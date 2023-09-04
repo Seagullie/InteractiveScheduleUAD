@@ -199,4 +199,11 @@ export const globalStyles = StyleSheet.create({
     alignItems: "center",
     width: isLandscapeWeb() ? "45%" : "95%",
   },
+
+  searchBar: {
+    fontSize: 12,
+    flex: 1,
+    fontFamily: "montserrat-500",
+    paddingVertical: 2,
+  },
 })
