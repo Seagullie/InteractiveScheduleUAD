@@ -132,8 +132,7 @@ const styles = StyleSheet.create({
   },
 
   horizontalFlex: {
-    flexDirection: "row",
-    alignItems: "center",
+    ...globalStyles.horizontalCenteredFlex,
   },
 
   searchBarContainer: {

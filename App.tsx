@@ -32,7 +32,7 @@ import SettingsScreen from "./screens/SettingsScreen"
 import AboutScreen from "./screens/AboutScreen"
 import { isLandscapeWeb, isRunningInBrowser } from "./utilities/utilities"
 import { Entypo, FontAwesome, Ionicons, Octicons } from "@expo/vector-icons"
-
+import QnAScreen from "./screens/QnAScreen"
 ;("use client")
 
 function fallbackRender({ error, resetErrorBoundary }) {
@@ -51,6 +51,7 @@ export default function App() {
   try {
     const [appIsReady, setAppIsReady] = useState(false)
 
+    // TODO: use enums for font names
     const [fontsLoaded] = useFonts({
       "lato-regular": require("./assets/fonts/Lato-Regular.ttf"),
       "lato-bold": require("./assets/fonts/Lato-Bold.ttf"),
@@ -61,6 +62,7 @@ export default function App() {
       "montserrat-semibold": require("./assets/fonts/Montserrat-SemiBold.ttf"),
 
       "raleway-regular": require("./assets/fonts/Raleway-Regular.ttf"),
+      "raleway-medium": require("./assets/fonts/Raleway-Medium.ttf"),
 
       "montserrat-500": require("./assets/fonts/Montserrat-Medium.ttf"),
       "montserrat-600": require("./assets/fonts/Montserrat-SemiBold.ttf"),
@@ -74,9 +76,8 @@ export default function App() {
       "century-gothic-italic": require("./assets/fonts/GOTHICI.ttf"),
     })
 
-
     // preload icons to prevent text flicker effect on navigating to another page
-    if(isRunningInBrowser()) {
+    if (isRunningInBrowser()) {
       Font.loadAsync(FontAwesome.font)
       Font.loadAsync(Entypo.font)
       Font.loadAsync(Ionicons.font)
@@ -120,6 +121,8 @@ export default function App() {
               <Drawer.Screen name={DrawerRoutes.CONTACTS} component={ContactsStack} />
 
               <Drawer.Screen name={DrawerRoutes.NEWS} component={NewsScreen} />
+
+              <Drawer.Screen name={DrawerRoutes.QnA} component={QnAScreen} />
 
               <Drawer.Screen
                 name={DrawerRoutes.EDITOR}

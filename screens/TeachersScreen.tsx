@@ -26,7 +26,7 @@ export default function TeachersScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={{ ...styles.horizontalFlex, ...styles.searchBarContainer }}>
+      <View style={{ ...globalStyles.horizontalCenteredFlex, ...styles.searchBarContainer }}>
         <Ionicons name="search-outline" size={14} style={{ marginHorizontal: 5 }} color={palette.grayedOut} />
         <TextInput style={styles.searchBar} onChangeText={setSearchQuery} placeholder="Знайти викладача" />
       </View>

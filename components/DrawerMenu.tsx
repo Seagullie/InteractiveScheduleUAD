@@ -1,6 +1,5 @@
 import React, { useRef } from "react"
 import { ActivityIndicator, Text, View, StyleSheet, Image } from "react-native"
-import { FontAwesome5, Ionicons } from "@expo/vector-icons"
 import { useNavigation, useNavigationState } from "@react-navigation/native"
 import { drawerMenuImages, globalStyles, palette } from "../styles/global"
 import { TouchableOpacity } from "react-native-gesture-handler"

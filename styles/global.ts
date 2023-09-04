@@ -206,4 +206,9 @@ export const globalStyles = StyleSheet.create({
     fontFamily: "montserrat-500",
     paddingVertical: 2,
   },
+
+  horizontalCenteredFlex: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
 })

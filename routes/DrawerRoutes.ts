@@ -4,6 +4,7 @@ export enum DrawerRoutes {
   TEACHERS = "Викладачі",
   CONTACTS = "Контакти",
   NEWS = "Новини",
+  QnA = "Q&A",
 
   TESTS = "Тести",
   EDITOR = "Редактор",
