@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.0122ce01.css",
-    "main.js": "/static/js/main.3db4bdab.js",
+    "main.js": "/static/js/main.ae1682b1.js",
     "static/js/59.179f1c87.js": "/static/js/59.179f1c87.js",
     "static/media/MaterialCommunityIcons.ttf": "/static/media/MaterialCommunityIcons.5d42b4e60858731e7b65.ttf",
     "static/media/uad_logo_text.svg": "/static/media/uad_logo_text.b76c274a19a049357f30.svg",
@@ -62,12 +62,12 @@
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
     "main.0122ce01.css.map": "/static/css/main.0122ce01.css.map",
-    "main.3db4bdab.js.map": "/static/js/main.3db4bdab.js.map",
+    "main.ae1682b1.js.map": "/static/js/main.ae1682b1.js.map",
     "59.179f1c87.js.map": "/static/js/59.179f1c87.js.map"
   },
   "entrypoints": [
     "static/js/59.179f1c87.js",
     "static/css/main.0122ce01.css",
-    "static/js/main.3db4bdab.js"
+    "static/js/main.ae1682b1.js"
   ]
 }

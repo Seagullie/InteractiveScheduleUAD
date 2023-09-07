@@ -122,7 +122,7 @@ export default function App() {
 
               <Drawer.Screen name={DrawerRoutes.NEWS} component={NewsScreen} />
 
-              <Drawer.Screen name={DrawerRoutes.QnA} component={QnAScreen} />
+              {/* <Drawer.Screen name={DrawerRoutes.QnA} component={QnAScreen} /> */}
 
               <Drawer.Screen
                 name={DrawerRoutes.EDITOR}
