@@ -301,14 +301,20 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
           {/* temp slice for performance reasons */}
           {workDays.slice(0, 111).map((day, idx) => {
             const item = day
-            const isEmpty = scheduleRef.current!.scheduleDays[idx].getCurrentWeekClasses().length === 0
+
+            const schedule = scheduleRef.current!
+            const scheduleDay = schedule.scheduleDays[idx]
+
+            const currentlySelectedWeekClasses =
+              weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
+
+            const isEmpty = currentlySelectedWeekClasses.length === 0
             const shouldDisplayEmptyDay = settingsServiceRef.current!.displayEmptyDays != DisplayEmptyDaysMode.Hide
 
             if (!isEditable && isEmpty && !shouldDisplayEmptyDay) {
               return <View style={globalStyles.noDisplay} key={day + weekType}></View>
             }
 
-            let scheduleDay = scheduleRef.current!.scheduleDays[idx]
             let classes = weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
 
             return (
