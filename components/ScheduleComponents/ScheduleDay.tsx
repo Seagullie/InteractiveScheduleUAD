@@ -43,7 +43,7 @@ export default function ScheduleDayComponent({
 }): JSX.Element {
   if (scheduleDay == undefined) {
     return (
-      <View style={styles.scheduleDayCard}>
+      <View style={SDstyles.scheduleDayCard}>
         <Text style={globalStyles.dayNameHeader}>{dayName}</Text>
         <View>
           <View style={globalStyles.centered}>
@@ -129,12 +129,12 @@ export default function ScheduleDayComponent({
 
   return (
     <View key={dayName + weekType}>
-      <Text style={styles.dayNameHeader}>{dayName}</Text>
+      <Text style={SDstyles.dayNameHeader}>{dayName}</Text>
       <View
         style={[
-          styles.scheduleDayCard,
+          SDstyles.scheduleDayCard,
           classes.length == 0 && settings?.displayEmptyDays == DisplayEmptyDaysMode.Darken
-            ? styles.fadedDayContainerView
+            ? SDstyles.fadedDayContainerView
             : {},
         ]}
       >
@@ -153,7 +153,7 @@ export default function ScheduleDayComponent({
             saveEditedClasses(data)
           }}
           ListEmptyComponent={() => {
-            return <AppText style={styles.noClassesText} testID="noClassesText" >{_.sample(NoClassesText)}</AppText>
+            return <AppText style={SDstyles.noClassesText} testID="noClassesText" >{_.sample(NoClassesText)}</AppText>
           }}
           scrollEnabled={false}
           nestedScrollEnabled={false}
@@ -255,7 +255,7 @@ export default function ScheduleDayComponent({
   )
 }
 
-const styles = StyleSheet.create({
+export const SDstyles = StyleSheet.create({
   noClassesText: {
     fontSize: 14,
     marginVertical: 10,

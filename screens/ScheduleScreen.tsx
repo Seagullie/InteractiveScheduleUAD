@@ -26,6 +26,7 @@ import ScheduleHeader from "../components/ScheduleComponents/ScheduleHeader"
 import { Event } from "../constants/Events"
 import EditedSchedulesStorageService from "../services/EditedScheduleStorageService"
 import EditActionsExplanatoryCard from "../components/ScheduleEditorComponents/EditActionsExplanatoryCard"
+import DateOverviewCard from "../components/ScheduleComponents/DateOverviewCard"
 
 // TODO: scroll to current day on mount only instead of doing so on every rerender?
 
@@ -260,7 +261,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
         >
           {/* explanatory card if in editor */}
 
-          {isEditable ? <EditActionsExplanatoryCard /> : null}
+          {isEditable ? <EditActionsExplanatoryCard /> : <DateOverviewCard />}
           {/* temp slice for performance reasons */}
           {workDays.slice(0, 111).map((day, idx) => {
             const item = day
@@ -393,6 +394,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
-  
 })

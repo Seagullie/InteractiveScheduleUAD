@@ -2,10 +2,18 @@ import React from "react"
 import { View, Text, StyleSheet, Image } from "react-native"
 import AppText from "../../shared/AppText"
 import { editorImages } from "../../styles/global"
+import { SDstyles } from "../ScheduleComponents/ScheduleDay"
 
 export default function EditActionsExplanatoryCard() {
   return (
-    <View style={[styles.scheduleDayCard]}>
+    <View
+      style={[
+        styles.scheduleDayCard,
+        {
+          marginHorizontal: 10,
+        },
+      ]}
+    >
       <View
         style={[
           {
@@ -51,19 +59,6 @@ const styles = StyleSheet.create({
   },
 
   scheduleDayCard: {
-    marginTop: 10,
-    marginBottom: 15,
-    marginHorizontal: 10,
-    borderRadius: 6,
-    backgroundColor: "white",
-
-    paddingVertical: 2,
-    paddingHorizontal: 5,
-
-    elevation: 1,
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: "#333",
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
+    ...SDstyles.scheduleDayCard,
   },
 })
