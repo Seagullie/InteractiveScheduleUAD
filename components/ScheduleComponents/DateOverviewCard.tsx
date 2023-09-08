@@ -104,6 +104,6 @@ const styles = StyleSheet.create({
   },
 
   lowerRowText: {
-    // color: palette.text,
+    color: palette.grayedOut,
   },
 })

@@ -71,7 +71,7 @@ export default function DrawerMenu() {
 
     let routes = routesContainer.routes
 
-    let breakpoint = routes.length - 4
+    let breakpoint = routes.length - 5
     let topRoutes = routes.slice(0, breakpoint)
     let bottomRoutes = routes.slice(breakpoint, routes.length)
 
