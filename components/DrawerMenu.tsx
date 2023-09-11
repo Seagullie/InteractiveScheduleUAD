@@ -173,7 +173,9 @@ const styles = StyleSheet.create({
   drawerContainerBottom: {},
 
   activePageLink: {
-    backgroundColor: "lightblue",
+    // backgroundColor: "lightblue",
+    backgroundColor: "rgba(37, 150, 190, 0.7)",
+    // opacity: 0.5,
   },
 
   drawerContainerHeader: {
