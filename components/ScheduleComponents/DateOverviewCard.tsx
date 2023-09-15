@@ -5,6 +5,7 @@ import { editorImages, palette } from "../../styles/global"
 import { SDstyles } from "../ScheduleComponents/ScheduleDay"
 import GetWeekType from "../../utilities/getWeekType"
 import _ from "lodash"
+import { isRunningInBrowser } from "../../utilities/utilities"
 
 export default function DateOverviewCard() {
   // current day of the week, in this format: "Понеділок" and nothing else
@@ -68,7 +69,8 @@ export default function DateOverviewCard() {
           <AppText style={styles.upperRowText}>{currentWeekType}</AppText>
           <AppText style={styles.lowerRowText}>{currentWorkWeekInterval}</AppText>
         </View>
-        <View style={styles.verticalSeparator} />
+        {isRunningInBrowser() ? <View style={styles.verticalSeparator} /> : <View />}
+
         <View style={{ flex: 1, alignItems: "flex-end" }}>
           <AppText style={styles.upperRowText}>{currentDayString}</AppText>
           <AppText style={styles.lowerRowText}>{currentDayDate}</AppText>
@@ -94,6 +96,7 @@ const styles = StyleSheet.create({
     width: 1,
     height: "100%",
     backgroundColor: palette.background,
+    opacity: 0.5,
     marginHorizontal: 10,
   },
 
