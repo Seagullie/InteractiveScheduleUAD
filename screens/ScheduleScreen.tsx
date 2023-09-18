@@ -27,6 +27,7 @@ import { Event } from "../constants/Events"
 import EditedSchedulesStorageService from "../services/EditedScheduleStorageService"
 import EditActionsExplanatoryCard from "../components/ScheduleEditorComponents/EditActionsExplanatoryCard"
 import DateOverviewCard from "../components/ScheduleComponents/DateOverviewCard"
+import { WeekTypeContext } from "../contexts/weekTypeContext"
 
 // TODO: scroll to current day on mount only instead of doing so on every rerender?
 
@@ -245,95 +246,97 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
   return (
     <SettingsContext.Provider value={settingsServiceRef.current}>
-      <View style={styles.rootContainer}>
-        <ScheduleHeader title={scheduleName} onWeekTypeChanged={onWeekTypeChanged} />
+      <WeekTypeContext.Provider value={weekType}>
+        <View style={styles.rootContainer}>
+          <ScheduleHeader title={scheduleName} onWeekTypeChanged={onWeekTypeChanged} />
 
-        <ScrollView
-          style={
-            {
-              // flex: 1
-              // ^breaks it on mobile
+          <ScrollView
+            style={
+              {
+                // flex: 1
+                // ^breaks it on mobile
+              }
             }
-          }
-          contentContainerStyle={{ paddingBottom: 0 }}
-          ref={scrollViewContainerRef}
-          // nestedScrollEnabled={false}
-        >
-          {/* explanatory card if in editor */}
+            contentContainerStyle={{ paddingBottom: 0 }}
+            ref={scrollViewContainerRef}
+            // nestedScrollEnabled={false}
+          >
+            {/* explanatory card if in editor, otherwise date overview card */}
 
-          {isEditable ? <EditActionsExplanatoryCard /> : <DateOverviewCard />}
-          {/* temp slice for performance reasons */}
-          {workDays.slice(0, 111).map((day, idx) => {
-            const item = day
+            {isEditable ? <EditActionsExplanatoryCard /> : <DateOverviewCard />}
+            {/* temp slice for performance reasons */}
+            {workDays.slice(0, 111).map((day, idx) => {
+              const item = day
 
-            const schedule = scheduleRef.current!
-            const scheduleDay = schedule.scheduleDays[idx]
+              const schedule = scheduleRef.current!
+              const scheduleDay = schedule.scheduleDays[idx]
 
-            const currentlySelectedWeekClasses =
-              weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
+              const currentlySelectedWeekClasses =
+                weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
 
-            const isEmpty = currentlySelectedWeekClasses.length === 0
-            const shouldDisplayEmptyDay = settingsServiceRef.current!.displayEmptyDays != DisplayEmptyDaysMode.Hide
+              const isEmpty = currentlySelectedWeekClasses.length === 0
+              const shouldDisplayEmptyDay = settingsServiceRef.current!.displayEmptyDays != DisplayEmptyDaysMode.Hide
 
-            if (!isEditable && isEmpty && !shouldDisplayEmptyDay) {
-              return <View style={globalStyles.noDisplay} key={day + weekType}></View>
-            }
+              if (!isEditable && isEmpty && !shouldDisplayEmptyDay) {
+                return <View style={globalStyles.noDisplay} key={day + weekType}></View>
+              }
 
-            let classes = weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
+              let classes = weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
 
-            return (
-              <View
-                style={styles.cardContainer}
-                key={day + weekType}
-                onLayout={(event) => {
-                  const layout = event.nativeEvent.layout
-                  dataSourceCords[idx] = layout.y
-                  setDataSourceCords(dataSourceCords)
-                  // console.log("- - - component layout data (start) - - - ")
-                  // console.log(dataSourceCords)
-                  // console.log("height:", layout.height)
-                  // console.log("width:", layout.width)
-                  // console.log("x:", layout.x)
-                  // console.log("y:", layout.y)
-                  // console.log("- - - component layout data (end) - - - ")
+              return (
+                <View
+                  style={styles.cardContainer}
+                  key={day + weekType}
+                  onLayout={(event) => {
+                    const layout = event.nativeEvent.layout
+                    dataSourceCords[idx] = layout.y
+                    setDataSourceCords(dataSourceCords)
+                    // console.log("- - - component layout data (start) - - - ")
+                    // console.log(dataSourceCords)
+                    // console.log("height:", layout.height)
+                    // console.log("width:", layout.width)
+                    // console.log("x:", layout.x)
+                    // console.log("y:", layout.y)
+                    // console.log("- - - component layout data (end) - - - ")
 
-                  if (dataSourceCords.length < todayIndex) return
-                  if (this.scrolledToToday == true) return
+                    if (dataSourceCords.length < todayIndex) return
+                    if (this.scrolledToToday == true) return
 
-                  // this should happen only once
-                  scrollViewContainerRef.current!.scrollTo({
-                    x: 0,
-                    y: dataSourceCords[todayIndex],
-                    animated: true,
-                  })
+                    // this should happen only once
+                    scrollViewContainerRef.current!.scrollTo({
+                      x: 0,
+                      y: dataSourceCords[todayIndex],
+                      animated: true,
+                    })
 
-                  // TODO: Refactor
-                  if (dataSourceCords.length == 5) {
-                    this.scrolledToToday = true
-                  }
-                }}
-              >
-                <ScheduleDayComponent
-                  classesCollection={classes}
-                  scheduleObject={scheduleRef.current!}
-                  dayName={item}
-                  dayIndex={idx}
-                  scheduleDay={scheduleRef.current!.scheduleDays[idx]}
-                  displayRoomNumber={!isEditable ? settingsServiceRef.current!.displayRoomNumber : true}
-                  showSeparator={idx !== workDays.length - 1}
-                  weekType={weekType}
-                  fade={
-                    !isEditable
-                      ? isEmpty && settingsServiceRef.current!.displayEmptyDays == DisplayEmptyDaysMode.Darken
-                      : false
-                  }
-                  isEditable={isEditable}
-                ></ScheduleDayComponent>
-              </View>
-            )
-          })}
-        </ScrollView>
-      </View>
+                    // TODO: Refactor
+                    if (dataSourceCords.length == 5) {
+                      this.scrolledToToday = true
+                    }
+                  }}
+                >
+                  <ScheduleDayComponent
+                    classesCollection={classes}
+                    scheduleObject={scheduleRef.current!}
+                    dayName={item}
+                    dayIndex={idx}
+                    scheduleDay={scheduleRef.current!.scheduleDays[idx]}
+                    displayRoomNumber={!isEditable ? settingsServiceRef.current!.displayRoomNumber : true}
+                    showSeparator={idx !== workDays.length - 1}
+                    weekType={weekType}
+                    fade={
+                      !isEditable
+                        ? isEmpty && settingsServiceRef.current!.displayEmptyDays == DisplayEmptyDaysMode.Darken
+                        : false
+                    }
+                    isEditable={isEditable}
+                  ></ScheduleDayComponent>
+                </View>
+              )
+            })}
+          </ScrollView>
+        </View>
+      </WeekTypeContext.Provider>
     </SettingsContext.Provider>
   )
 }

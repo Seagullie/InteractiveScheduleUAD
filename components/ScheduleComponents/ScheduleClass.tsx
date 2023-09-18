@@ -11,6 +11,8 @@ import { SettingsContext } from "../../contexts/settingsContext"
 import ScheduleText from "./ScheduleText"
 import * as Clipboard from "expo-clipboard"
 import { isRunningInBrowser } from "../../utilities/utilities"
+import { WeekTypeContext } from "../../contexts/weekTypeContext"
+import GetWeekType from "../../utilities/getWeekType"
 
 export const formatRoomName = (scheduleClassInstance: ScheduleClass, unfoldClassText: boolean) => {
   let room = ""
@@ -93,6 +95,7 @@ export default function ScheduleClassComponent({
 
   const { height, width } = useWindowDimensions()
   const settings = useContext(SettingsContext)
+  const selectedWeekType = useContext(WeekTypeContext)
 
   let [isOngoingClass, setIsOngoingClass] = useState(false)
   let className = scheduleClassInstance.name
@@ -117,7 +120,9 @@ export default function ScheduleClassComponent({
     }, 15000)
 
     async function init() {
-      setIsOngoingClass(scheduleClassInstance.isCurrent())
+      let isOngoingClass = scheduleClassInstance.isCurrent() && selectedWeekType == GetWeekType()
+
+      setIsOngoingClass(isOngoingClass)
       setIsReady(true)
     }
 

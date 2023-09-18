@@ -97,7 +97,11 @@ export default function ScheduleDayComponent({
   // any time new updated classes collection prop is passed, add placeholders to it and update state
   // it also initializes classes state on first render
   useEffect(() => {
-    setClasses(addPlaceholders(classesCollection))
+    let placeholderClasses = addPlaceholders(classesCollection)
+    // sort by index in ascending order
+    let sortedClasses = _.sortBy(placeholderClasses, (class_) => class_.index)
+
+    setClasses(sortedClasses)
   }, [classesCollection])
 
   useEffect(() => {
@@ -153,7 +157,11 @@ export default function ScheduleDayComponent({
             saveEditedClasses(data)
           }}
           ListEmptyComponent={() => {
-            return <AppText style={SDstyles.noClassesText} testID="noClassesText" >{_.sample(NoClassesText)}</AppText>
+            return (
+              <AppText style={SDstyles.noClassesText} testID="noClassesText">
+                {_.sample(NoClassesText)}
+              </AppText>
+            )
           }}
           scrollEnabled={false}
           nestedScrollEnabled={false}
