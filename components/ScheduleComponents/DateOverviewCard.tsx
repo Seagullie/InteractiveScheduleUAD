@@ -25,12 +25,16 @@ export default function DateOverviewCard() {
   // current work week interval, in this format: "12.04.2021 - 18.04.2021", where start date is monday and end date is friday
   const currentWorkWeekInterval = (() => {
     const currentDate = new Date()
-    const currentDay = currentDate.getDay()
+    // starts with sunday by default, so we need to subtract 1 for it to start with monday
+    let currentDayOfWeek = currentDate.getDay() - 1
+    if (currentDayOfWeek == -1) {
+      currentDayOfWeek = 6
+    }
     const currentMonth = currentDate.getMonth()
     const currentYear = currentDate.getFullYear()
 
-    const mondayDate = new Date(currentYear, currentMonth, currentDate.getDate() - currentDay + 1)
-    const fridayDate = new Date(currentYear, currentMonth, currentDate.getDate() - currentDay + 5)
+    const mondayDate = new Date(currentYear, currentMonth, currentDate.getDate() - currentDayOfWeek)
+    const fridayDate = new Date(currentYear, currentMonth, currentDate.getDate() - currentDayOfWeek + 4)
 
     return `${mondayDate.toLocaleDateString("uk-UA", {
       day: "numeric",
