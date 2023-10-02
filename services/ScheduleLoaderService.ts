@@ -1,11 +1,21 @@
 import * as FileSystem from "expo-file-system"
-import { AssetFile } from "contentful"
+import {
+  AssetFile
+} from "contentful"
 import _ from "lodash"
 import NetInfo from "@react-native-community/netinfo"
 
-import ScheduleModel, { ScheduleDay } from "../models/ScheduleModel"
-import { workDaysEnLower } from "../constants/Days"
-import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../utilities/utilities"
+import ScheduleModel, {
+  ScheduleDay
+} from "../models/ScheduleModel"
+import {
+  workDaysEnLower
+} from "../constants/Days"
+import {
+  ensureExtension,
+  getContentfulClient,
+  isRunningInBrowser
+} from "../utilities/utilities"
 import ExampleScheduleKN from "../assets/example_schedules/КН-example.json"
 import ExampleScheduleIST from "../assets/example_schedules/ІСТ-example.json"
 import ExampleScheduleTE from "../assets/example_schedules/ТЕ-example.json"
@@ -35,7 +45,7 @@ export default class ScheduleLoaderService {
 
   pathToScheduleFolder = `${FileSystem.documentDirectory}schedules/`
 
-  static async GetInstance(): Promise<ScheduleLoaderService> {
+  static async GetInstance(): Promise < ScheduleLoaderService > {
     if (!this.instance) {
       this.instance = new this()
       await this.instance.init()
@@ -73,7 +83,9 @@ export default class ScheduleLoaderService {
         }
       } else {
         // create schedules folder
-        await FileSystem.makeDirectoryAsync(this.pathToScheduleFolder, { intermediates: true })
+        await FileSystem.makeDirectoryAsync(this.pathToScheduleFolder, {
+          intermediates: true
+        })
 
         try {
           await this.getSchedulesFromContentful()
@@ -114,7 +126,12 @@ export default class ScheduleLoaderService {
       allScheduleFileNames.map(async (filename) => {
         let file = await FileSystem.readAsStringAsync(`${this.pathToScheduleFolder}${filename}`)
         let json = JSON.parse(file)
-        let { revision, createdAt, updatedAt, json_parsed } = json
+        let {
+          revision,
+          createdAt,
+          updatedAt,
+          json_parsed
+        } = json
         return {
           filename,
           revision,
@@ -135,7 +152,12 @@ export default class ScheduleLoaderService {
     // retrieve schedules from contentful
     console.log(`[Schedule Loader] retrieving schedules from contentful`)
 
-    const client = getContentfulClient()
+    try {
+
+      var client = getContentfulClient()
+    } catch (e) {
+      return this.getExampleSchedules()
+    }
     const assets = await client.getAssets({
       limit: 1000,
     })
@@ -190,8 +212,7 @@ export default class ScheduleLoaderService {
   getExampleSchedules() {
     console.log(`[Schedule Loader] retrieving example schedules`)
 
-    const scheduleFiles: ScheduleFile[] = [
-      {
+    const scheduleFiles: ScheduleFile[] = [{
         filename: "КН-example.json",
         revision: 0,
         createdAt: "",
@@ -243,14 +264,18 @@ export default class ScheduleLoaderService {
     // iterate over assets and download their metadata
     // TODO: dry up the duplicate
 
-    const scheduleFileMetadatas: (ScheduleFileMetadata & { linkToFile: string })[] = await Promise.all(
+    const scheduleFileMetadatas: (ScheduleFileMetadata & {
+      linkToFile: string
+    })[] = await Promise.all(
       assets.items.map(async (itm) => {
         const file: AssetFile = itm.fields.file
 
         const protocol = "https:"
         const linkToFile = protocol + file.url
 
-        let scheduleFileMetadata: ScheduleFileMetadata & { linkToFile: string } = {
+        let scheduleFileMetadata: ScheduleFileMetadata & {
+          linkToFile: string
+        } = {
           filename: file.fileName,
           revision: itm.sys.revision,
           createdAt: itm.sys.createdAt,
@@ -338,7 +363,9 @@ export default class ScheduleLoaderService {
     // get corresponding schedule file
     let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
 
-    let jsonToDump: { [key: string]: ScheduleDay } = {}
+    let jsonToDump: {
+      [key: string]: ScheduleDay
+    } = {}
 
     workDaysEnLower.forEach((day, idx) => {
       jsonToDump[day] = schedule.scheduleDays[idx]
