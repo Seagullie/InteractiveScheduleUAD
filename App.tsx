@@ -35,6 +35,8 @@ import { Entypo, FontAwesome, Ionicons, Octicons } from "@expo/vector-icons"
 import QnAScreen from "./screens/QnAScreen"
 ;("use client")
 
+import "react-native-url-polyfill/auto"
+
 function fallbackRender({ error, resetErrorBoundary }) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
 
