@@ -1,5 +1,7 @@
 import { DateTriggerInput, NotificationContentInput, WeeklyTriggerInput } from "expo-notifications"
-import ScheduleModel, { ScheduleClass, ScheduleDay } from "../models/ScheduleModel"
+import ScheduleModel from "../models/ScheduleModel"
+import { ScheduleDay } from "../models/ScheduleDay"
+import { ScheduleClass } from "../models/ScheduleClass"
 import GetWeekType from "../utilities/getWeekType"
 import { createEvenlySpacedTimeSequence, setDayOnDate } from "../utilities/utilities"
 import LocalNotificationsService from "./LocalNotificationsService"

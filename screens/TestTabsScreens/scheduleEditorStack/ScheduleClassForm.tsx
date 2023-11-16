@@ -4,7 +4,9 @@ import AppText from "../../../shared/AppText"
 import { View, StyleSheet, TextInput, Platform, TextInputProps } from "react-native"
 import { palette } from "../../../styles/global"
 import CustomSwitch from "../../../shared/Switch"
-import { CLASS_TYPE, ScheduleClass, ScheduleClassProps } from "../../../models/ScheduleModel"
+import { ScheduleClassFields } from "../../../models/ScheduleClass"
+import { CLASS_TYPE } from "../../../models/ScheduleClass"
+import { ScheduleClass } from "../../../models/ScheduleClass"
 import { Formik, useFormikContext } from "formik"
 import { REGLAMENT_DATA } from "../../../constants/Constants"
 import getStrict from "../../../utilities/getStrict"
@@ -19,7 +21,7 @@ import { RadioButtonGroup } from "../../../shared/RadioButtonGroup"
 
 // TODO: do not display all suggestions at once, but only those that match the query (unless query is empty, then display nothing)
 
-type ScheduleClassEditables = Omit<ScheduleClassProps, "index" | "isSharedClass" | "day" | "weekName" | "week">
+type ScheduleClassEditables = Omit<ScheduleClassFields, "index" | "isSharedClass" | "day" | "weekName" | "week">
 
 const AutoSubmitFormData = () => {
   // Grab values and submitForm from context
@@ -87,7 +89,7 @@ export default function ScheduleClassForm() {
   }: {
     scheduleClass: ScheduleClass
     currentlyViewedWeek: WeekType
-    onFormDataUpdated: (data: ScheduleClassProps) => void
+    onFormDataUpdated: (data: ScheduleClassFields) => void
   } = data
 
   let kbAvoidingViewBehavior: "padding" | "height" | "position" = Platform.OS === "ios" ? "padding" : "height"

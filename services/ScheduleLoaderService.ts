@@ -3,7 +3,8 @@ import { AssetFile } from "contentful"
 import _ from "lodash"
 import NetInfo from "@react-native-community/netinfo"
 
-import ScheduleModel, { ScheduleDay } from "../models/ScheduleModel"
+import ScheduleModel from "../models/ScheduleModel"
+import { ScheduleDay } from "../models/ScheduleDay"
 import { workDaysEnLower } from "../constants/Days"
 import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../utilities/utilities"
 import ExampleScheduleKN from "../assets/example_schedules/КН-example.json"
@@ -12,19 +13,19 @@ import ExampleScheduleTE from "../assets/example_schedules/ТЕ-example.json"
 import EditedSchedulesStorageService from "./EditedScheduleStorageService"
 
 // This is a singleton service that loads schedules from local storage / contentful and provides it to the rest of the application
-// if no schedules are available (no schedules folder) it should retrieve them from contentful and store them locally
+// if no schedules are available (no schedules folder), it should retrieve them from contentful and store them locally
 // if schedules are indeed available, we gotta check whether they are up to date or not
 // for that we will have to rely on some additional field. Perhaps revision or perhaps creactedAt.
 // or perhaps both
 
-export type ScheduleFileMetadata = {
+export type ContentfulScheduleFileMetadata = {
   filename: string
   revision: number
   createdAt: string
   updatedAt: string
 }
 
-export interface ScheduleFile extends ScheduleFileMetadata {
+export interface ScheduleFile extends ContentfulScheduleFileMetadata {
   json_parsed: string
 }
 
@@ -52,7 +53,6 @@ export default class ScheduleLoaderService {
   protected constructor() {}
 
   protected async init() {
-
     if (isRunningInBrowser()) {
       await this.getSchedulesFromContentful()
       // replace contentful schedules with their user edited versions
@@ -139,7 +139,7 @@ export default class ScheduleLoaderService {
     const assets = await client.getAssets({
       limit: 1000,
     })
-    console.log(`[Schedule Loader] retrieved ${assets.items.length} schedule assets from contentful`)
+    console.log(`[Schedule Loader] retrieved ${assets.items.length} schedule assets from Contentful`)
 
     // iterate over assets and download them
 
@@ -243,14 +243,14 @@ export default class ScheduleLoaderService {
     // iterate over assets and download their metadata
     // TODO: dry up the duplicate
 
-    const scheduleFileMetadatas: (ScheduleFileMetadata & { linkToFile: string })[] = await Promise.all(
+    const scheduleFileMetadatas: (ContentfulScheduleFileMetadata & { linkToFile: string })[] = await Promise.all(
       assets.items.map(async (itm) => {
         const file: AssetFile = itm.fields.file
 
         const protocol = "https:"
         const linkToFile = protocol + file.url
 
-        let scheduleFileMetadata: ScheduleFileMetadata & { linkToFile: string } = {
+        let scheduleFileMetadata: ContentfulScheduleFileMetadata & { linkToFile: string } = {
           filename: file.fileName,
           revision: itm.sys.revision,
           createdAt: itm.sys.createdAt,
@@ -320,7 +320,7 @@ export default class ScheduleLoaderService {
     this.scheduleFiles = updatedScheduleFiles
   }
 
-  getScheduleFileMetadata(scheduleFile: ScheduleFile): ScheduleFileMetadata | undefined {
+  getScheduleFileMetadata(scheduleFile: ScheduleFile): ContentfulScheduleFileMetadata | undefined {
     if (!scheduleFile) {
       return undefined
     }

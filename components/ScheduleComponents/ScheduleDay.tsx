@@ -1,7 +1,10 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { Text, View, StyleSheet, ActivityIndicator } from "react-native"
 import { globalStyles, palette } from "../../styles/global"
-import ScheduleModel, { ScheduleClass, ScheduleClassProps, ScheduleDay } from "../../models/ScheduleModel"
+import ScheduleModel from "../../models/ScheduleModel"
+import { ScheduleDay } from "../../models/ScheduleDay"
+import { ScheduleClassFields } from "../../models/ScheduleClass"
+import { ScheduleClass } from "../../models/ScheduleClass"
 import _ from "lodash"
 import ScheduleClassComponent from "./ScheduleClass"
 import Separator from "../../shared/Separator"
@@ -214,7 +217,7 @@ export default function ScheduleDayComponent({
                     navigation.push(EditorStackRoutes.SCHEDULE_CLASS_FORM, {
                       scheduleClass: class_,
                       currentlyViewedWeek: weekType,
-                      onFormDataUpdated: (values: ScheduleClassProps) => {
+                      onFormDataUpdated: (values: ScheduleClassFields) => {
                         let updatedClasses = classes.map((class_) => {
                           if (class_.index == idx + 1) {
                             // process the values
