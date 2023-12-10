@@ -8,13 +8,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import ScheduleModel, { ScheduleDaysJson } from "../models/ScheduleModel"
 import { ScheduleDay } from "../models/ScheduleDay"
 import { workDaysEnLower } from "../constants/Days"
-import ScheduleLoaderService, { ContentfulScheduleFileMetadata } from "./ScheduleLoaderService"
+import ScheduleLoaderService, { ScheduleFileMetadata } from "./ScheduleLoaderService"
 import _ from "lodash"
 import { ensureExtension } from "../utilities/utilities"
 
 type ScheduleWithMetadata = {
   scheduleDays: ScheduleDaysJson
-  metadata: ContentfulScheduleFileMetadata
+  metadata: ScheduleFileMetadata
 }
 
 interface IEditedScheduleStorageService {
