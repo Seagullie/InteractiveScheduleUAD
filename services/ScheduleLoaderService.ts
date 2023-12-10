@@ -3,8 +3,7 @@ import { AssetFile } from "contentful"
 import _ from "lodash"
 import NetInfo from "@react-native-community/netinfo"
 
-import ScheduleModel from "../models/ScheduleModel"
-import { ScheduleDay } from "../models/ScheduleDay"
+import ScheduleModel, { ScheduleDay } from "../models/ScheduleModel"
 import { workDaysEnLower } from "../constants/Days"
 import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../utilities/utilities"
 import ExampleScheduleKN from "../assets/example_schedules/КН-example.json"
@@ -18,14 +17,14 @@ import EditedSchedulesStorageService from "./EditedScheduleStorageService"
 // for that we will have to rely on some additional field. Perhaps revision or perhaps creactedAt.
 // or perhaps both
 
-export type ContentfulScheduleFileMetadata = {
+export type ScheduleFileMetadata = {
   filename: string
   revision: number
   createdAt: string
   updatedAt: string
 }
 
-export interface ScheduleFile extends ContentfulScheduleFileMetadata {
+export interface ScheduleFile extends ScheduleFileMetadata {
   json_parsed: string
 }
 
@@ -76,7 +75,9 @@ export default class ScheduleLoaderService {
         }
       } else {
         // create schedules folder
-        await FileSystem.makeDirectoryAsync(this.pathToScheduleFolder, { intermediates: true })
+        await FileSystem.makeDirectoryAsync(this.pathToScheduleFolder, {
+          intermediates: true,
+        })
 
         try {
           await this.getSchedulesFromContentful()
@@ -140,7 +141,11 @@ export default class ScheduleLoaderService {
     // retrieve schedules from contentful
     console.log(`[Schedule Loader] retrieving schedules from contentful`)
 
-    const client = getContentfulClient()
+    try {
+      var client = getContentfulClient()
+    } catch (e) {
+      return this.getExampleSchedules()
+    }
     const assets = await client.getAssets({
       limit: 1000,
     })
@@ -248,14 +253,18 @@ export default class ScheduleLoaderService {
     // iterate over assets and download their metadata
     // TODO: dry up the duplicate
 
-    const scheduleFileMetadatas: (ContentfulScheduleFileMetadata & { linkToFile: string })[] = await Promise.all(
+    const scheduleFileMetadatas: (ScheduleFileMetadata & {
+      linkToFile: string
+    })[] = await Promise.all(
       assets.items.map(async (item) => {
         const file: AssetFile = item.fields.file
 
         const protocol = "https:"
         const linkToFile = protocol + file.url
 
-        let scheduleFileMetadata: ContentfulScheduleFileMetadata & { linkToFile: string } = {
+        let scheduleFileMetadata: ScheduleFileMetadata & {
+          linkToFile: string
+        } = {
           filename: file.fileName,
           revision: item.sys.revision,
           createdAt: item.sys.createdAt,
@@ -325,7 +334,7 @@ export default class ScheduleLoaderService {
     this.scheduleFiles = updatedScheduleFiles
   }
 
-  getScheduleFileMetadata(scheduleFile: ScheduleFile): ContentfulScheduleFileMetadata | undefined {
+  getScheduleFileMetadata(scheduleFile: ScheduleFile): ScheduleFileMetadata | undefined {
     if (!scheduleFile) {
       return undefined
     }
@@ -343,7 +352,9 @@ export default class ScheduleLoaderService {
     // get corresponding schedule file
     let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
 
-    let jsonToDump: { [key: string]: ScheduleDay } = {}
+    let jsonToDump: {
+      [key: string]: ScheduleDay
+    } = {}
 
     workDaysEnLower.forEach((day, idx) => {
       jsonToDump[day] = schedule.scheduleDays[idx]
