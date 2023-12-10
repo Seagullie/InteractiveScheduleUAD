@@ -98,7 +98,7 @@ export default class EditedSchedulesStorageService implements IEditedScheduleSto
     let editVer = await this.loadEditedSchedule(scheduleFileName)
     if (!editVer) return false
 
-    debugger
+    // debugger
 
     let editVerMetadata = editVer.metadata
 

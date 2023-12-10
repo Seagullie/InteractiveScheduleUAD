@@ -7,7 +7,7 @@ import { globalStyles, palette } from "../../styles/global"
 import getStrict from "../../utilities/getStrict"
 import { REGLAMENT_DATA } from "../../constants/Constants"
 import _ from "lodash"
-import TeacherTableModel from "../../models/TeacherTableModel"
+import TeacherModel from "../../models/TeacherModel"
 import SettingsService, { DisplayTeacherMode } from "../../services/SettingsService"
 import { SettingsContext } from "../../contexts/settingsContext"
 import ScheduleText from "./ScheduleText"
@@ -52,7 +52,7 @@ export const formatTeacherName = (
 ) => {
   let teacher = ""
 
-  let teacherTable = TeacherTableModel.GetInstance()
+  let teacherTable = TeacherModel.GetInstance()
   let teacherSurname = scheduleClassInstance.teacher
   if (teacherSurname == null) {
     teacher = "..."

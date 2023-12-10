@@ -5,8 +5,6 @@ import { ScheduleClass } from "./ScheduleClass"
 import { IScheduleClass } from "./ScheduleClass"
 import { ScheduleDay } from "./ScheduleDay"
 
-// TODO: separate other models into own files
-
 export type ScheduleDaysJson = { [key: string]: ScheduleDay }
 
 interface IScheduleModelFields {

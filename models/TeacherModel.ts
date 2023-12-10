@@ -14,21 +14,21 @@ type Teacher = {
   "№": number
 }
 
-export default class TeacherTableModel {
+export default class TeacherModel {
   teachers = teachersJson
   teachersFuse = new Fuse(this.teachers, {
     keys: ["ПІБ викладача"],
     threshold: 0.3,
   })
 
-  private static instance: TeacherTableModel
+  private static instance: TeacherModel
 
-  static GetInstance(): TeacherTableModel {
-    if (!TeacherTableModel.instance) {
-      TeacherTableModel.instance = new TeacherTableModel()
+  static GetInstance(): TeacherModel {
+    if (!TeacherModel.instance) {
+      TeacherModel.instance = new TeacherModel()
     }
 
-    return TeacherTableModel.instance
+    return TeacherModel.instance
   }
 
   private constructor() {
@@ -36,9 +36,6 @@ export default class TeacherTableModel {
   }
 
   getTeacherBySurname(surname: string): Teacher | string {
-    // sanitized surname string: remove periods and spaces
-    // surname = surname.split(" ")[0].replace(".", "").replace(" ", "")
-
     if (typeof surname != "string") return "Викладача не знайдено"
 
     let match = this.teachersFuse.search(surname)
@@ -60,9 +57,11 @@ export default class TeacherTableModel {
     let teacher = this.getTeacherBySurname(surname)
     if (typeof teacher == "string") return surname
 
-    surname = teacher["ПІБ викладача"].split(" ")[0]
-    let name = teacher["ПІБ викладача"].split(" ")[1]
-    let patronymic = teacher["ПІБ викладача"].split(" ")[2]
+    const teacherFullNameBits = teacher["ПІБ викладача"].split(" ")
+
+    surname = teacherFullNameBits[0]
+    let name = teacherFullNameBits[1]
+    let patronymic = teacherFullNameBits[2]
 
     return `${surname} ${name[0]}. ${patronymic[0]}.`
   }

@@ -7,7 +7,7 @@ import useEffect from "react"
 import teachersJson from "../assets/teachers.json"
 import { FlatList } from "react-native-gesture-handler"
 import Card from "../shared/card"
-import TeacherTableModel from "../models/TeacherTableModel"
+import TeacherModel from "../models/TeacherModel"
 import AppText from "../shared/AppText"
 
 // TODO: fix scroll view intercepting select event on text
@@ -15,7 +15,7 @@ import AppText from "../shared/AppText"
 export default function TeachersScreen() {
   const [searchQuery, setSearchQuery] = React.useState<string>("")
 
-  const teachersTable = useRef(TeacherTableModel.GetInstance())
+  const teachersTable = useRef(TeacherModel.GetInstance())
 
   const [teachers, setTeachers] = React.useState<typeof teachersJson>(teachersTable.current.teachers)
 

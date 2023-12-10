@@ -24,19 +24,15 @@ import {
 import { isMail, isRunningInBrowser } from "../utilities/utilities"
 import { useNavigation } from "@react-navigation/native"
 
-function Category({
-  title,
-  titleIcon,
-  subcategories,
-  onPress,
-  children,
-}: {
+type CategoryProps = {
   title: string
   titleIcon: JSX.Element
   subcategories: string[]
   onPress: () => void
-  children?: JSX.Element
-}) {
+  children?: JSX.Element[]
+}
+
+function Category({ title, titleIcon, subcategories, onPress, children }: CategoryProps) {
   return (
     <View style={styles.category}>
       <View style={styles.categoryTitle}>

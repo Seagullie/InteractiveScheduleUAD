@@ -1,15 +1,14 @@
 import React from "react"
 
 import { useCallback, useRef, useState } from "react"
-import { View, StyleSheet, ActivityIndicator, ToastAndroid, Image } from "react-native"
-import { editorImages, globalStyles, palette } from "../styles/global"
+import { View, StyleSheet, ActivityIndicator, ToastAndroid } from "react-native"
+import { globalStyles, palette } from "../styles/global"
 
 import ScheduleDayComponent from "../components/ScheduleComponents/ScheduleDay"
 import { useEffect } from "react"
 import SettingsService, { DisplayEmptyDaysMode } from "../services/SettingsService"
 import ScheduleModel from "../models/ScheduleModel"
 
-import { useErrorBoundary } from "react-error-boundary"
 import { ScrollView } from "react-native-gesture-handler"
 import _ from "lodash"
 import { workDays } from "../constants/Days"
@@ -21,10 +20,8 @@ import IntroductoryCarousel from "./IntroductoryCarousel/IntroductoryCarousel"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import GetWeekType, { WeekType } from "../utilities/getWeekType"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
-import AppText from "../shared/AppText"
 import ScheduleHeader from "../components/ScheduleComponents/ScheduleHeader"
 import { Event } from "../constants/Events"
-import EditedSchedulesStorageService from "../services/EditedScheduleStorageService"
 import EditActionsExplanatoryCard from "../components/ScheduleEditorComponents/EditActionsExplanatoryCard"
 import DateOverviewCard from "../components/ScheduleComponents/DateOverviewCard"
 import { WeekTypeContext } from "../contexts/weekTypeContext"
@@ -40,7 +37,6 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
     navigation.closeDrawer()
   }
 
-  // const { showBoundary } = useErrorBoundary()
   const todayIndex = _.clamp(new Date().getDay() - 1, 0, 4)
 
   // state for unconditional rerendering
@@ -160,7 +156,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
   const onWeekTypeChanged = (weekType: number) => {
     console.log("week type changed to: ", weekType)
     // display toast message if in editor
-    // switching to it takes longer...
+    // the switching takes longer in editor...
     if (isEditable) {
       // TODO: make cross platform version of toast
       if (!isRunningInBrowser()) {

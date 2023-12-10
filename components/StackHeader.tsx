@@ -6,27 +6,23 @@ import { globalStyles, palette } from "../styles/global"
 import { useNavigation } from "@react-navigation/native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 
+export type StackHeaderProps = {
+  title: string
+  useSafeAreaView?: boolean
+  hasBackground?: boolean
+  captionStyles?: any
+}
+
 export default function StackHeader({
   title,
   useSafeAreaView = true,
   hasBackground = true,
   captionStyles = undefined,
-}: {
-  title: string
-  useSafeAreaView?: boolean
-  hasBackground?: boolean
-  captionStyles?: any
-}) {
+}: StackHeaderProps) {
   const navigation = useNavigation()
-
-  //   const openMenu = () => {
-  //     console.log("opening drawer")
-  //     // navigation.openDrawer()
-  //   }
 
   const ViewComponent = useSafeAreaView ? SafeAreaView : View
 
-  // extract current screen name from navigation state
   const headerText = title
   return (
     <ViewComponent style={[styles.header, !hasBackground ? { backgroundColor: "transparent" } : {}]}>

@@ -6,7 +6,7 @@ import GetWeekType from "../utilities/getWeekType"
 import { createEvenlySpacedTimeSequence, setDayOnDate } from "../utilities/utilities"
 import LocalNotificationsService from "./LocalNotificationsService"
 import { REGLAMENT_DATA, SEMESTER_MONTHS } from "../constants/Constants"
-import TeacherTableModel from "../models/TeacherTableModel"
+import TeacherModel from "../models/TeacherModel"
 
 export default class ClassNotificationBuilder {
   signature: string
@@ -18,7 +18,7 @@ export default class ClassNotificationBuilder {
   schedule: ScheduleModel
   class_: ScheduleClass
 
-  teachersTable = TeacherTableModel.GetInstance()
+  teachersTable = TeacherModel.GetInstance()
 
   constructor(
     schedule: ScheduleModel,

@@ -1,8 +1,8 @@
-import TeacherTableModel from "../TeacherTableModel"
+import TeacherModel from "../TeacherModel"
 
 describe("TeacherTableModel", () => {
   it("fetches full name by surname", () => {
-    const teacherTableModel = TeacherTableModel.GetInstance()
+    const teacherTableModel = TeacherModel.GetInstance()
 
     const sampleTeacher = teacherTableModel.teachers[0]
     const sampleTeacherSurname = sampleTeacher["ПІБ викладача"].split(" ")[0]
@@ -13,7 +13,7 @@ describe("TeacherTableModel", () => {
   })
 
   it("once surname and initials are specified, fetches right person out of those with same surname", () => {
-    const teacherTableModel = TeacherTableModel.GetInstance()
+    const teacherTableModel = TeacherModel.GetInstance()
 
     const teachersWithSameSurname = teacherTableModel.teachers.filter((teacher) => {
       const surname = teacher["ПІБ викладача"].split(" ")[0]

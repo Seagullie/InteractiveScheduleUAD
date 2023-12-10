@@ -9,6 +9,7 @@ import NewsLoaderService from "../services/NewsLoaderService"
 import { isRunningInExpoGo } from "../utilities/utilities"
 import _ from "lodash"
 import RouteIcons from "../constants/RouteIcons"
+import { YellowCircle } from "./YellowCircle"
 
 // let allIcons = Object.keys(Ionicons.getRawGlyphMap())
 // console.log(allIcons)
@@ -30,26 +31,6 @@ NewsLoaderService.GetInstance().then(async (instance) => {
 
   console.log("shouldDisplayYellowCircle: ", shouldDisplayYellowCircle)
 })
-
-function YellowCircle({ filled = true }: { filled?: boolean }) {
-  return (
-    <View
-      style={{
-        marginLeft: 10,
-        marginTop: 5,
-
-        alignSelf: "flex-start",
-
-        width: 5,
-        height: 5,
-        borderRadius: 10,
-        backgroundColor: filled ? "#FFE600" : "transparent",
-        borderWidth: 1,
-        borderColor: !filled ? palette.grayedOut : "transparent",
-      }}
-    />
-  )
-}
 
 export default function DrawerMenu() {
   const routeNameToIconRef = useRef(RouteIcons)

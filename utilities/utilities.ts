@@ -48,7 +48,7 @@ export function setDayOnDate(date: Date, day: number): Date {
   return date
 }
 
-function liesInRange(value: Date, start: Date, end: Date) {
+function isInRange(value: Date, start: Date, end: Date) {
   return value <= end && value >= start
 }
 
@@ -70,7 +70,7 @@ export function determineInterval(timepoint = new Date()): false | REGLAMENT_DAT
     let earlier = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hourStart), parseInt(minuteStart))
     let later = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hourEnd), parseInt(minuteEnd))
 
-    if (liesInRange(timepoint, earlier, later)) {
+    if (isInRange(timepoint, earlier, later)) {
       interval = class_
     }
   })

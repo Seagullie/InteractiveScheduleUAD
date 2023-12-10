@@ -9,6 +9,20 @@ import AppText from "../shared/AppText"
 // TODO: fix modal content overflowing when keyboard is shown
 // TODO: refactor onClose to something more understandable
 
+export type OptionPickerModalProps = {
+  hasSearchBar?: boolean
+  headerText?: string
+  isOpen: boolean
+  displaySeparators?: boolean
+  initialOptions: string[]
+  initialSelectedOption: string
+  renderItem?: (option: string, idx: number) => JSX.Element
+  closeModal: () => void
+  onSelected: (option: string) => void
+  optionIcon?: JSX.Element
+  isOptionSelectable?: boolean
+}
+
 export default function OptionPickerModal({
   hasSearchBar = true,
   headerText = "",
@@ -21,19 +35,7 @@ export default function OptionPickerModal({
   onSelected,
   optionIcon,
   isOptionSelectable = true,
-}: {
-  hasSearchBar?: boolean
-  headerText?: string
-  isOpen: boolean
-  displaySeparators?: boolean
-  initialOptions: string[]
-  initialSelectedOption: string
-  renderItem?: (option: string, idx: number) => JSX.Element
-  closeModal: () => void
-  onSelected: (option: string) => void
-  optionIcon?: JSX.Element
-  isOptionSelectable?: boolean
-}) {
+}: OptionPickerModalProps) {
   const { height, width } = useWindowDimensions()
 
   const [options, setOptions] = React.useState<string[]>(initialOptions)
