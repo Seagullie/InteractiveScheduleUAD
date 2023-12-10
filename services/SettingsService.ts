@@ -39,13 +39,15 @@ interface ISettingsService extends ScheduleAppSettings {
   readFromStorage: () => Promise<ScheduleAppSettings | null>
 }
 
-// // update place 2 for new setting
-// as of now in order to add a new setting you have to modify 3 places
+// update place 2 for new setting
+// as of now in order to add a new setting you have to modify 2 places
 // that doesn't sound great.
 // make sure you start with ScheduleAppSettings type
 
-// loads and saves settings to async storage
-// also provides a way to subscribe to settings change event
+/**
+ * Represents a service for managing settings in the application.
+ * Loads and saves settings to async storage. Provides a way to subscribe to settings change event.
+ */
 export default class SettingsService implements ISettingsService {
   displayEmptyDays: DisplayEmptyDaysMode = DisplayEmptyDaysMode.Display
   currentScheduleName = "" // Object.keys(scheduleFilesJSON)[0] // this has to match the name of the file in assets/schedules
@@ -96,16 +98,9 @@ export default class SettingsService implements ISettingsService {
     }
   }
 
-  // update place 3 for new setting
   constructSettingsObjectFromProperties(): ScheduleAppSettings {
     return {
-      currentScheduleName: this.currentScheduleName,
-      notifyBeforeClass: this.notifyBeforeClass,
-      notifyBeforeClassOffsetMinutes: this.notifyBeforeClassOffsetMinutes,
-      displayRoomNumber: this.displayRoomNumber,
-      displayEmptyRows: this.displayEmptyRows,
-      displayEmptyDays: this.displayEmptyDays,
-      displayTeacherName: this.displayTeacherName,
+      ...this,
     }
   }
 

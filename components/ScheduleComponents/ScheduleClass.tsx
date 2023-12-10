@@ -76,19 +76,21 @@ export const formatTeacherName = (
   return teacher
 }
 
+export type ScheduleClassComponentProps = {
+  scheduleClassInstance: ScheduleClass
+  idx: number
+  displayRoomNumber: boolean
+  isEditable?: boolean
+  highlightAsOngoing?: boolean
+}
+
 export default function ScheduleClassComponent({
   scheduleClassInstance,
   idx,
   displayRoomNumber,
   isEditable = false,
   highlightAsOngoing = false,
-}: {
-  scheduleClassInstance: ScheduleClass
-  idx: number
-  displayRoomNumber: boolean
-  isEditable?: boolean
-  highlightAsOngoing?: boolean
-}) {
+}: ScheduleClassComponentProps) {
   let [state, setState] = React.useState({})
   let isCurrentClassRef = React.useRef(scheduleClassInstance.isCurrent())
 

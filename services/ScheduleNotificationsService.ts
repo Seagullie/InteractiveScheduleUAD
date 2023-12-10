@@ -7,7 +7,10 @@ import { isRunningInBrowser } from "../utilities/utilities"
 
 // TODO: Read about override keyword in TypeScript
 
-// singleton service. Main function is constructing and registering notifications for entire schedule
+//
+/**
+ * Singleton service. Main function is constructing and registering notifications for entire schedule.
+ */
 export default class ScheduleNotificationsService extends LocalNotificationsService {
   onConfigureNotificationsForScheduleStart: null | (() => void) = null
   onConfigureNotificationsForScheduleEnd: null | (() => void) = null

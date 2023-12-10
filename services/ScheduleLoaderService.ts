@@ -12,7 +12,7 @@ import ExampleScheduleIST from "../assets/example_schedules/ІСТ-example.json"
 import ExampleScheduleTE from "../assets/example_schedules/ТЕ-example.json"
 import EditedSchedulesStorageService from "./EditedScheduleStorageService"
 
-// This is a singleton service that loads schedules from local storage / contentful and provides it to the rest of the application
+// This is a singleton service that loads schedules from local storage / contentful and provides them to the rest of the application
 // if no schedules are available (no schedules folder), it should retrieve them from contentful and store them locally
 // if schedules are indeed available, we gotta check whether they are up to date or not
 // for that we will have to rely on some additional field. Perhaps revision or perhaps creactedAt.
@@ -29,6 +29,9 @@ export interface ScheduleFile extends ContentfulScheduleFileMetadata {
   json_parsed: string
 }
 
+/**
+ * Singleton service that loads schedules from local storage / contentful and provides them to the rest of the application.
+ */
 export default class ScheduleLoaderService {
   protected static instance: ScheduleLoaderService
 
@@ -129,8 +132,10 @@ export default class ScheduleLoaderService {
     return scheduleFiles
   }
 
-  // downloads schedules and sets them to .scheduleFiles
-  // also saves them to schedules folder (android only)
+  /**
+   * Downloads schedules from contentful and sets them to .scheduleFiles.
+   * Also saves them to schedules folder (android only).
+   */
   async getSchedulesFromContentful() {
     // retrieve schedules from contentful
     console.log(`[Schedule Loader] retrieving schedules from contentful`)
@@ -244,17 +249,17 @@ export default class ScheduleLoaderService {
     // TODO: dry up the duplicate
 
     const scheduleFileMetadatas: (ContentfulScheduleFileMetadata & { linkToFile: string })[] = await Promise.all(
-      assets.items.map(async (itm) => {
-        const file: AssetFile = itm.fields.file
+      assets.items.map(async (item) => {
+        const file: AssetFile = item.fields.file
 
         const protocol = "https:"
         const linkToFile = protocol + file.url
 
         let scheduleFileMetadata: ContentfulScheduleFileMetadata & { linkToFile: string } = {
           filename: file.fileName,
-          revision: itm.sys.revision,
-          createdAt: itm.sys.createdAt,
-          updatedAt: itm.sys.updatedAt,
+          revision: item.sys.revision,
+          createdAt: item.sys.createdAt,
+          updatedAt: item.sys.updatedAt,
           linkToFile,
         }
 
@@ -298,11 +303,11 @@ export default class ScheduleLoaderService {
             await FileSystem.downloadAsync(sfm.linkToFile, linkToDestFile)
 
             let scheduleFile: ScheduleFile = {
+              json_parsed: JSON.parse(await FileSystem.readAsStringAsync(linkToDestFile)),
               filename: sfm.filename,
               revision: sfm.revision,
               createdAt: sfm.createdAt,
               updatedAt: sfm.updatedAt,
-              json_parsed: JSON.parse(await FileSystem.readAsStringAsync(linkToDestFile)),
             }
 
             // write newly downloaded schedule to schedules folder (important)

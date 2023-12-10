@@ -5,15 +5,7 @@ import { globalStyles, palette } from "../styles/global"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import _ from "lodash"
 import NewsLoaderService, { NewsArticle } from "../services/NewsLoaderService"
-
-// TODO: move to utils
-function truncateText(text: string, maxLength: number) {
-  if (text.length > maxLength) {
-    return text.slice(0, maxLength) + "..."
-  } else {
-    return text
-  }
-}
+import { truncateText } from "../utilities/utilities"
 
 function NewsCard({ date, title, body }: { date: string; title: string; body: string }) {
   // convert date into day/month/year format

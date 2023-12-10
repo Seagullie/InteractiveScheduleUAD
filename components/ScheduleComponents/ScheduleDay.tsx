@@ -131,7 +131,7 @@ export default function ScheduleDayComponent({
     return extendedContainer
   }
 
-  // flat list doesn't suppress scroll events while nested inside ScrollView and is preferrable if component is not editable
+  // flat list doesn't suppress scroll events while nested inside ScrollView. Flat list is preferrable if component is not editable
   const ListComponent = isEditable ? DraggableFlatList : FlatList
 
   return (

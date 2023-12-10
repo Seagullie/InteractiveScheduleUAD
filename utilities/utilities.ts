@@ -152,3 +152,11 @@ export const loadJSON = async (pathToJSONFile: string) => {
     console.log(e)
   }
 }
+
+export function truncateText(text: string, maxLength: number) {
+  if (text.length > maxLength) {
+    return text.slice(0, maxLength) + "..."
+  } else {
+    return text
+  }
+}
