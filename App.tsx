@@ -105,8 +105,6 @@ export default function App() {
 
     const markdown = (
       <ErrorBoundary fallbackRender={fallbackRender}>
-        {/* <View style={style.root}></View> */}
-
         <NavigationContainer>
           <View style={styles.root}>
             <Drawer.Navigator

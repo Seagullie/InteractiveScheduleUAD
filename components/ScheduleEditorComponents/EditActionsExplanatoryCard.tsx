@@ -1,7 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet, Image } from "react-native"
 import AppText from "../../shared/AppText"
-import { editorImages } from "../../styles/global"
+import { editorImages } from "../../constants/Images"
 import { SDstyles } from "../ScheduleComponents/ScheduleDay"
 
 export default function EditActionsExplanatoryCard() {

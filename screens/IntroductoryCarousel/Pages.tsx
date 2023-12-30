@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, ImageBackground } from "react-native"
 import AppText from "../../shared/AppText"
-import { previewImages, palette, globalStyles, previewImagesFull } from "../../styles/global"
+import { palette, globalStyles } from "../../styles/global"
+import { previewImagesFull } from "../../constants/Images"
+import { previewImages } from "../../constants/Images"
 import { isRunningInBrowser } from "../../utilities/utilities"
 
 import * as Device from "expo-device"

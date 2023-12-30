@@ -1,7 +1,8 @@
 import { FontAwesome, Ionicons } from "@expo/vector-icons"
 import React from "react"
 import { Image } from "react-native-elements"
-import { imageIcons, palette } from "../styles/global"
+import { palette } from "../styles/global"
+import { imageIcons } from "./Images"
 import AppText from "../shared/AppText"
 import { View } from "react-native"
 

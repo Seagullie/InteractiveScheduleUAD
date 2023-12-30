@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
 
 import { View, Button, StyleSheet, Text, Image, TouchableOpacity, ActivityIndicator } from "react-native"
-import { palette, globalStyles, previewImages } from "../../styles/global"
+import { palette, globalStyles } from "../../styles/global"
+import { previewImages } from "../../constants/Images"
 import AppText from "../../shared/AppText"
 
 // Import Swiper React components
