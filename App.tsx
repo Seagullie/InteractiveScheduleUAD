@@ -36,6 +36,8 @@ import QnAScreen from "./screens/QnAScreen"
 ;("use client")
 
 import "react-native-url-polyfill/auto"
+import Aptabase, { trackEvent } from "@aptabase/react-native"
+import { AptabaseAppKey } from "./constants/Keys"
 
 function fallbackRender({ error, resetErrorBoundary }) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
@@ -51,6 +53,9 @@ function fallbackRender({ error, resetErrorBoundary }) {
 
 export default function App() {
   try {
+    // init analytics
+    Aptabase.init(AptabaseAppKey)
+
     const [appIsReady, setAppIsReady] = useState(false)
 
     // TODO: use enums for font names
@@ -95,6 +100,8 @@ export default function App() {
     if (!appIsReady) {
       return null
     }
+
+    trackEvent("app", { event: "app started" })
 
     const markdown = (
       <ErrorBoundary fallbackRender={fallbackRender}>
