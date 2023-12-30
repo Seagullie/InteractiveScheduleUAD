@@ -36,9 +36,9 @@ import QnAScreen from "./screens/QnAScreen"
 ;("use client")
 
 import "react-native-url-polyfill/auto"
-import Aptabase, { trackEvent } from "@aptabase/react-native"
-import { AptabaseAppKey } from "./constants/Keys"
+
 import { GetAllAppFonts } from "./constants/Fonts"
+import { AnalyticsService } from "./services/AnalyticsService/AnalyticsService"
 
 function fallbackRender({ error, resetErrorBoundary }) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
@@ -54,13 +54,7 @@ function fallbackRender({ error, resetErrorBoundary }) {
 
 export default function App() {
   try {
-    // init analytics
-    Aptabase.init(AptabaseAppKey)
-
     const [appIsReady, setAppIsReady] = useState(false)
-
-    // debugger
-
     const [fontsLoaded] = useFonts(GetAllAppFonts())
 
     // preload icons to prevent text flicker effect on navigating to another page
@@ -81,7 +75,7 @@ export default function App() {
       return null
     }
 
-    trackEvent("app", { event: "app started" })
+    AnalyticsService.trackEvent("app", { event: "app started" })
 
     const markdown = (
       <ErrorBoundary fallbackRender={fallbackRender}>
