@@ -59,7 +59,7 @@ export default class SettingsService implements ISettingsService {
 
   private static instance: SettingsService
 
-  SettingsEventEmmiter = new EventEmitter()
+  SettingsEventEmitter = new EventEmitter()
 
   static async GetInstance(): Promise<SettingsService> {
     if (!SettingsService.instance) {
@@ -112,7 +112,7 @@ export default class SettingsService implements ISettingsService {
       const jsonValue = JSON.stringify(settingsObject)
       await AsyncStorage.setItem(STORAGE_KEY, jsonValue)
 
-      this.SettingsEventEmmiter.emit(Event.SETTINGS_UPDATED, this)
+      this.SettingsEventEmitter.emit(Event.SETTINGS_UPDATED, this)
     } catch (e) {
       // saving error
       console.error(e)

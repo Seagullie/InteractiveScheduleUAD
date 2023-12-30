@@ -65,11 +65,11 @@ describe("Settings Service", () => {
     const settings = await SettingsService.GetInstance()
 
     const onSettingsSaved = jest.fn()
-    settings.SettingsEventEmmiter.on(Event.SETTINGS_UPDATED, onSettingsSaved)
+    settings.SettingsEventEmitter.on(Event.SETTINGS_UPDATED, onSettingsSaved)
 
     await settings.saveToStorage()
 
-    expect(settings.SettingsEventEmmiter.listenerCount(Event.SETTINGS_UPDATED)).toBe(1)
+    expect(settings.SettingsEventEmitter.listenerCount(Event.SETTINGS_UPDATED)).toBe(1)
     expect(onSettingsSaved).toHaveBeenCalledTimes(1)
     expect(onSettingsSaved).toHaveBeenCalledWith(settings)
   })

@@ -131,9 +131,9 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
       console.log("[Schedule.tsx] schedule: ", schedule)
 
-      settingsService.SettingsEventEmmiter.on(Event.SETTINGS_UPDATED, onSettingsUpdated)
+      settingsService.SettingsEventEmitter.on(Event.SETTINGS_UPDATED, onSettingsUpdated)
       console.log("subscribed to settings updated event")
-      console.log("n of subscribers: ", settingsService.SettingsEventEmmiter.listenerCount(Event.SETTINGS_UPDATED))
+      console.log("n of subscribers: ", settingsService.SettingsEventEmitter.listenerCount(Event.SETTINGS_UPDATED))
 
       scheduleRef.current = schedule
 
@@ -148,7 +148,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
     return () => {
       SettingsService.GetInstance().then((settingsService: SettingsService) => {
-        settingsService.SettingsEventEmmiter.removeListener(Event.SETTINGS_UPDATED, onSettingsUpdated)
+        settingsService.SettingsEventEmitter.removeListener(Event.SETTINGS_UPDATED, onSettingsUpdated)
       })
     }
   }, [])
