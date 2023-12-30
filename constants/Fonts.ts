@@ -23,29 +23,30 @@ export enum FontName {
 }
 
 export function GetAllAppFonts() {
-  const pathToFontsFolder = "../assets/fonts/"
+  //   const pathToFontsFolder = "../assets/fonts/"
+  //  path to fonts folder is hardcoded  because  require() doesn't work with interpolated strings
 
   const FONTS = {
-    [FontName.LatoRegular]: require(`${pathToFontsFolder}Lato-Regular.ttf`),
-    [FontName.LatoBold]: require(`${pathToFontsFolder}Lato-Bold.ttf`),
-    [FontName.CinzelRegular]: require(`${pathToFontsFolder}CinzelDecorative-Regular.ttf`),
+    [FontName.LatoRegular]: require("../assets/fonts/Lato-Regular.ttf"),
+    [FontName.LatoBold]: require("../assets/fonts/Lato-Bold.ttf"),
+    [FontName.CinzelRegular]: require("../assets/fonts/CinzelDecorative-Regular.ttf"),
 
-    [FontName.MontserratRegular]: require(`${pathToFontsFolder}Montserrat-Regular.ttf`),
-    [FontName.MontserratMedium]: require(`${pathToFontsFolder}Montserrat-Medium.ttf`),
-    [FontName.MontserratSemiBold]: require(`${pathToFontsFolder}Montserrat-SemiBold.ttf`),
+    [FontName.MontserratRegular]: require("../assets/fonts/Montserrat-Regular.ttf"),
+    [FontName.MontserratMedium]: require("../assets/fonts/Montserrat-Medium.ttf"),
+    [FontName.MontserratSemiBold]: require("../assets/fonts/Montserrat-SemiBold.ttf"),
 
-    [FontName.RalewayRegular]: require(`${pathToFontsFolder}Raleway-Regular.ttf`),
-    [FontName.RalewayMedium]: require(`${pathToFontsFolder}Raleway-Medium.ttf`),
-    [FontName.Raleway500]: require(`${pathToFontsFolder}Raleway-Regular.ttf`),
-    [FontName.Raleway600]: require(`${pathToFontsFolder}Raleway-Medium.ttf`),
+    [FontName.RalewayRegular]: require("../assets/fonts/Raleway-Regular.ttf"),
+    [FontName.RalewayMedium]: require("../assets/fonts/Raleway-Medium.ttf"),
+    [FontName.Raleway500]: require("../assets/fonts/Raleway-Regular.ttf"),
+    [FontName.Raleway600]: require("../assets/fonts/Raleway-Medium.ttf"),
 
-    [FontName.Montserrat500]: require(`${pathToFontsFolder}Montserrat-Medium.ttf`),
-    [FontName.Montserrat600]: require(`${pathToFontsFolder}Montserrat-SemiBold.ttf`),
-    [FontName.MontserratBold]: require(`${pathToFontsFolder}Montserrat-Bold.ttf`),
+    [FontName.Montserrat500]: require("../assets/fonts/Montserrat-Medium.ttf"),
+    [FontName.Montserrat600]: require("../assets/fonts/Montserrat-SemiBold.ttf"),
+    [FontName.MontserratBold]: require("../assets/fonts/Montserrat-Bold.ttf"),
 
-    [FontName.CenturyGothic]: require(`${pathToFontsFolder}CenturyGothic.ttf`),
-    [FontName.CenturyGothicBold]: require(`${pathToFontsFolder}GOTHICB.ttf`),
-    [FontName.CenturyGothicItalic]: require(`${pathToFontsFolder}GOTHICI.ttf`),
+    [FontName.CenturyGothic]: require("../assets/fonts/CenturyGothic.ttf"),
+    [FontName.CenturyGothicBold]: require("../assets/fonts/GOTHICB.ttf"),
+    [FontName.CenturyGothicItalic]: require("../assets/fonts/GOTHICI.ttf"),
   }
 
   return FONTS

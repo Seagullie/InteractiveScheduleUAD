@@ -59,6 +59,8 @@ export default function App() {
 
     const [appIsReady, setAppIsReady] = useState(false)
 
+    // debugger
+
     const [fontsLoaded] = useFonts(GetAllAppFonts())
 
     // preload icons to prevent text flicker effect on navigating to another page
