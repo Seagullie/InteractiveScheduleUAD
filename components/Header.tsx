@@ -6,13 +6,14 @@ import { globalStyles } from "../styles/global"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { isHorizontalOrientation, isLandscapeWeb } from "../utilities/utilities"
 import RouteIcons from "../constants/RouteIcons"
+import { FontName } from "../constants/Fonts"
 
 export function getIcon(navigation, headerText: string) {
   const RouteIconConstructor = RouteIcons[headerText].type
   const RouteIcon = <RouteIconConstructor {...RouteIcons[headerText].props} style={globalStyles.navIcon} />
 
   const iconOnPress = () => navigation.openDrawer()
- 
+
   const icon = isLandscapeWeb() ? (
     RouteIcon
   ) : (
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     color: "white",
-    fontFamily: "century-gothic",
+    fontFamily: FontName.CenturyGothic,
   },
 
   headerContentContainer: {

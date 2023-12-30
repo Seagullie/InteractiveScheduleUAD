@@ -38,6 +38,7 @@ import QnAScreen from "./screens/QnAScreen"
 import "react-native-url-polyfill/auto"
 import Aptabase, { trackEvent } from "@aptabase/react-native"
 import { AptabaseAppKey } from "./constants/Keys"
+import { GetAllAppFonts } from "./constants/Fonts"
 
 function fallbackRender({ error, resetErrorBoundary }) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
@@ -58,30 +59,7 @@ export default function App() {
 
     const [appIsReady, setAppIsReady] = useState(false)
 
-    // TODO: use enums for font names
-    const [fontsLoaded] = useFonts({
-      "lato-regular": require("./assets/fonts/Lato-Regular.ttf"),
-      "lato-bold": require("./assets/fonts/Lato-Bold.ttf"),
-      "cinzel-regular": require("./assets/fonts/CinzelDecorative-Regular.ttf"),
-
-      "montserrat-regular": require("./assets/fonts/Montserrat-Regular.ttf"),
-      "montserrat-medium": require("./assets/fonts/Montserrat-Medium.ttf"),
-      "montserrat-semibold": require("./assets/fonts/Montserrat-SemiBold.ttf"),
-
-      "raleway-regular": require("./assets/fonts/Raleway-Regular.ttf"),
-      "raleway-medium": require("./assets/fonts/Raleway-Medium.ttf"),
-
-      "montserrat-500": require("./assets/fonts/Montserrat-Medium.ttf"),
-      "montserrat-600": require("./assets/fonts/Montserrat-SemiBold.ttf"),
-
-      "montserrat-bold": require("./assets/fonts/Montserrat-Bold.ttf"),
-      "raleway-500": require("./assets/fonts/Raleway-Regular.ttf"),
-      "raleway-600": require("./assets/fonts/Raleway-Medium.ttf"),
-
-      "century-gothic": require("./assets/fonts/CenturyGothic.ttf"),
-      "century-gothic-bold": require("./assets/fonts/GOTHICB.ttf"),
-      "century-gothic-italic": require("./assets/fonts/GOTHICI.ttf"),
-    })
+    const [fontsLoaded] = useFonts(GetAllAppFonts())
 
     // preload icons to prevent text flicker effect on navigating to another page
     if (isRunningInBrowser()) {

@@ -24,6 +24,7 @@ import {
 } from "../constants/Contacts"
 import { isMail, isRunningInBrowser } from "../utilities/utilities"
 import { useNavigation } from "@react-navigation/native"
+import { FontName } from "../constants/Fonts"
 
 type CategoryProps = {
   title: string
@@ -38,7 +39,7 @@ function Category({ title, titleIcon, subcategories, onPress, children }: Catego
     <View style={styles.category}>
       <View style={styles.categoryTitle}>
         {titleIcon}
-        <AppText style={[{ fontSize: 14, fontFamily: "montserrat-600", marginLeft: 5 }]}>{title}</AppText>
+        <AppText style={[{ fontSize: 14, fontFamily: FontName.Montserrat600, marginLeft: 5 }]}>{title}</AppText>
       </View>
       <FlatList
         data={children}

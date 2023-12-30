@@ -11,6 +11,7 @@ import { determineInterval } from "../utilities/utilities"
 import { REGLAMENT_DATA } from "../constants/Constants"
 import AppText from "../shared/AppText"
 import { ScrollView } from "react-native-gesture-handler"
+import { FontName } from "../constants/Fonts"
 
 console.log("Importing modules...")
 
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
 
   reglamentClassIndex: {
     fontSize: 14,
-    fontFamily: "montserrat-600",
+    fontFamily: FontName.Montserrat600,
     color: palette.text,
 
     marginLeft: 10,
@@ -195,7 +196,7 @@ const styles = StyleSheet.create({
 
   timePointText: {
     color: palette.grayishBlue,
-    fontFamily: "montserrat-bold",
+    fontFamily: FontName.MontserratBold,
   },
 
   timePointDate: {

@@ -9,6 +9,7 @@ import { FlatList } from "react-native-gesture-handler"
 import Card from "../shared/card"
 import TeacherModel from "../models/TeacherModel"
 import AppText from "../shared/AppText"
+import { FontName } from "../constants/Fonts"
 
 // TODO: fix scroll view intercepting select event on text
 
@@ -41,7 +42,7 @@ export default function TeachersScreen() {
             <View key={index} style={styles.teacherCard}>
               <AppText
                 style={{
-                  fontFamily: "montserrat-bold",
+                  fontFamily: FontName.MontserratBold,
                   ...styles.teacherDataText,
                   fontSize: styles.teacherDataText.fontSize + 2,
                 }}

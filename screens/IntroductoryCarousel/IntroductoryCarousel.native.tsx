@@ -14,6 +14,7 @@ import ScheduleLoaderService from "../../services/ScheduleLoaderService"
 import { ensureExtension, ensureNoExtension } from "../../utilities/utilities"
 import SettingsService from "../../services/SettingsService"
 import { DrawerRoutes } from "../../routes/DrawerRoutes"
+import { FontName } from "../../constants/Fonts"
 
 // use this library: https://github.com/callstack/react-native-pager-view
 
@@ -163,7 +164,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           >
             <AppText
               accessibilityLabel="selectSchedule"
-              style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}
+              style={{ color: palette.navigationBackground, fontFamily: FontName.Montserrat600 }}
             >
               Обрати розклад
             </AppText>
@@ -199,7 +200,11 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
             }}
           >
             <AppText
-              style={{ color: palette.navigationBackground, fontFamily: "montserrat-600", color: palette.grayedOut }}
+              style={{
+                color: palette.navigationBackground,
+                fontFamily: FontName.Montserrat600,
+                color: palette.grayedOut,
+              }}
             >
               Назад
             </AppText>
@@ -220,7 +225,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
               pagerRef.current!.setPage(newCurrentPage)
             }}
           >
-            <AppText style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}>
+            <AppText style={{ color: palette.navigationBackground, fontFamily: FontName.Montserrat600 }}>
               {currentPage != lastPageIndex ? "Далі" : "Закрити"}
             </AppText>
           </TouchableOpacity>

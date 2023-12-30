@@ -12,6 +12,7 @@ import { getIcon } from "../Header"
 import { DrawerRoutes } from "../../routes/DrawerRoutes"
 
 import { useRoute } from "@react-navigation/native"
+import { FontName } from "../../constants/Fonts"
 
 // TODO: Dry up. I simply copypasted this code from Header.tsx
 // TODO: Display activity indicator during changing week type
@@ -56,7 +57,10 @@ export default function ScheduleHeader({
               ]}
             >
               <Text
-                style={[scheduleHeaderStyles.weekTypeText, weekTypeInUkrainian == "Чисельник" ? scheduleHeaderStyles.selectedText : {}]}
+                style={[
+                  scheduleHeaderStyles.weekTypeText,
+                  weekTypeInUkrainian == "Чисельник" ? scheduleHeaderStyles.selectedText : {},
+                ]}
                 onPress={() => {
                   onWeekTypeChanged(0)
                   setWeekType(0)
@@ -67,7 +71,10 @@ export default function ScheduleHeader({
             </View>
 
             <View
-              style={[scheduleHeaderStyles.weekTextContainer, weekTypeInUkrainian == "Знаменник" ? scheduleHeaderStyles.selectedContainer : {}]}
+              style={[
+                scheduleHeaderStyles.weekTextContainer,
+                weekTypeInUkrainian == "Знаменник" ? scheduleHeaderStyles.selectedContainer : {},
+              ]}
             >
               <Text
                 onPress={() => {
@@ -75,7 +82,10 @@ export default function ScheduleHeader({
                   onWeekTypeChanged(1)
                   setWeekType(1)
                 }}
-                style={[scheduleHeaderStyles.weekTypeText, weekTypeInUkrainian == "Знаменник" ? scheduleHeaderStyles.selectedText : {}]}
+                style={[
+                  scheduleHeaderStyles.weekTypeText,
+                  weekTypeInUkrainian == "Знаменник" ? scheduleHeaderStyles.selectedText : {},
+                ]}
               >
                 Знам
               </Text>
@@ -111,7 +121,7 @@ export const scheduleHeaderStyles = StyleSheet.create({
     fontSize: 20,
     color: "#333",
     color: "white",
-    fontFamily: "century-gothic",
+    fontFamily: FontName.CenturyGothic,
   },
   sideMenuIcon: {
     color: "white",

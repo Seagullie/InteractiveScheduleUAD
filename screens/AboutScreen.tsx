@@ -8,6 +8,7 @@ import AppText from "../shared/AppText"
 import { ScrollView } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
 import { DrawerRoutes } from "../routes/DrawerRoutes"
+import { FontName } from "../constants/Fonts"
 
 export default function AboutScreen() {
   const appVersion = "1.1.0"
@@ -218,7 +219,7 @@ export default function AboutScreen() {
           <View>
             <AppText
               style={{
-                fontFamily: "montserrat-600",
+                fontFamily: FontName.Montserrat600,
                 fontSize: 16,
                 marginVertical: 10,
                 marginTop: 25,
@@ -239,7 +240,7 @@ export default function AboutScreen() {
 
       <View style={[styles.card]}>
         <AppText style={[styles.teamSectionHeader, { marginBottom: 10 }]}>Зворотній зв'язок</AppText>
-        <AppText style={[{ fontSize: 13, fontFamily: "montserrat-600", marginBottom: 5 }]}>
+        <AppText style={[{ fontSize: 13, fontFamily: FontName.Montserrat600, marginBottom: 5 }]}>
           Виникли запитання або ідеї як покращити наш застосунок? Напиши нам!
         </AppText>
         <View style={[globalStyles.centered, { flexDirection: "row" }]}>
@@ -257,7 +258,7 @@ export default function AboutScreen() {
 
       <View style={[styles.card]}>
         <AppText style={[styles.teamSectionHeader, { marginBottom: 10 }]}>Розвиток проекту</AppText>
-        <AppText style={[{ fontSize: 13, fontFamily: "montserrat-600", marginBottom: 5 }]}>
+        <AppText style={[{ fontSize: 13, fontFamily: FontName.Montserrat600, marginBottom: 5 }]}>
           Якщо у тебе є досвід роботи з React Native та бажаєш розвивати проект, залишаємо посилання на код застосунку:
         </AppText>
         <View style={[globalStyles.centered, { flexDirection: "row", alignItems: "center" }]}>
@@ -274,13 +275,13 @@ export default function AboutScreen() {
       </View>
 
       <View style={[styles.copyrightContainer]}>
-        <AppText style={[{ textAlign: "center", fontFamily: "century-gothic" }]}>
+        <AppText style={[{ textAlign: "center", fontFamily: FontName.CenturyGothic }]}>
           Авторські права 2023 © Українська Академія Друкарства. Усі права захищені
         </AppText>
       </View>
 
       <View style={[styles.appVersionContainer]}>
-        <AppText style={[{ fontFamily: "century-gothic", color: "#5A5A5A" }]}>{appVersion} </AppText>
+        <AppText style={[{ fontFamily: FontName.CenturyGothic, color: "#5A5A5A" }]}>{appVersion} </AppText>
       </View>
     </ScrollView>
   )
@@ -292,7 +293,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 26,
     color: palette.navigationBackground,
-    fontFamily: "century-gothic",
+    fontFamily: FontName.CenturyGothic,
   },
 
   row: {
@@ -335,9 +336,8 @@ const styles = StyleSheet.create({
 
   teamMemberDetails: {
     letterSpacing: 0,
-    fontFamily: "raleway-600",
+    fontFamily: FontName.Raleway600,
     textAlign: "center",
-    letterSpacing: 0,
   },
 
   regularLetterSpacing: {
@@ -369,12 +369,12 @@ const styles = StyleSheet.create({
   },
 
   tileText: {
-    fontFamily: "century-gothic",
+    fontFamily: FontName.CenturyGothic,
     fontSize: 14,
   },
 
   testerName: {
-    fontFamily: "montserrat-500",
+    fontFamily: FontName.Montserrat500,
     fontSize: 13,
     color: palette.navigationBackground,
     alignSelf: "center",
@@ -399,7 +399,7 @@ const styles = StyleSheet.create({
   contactsEmail: {
     color: palette.navigationBackground,
     fontSize: 16,
-    fontFamily: "century-gothic",
+    fontFamily: FontName.CenturyGothic,
     textAlign: "center",
     textDecorationLine: "underline",
     marginBottom: 3,

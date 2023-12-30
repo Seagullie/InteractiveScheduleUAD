@@ -5,6 +5,7 @@ import { globalStyles, palette } from "../styles/global"
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler"
 import { Ionicons } from "@expo/vector-icons"
 import AppText from "../shared/AppText"
+import { FontName } from "../constants/Fonts"
 
 // TODO: fix modal content overflowing when keyboard is shown
 // TODO: refactor onClose to something more understandable
@@ -165,14 +166,14 @@ const styles = StyleSheet.create({
   },
 
   option: {
-    fontFamily: "montserrat-500",
+    fontFamily: FontName.Montserrat500,
     color: palette.text,
     width: "100%",
     marginVertical: 10,
   },
 
   selectedOption: {
-    fontFamily: "montserrat-600",
+    fontFamily: FontName.Montserrat600,
   },
 
   separator: {
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    fontFamily: "montserrat-bold",
+    fontFamily: FontName.MontserratBold,
     fontSize: 20,
     marginBottom: 10,
     color: palette.text,
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
   },
 
   closeButtonText: {
-    fontFamily: "montserrat-600",
+    fontFamily: FontName.Montserrat600,
     color: palette.grayedOut,
     fontSize: 16,
   },

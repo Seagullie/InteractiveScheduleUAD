@@ -15,6 +15,7 @@ import * as Clipboard from "expo-clipboard"
 import { isRunningInBrowser } from "../../utilities/utilities"
 import { WeekTypeContext } from "../../contexts/weekTypeContext"
 import GetWeekType from "../../utilities/getWeekType"
+import { FontName } from "../../constants/Fonts"
 
 export const formatRoomName = (scheduleClassInstance: ScheduleClass, unfoldClassText: boolean) => {
   let room = ""
@@ -266,24 +267,24 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontFamily: "montserrat-regular",
+    fontFamily: FontName.MontserratRegular,
     color: palette.text,
   },
 
   classStartText: {
-    fontFamily: "montserrat-regular",
+    fontFamily: FontName.MontserratRegular,
     color: palette.text,
     alignSelf: "center",
   },
 
   classEndText: {
-    fontFamily: "montserrat-regular",
+    fontFamily: FontName.MontserratRegular,
     color: palette.text,
     alignSelf: "center",
   },
 
   classNameText: {
-    fontFamily: "montserrat-medium",
+    fontFamily: FontName.MontserratMedium,
     color: palette.text,
     alignSelf: "flex-start",
     textAlign: "left",
@@ -291,12 +292,12 @@ const styles = StyleSheet.create({
   },
 
   teacherNameText: {
-    fontFamily: "montserrat-regular",
+    fontFamily: FontName.MontserratRegular,
     color: palette.grayedOut,
   },
 
   roomNumberText: {
-    fontFamily: "montserrat-regular",
+    fontFamily: FontName.MontserratRegular,
     color: palette.text,
     textAlign: "right",
   },

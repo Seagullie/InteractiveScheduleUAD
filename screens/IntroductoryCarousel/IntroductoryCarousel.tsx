@@ -21,6 +21,7 @@ import { useNavigation } from "@react-navigation/native"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService"
 import { getPageFour, getPageOne, getPageThree, getPageTwo } from "./Pages"
 import { Swiper as SwiperType } from "swiper/types"
+import { FontName } from "../../constants/Fonts"
 
 // TODO: move shared logic to a separate file. As of now, lots if it is a copypaste from IntroductoryCarousel.native.tsx
 // TODO: fix navigation falling out of viewport on firefox
@@ -103,7 +104,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           >
             <AppText
               accessibilityLabel="selectSchedule"
-              style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}
+              style={{ color: palette.navigationBackground, fontFamily: FontName.Montserrat600 }}
             >
               Обрати розклад
             </AppText>
@@ -136,7 +137,11 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
             }}
           >
             <AppText
-              style={{ color: palette.navigationBackground, fontFamily: "montserrat-600", color: palette.grayedOut }}
+              style={{
+                color: palette.navigationBackground,
+                fontFamily: FontName.Montserrat600,
+                color: palette.grayedOut,
+              }}
             >
               Назад
             </AppText>
@@ -157,7 +162,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
               setCurrentPage(newCurrentPage)
             }}
           >
-            <AppText style={{ color: palette.navigationBackground, fontFamily: "montserrat-600" }}>
+            <AppText style={{ color: palette.navigationBackground, fontFamily: FontName.Montserrat600 }}>
               {currentPage != lastPageIndex ? "Далі" : "Закрити"}
             </AppText>
           </TouchableOpacity>

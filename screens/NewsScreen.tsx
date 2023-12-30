@@ -6,6 +6,7 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import _ from "lodash"
 import NewsLoaderService, { NewsArticle } from "../services/NewsLoaderService"
 import { truncateText } from "../utilities/utilities"
+import { FontName } from "../constants/Fonts"
 
 function NewsCard({ date, title, body }: { date: string; title: string; body: string }) {
   // convert date into day/month/year format
@@ -21,12 +22,12 @@ function NewsCard({ date, title, body }: { date: string; title: string; body: st
     <View style={{ marginBottom: 15 }}>
       <AppText style={{ alignSelf: "center" }}>{date}</AppText>
       <View style={styles.newsArticleCard}>
-        <AppText style={{ fontFamily: "montserrat-bold", fontSize: 14 }}>{title}</AppText>
-        <AppText style={{ marginVertical: 15, fontFamily: "montserrat-regular" }}>
+        <AppText style={{ fontFamily: FontName.MontserratBold, fontSize: 14 }}>{title}</AppText>
+        <AppText style={{ marginVertical: 15, fontFamily: FontName.MontserratRegular }}>
           {isBodyExpanded ? body : truncateText(body, 280)}
         </AppText>
         <TouchableOpacity onPress={() => setIsBodyExpanded(!isBodyExpanded)} style={styles.moreButton}>
-          <AppText style={{ fontFamily: "montserrat-semibold", color: palette.navigationBackground }}>
+          <AppText style={{ fontFamily: FontName.MontserratSemiBold, color: palette.navigationBackground }}>
             {!isBodyExpanded ? "Детальніше" : "Згорнути"}
           </AppText>
         </TouchableOpacity>

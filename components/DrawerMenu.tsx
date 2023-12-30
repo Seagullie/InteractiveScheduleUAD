@@ -11,6 +11,7 @@ import { isRunningInExpoGo } from "../utilities/utilities"
 import _ from "lodash"
 import RouteIcons from "../constants/RouteIcons"
 import { YellowCircle } from "./YellowCircle"
+import { FontName } from "../constants/Fonts"
 
 // let allIcons = Object.keys(Ionicons.getRawGlyphMap())
 // console.log(allIcons)
@@ -106,7 +107,7 @@ export default function DrawerMenu() {
               style={{ width: 35, height: 40, marginRight: 15 }}
               source={drawerMenuImages.uad_logo_white_outline}
             />
-            <Text style={{ fontSize: 24, fontFamily: "century-gothic", color: "white" }}>Розклад</Text>
+            <Text style={{ fontSize: 24, fontFamily: FontName.CenturyGothic, color: "white" }}>Розклад</Text>
           </View>
           {topRoutes.map((route, index: number) => {
             return <RouteButton key={index} route={route} index={index} />
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginLeft: 10,
     color: "white",
-    fontFamily: "century-gothic",
+    fontFamily: FontName.CenturyGothic,
   },
 
   drawerContainer: {

@@ -22,6 +22,7 @@ import SettingsService, { DisplayEmptyDaysMode } from "../../services/SettingsSe
 import { EditorStackRoutes } from "../../routes/EditorStackRoutes"
 import { SettingsContext } from "../../contexts/settingsContext"
 import { NoClassesText } from "../../constants/Descriptions"
+import { FontName } from "../../constants/Fonts"
 
 // TODO: accelerate disengage time once an item gets dropped into new slot
 
@@ -273,7 +274,7 @@ export const SDstyles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
 
-    fontFamily: "montserrat-600",
+    fontFamily: FontName.Montserrat600,
 
     color: palette.grayedOut,
   },
@@ -283,7 +284,7 @@ export const SDstyles = StyleSheet.create({
   },
 
   dayNameHeader: {
-    fontFamily: "montserrat-600",
+    fontFamily: FontName.Montserrat600,
     fontSize: 14,
     ...globalStyles.sectionHeader,
     color: palette.text,

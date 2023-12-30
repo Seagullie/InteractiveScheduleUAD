@@ -2,6 +2,7 @@ import { useState } from "react"
 import { View, TouchableOpacity, StyleSheet } from "react-native"
 import AppText from "../shared/AppText"
 import { globalStyles, palette } from "../styles/global"
+import { FontName } from "../constants/Fonts"
 
 export default function UnfoldableCard({ title, bodyComponent }: { title: string; bodyComponent: JSX.Element }) {
   let [isBodyRevealed, setIsBodyRevealed] = useState(false)
@@ -12,11 +13,13 @@ export default function UnfoldableCard({ title, bodyComponent }: { title: string
         {/* title | question */}
 
         <View style={[globalStyles.horizontalCenteredFlex]}>
-          <AppText style={{ fontFamily: "raleway-medium", fontSize: 15, flex: 1, lineHeight: 20 }}>{title}</AppText>
+          <AppText style={{ fontFamily: FontName.RalewayMedium, fontSize: 15, flex: 1, lineHeight: 20 }}>
+            {title}
+          </AppText>
 
           {/* reveal button */}
           <TouchableOpacity onPress={() => setIsBodyRevealed(!isBodyRevealed)} style={UCStyles.revealButton}>
-            <AppText style={{ fontFamily: "century-gothic", color: palette.textOnBackground, fontSize: 36 }}>
+            <AppText style={{ fontFamily: FontName.CenturyGothic, color: palette.textOnBackground, fontSize: 36 }}>
               {!isBodyRevealed ? "+" : "-"}
             </AppText>
           </TouchableOpacity>
@@ -46,7 +49,7 @@ export const UCStyles = StyleSheet.create({
 
   unfoldableCardText: {
     marginVertical: 15,
-    fontFamily: "raleway-regular",
+    fontFamily: FontName.RalewayRegular,
     fontSize: 14,
     lineHeight: 1.3 * 14,
   },

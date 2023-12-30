@@ -14,6 +14,7 @@ import ScheduleLoaderService from "../services/ScheduleLoaderService"
 import { ensureExtension, ensureNoExtension, isRunningInBrowser } from "../utilities/utilities"
 import AppText from "../shared/AppText"
 import { Ionicons } from "@expo/vector-icons"
+import { FontName } from "../constants/Fonts"
 
 // TODO: Fix settings page visually spazzing out on mount
 // it's not the switches
@@ -434,7 +435,7 @@ export const styles = StyleSheet.create({
     marginLeft: 24,
   },
   settingsSectionName: {
-    fontFamily: "raleway-600",
+    fontFamily: FontName.Raleway600,
     color: "rgba(90,90,90,1)",
     fontSize: 14,
 
@@ -464,12 +465,12 @@ export const styles = StyleSheet.create({
   },
 
   settingName: {
-    fontFamily: "raleway-500",
+    fontFamily: FontName.Raleway500,
     color: "rgba(82,82,82,1)",
     fontSize: 15,
   },
   settingValue: {
-    fontFamily: "montserrat-medium",
+    fontFamily: FontName.MontserratMedium,
     color: "rgba(136,136,136,1)",
     height: 17,
     textAlign: "right",

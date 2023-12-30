@@ -7,6 +7,7 @@ import { SDstyles } from "../ScheduleComponents/ScheduleDay"
 import GetWeekType from "../../utilities/getWeekType"
 import _ from "lodash"
 import { isRunningInBrowser } from "../../utilities/utilities"
+import { FontName } from "../../constants/Fonts"
 
 export default function DateOverviewCard() {
   // current day of the week, in this format: "Понеділок" and nothing else
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
   },
 
   upperRowText: {
-    fontFamily: "montserrat-medium",
+    fontFamily: FontName.MontserratMedium,
     fontSize: 13,
     marginBottom: 5,
   },

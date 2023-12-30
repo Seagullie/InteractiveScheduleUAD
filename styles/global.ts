@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native"
 import { isLandscapeWeb, isRunningInBrowser } from "../utilities/utilities"
+import { FontName } from "../constants/Fonts"
 
 export const palette = {
   background: "#E6E6E6",
@@ -37,7 +38,7 @@ export const globalStyles = StyleSheet.create({
   },
 
   text: {
-    fontFamily: "cinzel-regular",
+    fontFamily: FontName.CinzelRegular,
     fontSize: 18,
   },
 
@@ -162,7 +163,7 @@ export const globalStyles = StyleSheet.create({
   searchBar: {
     fontSize: 12,
     flex: 1,
-    fontFamily: "montserrat-500",
+    fontFamily: FontName.Montserrat500,
     paddingVertical: 2,
   },
 

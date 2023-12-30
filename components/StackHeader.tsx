@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { globalStyles, palette } from "../styles/global"
 import { useNavigation } from "@react-navigation/native"
 import { TouchableOpacity } from "react-native-gesture-handler"
+import { FontName } from "../constants/Fonts"
 
 export type StackHeaderProps = {
   title: string
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     color: "white",
-    fontFamily: "century-gothic",
+    fontFamily: FontName.CenturyGothic,
   },
 
   headerTitle: {

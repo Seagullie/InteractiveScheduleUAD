@@ -1,6 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 import AppText from "../shared/AppText"
+import { FontName } from "../constants/Fonts"
 
 interface TableProps {
   headers: string[]
@@ -44,7 +45,7 @@ const Table: React.FC<TableProps> = ({ headers, data, columnWidths }) => {
             >
               <AppText
                 style={{
-                  fontFamily: "montserrat-regular",
+                  fontFamily: FontName.MontserratRegular,
                 }}
               >
                 {cell}
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
   tableHeaderCell: {
     ...sharedCellStyle, // Include shared cell styles
     // fontWeight: "bold",
-    fontFamily: "montserrat-medium",
+    fontFamily: FontName.MontserratMedium,
     fontSize: 12,
     borderRightWidth: tableBorderWidth,
     borderColor: tableBorderColor,
