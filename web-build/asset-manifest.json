@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.0122ce01.css",
-    "main.js": "/static/js/main.e940b0b6.js",
-    "static/js/59.632269b3.js": "/static/js/59.632269b3.js",
+    "main.js": "/static/js/main.027d1f4d.js",
+    "static/js/117.c8e8a0c4.js": "/static/js/117.c8e8a0c4.js",
     "static/media/MaterialCommunityIcons.ttf": "/static/media/MaterialCommunityIcons.5d42b4e60858731e7b65.ttf",
     "static/media/uad_logo_text.svg": "/static/media/uad_logo_text.b76c274a19a049357f30.svg",
     "static/media/lightbulb-nontrasparent-fixed.png": "/static/media/lightbulb-nontrasparent-fixed.c11b98c980e0ff68bfdb.png",
@@ -12,34 +12,22 @@
     "static/media/MaterialIcons.ttf": "/static/media/MaterialIcons.120b4c7bbd155bd0a04d.ttf",
     "static/media/shepita_julia.png": "/static/media/shepita_julia.ff1f72af570c13146725.png",
     "static/media/FontAwesome5_Solid.ttf": "/static/media/FontAwesome5_Solid.07c3313b24f7b1ca85ee.ttf",
-    "static/media/Montserrat-Medium.ttf": "/static/media/Montserrat-Medium.c86e3b9010ff63c99166.ttf",
-    "static/media/Montserrat-Bold.ttf": "/static/media/Montserrat-Bold.2c155811b35513d5beaa.ttf",
-    "static/media/Montserrat-Regular.ttf": "/static/media/Montserrat-Regular.ceb11275ab638627a643.ttf",
     "static/media/FontAwesome.ttf": "/static/media/FontAwesome.1e59d2330b4c6deb84b3.ttf",
-    "static/media/Raleway-Medium.ttf": "/static/media/Raleway-Medium.601cda68c7b7bbcc9a12.ttf",
-    "static/media/Raleway-Regular.ttf": "/static/media/Raleway-Regular.3927fa2a37e6f7f4c7c0.ttf",
     "static/media/schedule-preview.png": "/static/media/schedule-preview.aacf9e2dd8d93fb3c708.png",
-    "static/media/CenturyGothic.ttf": "/static/media/CenturyGothic.b194aa2bd524e2c973f7.ttf",
     "static/media/FontAwesome5_Brands.ttf": "/static/media/FontAwesome5_Brands.9e138496e8f1719c6ebf.ttf",
-    "static/media/Montserrat-SemiBold.ttf": "/static/media/Montserrat-SemiBold.62b8eee010e3957d425f.ttf",
     "static/media/editor-view-preview.png": "/static/media/editor-view-preview.3ecda478ecb9ea82c2a5.png",
     "static/media/senchyk_andrii.png": "/static/media/senchyk_andrii.7c5258269b2460816407.png",
     "static/media/schedule-view-highlight.png": "/static/media/schedule-view-highlight.96155a7cb88f634c556f.png",
     "static/media/zakharova_zarina.png": "/static/media/zakharova_zarina.9161c04e32983806376f.png",
-    "static/media/Lato-Regular.ttf": "/static/media/Lato-Regular.9d883d540ee2b4de8024.ttf",
-    "static/media/Lato-Bold.ttf": "/static/media/Lato-Bold.636be8de934918e38ed9.ttf",
     "static/media/AntDesign.ttf": "/static/media/AntDesign.163adab9dbd7cb1ed12a.ttf",
     "static/media/reglament.png": "/static/media/reglament.64ff0ac21e6f4fb30a13.png",
     "static/media/Entypo.ttf": "/static/media/Entypo.fc6169344c041cffcdae.ttf",
-    "static/media/GOTHICI.ttf": "/static/media/GOTHICI.cf2ca5f01e2e4526231e.ttf",
     "static/media/settings.png": "/static/media/settings.ed6fa137a53d188c9ab1.png",
     "static/media/reglament-preview.png": "/static/media/reglament-preview.0d3212f191802ca44f4a.png",
-    "static/media/CinzelDecorative-Regular.ttf": "/static/media/CinzelDecorative-Regular.c243877d82654b511c69.ttf",
     "static/media/ivanov_mykhailo.png": "/static/media/ivanov_mykhailo.6bc77ff724dfac922eee.png",
     "static/media/Foundation.ttf": "/static/media/Foundation.c0cbb004854f9c746f89.ttf",
     "static/media/editor-preview.png": "/static/media/editor-preview.b19eda51e58548d31c84.png",
     "static/media/Feather.ttf": "/static/media/Feather.0f5d9cede2e831f3fc80.ttf",
-    "static/media/GOTHICB.ttf": "/static/media/GOTHICB.d2dcbbef07d36bcfae6b.ttf",
     "static/media/SimpleLineIcons.ttf": "/static/media/SimpleLineIcons.3ec13a24af3fdda11107.ttf",
     "static/media/Octicons.ttf": "/static/media/Octicons.6b742a230954dc640ba2.ttf",
     "static/media/schedule-view-cropped-preview-3.png": "/static/media/schedule-view-cropped-preview-3.42ec3b441f385acedd73.png",
@@ -62,12 +50,12 @@
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
     "main.0122ce01.css.map": "/static/css/main.0122ce01.css.map",
-    "main.e940b0b6.js.map": "/static/js/main.e940b0b6.js.map",
-    "59.632269b3.js.map": "/static/js/59.632269b3.js.map"
+    "main.027d1f4d.js.map": "/static/js/main.027d1f4d.js.map",
+    "117.c8e8a0c4.js.map": "/static/js/117.c8e8a0c4.js.map"
   },
   "entrypoints": [
-    "static/js/59.632269b3.js",
+    "static/js/117.c8e8a0c4.js",
     "static/css/main.0122ce01.css",
-    "static/js/main.e940b0b6.js"
+    "static/js/main.027d1f4d.js"
   ]
 }
