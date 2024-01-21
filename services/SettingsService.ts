@@ -59,7 +59,7 @@ export default class SettingsService implements ISettingsService {
 
   private static instance: SettingsService
 
-  SettingsEventEmitter = new EventEmitter()
+  SettingsEventEmitter: EventEmitter = new EventEmitter()
 
   static async GetInstance(): Promise<SettingsService> {
     if (!SettingsService.instance) {
@@ -96,12 +96,20 @@ export default class SettingsService implements ISettingsService {
       console.log("current schedule name is empty. setting it to default...")
       this.currentScheduleName = scheduleLoader.scheduleFiles[0].filename
     }
+
+    // TODO: remove this before next publish
+    this.SettingsEventEmitter = new EventEmitter()
   }
 
+  // TODO: move all settings to separate object
   constructSettingsObjectFromProperties(): ScheduleAppSettings {
-    return {
-      ...this,
-    }
+    let settingsObject = { ...this }
+
+    // exclude event emitter from settings object
+
+    delete settingsObject.SettingsEventEmitter
+
+    return settingsObject
   }
 
   // TODO: Refactor
