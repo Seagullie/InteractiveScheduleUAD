@@ -36,6 +36,8 @@ export default function NotificationTestsScreen() {
   // data: "package:" + pkg,
   // "interactive-schedule-notifications"
 
+  // note: avoid using Constants[.manifest]
+
   const requestConfigurePermissions = async () => {
     // navigate to notification channel settings
     // const pkg = Constants.manifest.releaseChannel ? Constants.manifest.android.package : "host.exp.exponent"

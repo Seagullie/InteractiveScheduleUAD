@@ -141,7 +141,9 @@ export default class SettingsService implements ISettingsService {
   }
 
   async openAndroidSystemSettingsForNotifications() {
-    const pkg = Constants.manifest.android.package
+    // const pkg = Constants.manifest.android.package
+    const pkg = Constants.expoConfig.android.package
+
     const channel = await Notifications.getNotificationChannelAsync(NOTIFICATIONS_CHANNEL_ID)
     const allChannels = await Notifications.getNotificationChannelsAsync()
     console.log("[Notification Tests] All channels of this app: ")
