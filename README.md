@@ -22,6 +22,12 @@
 
 Регламент, Викладачі, Контакти, Новини.
 
+## Посилання на веб-версію
+
+* https://scheduleuad.live/
+* https://schedule-uad.live/
+* https://schedule-uad-web-app-wv68l.ondigitalocean.app
+
 # Інструкції для локального запуску
 Сам проджект це React Native + Expo SDK, котрий білдиться й переглядається через додаток Expo Go.
 
