@@ -22,7 +22,13 @@
 
 Регламент, Викладачі, Контакти, Новини.
 
-# Скріншоти
+## Посилання на веб-версію
+
+* https://scheduleuad.live/
+* https://schedule-uad.live/
+* https://schedule-uad-web-app-wv68l.ondigitalocean.app
+
+## Скріншоти
 <details>
   <summary>Скріншоти</summary>
   <img src="docs/images/ui-screenshots/schedule-view-highlight.png">
@@ -30,6 +36,7 @@
   <img src="docs/images/ui-screenshots/editor-view-preview.png">
   <img src="docs/images/ui-screenshots/settings.png">
 </details>
+
 
 # Інструкції для локального запуску
 Сам проджект це React Native + Expo SDK, котрий білдиться й переглядається через додаток Expo Go.
