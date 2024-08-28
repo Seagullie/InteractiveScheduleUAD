@@ -12,7 +12,7 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
 import { createClient } from "contentful/dist/contentful.browser.min.js"
 import { AssetFile, ContentfulClientApi } from "contentful"
 import Expander from "../../components/shared/Expander"
-import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService.native"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 import FlatButton from "../../components/shared/Button"
 
 const pathToSchedules = `assets/schedules/`

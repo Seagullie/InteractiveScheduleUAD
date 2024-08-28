@@ -6,7 +6,7 @@ import { DrawerRoutes } from "../../routes/DrawerRoutes"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import { act } from "react-test-renderer"
-import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService.native"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 
 import * as FileSystem from "expo-file-system"
 import * as Header from "../../components/Header"

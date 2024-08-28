@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import EventEmitter from "events"
-import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService.native"
+import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService"
 import Constants from "expo-constants"
 import * as Notifications from "expo-notifications"
 import * as IntentLauncher from "expo-intent-launcher"

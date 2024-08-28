@@ -7,7 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import ScheduleModel from "../../models/ScheduleModel"
 import { workDaysEnLower } from "../../constants/Days"
-import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService.native"
+import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService"
 import _ from "lodash"
 import { ensureExtension } from "../../utilities/utilities"
 import { IEditedScheduleStorageService, ScheduleWithMetadata } from "./Types"

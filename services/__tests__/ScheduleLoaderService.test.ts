@@ -2,7 +2,7 @@ import NetInfo from "@react-native-community/netinfo"
 import _ from "lodash"
 import * as FileSystem from "expo-file-system"
 
-import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService.native"
+import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService"
 
 beforeEach(() => {
   // delete already existing instance for init to run again

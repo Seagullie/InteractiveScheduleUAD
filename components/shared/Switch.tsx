@@ -28,6 +28,7 @@ export default function CustomSwitch({
       trackColor={{ false: "#767577", true: palette.navigationBackground }}
       // thumbColor={"#eeeeee"}
       thumbColor="#eeeeee"
+      // @ts-ignore
       activeThumbColor="#eeeeee" // this prop is added and used by  react-native-web
       onValueChange={(newValue) => {
         if (disabled) return

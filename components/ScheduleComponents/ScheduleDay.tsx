@@ -16,7 +16,7 @@ import UnderlayRightSide from "../ScheduleEditorComponents/ScheduleClassUnderlay
 import DraggableFlatList from "react-native-draggable-flatlist"
 import AppText from "../shared/AppText"
 import { mapUkrWorkDayToEnWorkDay } from "../../constants/Days"
-import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService.native"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 import ScheduleNotificationsService from "../../services/ScheduleNotificationsService"
 import SettingsService from "../../services/SettingsService/SettingsService"
 import { DisplayEmptyDaysMode } from "../../services/SettingsService/Types"

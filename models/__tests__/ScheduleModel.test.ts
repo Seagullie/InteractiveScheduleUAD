@@ -1,5 +1,5 @@
 import { REGLAMENT_DATA } from "../../constants/Constants"
-import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService.native"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 import GetWeekType from "../../utilities/getWeekType"
 import { setDayOnDate } from "../../utilities/utilities"
 import ScheduleModel from "../ScheduleModel"
