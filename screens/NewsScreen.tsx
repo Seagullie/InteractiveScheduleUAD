@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { View, StyleSheet } from "react-native"
-import AppText from "../shared/AppText"
+import AppText from "../components/shared/AppText"
 import { globalStyles, palette } from "../styles/global"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import _ from "lodash"

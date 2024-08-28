@@ -1,7 +1,6 @@
-import { DateTriggerInput, NotificationContentInput } from "expo-notifications"
 import ScheduleModel from "../models/ScheduleModel"
-import LocalNotificationsService from "./LocalNotificationsService"
-import SettingsService from "./SettingsService"
+import LocalNotificationsService from "./LocalNotificationsService/LocalNotificationsService"
+import SettingsService from "./SettingsService/SettingsService"
 import ClassNotificationBuilder from "./ClassNotificationBuilder"
 import { isRunningInBrowser } from "../utilities/utilities"
 

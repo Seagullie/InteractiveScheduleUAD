@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react-native"
 import SettingsScreen from "../SettingsScreen"
-import SettingsService from "../../services/SettingsService"
+import SettingsService from "../../services/SettingsService/SettingsService"
 import { ensureNoExtension } from "../../utilities/utilities"
 
 jest.mock("@expo/vector-icons", () => {

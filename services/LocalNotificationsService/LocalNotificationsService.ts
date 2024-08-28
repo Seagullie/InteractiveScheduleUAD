@@ -1,21 +1,10 @@
 import * as Notifications from "expo-notifications"
 import { Platform } from "react-native"
-import { isRunningInBrowser } from "../utilities/utilities"
+import { isRunningInBrowser } from "../../utilities/utilities"
+import { ILocalNotificationsService } from "./Types"
 
 // expo notifications docs: https://docs.expo.dev/versions/latest/sdk/notifications/
 // Expo's Push Notification Tool: https://expo.dev/notifications
-
-interface ILocalNotificationsService {
-  sendNotification(content: Notifications.NotificationContentInput): Promise<void>
-  scheduleNotification(
-    content: Notifications.NotificationContentInput,
-    trigger: Notifications.NotificationTriggerInput
-  ): Promise<void>
-  cancelAllScheduledNotificationsAsync(): Promise<void>
-  cancelScheduledNotificationAsync(identifier: string): Promise<void>
-  getAllScheduledNotificationsAsync(): Promise<Notifications.NotificationRequest[]>
-  checkPermissionsAsync(): Promise<Notifications.NotificationPermissionsStatus>
-}
 
 // singleton
 export default class LocalNotificationsService implements ILocalNotificationsService {

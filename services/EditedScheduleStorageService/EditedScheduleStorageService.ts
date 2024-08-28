@@ -5,26 +5,12 @@
 
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-import ScheduleModel, { ScheduleDaysJson } from "../models/ScheduleModel"
-import { ScheduleDay } from "../models/ScheduleDay"
-import { workDaysEnLower } from "../constants/Days"
-import ScheduleLoaderService, { ScheduleFileMetadata } from "./ScheduleLoaderService"
+import ScheduleModel from "../../models/ScheduleModel"
+import { workDaysEnLower } from "../../constants/Days"
+import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService.native"
 import _ from "lodash"
-import { ensureExtension } from "../utilities/utilities"
-
-type ScheduleWithMetadata = {
-  scheduleDays: ScheduleDaysJson
-  metadata: ScheduleFileMetadata
-}
-
-interface IEditedScheduleStorageService {
-  createVersionForEdits: (schedule: ScheduleModel) => Promise<ScheduleModel>
-  saveEditedSchedule: (schedule: ScheduleModel) => Promise<void>
-  loadEditedSchedule: (scheduleFileName: string) => Promise<ScheduleWithMetadata | null>
-
-  isOutdated: (scheduleFileName: string) => Promise<boolean>
-  removeEditedSchedule: (scheduleName: string) => Promise<void>
-}
+import { ensureExtension } from "../../utilities/utilities"
+import { IEditedScheduleStorageService, ScheduleWithMetadata } from "./Types"
 
 // singleton service
 export default class EditedSchedulesStorageService implements IEditedScheduleStorageService {

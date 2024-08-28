@@ -40,8 +40,9 @@ export default function DrawerMenu() {
   const navigation = useNavigation()
   console.log("navigation", navigation)
 
-  const handleNavigationButtonPress = (screenName: string) => {
+  const handleNavigationButtonPress = (screenName: DrawerRoutes) => {
     console.log("handlePageLinkPress", screenName)
+    // @ts-ignore
     navigation.navigate(screenName)
   }
 
@@ -67,8 +68,10 @@ export default function DrawerMenu() {
 
     // NavigationRoute type isn't exported, thus I have to use typeof here
     const RouteButton = ({ route, index }: { route: typeof currentRoute; index: number }) => {
-      const isCurrentRoute = route.name == currentRoute.name
-      const isNewsRoute = route.name == DrawerRoutes.NEWS
+      const routeName = route.name as DrawerRoutes
+
+      const isCurrentRoute = routeName == currentRoute.name
+      const isNewsRoute = routeName == DrawerRoutes.NEWS
 
       const yellowCircle =
         shouldDisplayYellowCircle && isNewsRoute ? <YellowCircle /> : <View style={globalStyles.noDisplay} />
@@ -82,7 +85,7 @@ export default function DrawerMenu() {
               AsyncStorage.setItem("newsChecked", new Date().toString())
             }
 
-            handleNavigationButtonPress(route.name)
+            handleNavigationButtonPress(routeName)
           }}
         >
           <View
@@ -91,7 +94,7 @@ export default function DrawerMenu() {
               ...(isCurrentRoute ? styles.activePageLink : {}),
             }}
           >
-            {routeNameToIconRef.current[route.name]}
+            {routeNameToIconRef.current[routeName]}
             <Text style={styles.pageLink}>{route.name}</Text>
             {yellowCircle}
           </View>

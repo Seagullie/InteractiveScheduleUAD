@@ -4,7 +4,7 @@ import { Button, Input } from "react-native-elements"
 import { globalStyles, palette } from "../styles/global"
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler"
 import { Ionicons } from "@expo/vector-icons"
-import AppText from "../shared/AppText"
+import AppText from "./shared/AppText"
 import { FontName } from "../constants/Fonts"
 
 // TODO: fix modal content overflowing when keyboard is shown

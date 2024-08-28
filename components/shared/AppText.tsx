@@ -1,7 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 import { TextProps } from "react-native-elements"
-import { palette } from "../styles/global"
+import { palette } from "../../styles/global"
 
 // export default class AppText extends Text {
 

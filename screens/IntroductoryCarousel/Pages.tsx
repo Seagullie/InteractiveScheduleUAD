@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ImageBackground } from "react-native"
-import AppText from "../../shared/AppText"
+import AppText from "../../components/shared/AppText"
 import { palette, globalStyles } from "../../styles/global"
 import { previewImagesFull } from "../../constants/Images"
 import { previewImages } from "../../constants/Images"

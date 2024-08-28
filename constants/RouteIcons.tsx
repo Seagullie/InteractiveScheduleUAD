@@ -1,7 +1,11 @@
 import { Ionicons, FontAwesome5, FontAwesome } from "@expo/vector-icons"
 import { DrawerRoutes } from "../routes/DrawerRoutes"
 
-const RouteIcons = {
+type RouteIconsType = {
+  [key in DrawerRoutes]: JSX.Element
+}
+
+const RouteIcons: RouteIconsType = {
   [DrawerRoutes.VIEWER]: <Ionicons name="calendar" color={"white"} size={18} />,
   [DrawerRoutes.REGLAMENT]: <Ionicons name="time-sharp" color={"white"} size={18} />,
   [DrawerRoutes.TEACHERS]: <FontAwesome5 name="user-graduate" color={"white"} size={18} />,

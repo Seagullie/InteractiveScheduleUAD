@@ -1,6 +1,6 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
-import AppText from "../shared/AppText"
+import AppText from "./shared/AppText"
 import { Modal } from "react-native"
 import { Pressable } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"

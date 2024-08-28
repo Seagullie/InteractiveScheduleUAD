@@ -1,6 +1,6 @@
 import { ensureNoExtension } from "../utilities/utilities"
-import ScheduleLoaderService from "../services/ScheduleLoaderService"
-import EditedSchedulesStorageService from "../services/EditedScheduleStorageService"
+import ScheduleLoaderService from "../services/ScheduleLoaderService/ScheduleLoaderService.native"
+import EditedSchedulesStorageService from "../services/EditedScheduleStorageService/EditedScheduleStorageService"
 import { ScheduleClass } from "./ScheduleClass"
 import { IScheduleClass } from "./ScheduleClass"
 import { ScheduleDay } from "./ScheduleDay"

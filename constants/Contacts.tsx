@@ -3,7 +3,7 @@ import React from "react"
 import { Image } from "react-native-elements"
 import { palette } from "../styles/global"
 import { imageIcons } from "./Images"
-import AppText from "../shared/AppText"
+import AppText from "../components/shared/AppText"
 import { View } from "react-native"
 
 export type ModalItem = {

@@ -3,13 +3,15 @@ import { AssetFile } from "contentful"
 import _ from "lodash"
 import NetInfo from "@react-native-community/netinfo"
 
-import ScheduleModel, { ScheduleDay } from "../models/ScheduleModel"
-import { workDaysEnLower } from "../constants/Days"
-import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../utilities/utilities"
-import ExampleScheduleKN from "../assets/example_schedules/КН-example.json"
-import ExampleScheduleIST from "../assets/example_schedules/ІСТ-example.json"
-import ExampleScheduleTE from "../assets/example_schedules/ТЕ-example.json"
-import EditedSchedulesStorageService from "./EditedScheduleStorageService"
+import ScheduleModel from "../../models/ScheduleModel"
+import { workDaysEnLower } from "../../constants/Days"
+import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../../utilities/utilities"
+import ExampleScheduleKN from "../../assets/example_schedules/КН-example.json"
+import ExampleScheduleIST from "../../assets/example_schedules/ІСТ-example.json"
+import ExampleScheduleTE from "../../assets/example_schedules/ТЕ-example.json"
+import EditedSchedulesStorageService from "../EditedScheduleStorageService/EditedScheduleStorageService"
+import { ScheduleDay } from "../../models/ScheduleDay"
+import { ScheduleFile, ScheduleFileMetadata } from "./Types"
 
 // This is a singleton service that loads schedules from local storage / contentful and provides them to the rest of the application
 // if no schedules are available (no schedules folder), it should retrieve them from contentful and store them locally
@@ -17,28 +19,17 @@ import EditedSchedulesStorageService from "./EditedScheduleStorageService"
 // for that we will have to rely on some additional field. Perhaps revision or perhaps creactedAt.
 // or perhaps both
 
-export type ScheduleFileMetadata = {
-  filename: string
-  revision: number
-  createdAt: string
-  updatedAt: string
-}
-
-export interface ScheduleFile extends ScheduleFileMetadata {
-  json_parsed: string
-}
-
 /**
- * Singleton service that loads schedules from local storage / contentful and provides them to the rest of the application.
+ * Singleton service that loads schedules from Local Storage / Contentful and provides them to the rest of the application.
  */
-export default class ScheduleLoaderService {
-  protected static instance: ScheduleLoaderService
+export default class ScheduleLoaderServiceBase {
+  protected static instance: ScheduleLoaderServiceBase
 
   scheduleFiles: ScheduleFile[] = []
 
   pathToScheduleFolder = `${FileSystem.documentDirectory}schedules/`
 
-  static async GetInstance(): Promise<ScheduleLoaderService> {
+  static async GetInstance(): Promise<ScheduleLoaderServiceBase> {
     if (!this.instance) {
       this.instance = new this()
       await this.instance.init()

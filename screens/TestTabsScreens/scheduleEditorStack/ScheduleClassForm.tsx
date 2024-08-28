@@ -1,9 +1,9 @@
 import { useRoute } from "@react-navigation/native"
 import React, { useCallback } from "react"
-import AppText from "../../../shared/AppText"
+import AppText from "../../../components/shared/AppText"
 import { View, StyleSheet, TextInput, Platform, TextInputProps } from "react-native"
 import { palette } from "../../../styles/global"
-import CustomSwitch from "../../../shared/Switch"
+import CustomSwitch from "../../../components/shared/Switch"
 import { ScheduleClassFields } from "../../../models/ScheduleClass"
 import { CLASS_TYPE } from "../../../models/ScheduleClass"
 import { ScheduleClass } from "../../../models/ScheduleClass"
@@ -14,7 +14,7 @@ import { formatRoomName } from "../../../components/ScheduleComponents/ScheduleC
 import _ from "lodash"
 import { workDays, workDaysEnLower } from "../../../constants/Days"
 import { WeekType } from "../../../utilities/getWeekType"
-import { RadioButtonGroup } from "../../../shared/RadioButtonGroup"
+import { RadioButtonGroup } from "../../../components/shared/RadioButtonGroup"
 
 // autocomplete library: https://www.npmjs.com/package/react-native-autocomplete-input
 // another one: https://www.npmjs.com/package/react-native-autocomplete-dropdown

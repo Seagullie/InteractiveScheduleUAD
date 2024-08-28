@@ -1,7 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet, Linking } from "react-native"
 import { globalStyles, palette } from "../../styles/global"
-import AppText from "../../shared/AppText"
+import AppText from "../../components/shared/AppText"
 import { Ionicons } from "@expo/vector-icons"
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
 

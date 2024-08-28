@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import React from "react"
 
 import { View, Text, StyleSheet, NativeSyntheticEvent, TextInputFocusEventData, Pressable } from "react-native"
-import AppText from "../../shared/AppText"
+import AppText from "../../components/shared/AppText"
 
 import * as FileSystem from "expo-file-system"
 import { Button } from "@rneui/themed"
@@ -11,9 +11,9 @@ import ContentViewModal from "../../components/ContentViewModal"
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
 import { createClient } from "contentful/dist/contentful.browser.min.js"
 import { AssetFile, ContentfulClientApi } from "contentful"
-import Expander from "../../shared/Expander"
-import ScheduleLoaderService from "../../services/ScheduleLoaderService"
-import FlatButton from "../../shared/Button"
+import Expander from "../../components/shared/Expander"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService.native"
+import FlatButton from "../../components/shared/Button"
 
 const pathToSchedules = `assets/schedules/`
 // const istSchedule = FileSystem.readAsStringAsync(pathToSchedules + "IST-51M.json")

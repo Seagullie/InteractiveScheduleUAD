@@ -4,7 +4,7 @@ import { ScheduleDay } from "../models/ScheduleDay"
 import { ScheduleClass } from "../models/ScheduleClass"
 import GetWeekType from "../utilities/getWeekType"
 import { createEvenlySpacedTimeSequence, setDayOnDate } from "../utilities/utilities"
-import LocalNotificationsService from "./LocalNotificationsService"
+import LocalNotificationsService from "./LocalNotificationsService/LocalNotificationsService"
 import { REGLAMENT_DATA, SEMESTER_MONTHS } from "../constants/Constants"
 import TeacherModel from "../models/TeacherModel"
 

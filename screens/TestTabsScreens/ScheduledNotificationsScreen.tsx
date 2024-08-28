@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react"
 import { Text, View, Button, ToastAndroid } from "react-native"
 
-import LocalNotificationsService from "../../services/LocalNotificationsService"
+import LocalNotificationsService from "../../services/LocalNotificationsService/LocalNotificationsService"
 import * as Notifications from "expo-notifications"
 import { FlatList, ScrollView } from "react-native-gesture-handler"
 import React from "react"
-import Card from "../../shared/card"
-import Expander from "../../shared/Expander"
+import Card from "../../components/shared/card"
+import Expander from "../../components/shared/Expander"
 import { CheckBox, Input, SearchBar } from "react-native-elements"
 import _ from "lodash"
 

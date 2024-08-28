@@ -11,7 +11,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Ionicons } from "@expo/vector-icons"
-import NotificationTestsScreen from "../screens/TestTabsScreens/NotificationTests"
+import NotificationTestsScreen from "../../screens/TestTabsScreens/NotificationTests"
 import Collapsible from "react-native-collapsible"
 import { TouchableHighlight } from "react-native-gesture-handler"
 import AppText from "./AppText"

@@ -1,6 +1,6 @@
 import { View, StyleSheet, TouchableOpacity, Linking } from "react-native"
 import { globalStyles, palette } from "../styles/global"
-import AppText from "../shared/AppText"
+import AppText from "../components/shared/AppText"
 import { useState } from "react"
 import Table from "../components/Table"
 import { ScrollView } from "react-native-gesture-handler"

@@ -1,7 +1,7 @@
 import * as Notifications from "expo-notifications"
 
 import ScheduleModel from "../../models/ScheduleModel"
-import ScheduleLoaderService from "../ScheduleLoaderService"
+import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService.native"
 import ScheduleNotificationsService from "../ScheduleNotificationsService"
 import { SEMESTER_MONTHS } from "../../constants/Constants"
 

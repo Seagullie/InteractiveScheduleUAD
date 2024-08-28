@@ -1,43 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import EventEmitter from "events"
-import ScheduleLoaderService from "./ScheduleLoaderService"
+import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService.native"
 import Constants from "expo-constants"
 import * as Notifications from "expo-notifications"
 import * as IntentLauncher from "expo-intent-launcher"
-import { NOTIFICATIONS_CHANNEL_ID } from "../constants/Constants"
-import { STORAGE_KEY } from "../constants/Keys"
-import { Event } from "../constants/Events"
-
-// TODO: avoid creating duplicate handlers for "settings updated" event
-
-export enum DisplayEmptyDaysMode {
-  Display = "Відображати",
-  Darken = "Затемняти",
-  Hide = "Приховати",
-}
-
-export enum DisplayTeacherMode {
-  Full = "ПІБ",
-  SurnameAndInitials = "Прізвище та ініціали",
-  Hide = "Приховати",
-}
-
-// update place 1 for new setting
-export type ScheduleAppSettings = {
-  currentScheduleName: string
-  notifyBeforeClass: boolean
-  notifyBeforeClassOffsetMinutes: number
-  displayRoomNumber: boolean
-  displayTeacherName: DisplayTeacherMode
-
-  displayEmptyRows: boolean // TODO: use enum here
-  displayEmptyDays: DisplayEmptyDaysMode
-}
-
-interface ISettingsService extends ScheduleAppSettings {
-  saveToStorage: () => Promise<void>
-  readFromStorage: () => Promise<ScheduleAppSettings | null>
-}
+import { NOTIFICATIONS_CHANNEL_ID } from "../../constants/Constants"
+import { STORAGE_KEY } from "../../constants/Keys"
+import { Event } from "../../constants/Events"
+import { ISettingsService, DisplayEmptyDaysMode, DisplayTeacherMode, ScheduleAppSettings } from "./Types"
 
 // update place 2 for new setting
 // as of now in order to add a new setting you have to modify 2 places
@@ -88,7 +58,8 @@ export default class SettingsService implements ISettingsService {
     console.log("settings fetched. Populating properties...")
     for (const [key, value] of Object.entries(fetchedSettings)) {
       console.log(`[fetched settings] ${key}: ${value}`)
-      this[key] = value
+      let key_ = key as keyof ScheduleAppSettings
+      ;(this[key_] as any) = value
     }
 
     console.log(`[SettingsService] current schedule name: ${this.currentScheduleName}`)

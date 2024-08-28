@@ -14,7 +14,7 @@ import * as Font from "expo-font"
 import { Drawer } from "./routes/globalDrawer"
 import Header from "./components/Header"
 
-import { ErrorBoundary } from "react-error-boundary"
+import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { ScrollView } from "react-native-gesture-handler"
 import DrawerMenu from "./components/DrawerMenu"
 import { DrawerRoutes } from "./routes/DrawerRoutes"
@@ -40,7 +40,7 @@ import "react-native-url-polyfill/auto"
 import { GetAllAppFonts } from "./constants/Fonts"
 import { AnalyticsService } from "./services/AnalyticsService/AnalyticsService"
 
-function fallbackRender({ error, resetErrorBoundary }) {
+function fallbackRender({ error, resetErrorBoundary }: FallbackProps) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
 
   return (
@@ -156,7 +156,7 @@ export default function App() {
   }
 }
 
-const drawerMenuWidthPx = 320
+// const drawerMenuWidthPx = 320
 
 const landscapeWebStyles = StyleSheet.create({
   root: {

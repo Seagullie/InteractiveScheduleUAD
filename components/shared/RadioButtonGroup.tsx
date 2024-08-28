@@ -2,7 +2,7 @@ import React from "react"
 import { CheckBox } from "react-native-elements"
 import { View, StyleSheet } from "react-native"
 import AppText from "./AppText"
-import { palette } from "../styles/global"
+import { palette } from "../../styles/global"
 
 function BlueCircle(filled = true) {
   return (

@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react-native"
 import ScheduleDay from "../ScheduleComponents/ScheduleDay"
 import { getFirstSchedule } from "./ScheduleClass.test"
-import ScheduleLoaderService from "../../services/ScheduleLoaderService"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService.native"
 import { SettingsContext } from "../../contexts/settingsContext"
-import SettingsService from "../../services/SettingsService"
+import SettingsService from "../../services/SettingsService/SettingsService"
 
 jest.mock("@react-navigation/native")
 

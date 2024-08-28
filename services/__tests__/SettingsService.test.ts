@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import SettingsService, { ScheduleAppSettings } from "../SettingsService"
+import SettingsService from "../SettingsService/SettingsService"
+import { ScheduleAppSettings } from "../SettingsService/Types"
 import { STORAGE_KEY } from "../../constants/Keys"
 import { Event } from "../../constants/Events"
 

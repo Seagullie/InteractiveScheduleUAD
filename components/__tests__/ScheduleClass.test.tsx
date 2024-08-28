@@ -3,8 +3,8 @@ import { render, screen, fireEvent } from "@testing-library/react-native"
 import ScheduleClassComponent from "../ScheduleComponents/ScheduleClass"
 import ScheduleModel from "../../models/ScheduleModel"
 import { ScheduleDay } from "../../models/ScheduleDay"
-import ScheduleLoaderService from "../../services/ScheduleLoaderService"
-import SettingsService from "../../services/SettingsService"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService.native"
+import SettingsService from "../../services/SettingsService/SettingsService"
 import { SettingsContext } from "../../contexts/settingsContext"
 
 // TODO: move to test-utils
