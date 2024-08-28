@@ -9,7 +9,8 @@
     "emulator": "C:\\Users\\main\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe -avd Nexus_6_API_27_560_dpi_",
     "web": "expo start --web",
     "rm-cache": "del /S /Q .\\node_modules\\.cache\\web\\web-development\\* ",
-    "test": "jest --watchAll --silent --noStackTrace"
+    "test": "jest --watchAll --silent --noStackTrace",
+    "expo-doctor": "npx expo-doctor"
   },
   "overrides": {
     "metro": "0.76.0",
@@ -33,7 +34,7 @@
     "contentful": "^10.1.0",
     "events": "^3.3.0",
     "expo": "~48.0.18",
-    "expo-clipboard": "^4.1.2",
+    "expo-clipboard": "~4.1.2",
     "expo-constants": "~14.2.1",
     "expo-device": "~5.2.1",
     "expo-file-system": "~15.2.2",
@@ -53,9 +54,9 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "react": "18.2.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "18.2.0",
     "react-error-boundary": "^4.0.3",
-    "react-native": "0.71.8",
+    "react-native": "0.71.14",
     "react-native-autocomplete-dropdown": "^2.1.1",
     "react-native-autocomplete-input": "^5.3.2",
     "react-native-collapsible": "^1.6.1",

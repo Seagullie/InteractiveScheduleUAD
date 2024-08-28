@@ -14,7 +14,7 @@ export const previewImagesFull = {
 }
 
 export const images = {
-  uad_logo_text: require("../assets/images/uad_logo_text.svg"),
+  // uad_logo_text: require("../assets/images/uad_logo_text.svg"),
   uad_logo_text_not_vector: require("../assets/images/uad_logo_text_not_vector.png"),
   uad_logo_text_not_vector_hires: require("../assets/images/uad_logo_text_not_vector_hires.png"),
 }

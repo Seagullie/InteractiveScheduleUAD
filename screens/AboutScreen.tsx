@@ -11,6 +11,7 @@ import { DrawerRoutes } from "../routes/DrawerRoutes"
 import { FontName } from "../constants/Fonts"
 
 export default function AboutScreen() {
+  // TODO: read from config file
   const appVersion = "1.1.0"
   const navigation = useNavigation()
 
