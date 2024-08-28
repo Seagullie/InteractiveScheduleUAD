@@ -9,7 +9,7 @@ import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../../
 import ExampleScheduleKN from "../../assets/example_schedules/КН-example.json"
 import ExampleScheduleIST from "../../assets/example_schedules/ІСТ-example.json"
 import ExampleScheduleTE from "../../assets/example_schedules/ТЕ-example.json"
-import EditedSchedulesStorageService from "../EditedScheduleStorageService/EditedScheduleStorageService"
+
 import { ScheduleDay } from "../../models/ScheduleDay"
 import { ScheduleFile, ScheduleFileMetadata } from "./Types"
 
@@ -46,56 +46,33 @@ export default class ScheduleLoaderServiceBase {
   protected constructor() {}
 
   protected async init() {
-    if (isRunningInBrowser()) {
-      await this.getSchedulesFromContentful()
-      // replace contentful schedules with their user edited versions
-      await this.replaceContentfulSchedulesWithEditedVersions()
+    // check whether schedules are available locally
+    const schedulesAvailableLocally = (await FileSystem.getInfoAsync(this.pathToScheduleFolder)).exists
+
+    // TODO: refactor try catches into one hoisted try catch
+    if (schedulesAvailableLocally) {
+      await this.getSchedulesFromFileSystem()
+
+      // check for updates
+      try {
+        await this.checkForUpdatesAsync()
+      } catch (e) {
+        this.getExampleSchedules()
+      }
     } else {
-      // check whether schedules are available locally
-      const schedulesAvailableLocally = (await FileSystem.getInfoAsync(this.pathToScheduleFolder)).exists
+      // create schedules folder
+      await FileSystem.makeDirectoryAsync(this.pathToScheduleFolder, {
+        intermediates: true,
+      })
 
-      // TODO: refactor try catches into one hoisted try catch
-      if (schedulesAvailableLocally) {
-        await this.getSchedulesFromFileSystem()
-
-        // check for updates
-        try {
-          await this.checkForUpdatesAsync()
-        } catch (e) {
-          this.getExampleSchedules()
-        }
-      } else {
-        // create schedules folder
-        await FileSystem.makeDirectoryAsync(this.pathToScheduleFolder, {
-          intermediates: true,
-        })
-
-        try {
-          await this.getSchedulesFromContentful()
-        } catch (e) {
-          this.getExampleSchedules()
-        }
+      try {
+        await this.getSchedulesFromContentful()
+      } catch (e) {
+        this.getExampleSchedules()
       }
     }
 
     this.scheduleFiles = _.sortBy(this.scheduleFiles, (sf) => sf.filename)
-  }
-  async replaceContentfulSchedulesWithEditedVersions() {
-    const editedSchedulesStorage = await EditedSchedulesStorageService.GetInstance()
-
-    let editedCounterpartsPromises = this.scheduleFiles.map(async (sf) => {
-      // patch contentful schedules with edited versions
-      const editedSchedule = await editedSchedulesStorage.loadEditedSchedule(sf.filename)
-      if (editedSchedule) {
-        sf.json_parsed = editedSchedule.scheduleDays
-      }
-
-      return sf
-    })
-
-    let editedCounterparts = await Promise.all(editedCounterpartsPromises)
-
-    this.scheduleFiles = editedCounterparts
   }
 
   async getSchedulesFromFileSystem() {
@@ -354,12 +331,12 @@ export default class ScheduleLoaderServiceBase {
     // replace .json_parsed with schedule contents
     scheduleFile!.json_parsed = jsonToDump
 
-    if (isRunningInBrowser()) {
-      const editedScheduleStorage = await EditedSchedulesStorageService.GetInstance()
-      await editedScheduleStorage.saveEditedSchedule(schedule)
+    // if (isRunningInBrowser()) {
+    //   const editedScheduleStorage = await EditedSchedulesStorageService.GetInstance()
+    //   await editedScheduleStorage.saveEditedSchedule(schedule)
 
-      return Promise.resolve()
-    }
+    //   return Promise.resolve()
+    // }
 
     console.log(`[Schedule Loader] dumping schedule ${scheduleFile?.filename} to file`)
     // write to file
