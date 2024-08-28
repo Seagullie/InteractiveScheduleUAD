@@ -51,7 +51,7 @@ export default function NotificationTestsScreen() {
     // })
 
     // const pkg = Constants.manifest.releaseChannel ? Constants.manifest.android.package : "host.exp.exponent"
-    const pkg = Constants.manifest.android.package
+    const pkg = Constants.expoConfig.android.package
     const allChannels = await Notifications.getNotificationChannelsAsync()
     const channel = await Notifications.getNotificationChannelAsync("interactive-schedule-notifications")
     console.log("[Notification Tests] All channels of this app: ")

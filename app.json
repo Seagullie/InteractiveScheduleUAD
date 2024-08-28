@@ -26,12 +26,10 @@
       },
       "package": "com.noid.InteractiveSchedule"
     },
-
     "notification": {
       "icon": "./assets/images/notification-icon.png",
       "color": "#1C5D8F"
     },
-
     "androidStatusBar": {
       "backgroundColor": "#1C5D8F",
       "barStyle": "light-content"
@@ -44,6 +42,12 @@
       "eas": {
         "projectId": "78051180-c2bf-42d2-b55b-1dd5bf876ea5"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/78051180-c2bf-42d2-b55b-1dd5bf876ea5"
     }
   }
 }
