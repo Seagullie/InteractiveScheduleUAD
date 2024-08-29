@@ -13,10 +13,6 @@
     "test": "jest --watchAll --silent --noStackTrace",
     "expo-doctor": "npx expo-doctor"
   },
-  "overrides": {
-    "metro": "0.76.0",
-    "metro-resolver": "0.76.0"
-  },
   "dependencies": {
     "@aptabase/react-native": "^0.3.9",
     "@aptabase/web": "^0.4.2",
@@ -91,6 +87,7 @@
     "babel-plugin-transform-remove-console": "^6.9.4",
     "jest": "^29.4.0",
     "jest-expo": "^51.0.0",
+    "metro": "^0.80.10",
     "react-native-dotenv": "^3.4.8",
     "react-test-renderer": "18.2.0",
     "ts-node": "^10.9.1",

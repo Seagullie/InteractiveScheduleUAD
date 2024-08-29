@@ -1,16 +1,18 @@
 import React, { Component, useEffect, useRef, useState } from "react"
 import { FlatList, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, PixelRatio } from "react-native"
-import Card from "../components/shared/card"
+
 import { Text } from "react-native-elements"
-import { globalStyles, palette } from "../styles/global"
+
 import SafeAccessArray from "../utilities/getStrict"
 import * as Device from "expo-device"
-
+import { ScrollView } from "react-native-gesture-handler"
 import { useWindowDimensions } from "react-native"
+
+import Card from "../components/shared/card"
+import { globalStyles, palette } from "../styles/global"
 import { determineInterval } from "../utilities/utilities"
 import { REGLAMENT_DATA } from "../constants/Constants"
 import AppText from "../components/shared/AppText"
-import { ScrollView } from "react-native-gesture-handler"
 import { FontName } from "../constants/Fonts"
 
 console.log("Importing modules...")

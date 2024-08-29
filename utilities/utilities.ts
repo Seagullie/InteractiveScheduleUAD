@@ -1,15 +1,16 @@
 import moment from "moment"
-import { REGLAMENT_DATA_ELEM_TYPE, REGLAMENT_DATA } from "../constants/Constants"
+
+import constants, { ExecutionEnvironment } from "expo-constants"
 
 import contentful from "contentful/dist/contentful.browser.min.js"
 import { createClient } from "contentful/dist/contentful.browser.min.js"
-// import { ContentType, createClient as createClientProper } from "contentful"
-
 import { ContentfulClientApi } from "contentful"
-import { ContentfulContentDeliveryAccessToken, ContentfulSpace } from "../constants/Keys"
 import { Platform } from "react-native"
 import * as FileSystem from "expo-file-system"
-import constants, { ExecutionEnvironment } from "expo-constants"
+
+import { ContentfulContentDeliveryAccessToken, ContentfulSpace } from "../constants/Keys"
+
+import { REGLAMENT_DATA_ELEM_TYPE, REGLAMENT_DATA } from "../constants/Constants"
 
 export const GetTimeDifference = (earlier: Date, later: Date) => {
   let momentA = moment(earlier)
