@@ -1,4 +1,9 @@
+console.log("Parsing App.tsx")
+
+// EXTERNAL DEPENDENCIES
+
 import * as SplashScreen from "expo-splash-screen"
+console.log("[IMPORTS 1] Imported SplashScreen")
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync()
 
@@ -11,13 +16,22 @@ import { NavigationContainer } from "@react-navigation/native"
 import { useFonts } from "expo-font"
 import * as Font from "expo-font"
 
-import { Drawer } from "./routes/globalDrawer"
-import Header from "./components/Header"
+import { Entypo, FontAwesome, Ionicons, Octicons } from "@expo/vector-icons"
 
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { ScrollView } from "react-native-gesture-handler"
+
+import "react-native-url-polyfill/auto"
+
+console.log("[IMPORTS] Imported all external dependencies")
+
+// OWN MODULES
+
 import DrawerMenu from "./components/DrawerMenu"
 import { DrawerRoutes } from "./routes/DrawerRoutes"
+
+import { Drawer } from "./routes/globalDrawer"
+import Header from "./components/Header"
 
 // screens
 
@@ -31,14 +45,13 @@ import TestTabs from "./routes/testTabs"
 import SettingsScreen from "./screens/SettingsScreen"
 import AboutScreen from "./screens/AboutScreen"
 import { isLandscapeWeb, isRunningInBrowser } from "./utilities/utilities"
-import { Entypo, FontAwesome, Ionicons, Octicons } from "@expo/vector-icons"
 import QnAScreen from "./screens/QnAScreen"
 ;("use client")
 
-import "react-native-url-polyfill/auto"
-
 import { GetAllAppFonts } from "./constants/Fonts"
 import { AnalyticsService } from "./services/AnalyticsService/AnalyticsService"
+
+console.log("[IMPORTS] Imported all internal dependencies")
 
 function fallbackRender({ error, resetErrorBoundary }: FallbackProps) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
@@ -54,6 +67,8 @@ function fallbackRender({ error, resetErrorBoundary }: FallbackProps) {
 
 export default function App() {
   try {
+    console.log("Settings up App component")
+
     const [appIsReady, setAppIsReady] = useState(false)
     const [fontsLoaded] = useFonts(GetAllAppFonts())
 
