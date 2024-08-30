@@ -11,7 +11,9 @@
     "web": "expo start --web",
     "rm-cache": "del /S /Q .\\node_modules\\.cache\\web\\web-development\\* ",
     "test": "jest --watchAll --silent --noStackTrace",
-    "expo-doctor": "npx expo-doctor"
+    "expo-doctor": "npx expo-doctor",
+    "eas-build-preview": "echo ⚠ You're expected to un-ignore .env before this command && eas build -p android --profile preview",
+    "eas-preview-build-archive": "eas build:inspect --stage archive -p android --profile preview --output ./build-archive-preview"
   },
   "dependencies": {
     "@aptabase/react-native": "^0.3.9",
