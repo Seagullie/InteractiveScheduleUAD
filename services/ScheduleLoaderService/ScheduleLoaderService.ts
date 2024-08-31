@@ -1,10 +1,10 @@
 import _ from "lodash"
 import { workDaysEnLower } from "../../constants/Days"
 import { ScheduleDay } from "../../models/ScheduleDay/ScheduleDay"
-import ScheduleModel from "../../models/ScheduleModel/ScheduleModel"
 import { ensureExtension } from "../../utilities/utilities"
 import EditedSchedulesStorageService from "../EditedScheduleStorageService/EditedScheduleStorageService"
 import ScheduleLoaderServiceBase from "./ScheduleLoaderServiceBase"
+import { IScheduleModel } from "../../models/ScheduleModel/Types"
 
 /**
  * Web version of the ScheduleLoaderService
@@ -37,7 +37,7 @@ export default class ScheduleLoaderService extends ScheduleLoaderServiceBase {
   }
 
   // persists schedule model into file
-  override async dumpSchedule(schedule: ScheduleModel) {
+  override async dumpSchedule(schedule: IScheduleModel) {
     // get corresponding schedule file
     let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
 

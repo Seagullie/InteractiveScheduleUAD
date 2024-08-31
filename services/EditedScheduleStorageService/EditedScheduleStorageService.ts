@@ -5,12 +5,12 @@
 
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-import ScheduleModel from "../../models/ScheduleModel/ScheduleModel"
 import { workDaysEnLower } from "../../constants/Days"
 import ScheduleLoaderService from "../ScheduleLoaderService/ScheduleLoaderService"
 import _ from "lodash"
 import { ensureExtension } from "../../utilities/utilities"
 import { IEditedScheduleStorageService, ScheduleWithMetadata } from "./Types"
+import { IScheduleModel } from "../../models/ScheduleModel/Types"
 
 // singleton service
 export default class EditedSchedulesStorageService implements IEditedScheduleStorageService {
@@ -41,14 +41,14 @@ export default class EditedSchedulesStorageService implements IEditedScheduleSto
   }
 
   // copies regular schedule to local storage
-  async createVersionForEdits(schedule: ScheduleModel) {
+  async createVersionForEdits(schedule: IScheduleModel) {
     // I wonder if this is enough
     await this.saveEditedSchedule(schedule)
     return schedule
   }
 
   // saves schedule with its metadata to local storage
-  async saveEditedSchedule(schedule: ScheduleModel): Promise<void> {
+  async saveEditedSchedule(schedule: IScheduleModel): Promise<void> {
     const scheduleLoader = await ScheduleLoaderService.GetInstance()
     const scheduleMetadata = scheduleLoader.getScheduleFileMetadata(
       scheduleLoader.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))

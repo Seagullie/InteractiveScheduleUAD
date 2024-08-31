@@ -2,7 +2,6 @@ import * as FileSystem from "expo-file-system"
 import _ from "lodash"
 import NetInfo from "@react-native-community/netinfo"
 
-import ScheduleModel from "../../models/ScheduleModel/ScheduleModel"
 import { workDaysEnLower } from "../../constants/Days"
 import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../../utilities/utilities"
 import ExampleScheduleKN from "../../assets/example_schedules/КН-example.json"
@@ -11,6 +10,7 @@ import ExampleScheduleTE from "../../assets/example_schedules/ТЕ-example.json"
 
 import { ScheduleDay } from "../../models/ScheduleDay/ScheduleDay"
 import { ScheduleFile, ScheduleFileMetadata } from "./Types"
+import { IScheduleModel } from "../../models/ScheduleModel/Types"
 
 // This is a singleton service that loads schedules from local storage / contentful and provides them to the rest of the application
 // if no schedules are available (no schedules folder), it should retrieve them from contentful and store them locally
@@ -28,8 +28,11 @@ export default class ScheduleLoaderServiceBase {
 
   pathToScheduleFolder = `${FileSystem.documentDirectory}schedules/`
 
+  // this function also properly returns child instance in child classes as well via dynamic access of class (.this is class here)
   static async GetInstance(): Promise<ScheduleLoaderServiceBase> {
     if (!this.instance) {
+      console.log(`[ScheduleLoader] Constructing instance of class ${this.name}`)
+
       this.instance = new this()
       await this.instance.init()
 
@@ -315,7 +318,7 @@ export default class ScheduleLoaderServiceBase {
   }
 
   // persists schedule model into file
-  async dumpSchedule(schedule: ScheduleModel) {
+  async dumpSchedule(schedule: IScheduleModel) {
     // get corresponding schedule file
     let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
 
