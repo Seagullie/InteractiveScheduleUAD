@@ -1,90 +1,25 @@
+// EXTERNAL DEPENDENCIES
+
 import React, { useContext, useEffect, useState } from "react"
-import { View, Text, StyleSheet, useWindowDimensions, ActivityIndicator, ToastAndroid } from "react-native"
-import { CLASS_TYPE_SHORT } from "../../models/ScheduleClass/Types"
-import { CLASS_TYPE } from "../../models/ScheduleClass/Types"
-import { ScheduleClass } from "../../models/ScheduleClass/ScheduleClass"
-import { globalStyles, palette } from "../../styles/global"
-import getStrict from "../../utilities/getStrict"
-import { REGLAMENT_DATA } from "../../constants/Constants"
+import { View, useWindowDimensions, ActivityIndicator, ToastAndroid } from "react-native"
 import _ from "lodash"
-import TeacherModel from "../../models/TeacherModel/TeacherModel"
-import SettingsService from "../../services/SettingsService/SettingsService"
-import { DisplayTeacherMode } from "../../services/SettingsService/Types"
-import { SettingsContext } from "../../contexts/settingsContext"
-import ScheduleText from "./ScheduleText"
 import * as Clipboard from "expo-clipboard"
-import { isRunningInBrowser } from "../../utilities/utilities"
-import { WeekTypeContext } from "../../contexts/weekTypeContext"
-import GetWeekType from "../../utilities/getWeekType"
-import { FontName } from "../../constants/Fonts"
 
-export const formatRoomName = (scheduleClassInstance: ScheduleClass, unfoldClassText: boolean) => {
-  let room = ""
+// INTERNAL DEPENDENCIES
 
-  if (
-    scheduleClassInstance.room == "" ||
-    scheduleClassInstance.room == null ||
-    scheduleClassInstance.room == undefined
-  ) {
-    // collapse all kinds of missing values into empty string
-    room = ""
-  } else {
-    if (typeof scheduleClassInstance.room == "string") {
-      room = scheduleClassInstance.room
-    } else if (scheduleClassInstance.room.length != undefined) {
-      // array check
-      room = scheduleClassInstance.room.join("\n")
-    }
-  }
-
-  // pad dots with spaces
-  room = room.replace(/\.(?!\s)/g, ". ")
-
-  if (!unfoldClassText) {
-    room = room.split("\n")[0]
-  }
-
-  return room
-}
-
-export const formatTeacherName = (
-  scheduleClassInstance: ScheduleClass,
-  isEditable: boolean,
-  settings: SettingsService | null // can be null if isEditable is true
-) => {
-  let teacher = ""
-
-  let teacherTable = TeacherModel.GetInstance()
-  let teacherSurname = scheduleClassInstance.teacher
-  if (teacherSurname == null) {
-    teacher = "..."
-  } else if (typeof teacherSurname != "string") {
-    if (teacherSurname.length == 1) {
-      teacher = teacherTable.getFullNameBySurname(teacherSurname[0])
-    } else {
-      let teachers = teacherSurname.map((sn) => teacherTable.getSurnameAndInitialsBySurname(sn))
-      teacher = teachers.join(", ")
-    }
-  } else {
-    let displayTeacherNameMode = isEditable ? DisplayTeacherMode.Full : settings!.displayTeacherName
-
-    if (displayTeacherNameMode == DisplayTeacherMode.Full) {
-      teacher = teacherTable.getFullNameBySurname(teacherSurname)
-    } else if (displayTeacherNameMode == DisplayTeacherMode.SurnameAndInitials) {
-      teacher = teacherTable.getSurnameAndInitialsBySurname(teacherSurname)
-    }
-  }
-
-  return teacher
-}
-
-export type ScheduleClassComponentProps = {
-  scheduleClassInstance: ScheduleClass
-  idx: number
-  displayRoomNumber: boolean
-  isEditable?: boolean
-  highlightAsOngoing?: boolean
-}
+import { CLASS_TYPE_SHORT, CLASS_TYPE } from "../../../models/ScheduleClass/Types"
+import { globalStyles, palette } from "../../../styles/global"
+import getStrict from "../../../utilities/getStrict"
+import { REGLAMENT_DATA } from "../../../constants/Constants"
+import { DisplayTeacherMode } from "../../../services/SettingsService/Types"
+import { SettingsContext } from "../../../contexts/settingsContext"
+import ScheduleText from "../ScheduleText"
+import { isRunningInBrowser } from "../../../utilities/utilities"
+import { WeekTypeContext } from "../../../contexts/weekTypeContext"
+import GetWeekType from "../../../utilities/getWeekType"
+import { styles } from "./Style"
+import { formatRoomName, formatTeacherName } from "./Formatters"
+import { ScheduleClassComponentProps } from "./Types"
 
 export default function ScheduleClassComponent({
   scheduleClassInstance,
@@ -239,87 +174,3 @@ export default function ScheduleClassComponent({
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  ongoingClass: {
-    // backgroundColor: "rgba(28, 93, 143, 0.1)",
-    backgroundColor: "rgb(227, 239, 249)",
-  },
-
-  classContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    borderRadius: 5,
-  },
-
-  startAndEndTimesContainer: {
-    alignItems: "flex-start",
-    width: "10%",
-    marginRight: "4%",
-  },
-
-  separator: {
-    ...globalStyles.separator,
-
-    backgroundColor: "rgba(217, 217, 217, 0.4)",
-  },
-
-  text: {
-    fontFamily: FontName.MontserratRegular,
-    color: palette.text,
-  },
-
-  classStartText: {
-    fontFamily: FontName.MontserratRegular,
-    color: palette.text,
-    alignSelf: "center",
-  },
-
-  classEndText: {
-    fontFamily: FontName.MontserratRegular,
-    color: palette.text,
-    alignSelf: "center",
-  },
-
-  classNameText: {
-    fontFamily: FontName.MontserratMedium,
-    color: palette.text,
-    alignSelf: "flex-start",
-    textAlign: "left",
-    flexGrow: 0.5,
-  },
-
-  teacherNameText: {
-    fontFamily: FontName.MontserratRegular,
-    color: palette.grayedOut,
-  },
-
-  roomNumberText: {
-    fontFamily: FontName.MontserratRegular,
-    color: palette.text,
-    textAlign: "right",
-  },
-
-  classTypeAndRoomNumberContainer: {
-    width: "12%",
-  },
-
-  roomNumberContainer: {
-    // flexGrow: 0.12,
-    alignItems: "flex-end",
-    textAlign: "right",
-  },
-
-  classAndTeacherBlock: {
-    // width: "74%",
-    flexBasis: "74%",
-    flexGrow: 1,
-    // flexGrow: 0.74,
-    // flexGrow: 1,
-    alignItems: "flex-start",
-    textAlign: "left",
-  },
-})

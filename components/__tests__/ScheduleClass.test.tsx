@@ -1,6 +1,6 @@
 import React from "react"
 import { render, screen, fireEvent } from "@testing-library/react-native"
-import ScheduleClassComponent from "../ScheduleComponents/ScheduleClass"
+import ScheduleClassComponent from "../ScheduleComponents/ScheduleClassComponent/ScheduleClass"
 import ScheduleModel from "../../models/ScheduleModel/ScheduleModel"
 import { ScheduleDay } from "../../models/ScheduleDay/ScheduleDay"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"

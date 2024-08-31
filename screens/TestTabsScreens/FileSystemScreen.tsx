@@ -14,6 +14,7 @@ import { AssetFile, ContentfulClientApi } from "contentful"
 import Expander from "../../components/shared/Expander"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 import FlatButton from "../../components/shared/Button"
+import { getContentfulClient } from "../../utilities/utilities"
 
 const pathToSchedules = `assets/schedules/`
 // const istSchedule = FileSystem.readAsStringAsync(pathToSchedules + "IST-51M.json")
@@ -61,11 +62,7 @@ export default function FileSystemScreen() {
       console.log(allFiles)
       setAllFiles(allFiles)
 
-      const client: ContentfulClientApi<undefiend> = createClient({
-        space: "ude6y2h1h61l",
-        environment: "master", // defaults to 'master' if not set
-        accessToken: "hQc8OI2VQrAnLLSWSpflQyByQUZ_t5ct1Ed8axAu7M0",
-      })
+      const client: ContentfulClientApi = getContentfulClient()
 
       client
         .getEntry("4DlBdNKIvYPma8B18WwQsJ")

@@ -17,22 +17,27 @@ import { FontName } from "../constants/Fonts"
 // console.log(allIcons)
 
 let shouldDisplayYellowCircle = true
-NewsLoaderService.GetInstance().then(async (instance) => {
-  let newestArticleDate = await instance.getNewestArticleDate()
-  let lastSeenArticle = await AsyncStorage.getItem("newsChecked")
-  let lastSeenArticleDate = lastSeenArticle ? new Date(lastSeenArticle) : null
 
-  console.log("newestArticleDate", newestArticleDate)
-  console.log("lastSeenArticleDate", lastSeenArticleDate)
+function determineIfShouldDisplayYellowCircle() {
+  NewsLoaderService.GetInstance().then(async (instance) => {
+    let newestArticleDate = await instance.getNewestArticleDate()
+    let lastSeenArticle = await AsyncStorage.getItem("newsChecked")
+    let lastSeenArticleDate = lastSeenArticle ? new Date(lastSeenArticle) : null
 
-  if (!lastSeenArticleDate || newestArticleDate.getTime() > lastSeenArticleDate.getTime()) {
-    shouldDisplayYellowCircle = true
-  } else {
-    shouldDisplayYellowCircle = false
-  }
+    console.log("newestArticleDate", newestArticleDate)
+    console.log("lastSeenArticleDate", lastSeenArticleDate)
 
-  console.log("shouldDisplayYellowCircle: ", shouldDisplayYellowCircle)
-})
+    if (!lastSeenArticleDate || newestArticleDate.getTime() > lastSeenArticleDate.getTime()) {
+      shouldDisplayYellowCircle = true
+    } else {
+      shouldDisplayYellowCircle = false
+    }
+
+    console.log("shouldDisplayYellowCircle: ", shouldDisplayYellowCircle)
+  })
+}
+
+determineIfShouldDisplayYellowCircle()
 
 export default function DrawerMenu() {
   const routeNameToIconRef = useRef(RouteIcons)
