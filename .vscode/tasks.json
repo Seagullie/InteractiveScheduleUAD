@@ -1,0 +1,40 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+            "label": "Expo Server",
+			"icon": {
+				"id": "server"
+			},
+            "type": "shell",
+            "command": "npx expo start",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			  },
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+
+        },
+		{
+            "label": "npm",
+			"icon": {
+				"id": "library",
+				"color": "terminal.ansiYellow"
+			},
+            "type": "shell",
+            "command": "cmd.exe",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"clear": false,
+				"close": false,
+			  },
+			"runOptions": {
+				"runOn": "folderOpen",
+			}
+
+        }
+	]
+}
