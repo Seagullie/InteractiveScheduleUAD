@@ -25,7 +25,7 @@ export default class SettingsService implements ISettingsService {
   notifyBeforeClassOffsetMinutes = 0
   displayRoomNumber = true
   displayTeacherName = DisplayTeacherMode.Full
-  displayEmptyRows = true
+  // displayEmptyRows = true
 
   private static instance: SettingsService
 

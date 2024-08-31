@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-import { isLandscapeWeb, isRunningInBrowser } from "../utilities/utilities"
+import { isLandscapeWeb } from "../utilities/utilities"
 import { FontName } from "../constants/Fonts"
 
 export const palette = {

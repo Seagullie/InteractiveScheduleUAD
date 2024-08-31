@@ -4,6 +4,8 @@
     "allowJs": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
+    "skipLibCheck": true,
+    // "maxNodeModuleJsDepth": 0
   },
   "extends": "expo/tsconfig.base",
 }

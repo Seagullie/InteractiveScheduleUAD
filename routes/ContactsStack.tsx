@@ -2,7 +2,6 @@ import * as React from "react"
 
 import { createStackNavigator } from "@react-navigation/stack"
 import FacultiesTestScreen from "../screens/TestTabsScreens/FacultiesTestScreen"
-import ContactsModalTestScreen from "../screens/TestTabsScreens/ContactsModalsTestScreen"
 import { View } from "react-native"
 import { ContactsStackRoutes } from "./ContactsStackRoutes"
 import StackHeader from "../components/StackHeader"

@@ -18,7 +18,7 @@ export type ScheduleAppSettings = {
   displayRoomNumber: boolean
   displayTeacherName: DisplayTeacherMode
 
-  displayEmptyRows: boolean // TODO: use enum here
+  // displayEmptyRows: boolean // TODO: use enum here
   displayEmptyDays: DisplayEmptyDaysMode
 }
 export interface ISettingsService extends ScheduleAppSettings {

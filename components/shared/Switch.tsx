@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Switch, StyleSheet } from "react-native"
+import { Switch, StyleSheet } from "react-native"
 import { palette } from "../../styles/global"
 import { isRunningInBrowser } from "../../utilities/utilities"
 import { SwitchProps } from "react-native-elements"

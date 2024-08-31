@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react"
 import { ActivityIndicator, Text, View, Image } from "react-native"
-import { ParamListBase, useNavigation, useNavigationState } from "@react-navigation/native"
+import { useNavigation, useNavigationState } from "@react-navigation/native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import _ from "lodash"

@@ -1,19 +1,7 @@
 import * as React from "react"
-import {
-  PixelRatio,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  TouchableOpacityBase,
-  View,
-  useWindowDimensions,
-} from "react-native"
-import { NavigationContainer } from "@react-navigation/native"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { TouchableOpacity, View } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
-import NotificationTestsScreen from "../../screens/TestTabsScreens/NotificationTests"
 import Collapsible from "react-native-collapsible"
-import { TouchableHighlight } from "react-native-gesture-handler"
 import AppText from "./AppText"
 
 export default function Expander({ header, children }: { header: string; children: React.ReactNode }) {

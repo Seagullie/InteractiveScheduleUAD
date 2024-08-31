@@ -1,14 +1,11 @@
-import React, { Component, useEffect, useRef, useState } from "react"
-import { FlatList, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, PixelRatio } from "react-native"
+import React, { useEffect, useRef, useState } from "react"
+import { View, StyleSheet, PixelRatio } from "react-native"
 
 import { Text } from "react-native-elements"
 
-import SafeAccessArray from "../utilities/getStrict"
-import * as Device from "expo-device"
 import { ScrollView } from "react-native-gesture-handler"
 import { useWindowDimensions } from "react-native"
 
-import Card from "../components/shared/card"
 import { globalStyles, palette } from "../styles/global"
 import { determineInterval } from "../utilities/utilities"
 import { REGLAMENT_DATA } from "../constants/Constants"
@@ -56,7 +53,7 @@ const ReglamentClass = ({ index }: { index: number }) => {
   let currentTimeInterval = determineInterval()
   let isCurrentClassRef = useRef(currentTimeInterval == classData)
 
-  let [state, setState] = useState({})
+  let [_, setState] = useState({})
   // rerender component if it's not current class anymore or became current class
 
   useEffect(() => {

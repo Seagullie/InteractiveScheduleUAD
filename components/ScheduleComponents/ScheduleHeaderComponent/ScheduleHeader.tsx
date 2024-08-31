@@ -1,7 +1,7 @@
 // EXTERNAL DEPENDENCIES
 
 import React from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { Text, View } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
 import { useRoute } from "@react-navigation/native"
@@ -12,6 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import GetWeekType, { WeekType } from "../../../utilities/getWeekType"
 import { getRouteIcon } from "../../Header"
 import { scheduleHeaderStyles } from "./Styles"
+import { DrawerRoutes } from "../../../routes/DrawerRoutes"
 
 // TODO: Dry up. I simply copypasted this code from Header.tsx
 // TODO: Display activity indicator during changing week type
@@ -32,7 +33,7 @@ export default function ScheduleHeader({
   // extract current screen name from navigation state
   const headerText = title.split(".")[0]
 
-  const routeName = useRoute().name
+  const routeName = useRoute().name as DrawerRoutes
   console.log("[Schedule Header] routeName: ", routeName)
 
   const icon = getRouteIcon(navigation_, routeName)

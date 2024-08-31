@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { StyleSheet } from "react-native"
 import { TextProps } from "react-native-elements"
 import { palette } from "../../styles/global"
 import AppText from "../shared/AppText"

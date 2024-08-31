@@ -2,7 +2,9 @@ import moment from "moment"
 
 import constants, { ExecutionEnvironment } from "expo-constants"
 
+// @ts-ignore
 import contentful from "contentful/dist/contentful.browser.min.js"
+// @ts-ignore
 import { createClient } from "contentful/dist/contentful.browser.min.js"
 import { ContentfulClientApi } from "contentful"
 import { Platform } from "react-native"

@@ -4,7 +4,7 @@ import React from "react"
 import { useCallback, useRef, useState, useEffect } from "react"
 import { View, ActivityIndicator, ToastAndroid } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
-import _ from "lodash"
+import ldash from "lodash"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
 
@@ -37,14 +37,16 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
   // [web] a workaround to render drawer menu content without explicitly opening it
   if (isRunningInBrowser()) {
     const navigation = useNavigation()
+    // @ts-ignore
     navigation.openDrawer()
+    // @ts-ignore
     navigation.closeDrawer()
   }
 
-  const todayIndex = _.clamp(new Date().getDay() - 1, 0, 4)
+  const todayIndex = ldash.clamp(new Date().getDay() - 1, 0, 4)
 
   // state for unconditional rerendering
-  const [state, setState] = useState({})
+  const [_, setState] = useState({})
   const [isFirstTimeLaunch, setIsFirstTimeLaunch] = useState<string | null>("false") // async storage can't store anything other than strings
 
   let scheduleRef = useRef<ScheduleModel | null>(null)
@@ -91,7 +93,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
           ensureExtension(settingsService.currentScheduleName, ".json")
         )
         // TODO: Refactor XD
-        scheduleFileRef.current = _.cloneDeep(updatedSchedule) ?? null
+        scheduleFileRef.current = ldash.cloneDeep(updatedSchedule) ?? null
 
         setScheduleName(settingsService.currentScheduleName)
       } else {
@@ -119,7 +121,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
       let scheduleFile = scheduleLoaderInstance.getScheduleFileByFileName(settingsService.currentScheduleName)
       let firstScheduleFile = scheduleLoaderInstance.scheduleFiles[0]
 
-      scheduleFileRef.current = _.cloneDeep(scheduleFile ?? firstScheduleFile)
+      scheduleFileRef.current = ldash.cloneDeep(scheduleFile ?? firstScheduleFile)
 
       const nameOfScheduleToLoad = scheduleFile ? settingsService.currentScheduleName : firstScheduleFile.filename
 
@@ -196,7 +198,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
           // setScheduleLoaded(false)
 
           // update refs
-          scheduleFileRef.current = _.cloneDeep(scheduleFile) ?? null
+          scheduleFileRef.current = ldash.cloneDeep(scheduleFile) ?? null
 
           let newSchedule = new ScheduleModel("groupname_groupyear", "groupname", 5)
           scheduleRef.current! = newSchedule
@@ -321,10 +323,10 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
                     classesCollection={classes}
                     scheduleObject={scheduleRef.current!}
                     dayName={item}
-                    dayIndex={idx}
+                    // dayIndex={idx}
                     scheduleDay={scheduleRef.current!.scheduleDays[idx]}
                     displayRoomNumber={!isEditable ? settingsServiceRef.current!.displayRoomNumber : true}
-                    showSeparator={idx !== workDays.length - 1}
+                    // showSeparator={idx !== workDays.length - 1}
                     weekType={weekType}
                     fade={
                       !isEditable

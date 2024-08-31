@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { View, Text, StyleSheet, Modal, Pressable, ScrollView, useWindowDimensions } from "react-native"
+import { View, Text, Modal, Pressable, ScrollView, useWindowDimensions } from "react-native"
 import { globalStyles, palette } from "../../styles/global"
 import { TextInput } from "react-native-gesture-handler"
 import { Ionicons } from "@expo/vector-icons"
@@ -32,9 +32,9 @@ export default function OptionPickerModal({
   optionIcon,
   isOptionSelectable = true,
 }: OptionPickerModalProps) {
-  const { height: windowHeight, width: windowWidth } = useWindowDimensions()
+  const { height: windowHeight } = useWindowDimensions()
 
-  const [options, setOptions] = React.useState<string[]>(optionsParam)
+  const [options, _] = React.useState<string[]>(optionsParam)
   const [searchQuery, setSearchQuery] = React.useState<string>("")
 
   // filter options if search bar is present

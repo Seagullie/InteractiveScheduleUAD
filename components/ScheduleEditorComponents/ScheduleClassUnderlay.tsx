@@ -12,7 +12,8 @@ export default function UnderlayRightSide({
 }: {
   onDeleteButtonPress: () => void
 }) {
-  const { close } = useSwipeableItemParams<Item>()
+  // @ts-ignore
+  const { close } = useSwipeableItemParams()
 
   return (
     <View style={[globalStyles.row, styles.underlayLeft]}>

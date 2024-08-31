@@ -1,7 +1,7 @@
 // EXTERNAL DEPENDENCIES
 
 import React, { useContext, useEffect, useState } from "react"
-import { View, useWindowDimensions, ActivityIndicator, ToastAndroid } from "react-native"
+import { View, ActivityIndicator, ToastAndroid } from "react-native"
 import _ from "lodash"
 import * as Clipboard from "expo-clipboard"
 
@@ -28,13 +28,13 @@ export default function ScheduleClassComponent({
   isEditable = false,
   highlightAsOngoing = false,
 }: ScheduleClassComponentProps) {
-  let [state, setState] = React.useState({})
+  let [_, setState] = React.useState({})
   let isCurrentClassRef = React.useRef(scheduleClassInstance.isCurrent())
 
   const [unfoldClassText, setUnfoldClassText] = React.useState(isEditable)
   const [unfoldTeacherText, setUnfoldTeacherText] = React.useState(isEditable)
 
-  const { height, width } = useWindowDimensions()
+  // const { height, width } = useWindowDimensions()
   const settings = useContext(SettingsContext)
   const selectedWeekType = useContext(WeekTypeContext)
 

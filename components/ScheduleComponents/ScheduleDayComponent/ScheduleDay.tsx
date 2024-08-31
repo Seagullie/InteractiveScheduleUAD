@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react"
-import { Text, View, StyleSheet, ActivityIndicator } from "react-native"
+import { Text, View, ActivityIndicator } from "react-native"
 import { globalStyles, palette } from "../../../styles/global"
 import { ScheduleClassFields } from "../../../models/ScheduleClass/Types"
 import { ScheduleClass } from "../../../models/ScheduleClass/ScheduleClass"
@@ -9,7 +9,7 @@ import Separator from "../../shared/Separator"
 import GetWeekType from "../../../utilities/getWeekType"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
-import SwipeableItem, { useSwipeableItemParams } from "react-native-swipeable-item"
+import SwipeableItem from "react-native-swipeable-item"
 import UnderlayRightSide from "../../ScheduleEditorComponents/ScheduleClassUnderlay"
 import DraggableFlatList from "react-native-draggable-flatlist"
 import AppText from "../../shared/AppText"
@@ -118,7 +118,7 @@ export default function ScheduleDayComponent({
       const shouldCreatePlaceholderClass = class_ == undefined
 
       if (shouldCreatePlaceholderClass) {
-        return ScheduleClass.GetPlaceholder(dayNameEnRef.current, idx + 1, weekType + 1)
+        return ScheduleClass.GetPlaceholder(dayNameEnRef.current, idx + 1, (weekType + 1) as 1 | 2)
       } else {
         return class_
       }
@@ -167,6 +167,7 @@ export default function ScheduleDayComponent({
           ItemSeparatorComponent={() => {
             return <Separator width="97%" color="rgba(217, 217, 217, 0.4)" upperElement={true} lowerElement={true} /> // TODO: Refactor
           }}
+          // @ts-ignore
           renderItem={({ item, drag, isActive }) => {
             let class_ = item
             let idx = item.index - 1
@@ -229,7 +230,7 @@ export default function ScheduleDayComponent({
                               console.log("new weekType will be:", weekType + 1)
                               class_.isBiweekly = isBiweekly
 
-                              class_.setWeek(weekType + 1)
+                              class_.setWeek((weekType + 1) as 1 | 2)
                             }
 
                             return new ScheduleClass(

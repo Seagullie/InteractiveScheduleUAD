@@ -1,7 +1,5 @@
-import { View, StyleSheet, TouchableOpacity, Linking } from "react-native"
-import { globalStyles, palette } from "../styles/global"
+import { View, Linking } from "react-native"
 import AppText from "../components/shared/AppText"
-import { useState } from "react"
 import Table from "../components/Table"
 import { ScrollView } from "react-native-gesture-handler"
 import UnfoldableCard, { UCStyles } from "../components/UnfoldableCard"

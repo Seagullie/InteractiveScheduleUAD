@@ -85,7 +85,7 @@ export default function App() {
           <View style={AppStyles.root}>
             <Drawer.Navigator
               screenOptions={{
-                header: (props) => <Header navigation={props.navigation} title={props.route.name} />,
+                header: (props) => <Header navigation={props.navigation} title={props.route.name as DrawerRoutes} />,
               }}
               drawerContent={(props) => <DrawerMenu {...props} />}
             >

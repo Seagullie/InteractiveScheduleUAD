@@ -2,11 +2,9 @@ import { Ionicons } from "@expo/vector-icons"
 import React, { useRef } from "react"
 import { View, StyleSheet, TextInput, Linking } from "react-native"
 import { globalStyles, palette } from "../styles/global"
-import useEffect from "react"
 
 import teachersJson from "../assets/teachers.json"
 import { FlatList } from "react-native-gesture-handler"
-import Card from "../components/shared/card"
 import TeacherModel from "../models/TeacherModel/TeacherModel"
 import AppText from "../components/shared/AppText"
 import { FontName } from "../constants/Fonts"
@@ -18,7 +16,7 @@ export default function TeachersScreen() {
 
   const teachersTable = useRef(TeacherModel.GetInstance())
 
-  const [teachers, setTeachers] = React.useState<typeof teachersJson>(teachersTable.current.teachers)
+  const [teachers, _] = React.useState<typeof teachersJson>(teachersTable.current.teachers)
 
   const filteredTeachers = teachers.filter((teacher) => {
     const teacherJson = JSON.stringify(teacher)

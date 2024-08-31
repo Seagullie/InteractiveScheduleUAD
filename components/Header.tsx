@@ -9,6 +9,7 @@ import RouteIcons from "../constants/RouteIcons"
 import { FontName } from "../constants/Fonts"
 import { DrawerRoutes } from "../routes/DrawerRoutes"
 
+//@ts-expect-error
 export function getRouteIcon(navigation, headerText: DrawerRoutes) {
   const RouteIconConstructor = RouteIcons[headerText].type
   const RouteIcon = <RouteIconConstructor {...RouteIcons[headerText].props} style={globalStyles.navIcon} />
@@ -24,7 +25,7 @@ export function getRouteIcon(navigation, headerText: DrawerRoutes) {
   return icon
 }
 
-function BaseHeader({ title, navigation }: { title: string; navigation: any }) {
+function BaseHeader({ title, navigation }: { title: DrawerRoutes; navigation: any }) {
   // extract current screen name from navigation state
   const headerText = title
 
@@ -44,7 +45,7 @@ export default function GlobalHeader({
   navigation,
   headerContent: headerContentElement,
 }: {
-  title: string
+  title: DrawerRoutes
   navigation: any
   headerContent?: React.ReactNode
 }) {

@@ -11,7 +11,7 @@ import { Ionicons } from "@expo/vector-icons"
 
 import CustomSwitch from "../../components/shared/Switch"
 import SettingsService from "../../services/SettingsService/SettingsService"
-import { DisplayEmptyDaysMode, DisplayTeacherMode } from "../../services/SettingsService/Types"
+import { DisplayEmptyDaysMode, DisplayTeacherMode, ScheduleAppSettings } from "../../services/SettingsService/Types"
 import { globalStyles, palette } from "../../styles/global"
 import OptionPickerModal from "../../components/OptionPickerModalComponent/OptionPickerModal"
 import ScheduleNotificationsService from "../../services/ScheduleNotificationsService"
@@ -30,6 +30,11 @@ import { styles } from "./Styles"
 // removing activity indicator as alternative layout breaks settings service integration and makes schedule picker fail to load options
 // hell. Let's start with simply refactoring the layout into components
 
+type ScheduleAppSettingsWithoutCurrentScheduleName = Omit<ScheduleAppSettings, "currentScheduleName">
+
+// settings fields are identical to ScheduleAppSettings, except for currentScheduleName. It is represented as selectedSchedule in this component
+type SettingFields = Record<keyof ScheduleAppSettingsWithoutCurrentScheduleName | "selectedSchedule", any>
+
 export default function Settings() {
   const settingsServiceRef = React.useRef<SettingsService | null>(null)
 
@@ -39,7 +44,7 @@ export default function Settings() {
 
   // Note: Update place 0
   // TODO: use a type for settingsValues
-  let [settingsValues, setSettingsValues] = useState({
+  let [settingsValues, setSettingsValues] = useState<SettingFields>({
     selectedSchedule: "",
     displayRoomNumber: false,
     notifyBeforeClass: false,

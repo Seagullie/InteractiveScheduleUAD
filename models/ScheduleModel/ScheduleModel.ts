@@ -62,6 +62,7 @@ export default class ScheduleModel implements IScheduleModel {
 
     console.log(`[Schedule Model] loading schedule from Schedule Loader: ${this.name}`)
 
+    // @ts-expect-error
     let data: ScheduleDaysJson = scheduleFile.json_parsed
 
     this.setSchedule(data)

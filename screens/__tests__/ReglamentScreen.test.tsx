@@ -1,6 +1,5 @@
-import { render, screen, fireEvent } from "@testing-library/react-native"
+import { render } from "@testing-library/react-native"
 import ReglamentScreen from "../ReglamentScreen"
-import * as Utilities from "../../utilities/utilities"
 jest.mock("../../utilities/utilities", () => {
   let thirdClassDate = new Date()
   thirdClassDate.setHours(13)
