@@ -13,7 +13,7 @@ import "swiper/css"
 
 import _ from "lodash"
 import { setStatusBarHidden } from "expo-status-bar"
-import OptionPickerModal from "../../components/OptionPickerModal"
+import OptionPickerModal from "../../components/OptionPickerModalComponent/OptionPickerModal"
 import { DrawerRoutes } from "../../routes/DrawerRoutes"
 import SettingsService from "../../services/SettingsService/SettingsService"
 import { ensureExtension, ensureNoExtension, isLandscapeWeb } from "../../utilities/utilities"
@@ -112,9 +112,9 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           <OptionPickerModal
             headerText="Вибери свою групу"
             isOpen={schedulePickerModalVisible}
-            initialOptions={schedulePickerData}
-            initialSelectedOption={""}
-            closeModal={() => setSchedulePickerModalVisible(false)}
+            options={schedulePickerData}
+            selectedOption={""}
+            onCloseModal={() => setSchedulePickerModalVisible(false)}
             onSelected={(selected) => {
               SettingsService.GetInstance().then((i) => {
                 i.currentScheduleName = ensureExtension(selected, ".json")

@@ -15,7 +15,7 @@ export default function CustomSwitch({
   initVal?: boolean
   disabled?: boolean
   onValueChange?: (newValue: boolean) => void
-  otherProps: SwitchProps
+  otherProps?: SwitchProps
 }): JSX.Element {
   const [isEnabled, setIsEnabled] = useState(initVal)
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState)

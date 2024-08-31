@@ -1,27 +1,22 @@
 import React, { useEffect } from "react"
 import { View, Text, StyleSheet, Modal, Pressable, ScrollView, useWindowDimensions } from "react-native"
-import { Button, Input } from "react-native-elements"
-import { globalStyles, palette } from "../styles/global"
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler"
+import { globalStyles, palette } from "../../styles/global"
+import { TextInput } from "react-native-gesture-handler"
 import { Ionicons } from "@expo/vector-icons"
-import AppText from "./shared/AppText"
-import { FontName } from "../constants/Fonts"
+import AppText from "../shared/AppText"
+import { styles } from "./Styles"
+import { OptionPickerModalProps } from "./Types"
 
 // TODO: fix modal content overflowing when keyboard is shown
 // TODO: refactor onClose to something more understandable
 
-export type OptionPickerModalProps = {
-  hasSearchBar?: boolean
-  headerText?: string
-  isOpen: boolean
-  displaySeparators?: boolean
-  initialOptions: string[]
-  initialSelectedOption: string
-  renderItem?: (option: string, idx: number) => JSX.Element
-  closeModal: () => void
-  onSelected: (option: string) => void
-  optionIcon?: JSX.Element
-  isOptionSelectable?: boolean
+/**
+ * Filters options based on search query. Case insensitive.
+ */
+function FilterOptions(options: string[], searchQuery: string) {
+  searchQuery = searchQuery.trim().toLowerCase()
+
+  return options.filter((option) => option.toLowerCase().includes(searchQuery))
 }
 
 export default function OptionPickerModal({
@@ -29,34 +24,34 @@ export default function OptionPickerModal({
   headerText = "",
   isOpen = false,
   displaySeparators = true,
-  initialOptions,
-  initialSelectedOption,
+  options: optionsParam,
+  selectedOption: selectedOptionParam,
   renderItem,
-  closeModal: closeModalCallback,
+  onCloseModal: onCloseModalCallback,
   onSelected,
   optionIcon,
   isOptionSelectable = true,
 }: OptionPickerModalProps) {
-  const { height, width } = useWindowDimensions()
+  const { height: windowHeight, width: windowWidth } = useWindowDimensions()
 
-  const [options, setOptions] = React.useState<string[]>(initialOptions)
+  const [options, setOptions] = React.useState<string[]>(optionsParam)
   const [searchQuery, setSearchQuery] = React.useState<string>("")
 
-  const filteredOptions = hasSearchBar
-    ? options.filter((option) => JSON.stringify(option).toLowerCase().includes(searchQuery.toLowerCase()))
-    : options
+  // filter options if search bar is present
+  const filteredOptions = hasSearchBar ? FilterOptions(options, searchQuery) : options
 
-  const [selectedOption, setSelectedOption] = React.useState<string>(initialSelectedOption)
+  const [selectedOption, setSelectedOption] = React.useState<string>(selectedOptionParam)
 
   console.log("selectedOption in schedule picker modal:", selectedOption)
 
   const closeModal = () => {
     setSearchQuery("")
-    closeModalCallback()
+    onCloseModalCallback()
     console.log("cleared search query and closed schedule picker modal")
   }
 
   useEffect(() => {
+    // return umount callback
     return () => {
       console.log("unmounting schedule picker modal")
       setSearchQuery("")
@@ -74,7 +69,7 @@ export default function OptionPickerModal({
             <TextInput style={styles.searchBar} onChangeText={setSearchQuery} placeholder="Пошук групи" />
           </View>
         </View>
-        <ScrollView style={{ width: "100%", height: 0.4 * height }}>
+        <ScrollView style={{ width: "100%", height: 0.4 * windowHeight }}>
           {filteredOptions.map((option, idx) => (
             <View key={idx}>
               {renderItem ? (
@@ -126,98 +121,3 @@ export default function OptionPickerModal({
     </Modal>
   )
 }
-
-const styles = StyleSheet.create({
-  modal: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "red", // not gonna work cause it's transparent
-  },
-
-  horizontalFlex: {
-    ...globalStyles.horizontalCenteredFlex,
-  },
-
-  searchBarContainer: {
-    marginLeft: -4,
-    marginVertical: 10,
-    backgroundColor: "#F2F2F2",
-    borderRadius: 7,
-    padding: 5,
-    paddingVertical: 2,
-  },
-
-  searchBar: {
-    ...globalStyles.searchBar,
-  },
-
-  modalContentContainer: {
-    ...globalStyles.modalContentContainer,
-    // top: "5%",
-  },
-
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.25)",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-  },
-
-  option: {
-    fontFamily: FontName.Montserrat500,
-    color: palette.text,
-    width: "100%",
-    marginVertical: 10,
-  },
-
-  selectedOption: {
-    fontFamily: FontName.Montserrat600,
-  },
-
-  separator: {
-    height: 1, // haha
-    width: "100%",
-    marginVertical: 6,
-    backgroundColor: "#E6E6E6",
-  },
-
-  header: {
-    fontFamily: FontName.MontserratBold,
-    fontSize: 20,
-    marginBottom: 10,
-    color: palette.text,
-  },
-
-  closeButton: {
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderColor: "#E6E6E6",
-    padding: 10,
-    paddingHorizontal: 30,
-    marginTop: 10,
-    // borderRadius: 10,
-
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    elevation: 0.2,
-    shadowOpacity: 0.0,
-    shadowRadius: 0,
-    borderRadius: 10,
-  },
-
-  closeButtonText: {
-    fontFamily: FontName.Montserrat600,
-    color: palette.grayedOut,
-    fontSize: 16,
-  },
-
-  checkIcon: {
-    position: "absolute",
-    right: 0,
-  },
-})

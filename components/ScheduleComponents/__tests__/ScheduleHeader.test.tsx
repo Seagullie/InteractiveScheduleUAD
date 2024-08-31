@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react-native"
-import ScheduleHeader, { scheduleHeaderStyles } from "../ScheduleHeader"
+import ScheduleHeader from "../ScheduleHeaderComponent/ScheduleHeader"
+import { scheduleHeaderStyles } from "../ScheduleHeaderComponent/Styles"
 import GetWeekType, { WeekType } from "../../../utilities/getWeekType"
 import { DrawerRoutes } from "../../../routes/DrawerRoutes"
 

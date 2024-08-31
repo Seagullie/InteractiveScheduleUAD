@@ -1,14 +1,15 @@
 import React from "react"
 import { StyleSheet, Text, View } from "react-native"
-import { FontAwesome5, Ionicons, MaterialIcons } from "@expo/vector-icons"
+import { MaterialIcons } from "@expo/vector-icons"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { globalStyles } from "../styles/global"
 import { TouchableOpacity } from "react-native-gesture-handler"
-import { isHorizontalOrientation, isLandscapeWeb } from "../utilities/utilities"
+import { isLandscapeWeb } from "../utilities/utilities"
 import RouteIcons from "../constants/RouteIcons"
 import { FontName } from "../constants/Fonts"
+import { DrawerRoutes } from "../routes/DrawerRoutes"
 
-export function getIcon(navigation, headerText: string) {
+export function getRouteIcon(navigation, headerText: DrawerRoutes) {
   const RouteIconConstructor = RouteIcons[headerText].type
   const RouteIcon = <RouteIconConstructor {...RouteIcons[headerText].props} style={globalStyles.navIcon} />
 
@@ -23,11 +24,11 @@ export function getIcon(navigation, headerText: string) {
   return icon
 }
 
-function BaseHeader({ title, navigation }) {
+function BaseHeader({ title, navigation }: { title: string; navigation: any }) {
   // extract current screen name from navigation state
   const headerText = title
 
-  const icon = getIcon(navigation, headerText)
+  const icon = getRouteIcon(navigation, headerText)
 
   return (
     <View style={styles.headerContentContainer}>

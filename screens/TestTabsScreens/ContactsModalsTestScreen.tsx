@@ -1,6 +1,6 @@
 import React from "react"
 import { View, Text, StyleSheet, Button, Linking } from "react-native"
-import OptionPickerModal from "../../components/OptionPickerModal"
+import OptionPickerModal from "../../components/OptionPickerModalComponent/OptionPickerModal"
 import { globalStyles, palette } from "../../styles/global"
 import { imageIcons } from "../../constants/Images"
 import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons"
@@ -271,8 +271,8 @@ export default function ContactsModalTestScreen() {
         isOpen={isOpen}
         hasSearchBar={false}
         displaySeparators={displaySeparators}
-        closeModal={onCloseModal}
-        initialOptions={initialOptions}
+        onCloseModal={onCloseModal}
+        options={initialOptions}
         renderItem={constructModalItem}
         isOptionSelectable={false}
       />

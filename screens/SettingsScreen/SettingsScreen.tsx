@@ -1,21 +1,25 @@
+// EXTERNAL DEPENDENCIES
+
 import React, { useEffect, useState } from "react"
-import { StyleSheet, View, Text, ActivityIndicator } from "react-native"
+import { View, ScrollView, ActivityIndicator } from "react-native"
+import { TouchableOpacity } from "react-native-gesture-handler"
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome"
 import EntypoIcon from "react-native-vector-icons/Entypo"
-import { ScrollView } from "react-native"
-import CustomSwitch from "../components/shared/Switch"
-import SettingsService from "../services/SettingsService/SettingsService"
-import { DisplayEmptyDaysMode, DisplayTeacherMode } from "../services/SettingsService/Types"
-import { globalStyles, palette } from "../styles/global"
-import { TouchableOpacity } from "react-native-gesture-handler"
-import OptionPickerModal from "../components/OptionPickerModal"
-import ScheduleNotificationsService from "../services/ScheduleNotificationsService"
-import ScheduleModel from "../models/ScheduleModel/ScheduleModel"
-import ScheduleLoaderService from "../services/ScheduleLoaderService/ScheduleLoaderService"
-import { ensureExtension, ensureNoExtension, isRunningInBrowser } from "../utilities/utilities"
-import AppText from "../components/shared/AppText"
 import { Ionicons } from "@expo/vector-icons"
-import { FontName } from "../constants/Fonts"
+
+// INTERNAL DEPENDENCIES
+
+import CustomSwitch from "../../components/shared/Switch"
+import SettingsService from "../../services/SettingsService/SettingsService"
+import { DisplayEmptyDaysMode, DisplayTeacherMode } from "../../services/SettingsService/Types"
+import { globalStyles, palette } from "../../styles/global"
+import OptionPickerModal from "../../components/OptionPickerModalComponent/OptionPickerModal"
+import ScheduleNotificationsService from "../../services/ScheduleNotificationsService"
+import ScheduleModel from "../../models/ScheduleModel/ScheduleModel"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
+import { ensureExtension, ensureNoExtension, isRunningInBrowser } from "../../utilities/utilities"
+import AppText from "../../components/shared/AppText"
+import { styles } from "./Styles"
 
 // TODO: Fix settings page visually spazzing out on mount
 // it's not the switches
@@ -27,11 +31,14 @@ import { FontName } from "../constants/Fonts"
 // hell. Let's start with simply refactoring the layout into components
 
 export default function Settings() {
-  let [schedulePickerData, setSchedulePickerData] = useState<string[]>([])
-
   const settingsServiceRef = React.useRef<SettingsService | null>(null)
 
+  // REACTIVE VARIABLES
+
+  let [schedulePickerData, setSchedulePickerData] = useState<string[]>([])
+
   // Note: Update place 0
+  // TODO: use a type for settingsValues
   let [settingsValues, setSettingsValues] = useState({
     selectedSchedule: "",
     displayRoomNumber: false,
@@ -51,6 +58,9 @@ export default function Settings() {
 
   const [isReady, setIsReady] = useState(false)
 
+  // EFFECTS
+
+  // mount effect
   useEffect(() => {
     async function onMount() {
       const settingsService = await SettingsService.GetInstance()
@@ -101,6 +111,7 @@ export default function Settings() {
     onMount()
   }, [])
 
+  // settings change effect
   // write settings to disk on each update to make sure they aren't lost
   useEffect(() => {
     if (!isReady) return
@@ -126,6 +137,8 @@ export default function Settings() {
 
     settingsService.saveToStorage()
   }, [settingsValues])
+
+  // Used in corresponding onPress callback. Enables or disables schedule notifications
   async function toggleNotifs(enable: boolean) {
     let scheduleNotifService = await ScheduleNotificationsService.GetInstance()
     if (enable) {
@@ -138,42 +151,16 @@ export default function Settings() {
     }
   }
 
-  function constructCategoryHeader(categoryName: string, categoryIcon: JSX.Element) {
-    return (
-      <View style={styles.categoryHeader}>
-        {categoryIcon}
-        <AppText style={styles.settingsSectionName}>{categoryName}</AppText>
-      </View>
-    )
-  }
-
-  function constructSettingsRow(settingDescription: string, changeSettingComponent: JSX.Element) {
-    return (
-      <View style={styles.settingRow}>
-        <AppText style={styles.settingName}>{settingDescription}</AppText>
-        {changeSettingComponent}
-      </View>
-    )
-  }
-
   if (!isReady) {
-    return (
-      <View
-        style={[
-          { flex: 1, justifyContent: "center", alignItems: "center" },
-          styles.loadingIndicatorOverlay,
-          isReady ? globalStyles.noDisplay : {},
-        ]}
-      >
-        <ActivityIndicator size="large" color={palette.navigationBackground} />
-      </View>
-    )
+    // return spinner
+    return ActivityIndicatorLarge
   }
 
   // setTimeout(() => {
   //   setIsReady(true)
   // }, 500)
 
+  // notifications aren't implemented in browser (although they could have been)
   let notificationsSection = !isRunningInBrowser() ? (
     <View>
       {constructCategoryHeader(
@@ -212,9 +199,9 @@ export default function Settings() {
             <OptionPickerModal
               hasSearchBar={false}
               isOpen={notifyBeforehandModalVisible}
-              initialOptions={[0, 5, 10, 15, 20].map((n) => n + " хв.")}
-              initialSelectedOption={settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
-              closeModal={() => setNotifyBeforehandModalVisible(false)}
+              options={[0, 5, 10, 15, 20].map((n) => n + " хв.")}
+              selectedOption={settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
+              onCloseModal={() => setNotifyBeforehandModalVisible(false)}
               onSelected={(selected) => {
                 let selectedInt = parseInt(selected)
                 setSettingsValues({
@@ -295,9 +282,9 @@ export default function Settings() {
                       <OptionPickerModal
                         headerText="Вибери свою групу"
                         isOpen={schedulePickerModalVisible}
-                        initialOptions={schedulePickerData}
-                        initialSelectedOption={settingsValues.selectedSchedule}
-                        closeModal={() => setSchedulePickerModalVisible(false)}
+                        options={schedulePickerData}
+                        selectedOption={settingsValues.selectedSchedule}
+                        onCloseModal={() => setSchedulePickerModalVisible(false)}
                         onSelected={(selected) => {
                           setSettingsValues({
                             ...settingsValues,
@@ -341,13 +328,13 @@ export default function Settings() {
                     <OptionPickerModal
                       hasSearchBar={false}
                       isOpen={displayTeacherModeModalVisible}
-                      initialOptions={[
+                      options={[
                         DisplayTeacherMode.Full,
                         DisplayTeacherMode.SurnameAndInitials,
                         DisplayTeacherMode.Hide,
                       ]}
-                      initialSelectedOption={settingsValues.displayTeacherName}
-                      closeModal={() => setDisplayTeacherModeModalVisible(false)}
+                      selectedOption={settingsValues.displayTeacherName}
+                      onCloseModal={() => setDisplayTeacherModeModalVisible(false)}
                       onSelected={(selected) => {
                         setSettingsValues({
                           ...settingsValues,
@@ -373,13 +360,9 @@ export default function Settings() {
                     <OptionPickerModal
                       hasSearchBar={false}
                       isOpen={emptyDayDisplayModalVisible}
-                      initialOptions={[
-                        DisplayEmptyDaysMode.Display,
-                        DisplayEmptyDaysMode.Darken,
-                        DisplayEmptyDaysMode.Hide,
-                      ]}
-                      initialSelectedOption={settingsValues.displayEmptyDays}
-                      closeModal={() => setEmptyDayDisplayModalVisible(false)}
+                      options={[DisplayEmptyDaysMode.Display, DisplayEmptyDaysMode.Darken, DisplayEmptyDaysMode.Hide]}
+                      selectedOption={settingsValues.displayEmptyDays}
+                      onCloseModal={() => setEmptyDayDisplayModalVisible(false)}
                       onSelected={(selected) => {
                         setSettingsValues({
                           ...settingsValues,
@@ -398,98 +381,27 @@ export default function Settings() {
   )
 }
 
-export const styles = StyleSheet.create({
-  scrollViewContentContainer: {
-    // backgroundColor: "green",
-  },
+const ActivityIndicatorLarge = (
+  <View style={[{ flex: 1, justifyContent: "center", alignItems: "center" }, styles.loadingIndicatorOverlay]}>
+    <ActivityIndicator size="large" color={palette.navigationBackground} />
+  </View>
+)
 
-  loadingIndicatorOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
+// markdown constructors to avoid repeating the same layout code
+function constructCategoryHeader(categoryName: string, categoryIcon: JSX.Element) {
+  return (
+    <View style={styles.categoryHeader}>
+      {categoryIcon}
+      <AppText style={styles.settingsSectionName}>{categoryName}</AppText>
+    </View>
+  )
+}
 
-    width: "100%",
-    height: "100%",
-    backgroundColor: palette.background,
-
-    zIndex: 9999,
-  },
-
-  scrollViewDirect: {
-    ...globalStyles.screen,
-    paddingBottom: 24,
-  },
-
-  pageBackground: {
-    // minHeight: "100%",
-  },
-
-  settingValueContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  categoryHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 24,
-    marginLeft: 24,
-  },
-  settingsSectionName: {
-    fontFamily: FontName.Raleway600,
-    color: "rgba(90,90,90,1)",
-    fontSize: 14,
-
-    marginLeft: 6,
-  },
-
-  settingsCategory: {
-    padding: 10,
-    paddingBottom: 5,
-    margin: 11,
-
-    backgroundColor: "rgba(255,255,255,1)",
-    borderRadius: 9,
-  },
-
-  separator: {
-    width: "100%",
-    height: 1,
-    borderWidth: 0,
-    borderTopWidth: 1,
-    borderColor: "rgba(242,242,242,1)",
-  },
-
-  centeredTextAndIcon: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  settingName: {
-    fontFamily: FontName.Raleway500,
-    color: "rgba(82,82,82,1)",
-    fontSize: 15,
-  },
-  settingValue: {
-    fontFamily: FontName.MontserratMedium,
-    color: "rgba(136,136,136,1)",
-    height: 17,
-    textAlign: "right",
-    fontSize: 12,
-  },
-  grayIcon: {
-    ...globalStyles.grayIcon,
-  },
-
-  settingsSectionIcon: {
-    color: "rgba(90,90,90,1)",
-    fontSize: 15,
-  },
-  settingRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-
-    marginVertical: 10,
-  },
-})
+function constructSettingsRow(settingDescription: string, changeSettingComponent: JSX.Element) {
+  return (
+    <View style={styles.settingRow}>
+      <AppText style={styles.settingName}>{settingDescription}</AppText>
+      {changeSettingComponent}
+    </View>
+  )
+}

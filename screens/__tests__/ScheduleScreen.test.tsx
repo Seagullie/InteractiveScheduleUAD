@@ -1,7 +1,7 @@
 import React from "react"
 import { View } from "react-native"
 import { render, screen, fireEvent, waitForElementToBeRemoved } from "@testing-library/react-native"
-import ScheduleScreen from "../ScheduleScreen"
+import ScheduleScreen from "../ScheduleScreen/ScheduleScreen"
 import { DrawerRoutes } from "../../routes/DrawerRoutes"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 

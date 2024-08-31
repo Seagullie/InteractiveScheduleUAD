@@ -1,38 +1,40 @@
+// EXTERNAL DEPENDENCIES
+
 import React from "react"
-
-import { useCallback, useRef, useState } from "react"
-import { View, StyleSheet, ActivityIndicator, ToastAndroid } from "react-native"
-import { globalStyles, palette } from "../styles/global"
-
-import ScheduleDayComponent from "../components/ScheduleComponents/ScheduleDay"
-import { useEffect } from "react"
-import SettingsService from "../services/SettingsService/SettingsService"
-import { DisplayEmptyDaysMode } from "../services/SettingsService/Types"
-import ScheduleModel from "../models/ScheduleModel/ScheduleModel"
-
+import { useCallback, useRef, useState, useEffect } from "react"
+import { View, ActivityIndicator, ToastAndroid } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
 import _ from "lodash"
-import { workDays } from "../constants/Days"
-import ScheduleNotificationsService from "../services/ScheduleNotificationsService"
-import ScheduleLoaderService from "../services/ScheduleLoaderService/ScheduleLoaderService"
-import { ScheduleFile } from "../services/ScheduleLoaderService/Types"
-import { SettingsContext } from "../contexts/settingsContext"
-import { ensureExtension, ensureNoExtension, isRunningInBrowser } from "../utilities/utilities"
-import IntroductoryCarousel from "./IntroductoryCarousel/IntroductoryCarousel"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import GetWeekType, { WeekType } from "../utilities/getWeekType"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
-import ScheduleHeader from "../components/ScheduleComponents/ScheduleHeader"
-import { Event } from "../constants/Events"
-import EditActionsExplanatoryCard from "../components/ScheduleEditorComponents/EditActionsExplanatoryCard"
-import DateOverviewCard from "../components/ScheduleComponents/DateOverviewCard"
-import { WeekTypeContext } from "../contexts/weekTypeContext"
+
+// INTERNAL DEPENDENCIES
+
+import { globalStyles, palette } from "../../styles/global"
+import ScheduleDayComponent from "../../components/ScheduleComponents/ScheduleDayComponent/ScheduleDay"
+import SettingsService from "../../services/SettingsService/SettingsService"
+import { DisplayEmptyDaysMode } from "../../services/SettingsService/Types"
+import ScheduleModel from "../../models/ScheduleModel/ScheduleModel"
+import { workDays } from "../../constants/Days"
+import ScheduleNotificationsService from "../../services/ScheduleNotificationsService"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
+import { ScheduleFile } from "../../services/ScheduleLoaderService/Types"
+import { SettingsContext } from "../../contexts/settingsContext"
+import { ensureExtension, ensureNoExtension, isRunningInBrowser } from "../../utilities/utilities"
+import IntroductoryCarousel from "../IntroductoryCarousel/IntroductoryCarousel"
+import GetWeekType, { WeekType } from "../../utilities/getWeekType"
+import ScheduleHeader from "../../components/ScheduleComponents/ScheduleHeaderComponent/ScheduleHeader"
+import { Event } from "../../constants/Events"
+import EditActionsExplanatoryCard from "../../components/ScheduleEditorComponents/EditActionsExplanatoryCard"
+import DateOverviewCard from "../../components/ScheduleComponents/DateOverviewCard"
+import { WeekTypeContext } from "../../contexts/weekTypeContext"
+import { styles } from "./Styles"
+import { IS_FIRST_TIME_LAUNCH_KEY } from "../../constants/AsyncStorageKeys"
 
 // TODO: scroll to current day on mount only instead of doing so on every rerender?
 
 export default function ScheduleScreen({ isEditable = false }: { isEditable: boolean }) {
   // [web] a workaround to render drawer menu content without explicitly opening it
-
   if (isRunningInBrowser()) {
     const navigation = useNavigation()
     navigation.openDrawer()
@@ -94,7 +96,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
         setScheduleName(settingsService.currentScheduleName)
       } else {
         // assume that something else changed and we need to rerender to reflect those changes
-        // (in editor, everything is always unfolded and there is no need to update)
+        // (in editor everything is always unfolded and there is no need to update)
         if (isEditable) return
         setState({})
       }
@@ -139,8 +141,8 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
       scheduleRef.current = schedule
 
-      const isFirstimeLaunch = await AsyncStorage.getItem("isFirstTimeLaunch")
-      setIsFirstTimeLaunch(isFirstimeLaunch)
+      const isFirstTimeLaunch = await AsyncStorage.getItem(IS_FIRST_TIME_LAUNCH_KEY)
+      setIsFirstTimeLaunch(isFirstTimeLaunch)
 
       setScheduleName(schedule.name)
       setScheduleLoaded(true)
@@ -148,6 +150,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
     onMount()
 
+    // on unmount
     return () => {
       SettingsService.GetInstance().then((settingsService: SettingsService) => {
         settingsService.SettingsEventEmitter.removeListener(Event.SETTINGS_UPDATED, onSettingsUpdated)
@@ -168,6 +171,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
     setWeekType(weekType)
   }
 
+  // runs when screen gets focus
   useFocusEffect(
     useCallback(() => {
       if (isEditable) return
@@ -338,61 +342,3 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
     </SettingsContext.Provider>
   )
 }
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    // width: "70%",
-    // alignSelf: "center",
-
-    // paddingBottom: 60,
-    ...globalStyles.screen,
-
-    // flex: 0,
-    backgroundColor: "#F5F5F5",
-  },
-  modalToggle: {
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "lightgray",
-    padding: 10,
-    borderRadius: 10,
-    alignSelf: "center",
-  },
-
-  modalClose: {
-    marginTop: 20,
-    marginBottom: 0,
-  },
-
-  modalContent: {
-    flex: 1,
-  },
-
-  selected: {
-    backgroundColor: "white",
-    color: "black",
-    padding: 5,
-    borderRadius: 10,
-    marginBottom: 5,
-  },
-
-  placeholderView: {
-    height: 35,
-  },
-  cardContainer: {
-    // height: 350,
-    padding: 5,
-  },
-
-  scheduleDaySelector: {
-    padding: 5,
-    zIndex: 9999,
-    position: "absolute",
-    top: 0,
-    right: 0,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-})

@@ -31,5 +31,6 @@ export const suffixesForNumbers = {
 }
 
 export const SEMESTER_MONTHS = 6
+export const MAX_CLASSES_PER_DAY = 6
 
 export const NOTIFICATIONS_CHANNEL_ID = "interactive-schedule-notifications"

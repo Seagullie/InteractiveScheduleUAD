@@ -1,0 +1,1 @@
+export const IS_FIRST_TIME_LAUNCH_KEY = "isFirstTimeLaunch"

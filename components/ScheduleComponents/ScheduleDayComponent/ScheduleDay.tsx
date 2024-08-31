@@ -1,29 +1,29 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { Text, View, StyleSheet, ActivityIndicator } from "react-native"
-import { globalStyles, palette } from "../../styles/global"
-import ScheduleModel from "../../models/ScheduleModel/ScheduleModel"
-import { ScheduleDay } from "../../models/ScheduleDay/ScheduleDay"
-import { ScheduleClassFields } from "../../models/ScheduleClass/Types"
-import { ScheduleClass } from "../../models/ScheduleClass/ScheduleClass"
+import { globalStyles, palette } from "../../../styles/global"
+import { ScheduleClassFields } from "../../../models/ScheduleClass/Types"
+import { ScheduleClass } from "../../../models/ScheduleClass/ScheduleClass"
 import _ from "lodash"
-import ScheduleClassComponent from "./ScheduleClassComponent/ScheduleClass"
-import Separator from "../shared/Separator"
-import GetWeekType from "../../utilities/getWeekType"
+import ScheduleClassComponent from "../ScheduleClassComponent/ScheduleClass"
+import Separator from "../../shared/Separator"
+import GetWeekType from "../../../utilities/getWeekType"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
 import SwipeableItem, { useSwipeableItemParams } from "react-native-swipeable-item"
-import UnderlayRightSide from "../ScheduleEditorComponents/ScheduleClassUnderlay"
+import UnderlayRightSide from "../../ScheduleEditorComponents/ScheduleClassUnderlay"
 import DraggableFlatList from "react-native-draggable-flatlist"
-import AppText from "../shared/AppText"
-import { mapUkrWorkDayToEnWorkDay } from "../../constants/Days"
-import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
-import ScheduleNotificationsService from "../../services/ScheduleNotificationsService"
-import SettingsService from "../../services/SettingsService/SettingsService"
-import { DisplayEmptyDaysMode } from "../../services/SettingsService/Types"
-import { EditorStackRoutes } from "../../routes/EditorStackRoutes"
-import { SettingsContext } from "../../contexts/settingsContext"
-import { NoClassesText } from "../../constants/Descriptions"
-import { FontName } from "../../constants/Fonts"
+import AppText from "../../shared/AppText"
+import { mapUkrWorkDayToEnWorkDay } from "../../../constants/Days"
+import ScheduleLoaderService from "../../../services/ScheduleLoaderService/ScheduleLoaderService"
+import ScheduleNotificationsService from "../../../services/ScheduleNotificationsService"
+import SettingsService from "../../../services/SettingsService/SettingsService"
+import { DisplayEmptyDaysMode } from "../../../services/SettingsService/Types"
+import { EditorStackRoutes } from "../../../routes/EditorStackRoutes"
+import { SettingsContext } from "../../../contexts/settingsContext"
+import { NoClassesText } from "../../../constants/Descriptions"
+import { SDstyles } from "./Styles"
+import { MAX_CLASSES_PER_DAY } from "../../../constants/Constants"
+import { ScheduleDayComponentProps } from "./Types"
 
 // TODO: accelerate disengage time once an item gets dropped into new slot
 
@@ -36,17 +36,9 @@ export default function ScheduleDayComponent({
   weekType = GetWeekType(),
   fade,
   isEditable = false,
-}: {
-  classesCollection: ScheduleClass[]
-  scheduleObject: ScheduleModel
-  dayName: string
-  scheduleDay: ScheduleDay
-  displayRoomNumber: boolean
-  weekType?: number
-  fade: boolean
-  isEditable?: boolean
-}): JSX.Element {
+}: ScheduleDayComponentProps): JSX.Element {
   if (scheduleDay == undefined) {
+    // if schedule day is not loaded yet, display loading indicator
     return (
       <View style={SDstyles.scheduleDayCard}>
         <Text style={globalStyles.dayNameHeader}>{dayName}</Text>
@@ -62,6 +54,7 @@ export default function ScheduleDayComponent({
   const settings = useContext(SettingsContext)
 
   const configureNotificationsCallback = useCallback(
+    // debounce to prevent multiple calls in short period of time
     _.debounce(async (updatedSchedule) => {
       let scheduleNotificationService = await ScheduleNotificationsService.GetInstance()
       scheduleNotificationService.configureNotificationsForSchedule(updatedSchedule)
@@ -113,12 +106,13 @@ export default function ScheduleDayComponent({
     console.log("mounting schedule day component")
   }, [])
 
+  // pads classes array with placeholder classes in order to have MAX_CLASSES_PER_DAY classes total for editing purposes
   function addPlaceholders(classes: ScheduleClass[]) {
     if (!isEditable) {
       return classes
     }
 
-    let extendedContainer: ScheduleClass[] = [undefined, undefined, undefined, undefined, undefined, undefined]
+    let extendedContainer: ScheduleClass[] = new Array(MAX_CLASSES_PER_DAY).fill(undefined)
     extendedContainer = extendedContainer.map((_, idx) => {
       let class_ = classes.find((class_) => class_.index == idx + 1)
       const shouldCreatePlaceholderClass = class_ == undefined
@@ -185,7 +179,6 @@ export default function ScheduleDayComponent({
                 key={idx + "" + class_.week}
                 scheduleClassInstance={class_}
                 isEditable={isEditable}
-                noTeacherText="Викладач"
                 highlightAsOngoing={isActive}
               />
             )
@@ -267,52 +260,3 @@ export default function ScheduleDayComponent({
     </View>
   )
 }
-
-export const SDstyles = StyleSheet.create({
-  noClassesText: {
-    fontSize: 14,
-    marginVertical: 10,
-    justifyContent: "center",
-    alignSelf: "center",
-
-    fontFamily: FontName.Montserrat600,
-
-    color: palette.grayedOut,
-  },
-
-  fadedDayContainerView: {
-    opacity: 0.5,
-  },
-
-  dayNameHeader: {
-    fontFamily: FontName.Montserrat600,
-    fontSize: 14,
-    ...globalStyles.sectionHeader,
-    color: palette.text,
-  },
-
-  scheduleDayCard: {
-    marginTop: 5,
-    marginBottom: 15,
-    marginHorizontal: 5,
-    borderRadius: 6,
-    backgroundColor: "white",
-
-    paddingVertical: 2,
-    paddingHorizontal: 5,
-
-    elevation: 1,
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: "#333",
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-
-  row: {
-    flexDirection: "row",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 15,
-  },
-})

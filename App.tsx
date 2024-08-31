@@ -24,7 +24,7 @@ console.log("[IMPORTS] Imported all external dependencies")
 
 // OWN MODULES
 
-import DrawerMenu from "./components/DrawerMenu"
+import DrawerMenu from "./components/DrawerMenuComponent/DrawerMenu"
 import { DrawerRoutes } from "./routes/DrawerRoutes"
 
 import { Drawer } from "./routes/globalDrawer"
@@ -32,14 +32,14 @@ import Header from "./components/Header"
 
 // screens
 
-import ScheduleScreen from "./screens/ScheduleScreen"
+import ScheduleScreen from "./screens/ScheduleScreen/ScheduleScreen"
 import ReglamentScreen from "./screens/ReglamentScreen"
 import TeachersScreen from "./screens/TeachersScreen"
 import EditorStack from "./routes/EditorStack"
 import ContactsStack from "./routes/ContactsStack"
 import NewsScreen from "./screens/NewsScreen"
 import TestTabs from "./routes/testTabs"
-import SettingsScreen from "./screens/SettingsScreen"
+import SettingsScreen from "./screens/SettingsScreen/SettingsScreen"
 import AboutScreen from "./screens/AboutScreen"
 import QnAScreen from "./screens/QnAScreen"
 

@@ -8,7 +8,7 @@ import { imageIcons } from "../constants/Images"
 import AppText from "../components/shared/AppText"
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
 import { Image } from "react-native-elements"
-import OptionPickerModal from "../components/OptionPickerModal"
+import OptionPickerModal from "../components/OptionPickerModalComponent/OptionPickerModal"
 import {
   ModalItem,
   accountingModalItems,
@@ -109,8 +109,8 @@ const constructContentPresenterModal = (
       isOpen={isOpen}
       hasSearchBar={false}
       displaySeparators={displaySeparators}
-      closeModal={onCloseModal}
-      initialOptions={initialOptions}
+      onCloseModal={onCloseModal}
+      options={initialOptions}
       renderItem={constructModalItem}
       isOptionSelectable={false}
     />

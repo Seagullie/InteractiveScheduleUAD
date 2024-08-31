@@ -9,7 +9,7 @@ import { previewImages } from "../../constants/Images"
 import _ from "lodash"
 import { StatusBar, setStatusBarHidden } from "expo-status-bar"
 import { useNavigation } from "@react-navigation/native"
-import OptionPickerModal from "../../components/OptionPickerModal"
+import OptionPickerModal from "../../components/OptionPickerModalComponent/OptionPickerModal"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 import { ensureExtension, ensureNoExtension } from "../../utilities/utilities"
 import SettingsService from "../../services/SettingsService/SettingsService"
@@ -172,9 +172,9 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           <OptionPickerModal
             headerText="Вибери свою групу"
             isOpen={schedulePickerModalVisible}
-            initialOptions={schedulePickerData}
-            initialSelectedOption={""}
-            closeModal={() => setSchedulePickerModalVisible(false)}
+            options={schedulePickerData}
+            selectedOption={""}
+            onCloseModal={() => setSchedulePickerModalVisible(false)}
             onSelected={(selected) => {
               // setSettingsValues({
               //   ...settingsValues,

@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react-native"
-import ScheduleDay from "../ScheduleComponents/ScheduleDay"
+import ScheduleDay from "../ScheduleComponents/ScheduleDayComponent/ScheduleDay"
 import { getFirstSchedule } from "./ScheduleClass.test"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 import { SettingsContext } from "../../contexts/settingsContext"

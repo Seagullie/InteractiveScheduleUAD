@@ -1,22 +1,20 @@
+// EXTERNAL DEPENDENCIES
+
 import React from "react"
-import { StyleSheet, Text, View, Image, Pressable, ImageBackground } from "react-native"
-import { MaterialIcons } from "@expo/vector-icons"
-import { SafeAreaView } from "react-native-safe-area-context"
-import { globalStyles, palette } from "../../styles/global"
-import GetWeekType, { WeekType } from "../../utilities/getWeekType"
+import { StyleSheet, Text, View } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
-import { ExecutionEnvironment, NativeConstants, Constants, PlatformManifest, AndroidManifest } from "expo-constants"
-import constants from "expo-constants"
-import { getIcon } from "../Header"
-import { DrawerRoutes } from "../../routes/DrawerRoutes"
-
 import { useRoute } from "@react-navigation/native"
-import { FontName } from "../../constants/Fonts"
+import { SafeAreaView } from "react-native-safe-area-context"
+
+// INTERNAL DEPENDENCIES
+
+import GetWeekType, { WeekType } from "../../../utilities/getWeekType"
+import { getRouteIcon } from "../../Header"
+import { scheduleHeaderStyles } from "./Styles"
 
 // TODO: Dry up. I simply copypasted this code from Header.tsx
 // TODO: Display activity indicator during changing week type
-
 export default function ScheduleHeader({
   title,
   onWeekTypeChanged,
@@ -37,7 +35,7 @@ export default function ScheduleHeader({
   const routeName = useRoute().name
   console.log("[Schedule Header] routeName: ", routeName)
 
-  const icon = getIcon(navigation_, routeName)
+  const icon = getRouteIcon(navigation_, routeName)
 
   return (
     <SafeAreaView style={scheduleHeaderStyles.header}>
@@ -96,70 +94,3 @@ export default function ScheduleHeader({
     </SafeAreaView>
   )
 }
-const baseStyles = StyleSheet.create({
-  text: {
-    color: "white",
-    fontFamily: "century-gothic",
-  },
-})
-
-export const scheduleHeaderStyles = StyleSheet.create({
-  header: {
-    paddingVertical: 15,
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#1C5D8F",
-  },
-
-  backroundImage: {
-    width: "100%",
-  },
-
-  headerText: {
-    fontSize: 20,
-    color: "#333",
-    color: "white",
-    fontFamily: FontName.CenturyGothic,
-  },
-  sideMenuIcon: {
-    color: "white",
-    marginHorizontal: 16,
-    marginRight: 10,
-    zIndex: 8888,
-  },
-
-  headerContentContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-  },
-
-  currentlyViewedDay: {
-    fontSize: 14,
-    ...baseStyles.text,
-    marginLeft: 10,
-    marginHorizontal: 16,
-  },
-
-  weekTypeText: {
-    fontSize: 16,
-    ...baseStyles.text,
-  },
-
-  weekTextContainer: {
-    paddingHorizontal: 5,
-    paddingVertical: 4,
-  },
-
-  selectedContainer: {
-    borderRadius: 5,
-    backgroundColor: "white",
-  },
-
-  selectedText: {
-    color: palette.navigationBackground,
-  },
-})
