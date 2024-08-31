@@ -49,8 +49,8 @@ export default class TeacherModel {
     const teacherFullNameBits = teacher["ПІБ викладача"].split(" ")
 
     surname = teacherFullNameBits[0]
-    let name = teacherFullNameBits[1]
-    let patronymic = teacherFullNameBits[2]
+    let name = teacherFullNameBits[1] ?? ""
+    let patronymic = teacherFullNameBits[2] ?? ""
 
     return `${surname} ${name[0]}. ${patronymic[0]}.`
   }
