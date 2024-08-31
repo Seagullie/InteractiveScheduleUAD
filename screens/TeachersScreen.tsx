@@ -7,7 +7,7 @@ import useEffect from "react"
 import teachersJson from "../assets/teachers.json"
 import { FlatList } from "react-native-gesture-handler"
 import Card from "../components/shared/card"
-import TeacherModel from "../models/TeacherModel"
+import TeacherModel from "../models/TeacherModel/TeacherModel"
 import AppText from "../components/shared/AppText"
 import { FontName } from "../constants/Fonts"
 

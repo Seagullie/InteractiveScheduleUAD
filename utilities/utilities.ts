@@ -85,7 +85,7 @@ export function getContentfulClient() {
   console.log("contentful module: ", contentful)
   console.log("create contentful client: ", createClient)
 
-  const client: ContentfulClientApi<undefiend> = createClient({
+  const client: ContentfulClientApi = createClient({
     space: ContentfulSpace,
     environment: "master", // defaults to 'master' if not set
     accessToken: ContentfulContentDeliveryAccessToken,

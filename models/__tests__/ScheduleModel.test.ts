@@ -2,8 +2,8 @@ import { REGLAMENT_DATA } from "../../constants/Constants"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 import GetWeekType from "../../utilities/getWeekType"
 import { setDayOnDate } from "../../utilities/utilities"
-import ScheduleModel from "../ScheduleModel"
-import { ScheduleDay } from "../ScheduleDay"
+import ScheduleModel from "../ScheduleModel/ScheduleModel"
+import { ScheduleDay } from "../ScheduleDay/ScheduleDay"
 
 function isDayOff(day: ScheduleDay) {
   return day.classes.length === 0

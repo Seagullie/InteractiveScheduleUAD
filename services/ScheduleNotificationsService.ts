@@ -1,4 +1,4 @@
-import ScheduleModel from "../models/ScheduleModel"
+import ScheduleModel from "../models/ScheduleModel/ScheduleModel"
 import LocalNotificationsService from "./LocalNotificationsService/LocalNotificationsService"
 import SettingsService from "./SettingsService/SettingsService"
 import ClassNotificationBuilder from "./ClassNotificationBuilder"

@@ -1,35 +1,9 @@
-import GetWeekType from "../utilities/getWeekType"
-import { determineInterval } from "../utilities/utilities"
-import getStrict from "../utilities/getStrict"
-import { workDaysEnLower } from "../constants/Days"
-import { REGLAMENT_DATA } from "../constants/Constants"
-
-export enum CLASS_TYPE {
-  LECTURE = "Лекція",
-  PRACTICE = "Практична",
-  LAB = "Лабораторна",
-}
-
-export const CLASS_TYPE_SHORT = {
-  [CLASS_TYPE.LECTURE]: "Лек",
-  [CLASS_TYPE.PRACTICE]: "Прак",
-  [CLASS_TYPE.LAB]: "Лаб",
-}
-
-export type ScheduleClassFields = {
-  index: number
-  isBiweekly: boolean
-  week: 1 | 2
-  name: string
-  teacher: string | string[]
-  room: string | string[]
-  isSharedClass: boolean
-
-  classType: CLASS_TYPE
-}
-export interface IScheduleClass extends ScheduleClassFields {
-  getUniqueStringSignature(): string
-}
+import GetWeekType from "../../utilities/getWeekType"
+import { determineInterval } from "../../utilities/utilities"
+import getStrict from "../../utilities/getStrict"
+import { workDaysEnLower } from "../../constants/Days"
+import { REGLAMENT_DATA } from "../../constants/Constants"
+import { IScheduleClass, CLASS_TYPE, ScheduleClassFields } from "./Types"
 
 export class ScheduleClass implements IScheduleClass {
   index: number

@@ -1,29 +1,10 @@
-import { ensureNoExtension } from "../utilities/utilities"
-import ScheduleLoaderService from "../services/ScheduleLoaderService/ScheduleLoaderService"
-import EditedSchedulesStorageService from "../services/EditedScheduleStorageService/EditedScheduleStorageService"
-import { ScheduleClass } from "./ScheduleClass"
-import { IScheduleClass } from "./ScheduleClass"
-import { ScheduleDay } from "./ScheduleDay"
-
-export type ScheduleDaysJson = { [key: string]: ScheduleDay }
-
-interface IScheduleModelFields {
-  name: string
-  specialtyName: string
-  year: number
-  dayNames: string[]
-  weekendDays: string[]
-  scheduleDays: ScheduleDay[]
-}
-
-interface IScheduleModel extends IScheduleModelFields {
-  setSchedule(data: ScheduleDaysJson): void
-  loadScheduleFromJSONFile(): void
-  loadScheduleFromImportedObject(objectName: string): void
-  getScheduleFromScheduleLoader(scheduleFileName: string): void
-  getScheduleFromEditedSchedulesStorage(scheduleFileName: string): void
-  getCurrentClass(): ScheduleClass | null
-}
+import { ensureNoExtension } from "../../utilities/utilities"
+import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
+import EditedSchedulesStorageService from "../../services/EditedScheduleStorageService/EditedScheduleStorageService"
+import { ScheduleClass } from "../ScheduleClass/ScheduleClass"
+import { IScheduleClass } from "../ScheduleClass/Types"
+import { ScheduleDay } from "../ScheduleDay/ScheduleDay"
+import { IScheduleModel, ScheduleDaysJson } from "./Types"
 
 export default class ScheduleModel implements IScheduleModel {
   name: string

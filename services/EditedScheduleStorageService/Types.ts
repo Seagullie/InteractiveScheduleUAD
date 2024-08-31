@@ -1,4 +1,5 @@
-import ScheduleModel, { ScheduleDaysJson } from "../../models/ScheduleModel"
+import ScheduleModel from "../../models/ScheduleModel/ScheduleModel"
+import { ScheduleDaysJson } from "../../models/ScheduleModel/Types"
 import { ScheduleFileMetadata } from "../ScheduleLoaderService/Types"
 
 export type ScheduleWithMetadata = {

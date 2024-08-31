@@ -1,6 +1,6 @@
 {
   "name": "interactiveschedule",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.ts",
   "scripts": {
     "start": "npx expo start",
@@ -13,7 +13,8 @@
     "test": "jest --watchAll --silent --noStackTrace",
     "expo-doctor": "npx expo-doctor",
     "eas-build-preview": "echo ⚠ You're expected to un-ignore .env before this command && eas build -p android --profile preview",
-    "eas-preview-build-archive": "eas build:inspect --stage archive -p android --profile preview --output ./build-archive-preview"
+    "eas-preview-build-archive": "eas build:inspect --stage archive -p android --profile preview --output ./build-archive-preview",
+    "check-circular": "npx madge --circular --extensions ts,tsx ."
   },
   "dependencies": {
     "@aptabase/react-native": "^0.3.9",
@@ -49,7 +50,6 @@
     "expo-web-browser": "~12.8.2",
     "formik": "^2.2.9",
     "fuse.js": "^6.6.2",
-    "jest": "^29.2.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "react": "18.2.0",
@@ -89,13 +89,14 @@
     "@types/react-test-renderer": "^18.0.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-transform-remove-console": "^6.9.4",
-    "jest": "^29.3.1",
+    "jest": "^29.2.1",
     "jest-expo": "^50.0.0",
+    "madge": "^8.0.0",
     "metro": "~0.80.4",
     "react-native-dotenv": "^3.4.8",
     "react-test-renderer": "18.2.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.3.0",
+    "typescript": "^5.4.5",
     "url-loader": "^4.1.1",
     "webdriverio": "^8.11.2",
     "webpack": "^5.88.1",

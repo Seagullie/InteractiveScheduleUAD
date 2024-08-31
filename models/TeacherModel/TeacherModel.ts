@@ -1,18 +1,7 @@
-import teachersJson from "../assets/teachers.json"
+import teachersJson from "../../assets/teachers.json"
 
 import Fuse from "fuse.js"
-
-// TODO: make teacher model
-
-type Teacher = {
-  "ПІБ викладача": string
-  Кваліфікаця: string
-  "E-mail": string
-  "Кафедра Абревіатура": string
-  "Кафедра Повна назва": string
-  "Кафедра Посилання": string
-  "№": number
-}
+import { Teacher } from "./Types"
 
 export default class TeacherModel {
   teachers = teachersJson

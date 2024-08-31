@@ -8,7 +8,7 @@ import ScheduleDayComponent from "../components/ScheduleComponents/ScheduleDay"
 import { useEffect } from "react"
 import SettingsService from "../services/SettingsService/SettingsService"
 import { DisplayEmptyDaysMode } from "../services/SettingsService/Types"
-import ScheduleModel from "../models/ScheduleModel"
+import ScheduleModel from "../models/ScheduleModel/ScheduleModel"
 
 import { ScrollView } from "react-native-gesture-handler"
 import _ from "lodash"

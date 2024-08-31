@@ -1,4 +1,4 @@
-import TeacherModel from "../TeacherModel"
+import TeacherModel from "../TeacherModel/TeacherModel"
 
 describe("TeacherTableModel", () => {
   it("fetches full name by surname", () => {

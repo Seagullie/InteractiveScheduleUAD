@@ -1,4 +1,4 @@
-import NewsLoaderService from "../NewsLoaderService"
+import NewsLoaderService from "../NewsLoaderService/NewsLoaderService"
 
 describe("News Loader Service", () => {
   const fetchContentfulEntriesSpy = jest.spyOn(NewsLoaderService.prototype, "fetchContentfulEntries")

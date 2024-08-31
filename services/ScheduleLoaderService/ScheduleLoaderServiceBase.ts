@@ -1,16 +1,15 @@
 import * as FileSystem from "expo-file-system"
-import { AssetFile } from "contentful"
 import _ from "lodash"
 import NetInfo from "@react-native-community/netinfo"
 
-import ScheduleModel from "../../models/ScheduleModel"
+import ScheduleModel from "../../models/ScheduleModel/ScheduleModel"
 import { workDaysEnLower } from "../../constants/Days"
 import { ensureExtension, getContentfulClient, isRunningInBrowser } from "../../utilities/utilities"
 import ExampleScheduleKN from "../../assets/example_schedules/КН-example.json"
 import ExampleScheduleIST from "../../assets/example_schedules/ІСТ-example.json"
 import ExampleScheduleTE from "../../assets/example_schedules/ТЕ-example.json"
 
-import { ScheduleDay } from "../../models/ScheduleDay"
+import { ScheduleDay } from "../../models/ScheduleDay/ScheduleDay"
 import { ScheduleFile, ScheduleFileMetadata } from "./Types"
 
 // This is a singleton service that loads schedules from local storage / contentful and provides them to the rest of the application
@@ -123,7 +122,7 @@ export default class ScheduleLoaderServiceBase {
 
     const scheduleFiles: ScheduleFile[] = await Promise.all(
       assets.items.map(async (a) => {
-        const file: AssetFile = a.fields.file
+        const file = a.fields.file
 
         const protocol = "https:"
         const linkToFile = protocol + file.url

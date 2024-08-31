@@ -1,18 +1,8 @@
 // This is a singleton service that loads news from contenful and provides it to the rest of the application
 
-import { EXAMPLE_NEWS } from "../constants/ExampleData"
-import { getContentfulClient } from "../utilities/utilities"
-
-type ContentfulNewsArticleFields = {
-  title: string
-  body: string
-}
-
-export type NewsArticle = {
-  title: string
-  body: string
-  createdAt: string
-}
+import { EXAMPLE_NEWS } from "../../constants/ExampleData"
+import { getContentfulClient } from "../../utilities/utilities"
+import { NewsArticle, ContentfulNewsArticleFields } from "./Types"
 
 export default class NewsLoaderService {
   protected static instance: NewsLoaderService

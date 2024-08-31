@@ -1,12 +1,12 @@
 import { DateTriggerInput, NotificationContentInput, WeeklyTriggerInput } from "expo-notifications"
-import ScheduleModel from "../models/ScheduleModel"
-import { ScheduleDay } from "../models/ScheduleDay"
-import { ScheduleClass } from "../models/ScheduleClass"
+import ScheduleModel from "../models/ScheduleModel/ScheduleModel"
+import { ScheduleDay } from "../models/ScheduleDay/ScheduleDay"
+import { ScheduleClass } from "../models/ScheduleClass/ScheduleClass"
 import GetWeekType from "../utilities/getWeekType"
 import { createEvenlySpacedTimeSequence, setDayOnDate } from "../utilities/utilities"
 import LocalNotificationsService from "./LocalNotificationsService/LocalNotificationsService"
 import { REGLAMENT_DATA, SEMESTER_MONTHS } from "../constants/Constants"
-import TeacherModel from "../models/TeacherModel"
+import TeacherModel from "../models/TeacherModel/TeacherModel"
 
 export default class ClassNotificationBuilder {
   signature: string

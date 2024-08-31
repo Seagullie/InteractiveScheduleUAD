@@ -1,17 +1,7 @@
-import GetWeekType from "../utilities/getWeekType"
-import { IScheduleClass, ScheduleClass } from "./ScheduleClass"
-
-interface IScheduleDayFields {
-  classes: IScheduleClass[]
-  name: string
-}
-
-export interface IScheduleDay extends IScheduleDayFields {
-  getCurrentWeekClasses(): IScheduleClass[]
-  getNominatorClasses(): IScheduleClass[]
-  getDenominatorClasses(): IScheduleClass[]
-  getMatchingClassOfOtherWeek(class_: IScheduleClass): IScheduleClass | null
-}
+import GetWeekType from "../../utilities/getWeekType"
+import { ScheduleClass } from "../ScheduleClass/ScheduleClass"
+import { IScheduleClass } from "../ScheduleClass/Types"
+import { IScheduleDay } from "./Types"
 
 export class ScheduleDay implements IScheduleDay {
   classes: ScheduleClass[]

@@ -1,5 +1,3 @@
-console.log("Parsing App.tsx")
-
 // EXTERNAL DEPENDENCIES
 
 import * as SplashScreen from "expo-splash-screen"
@@ -8,7 +6,7 @@ console.log("[IMPORTS 1] Imported SplashScreen")
 SplashScreen.preventAutoHideAsync()
 
 import "react-native-gesture-handler"
-import { Text, View, StyleSheet } from "react-native"
+import { View } from "react-native"
 import React, { useEffect, useState } from "react"
 
 import { NavigationContainer } from "@react-navigation/native"
@@ -18,8 +16,7 @@ import * as Font from "expo-font"
 
 import { Entypo, FontAwesome, Ionicons, Octicons } from "@expo/vector-icons"
 
-import { ErrorBoundary, FallbackProps } from "react-error-boundary"
-import { ScrollView } from "react-native-gesture-handler"
+import { ErrorBoundary } from "react-error-boundary"
 
 import "react-native-url-polyfill/auto"
 
@@ -44,26 +41,16 @@ import NewsScreen from "./screens/NewsScreen"
 import TestTabs from "./routes/testTabs"
 import SettingsScreen from "./screens/SettingsScreen"
 import AboutScreen from "./screens/AboutScreen"
-import { isLandscapeWeb, isRunningInBrowser } from "./utilities/utilities"
 import QnAScreen from "./screens/QnAScreen"
-;("use client")
 
+import { isRunningInBrowser } from "./utilities/utilities"
 import { GetAllAppFonts } from "./constants/Fonts"
 import { AnalyticsService } from "./services/AnalyticsService/AnalyticsService"
+import { showErrorView } from "./components/shared/FailureView"
+import { AppStyles } from "./styles/AppStyles"
+;("use client")
 
 console.log("[IMPORTS] Imported all internal dependencies")
-
-function fallbackRender({ error, resetErrorBoundary }: FallbackProps) {
-  // Call resetErrorBoundary() to reset the error boundary and retry the render.
-
-  return (
-    <ScrollView>
-      <Text>Something went wrong:</Text>
-      <Text style={{ color: "red" }}>{JSON.stringify(error.message)}</Text>
-      <Text style={{ color: "red" }}>{JSON.stringify(error.stack)}</Text>
-    </ScrollView>
-  )
-}
 
 export default function App() {
   try {
@@ -93,9 +80,9 @@ export default function App() {
     AnalyticsService.trackEvent("app", { event: "app started" })
 
     const markdown = (
-      <ErrorBoundary fallbackRender={fallbackRender}>
+      <ErrorBoundary fallbackRender={showErrorView}>
         <NavigationContainer>
-          <View style={styles.root}>
+          <View style={AppStyles.root}>
             <Drawer.Navigator
               screenOptions={{
                 header: (props) => <Header navigation={props.navigation} title={props.route.name} />,
@@ -148,50 +135,6 @@ export default function App() {
     return markdown
   } catch (e) {
     console.log(e)
-    return (
-      <ScrollView>
-        <Text>
-          Something went wrong. Something went wrong. Something went wrong. Something went wrong. Something went wrong.
-          Something went wrong.
-        </Text>
-        <Text>
-          Something went wrong. Something went wrong. Something went wrong. Something went wrong. Something went wrong.
-          Something went wrong.
-        </Text>
-        <Text>
-          Something went wrong. Something went wrong. Something went wrong. Something went wrong. Something went wrong.
-          Something went wrong.
-        </Text>
-        <Text>
-          {JSON.stringify(e.message, null, 4)}
-          {JSON.stringify(e.stack, null, 4)}
-        </Text>
-      </ScrollView>
-    )
+    return showErrorView(e)
   }
 }
-
-// const drawerMenuWidthPx = 320
-
-const landscapeWebStyles = StyleSheet.create({
-  root: {
-    width: "50%",
-    minWidth: "50%",
-    maxWidth: "50%",
-
-    maxHeight: "100%",
-
-    flexGrow: 1,
-    marginLeft: "33%", // free space divided by two and + drawerMenuWidthPx in % * 0.5
-    // TODO: unhardcode the percentage
-  },
-})
-
-const nativeStyles = StyleSheet.create({
-  root: {
-    width: "100%",
-    flex: 1,
-  },
-})
-
-const styles = isLandscapeWeb() ? landscapeWebStyles : nativeStyles
