@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from "react"
 
-import { View, Button, StyleSheet, Text, Image, TouchableOpacity, ActivityIndicator } from "react-native"
-import { palette, globalStyles } from "../../styles/global"
-import { previewImages } from "../../constants/Images"
+import { View, TouchableOpacity, ActivityIndicator, DimensionValue } from "react-native"
+import { palette } from "../../styles/global"
 import AppText from "../../components/shared/AppText"
 
 // Import Swiper React components
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react"
+import { Swiper } from "swiper/react"
 
 // Import Swiper styles
 import "swiper/css"
@@ -22,14 +21,16 @@ import ScheduleLoaderService from "../../services/ScheduleLoaderService/Schedule
 import { getPageFour, getPageOne, getPageThree, getPageTwo } from "./Pages"
 import { Swiper as SwiperType } from "swiper/types"
 import { FontName } from "../../constants/Fonts"
+import { styles, swiperWidth } from "./IntroductoryCarouselWebStyles"
 
 // TODO: move shared logic to a separate file. As of now, lots if it is a copypaste from IntroductoryCarousel.native.tsx
 // TODO: fix navigation falling out of viewport on firefox
 
 // TODO: get replace document height with viewport height
-const documentHeight = window.innerHeight
-const swiperWidth = isLandscapeWeb() ? `${documentHeight / 2}px` : "95%"
 
+/**
+ * Web version of Introductory Carousel Screen
+ */
 export default function InroductoryCarouselScreen({ onClose }: { onClose?: () => void }) {
   const [currentPage, setCurrentPage] = React.useState(0)
   const swiperRef = useRef<SwiperType>()
@@ -45,6 +46,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
 
   const lastPageIndex = 3
 
+  // mount effect
   useEffect(() => {
     async function init() {
       let scheduleLodaderInstance = await ScheduleLoaderService.GetInstance()
@@ -58,6 +60,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
     init()
   }, [])
 
+  // current page change effect
   useEffect(() => {
     if (swiperRef.current) {
       swiperRef.current.slideTo(currentPage)
@@ -65,6 +68,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
   }, [currentPage])
 
   if (!isReady) {
+    // return spinner
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color={palette.navigationBackground} />
@@ -82,7 +86,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
 
       <Swiper
         initialSlide={currentPage}
-        style={{ display: "flex", width: swiperWidth, flex: 1 }}
+        style={{ display: "flex", width: swiperWidth, flexGrow: 0, maxHeight: "85%" }}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         onSlideChange={(swiper) => {
           setCurrentPage(swiper.activeIndex)
@@ -94,6 +98,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
         {getPageThree()}
         {getPageFour()}
       </Swiper>
+      {/* pager navigation (page 1 has different buttons) */}
       {currentPage == 0 ? (
         <View style={[styles.pagerNavigation, { justifyContent: "center" }]}>
           <TouchableOpacity
@@ -102,10 +107,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
               setSchedulePickerModalVisible(true)
             }}
           >
-            <AppText
-              accessibilityLabel="selectSchedule"
-              style={{ color: palette.navigationBackground, fontFamily: FontName.Montserrat600 }}
-            >
+            <AppText accessibilityLabel="selectSchedule" style={styles.selectScheduleText}>
               Обрати розклад
             </AppText>
           </TouchableOpacity>
@@ -172,162 +174,3 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  carouselContainer: {
-    backgroundColor: "#F5F5F5",
-    // backgroundColor: "red",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    flex: 1,
-    zIndex: 9999,
-
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-
-  container: {
-    flex: 1,
-    height: "100%",
-  },
-
-  viewPager: {
-    flex: 1,
-    padding: 0,
-    marginHorizontal: 30,
-  },
-  page: {
-    // height: "100%",
-    flex: 1,
-    alignItems: "center",
-  },
-
-  paginationCircles: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginVertical: 20,
-
-    width: "100%",
-  },
-
-  circle: {
-    width: 5,
-    height: 5,
-    margin: 5,
-    borderRadius: 123,
-    backgroundColor: "#D9D9D9",
-    flexDirection: "row",
-  },
-
-  circleActive: {
-    backgroundColor: "#7B7B7B",
-  },
-
-  pageBody: {
-    marginBottom: 20,
-    // flex: 1,
-    // height: "100%",
-  },
-
-  overlay: {
-    backgroundColor: "#F5F5F5",
-    // backgroundColor: "red",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    flex: 1,
-    zIndex: 9998,
-  },
-
-  pagerNavigation: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-    alignSelf: "center",
-    width: swiperWidth,
-  },
-
-  pageTitle: {
-    fontSize: 24,
-    color: palette.navigationBackground,
-    textAlign: "center",
-    marginVertical: 10,
-    marginTop: 20,
-  },
-
-  imageContainer: {
-    borderRadius: 10,
-    height: "65%",
-    maxHeight: "65%",
-    width: "90%",
-    // backgroundColor: "green",
-
-    overflow: "auto",
-
-    // borderColor: palette.navigationBackground,
-    // borderWidth: 1,
-    // borderColor: palette.grayishBlue,
-
-    // elevation: 0,
-    // shadowOffset: { width: 1, height: 1 },
-    // shadowColor: palette.navigationBackground,
-    // shadowOpacity: 0.3,
-    // shadowRadius: 2,
-
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    flexDirection: "row",
-  },
-
-  previewImage: {
-    borderRadius: 10,
-    // borderColor: palette.backgroundLight,
-
-    // backgroundColor: palette.navigationBackground,
-
-    // height: "100%",
-    // width: "100%",
-
-    // resizeMode: "cover" is the default
-    // resizeMode: "contain",
-
-    // alignSelf: "flex-start",
-    // alignItems: "flex-start",
-    // justifyContent: "flex-start",
-
-    // flexDirection: "column",
-  },
-
-  halfImageContainer: {
-    height: "30%",
-  },
-
-  navigationButton: {
-    ...globalStyles.navigationButton,
-  },
-
-  backButton: {
-    borderColor: palette.grayedOut,
-  },
-
-  forwardButton: {
-    borderColor: palette.navigationBackground,
-    borderWidth: 1,
-  },
-
-  centeredDescriptionText: {
-    textAlign: "center",
-  },
-
-  pageDescriptionText: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-})

@@ -134,12 +134,10 @@ export const globalStyles = StyleSheet.create({
   navigationButton: {
     borderColor: palette.navigationBackground,
     borderWidth: 1,
+    borderRadius: 10,
 
     // paddingHorizontal: 15,
     paddingVertical: 5,
-
-    borderRadius: 10,
-
     width: 75,
 
     justifyContent: "center",
