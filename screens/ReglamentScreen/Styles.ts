@@ -30,9 +30,31 @@ export const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
 
+  timePointTextContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    // flexGrow: 0.9,
+    width: "77%",
+  },
+
   timePointText: {
+    // color: palette.grayishBlue,
+    color: "#333333",
+    fontFamily: FontName.MontserratMedium,
+    fontSize: 16,
+  },
+
+  indexTextContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    // flexGrow: 0.1,
+    width: "12%",
+  },
+
+  indexText: {
     color: palette.grayishBlue,
-    fontFamily: FontName.MontserratBold,
+    fontFamily: FontName.MontserratSemiBold,
+    fontSize: 20,
   },
 
   timePointDate: {
@@ -56,21 +78,37 @@ export const styles = StyleSheet.create({
 
   currentClass: {
     // backgroundColor: "rgb(227, 239, 249)",
-    backgroundColor: "#CCDFF1",
+    // backgroundColor: "#CCDFF1",
+    backgroundColor: "#E5EFF8",
+  },
+
+  currentClassIndex: {
+    color: "#4A6172",
   },
 
   reglamentClassContainer: {
     marginHorizontal: 8,
-    marginBottom: 18,
+    // marginBottom: 18,
+    marginBottom: 10,
   },
 
-  head: {},
   text: { margin: 0, textAlign: "center", borderBottomWidth: 1, borderRightWidth: 1, padding: 12 },
+
+  head: {},
   headerText: { fontWeight: "bold", fontSize: 14 },
   headText: { margin: 6, fontWeight: "bold" },
   row: {
     flexDirection: "row",
     // backgroundColor: "red",
     backgroundColor: "#f1f8ff",
+  },
+
+  verticalSeparator: {
+    width: 1,
+    height: "100%",
+    backgroundColor: "#E6E6E6",
+    // opacity: 0.5,
+    marginHorizontal: 10,
+    flexGrow: 0,
   },
 })

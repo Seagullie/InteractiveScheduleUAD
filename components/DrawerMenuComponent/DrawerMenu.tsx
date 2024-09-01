@@ -57,7 +57,7 @@ function RouteButtonFactory(
 ) {
   const RouteButton = ({ route, index }: { route: typeof currentRoute; index: number }) => {
     const navigation = useNavigation()
-    console.log("navigation", navigation)
+    // console.log("navigation", navigation)
 
     // handler for onPress of navigation button
     const handleNavigationButtonPress = (screenName: DrawerRoutes) => {
