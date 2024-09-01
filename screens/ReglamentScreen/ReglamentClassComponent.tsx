@@ -47,9 +47,11 @@ export const ReglamentClass = ({ index }: { index: number }) => {
       >
         <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
           <View style={styles.indexTextContainer}>
-            <AppText style={[styles.indexText, isCurrentClass ? styles.currentClassIndex : {}]}>{index + 1}</AppText>
+            <AppText style={[styles.indexText, isCurrentClass ? styles.currentClassIndexText : {}]}>
+              {index + 1}
+            </AppText>
           </View>
-          <View style={styles.verticalSeparator} />
+          <View style={[styles.verticalSeparator, isCurrentClass ? { backgroundColor: "#D9D9D9" } : {}]} />
 
           <View style={styles.timePointTextContainer}>
             <AppText style={styles.timePointText}>

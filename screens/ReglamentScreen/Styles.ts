@@ -79,10 +79,11 @@ export const styles = StyleSheet.create({
   currentClass: {
     // backgroundColor: "rgb(227, 239, 249)",
     // backgroundColor: "#CCDFF1",
-    backgroundColor: "#E5EFF8",
+    // backgroundColor: "#E5EFF8",
+    backgroundColor: "#D8E9F9",
   },
 
-  currentClassIndex: {
+  currentClassIndexText: {
     color: "#4A6172",
   },
 
