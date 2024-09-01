@@ -1,11 +1,9 @@
 import React from "react"
-import { View } from "react-native"
-import { render, screen, fireEvent, waitForElementToBeRemoved } from "@testing-library/react-native"
+import { render, fireEvent } from "@testing-library/react-native"
 import ScheduleScreen from "../ScheduleScreen/ScheduleScreen"
 import { DrawerRoutes } from "../../routes/DrawerRoutes"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-import { act } from "react-test-renderer"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 
 import * as FileSystem from "expo-file-system"
@@ -42,7 +40,6 @@ jest.mock("@react-navigation/native", () => {
 
 describe("<ScheduleScreen />", () => {
   it("renders everything correctly", async () => {
-    const getInfoAsyncSpy = FileSystem.getInfoAsync as jest.MockedFunction<typeof FileSystem.getInfoAsync>
     expect(jest.isMockFunction(FileSystem.getInfoAsync)).toBeTruthy()
 
     await AsyncStorage.setItem("isFirstTimeLaunch", "false")

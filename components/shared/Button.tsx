@@ -1,13 +1,12 @@
 import React from "react"
 
 import { View } from "react-native"
-import { Pressable, Text } from "react-native"
 import { StyleSheet } from "react-native"
-import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler"
+import { TouchableOpacity } from "react-native-gesture-handler"
 import AppText from "./AppText"
 import { palette } from "../../styles/global"
 
-export default function FlatButton({ onPress, text, color }) {
+export default function FlatButton({ onPress, text, color }: { onPress: () => void; text: string; color?: string }) {
   return (
     <TouchableOpacity style={{ alignItems: "flex-start" }} onPress={onPress}>
       <View style={styles.button}>

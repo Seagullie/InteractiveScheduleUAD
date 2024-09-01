@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, StyleSheet, FlatList, Linking, Pressable } from "react-native"
+import { View, StyleSheet, FlatList, Linking, Pressable } from "react-native"
 import Separator from "../components/shared/Separator"
 import EntypoIcon from "react-native-vector-icons/Entypo"
 import { Ionicons, Octicons } from "@expo/vector-icons"
@@ -22,15 +22,15 @@ import {
   studentCouncilModalItems,
   studentUnionModalItems,
 } from "../constants/Contacts"
-import { isMail, isRunningInBrowser } from "../utilities/utilities"
+import { isMail } from "../utilities/utilities"
 import { useNavigation } from "@react-navigation/native"
 import { FontName } from "../constants/Fonts"
 
 type CategoryProps = {
   title: string
   titleIcon: JSX.Element
-  subcategories: string[]
-  onPress: () => void
+  subcategories?: string[]
+  onPress?: () => void
   children?: JSX.Element[]
 }
 
@@ -52,11 +52,12 @@ function Category({ title, titleIcon, subcategories, onPress, children }: Catego
           const itemOnPress = item.props.onPress
           const ItemType = item.type
 
+          // @ts-expect-error
           const itemWithoutOnPress = <ItemType {...item.props} onPress={() => null} />
 
           return (
             <TouchableOpacity
-              onPress={(e) => {
+              onPress={() => {
                 itemOnPress() // hoist the onPress handler to parent for larger hitbox
               }}
               style={styles.subcategoryButtonContainer}
@@ -71,7 +72,7 @@ function Category({ title, titleIcon, subcategories, onPress, children }: Catego
   )
 }
 
-const constructModalItem = (item: ModalItem, idx) => {
+const constructModalItem = (item: ModalItem, idx: number) => {
   return (
     <View
       style={{
@@ -96,13 +97,13 @@ const constructModalItem = (item: ModalItem, idx) => {
   )
 }
 
-const constructContentPresenterModal = (
+function constructContentPresenterModal(
   headerText: string,
   isOpen: boolean,
   onCloseModal: () => void,
   initialOptions: ModalItem[],
   displaySeparators = false
-) => {
+) {
   return (
     <OptionPickerModal
       headerText={headerText}
@@ -178,6 +179,7 @@ export default function ContactsScreen() {
           onPress={(e) => {
             console.log("executing on press handler as child")
 
+            // @ts-expect-error
             navigation.push("Факультети")
             // e.stopPropagation()
             // e.preventDefault()

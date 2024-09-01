@@ -3,6 +3,7 @@ import teachersJson from "../../assets/teachers.json"
 import Fuse from "fuse.js"
 import { Teacher } from "./Types"
 import { TEACHER_NOT_FOUND_STRING } from "./Constants"
+import { ensureEnding } from "../../utilities/utilities"
 
 export default class TeacherModel {
   teachers = teachersJson
@@ -59,8 +60,8 @@ export default class TeacherModel {
     let patronymic = teacherFullNameBits[2]
 
     // sometimes data is not consistent, e.g. Kolosivska O.V. instead of full name, so additional checks are needed
-    let nameInitial = name ? name[0] + "." : ""
-    let patronymicInitial = patronymic ? patronymic[0] + "." : ""
+    let nameInitial = name ? ensureEnding(name[0], ".") : ""
+    let patronymicInitial = patronymic ? ensureEnding(patronymic[0], ".") : ""
 
     return `${surname} ${nameInitial} ${patronymicInitial}`
   }

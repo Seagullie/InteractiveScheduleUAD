@@ -108,6 +108,12 @@ export function ensureNoExtension(filename: string, extension: string) {
   return filename.slice(0, -extension.length)
 }
 
+export function ensureEnding(text: string, ending: string) {
+  if (text.endsWith(ending)) return text
+
+  return text + ending
+}
+
 export const isMail = (text: string) => {
   return text.includes("@") && !text.includes("http")
 }

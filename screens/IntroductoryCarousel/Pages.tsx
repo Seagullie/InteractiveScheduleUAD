@@ -1,11 +1,9 @@
-import { View, Text, StyleSheet, ImageBackground } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import AppText from "../../components/shared/AppText"
-import { palette, globalStyles } from "../../styles/global"
+import { palette } from "../../styles/global"
 import { previewImagesFull } from "../../constants/Images"
-import { previewImages } from "../../constants/Images"
 import { isRunningInBrowser } from "../../utilities/utilities"
 
-import * as Device from "expo-device"
 
 // Import Swiper React components
 import { SwiperSlide } from "swiper/react"

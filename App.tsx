@@ -33,11 +33,11 @@ import Header from "./components/Header"
 // screens
 
 import ScheduleScreen from "./screens/ScheduleScreen/ScheduleScreen"
-import ReglamentScreen from "./screens/ReglamentScreen"
+import ReglamentScreen from "./screens/ReglamentScreen/ReglamentScreen"
 import TeachersScreen from "./screens/TeachersScreen"
 import EditorStack from "./routes/EditorStack"
 import ContactsStack from "./routes/ContactsStack"
-import NewsScreen from "./screens/NewsScreen"
+import NewsScreen from "./screens/NewsScreen/NewsScreen"
 import TestTabs from "./routes/testTabs"
 import SettingsScreen from "./screens/SettingsScreen/SettingsScreen"
 import AboutScreen from "./screens/AboutScreen"

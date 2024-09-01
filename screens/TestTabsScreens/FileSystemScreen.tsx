@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import React from "react"
 
-import { View, Text, StyleSheet, NativeSyntheticEvent, TextInputFocusEventData, Pressable } from "react-native"
+import { View, StyleSheet } from "react-native"
 import AppText from "../../components/shared/AppText"
 
 import * as FileSystem from "expo-file-system"
@@ -9,8 +9,7 @@ import { Button } from "@rneui/themed"
 import { Input } from "react-native-elements"
 import ContentViewModal from "../../components/ContentViewModal"
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
-import { createClient } from "contentful/dist/contentful.browser.min.js"
-import { AssetFile, ContentfulClientApi } from "contentful"
+import { Asset, ContentfulClientApi } from "contentful"
 import Expander from "../../components/shared/Expander"
 import ScheduleLoaderService from "../../services/ScheduleLoaderService/ScheduleLoaderService"
 import FlatButton from "../../components/shared/Button"
@@ -80,7 +79,7 @@ export default function FileSystemScreen() {
         .then((asset) => {
           console.log(asset)
           setContentfulScheduleAsAsset(JSON.stringify(asset, null, 4))
-          const file: AssetFile = asset.fields.file
+          const file = asset.fields.file
 
           const protocol = "https:"
           const linkToFile = file.url

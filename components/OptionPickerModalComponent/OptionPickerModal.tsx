@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons"
 import AppText from "../shared/AppText"
 import { styles } from "./Styles"
 import { OptionPickerModalProps } from "./Types"
+import { render } from "@testing-library/react-native"
 
 // TODO: fix modal content overflowing when keyboard is shown
 // TODO: refactor onClose to something more understandable
@@ -19,7 +20,7 @@ function FilterOptions(options: string[], searchQuery: string) {
   return options.filter((option) => option.toLowerCase().includes(searchQuery))
 }
 
-export default function OptionPickerModal({
+export default function OptionPickerModal<OptionT = string>({
   hasSearchBar = true,
   headerText = "",
   isOpen = false,
@@ -31,16 +32,17 @@ export default function OptionPickerModal({
   onSelected,
   optionIcon,
   isOptionSelectable = true,
-}: OptionPickerModalProps) {
+}: OptionPickerModalProps<OptionT>) {
   const { height: windowHeight } = useWindowDimensions()
 
-  const [options, _] = React.useState<string[]>(optionsParam)
+  const [options, _] = React.useState<OptionT[]>(optionsParam)
   const [searchQuery, setSearchQuery] = React.useState<string>("")
 
   // filter options if search bar is present
-  const filteredOptions = hasSearchBar ? FilterOptions(options, searchQuery) : options
+  const filteredOptions =
+    hasSearchBar && typeof options[0] == "string" ? FilterOptions(options as string[], searchQuery) : options
 
-  const [selectedOption, setSelectedOption] = React.useState<string>(selectedOptionParam)
+  const [selectedOption, setSelectedOption] = React.useState<OptionT>(selectedOptionParam)
 
   console.log("selectedOption in schedule picker modal:", selectedOption)
 
@@ -73,14 +75,14 @@ export default function OptionPickerModal({
           {filteredOptions.map((option, idx) => (
             <View key={idx}>
               {renderItem ? (
-                renderItem(option, idx)
+                renderItem(option as OptionT, idx)
               ) : (
                 <Pressable
                   onPress={() => {
                     if (!isOptionSelectable) return
 
-                    setSelectedOption(option)
-                    onSelected(option)
+                    setSelectedOption(option as OptionT)
+                    onSelected(option as OptionT)
                     closeModal()
                   }}
                 >
@@ -94,7 +96,7 @@ export default function OptionPickerModal({
                       {optionIcon}
 
                       <AppText style={{ ...styles.option, ...(selectedOption == option ? styles.selectedOption : {}) }}>
-                        {option}
+                        {option as string}
                       </AppText>
                     </View>
 

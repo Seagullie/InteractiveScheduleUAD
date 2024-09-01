@@ -138,7 +138,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           >
             <AppText
               style={{
-                color: palette.navigationBackground,
+                // color: palette.navigationBackground,
                 fontFamily: FontName.Montserrat600,
                 color: palette.grayedOut,
               }}
@@ -155,6 +155,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
                 setStatusBarHidden(false, "fade")
                 setIsVisible(false)
                 onClose?.()
+                // @ts-expect-error
                 navigation.navigate(DrawerRoutes.VIEWER)
               }
 

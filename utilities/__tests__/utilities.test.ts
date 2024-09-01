@@ -49,7 +49,10 @@ describe("utility function createContentfulClient", () => {
   it("creates client and client fetches example entries", async () => {
     console.log("contentful client:", getContentfulClient)
     const client = getContentfulClient()
-    const entries = await client.getEntries()
+    const entries = await client.getEntries<{
+      title: string
+      body: string
+    }>()
     expect(entries.items[0].fields.title).toBe("test title")
     expect(entries.items[0].fields.body).toBe("test body")
   })

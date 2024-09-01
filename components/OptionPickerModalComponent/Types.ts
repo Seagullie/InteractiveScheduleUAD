@@ -1,4 +1,4 @@
-export type OptionPickerModalProps = {
+export type OptionPickerModalProps<OptionT> = {
   /**
    * Whether to display search bar
    */
@@ -18,15 +18,15 @@ export type OptionPickerModalProps = {
   /**
    * Options to display
    */
-  options: string[]
+  options: OptionT[]
   /**
    * Option to be selected
    */
-  selectedOption: string
+  selectedOption?: OptionT
   /**
    * Custom render function for
    */
-  renderItem?: (option: string, idx: number) => JSX.Element
+  renderItem?: (option: OptionT, idx: number) => JSX.Element
   /**
    * Callback for closing the modal
    */
@@ -34,7 +34,7 @@ export type OptionPickerModalProps = {
   /**
    * Callback for when an option is selected
    */
-  onSelected: (option: string) => void
+  onSelected?: (option: OptionT) => void
   /**
    * Icon to display next to each option
    */
