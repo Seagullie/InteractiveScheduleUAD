@@ -5,7 +5,7 @@ import FacultiesTestScreen from "../screens/TestTabsScreens/FacultiesTestScreen"
 import { View } from "react-native"
 import { ContactsStackRoutes } from "./ContactsStackRoutes"
 import StackHeader from "../components/StackHeader"
-import ContactsScreen from "../screens/ContactsScreen"
+import ContactsScreen from "../screens/ContactsScreen/ContactsScreen"
 import { palette } from "../styles/global"
 
 const Stack = createStackNavigator()

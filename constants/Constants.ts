@@ -11,7 +11,7 @@ export type REGLAMENT_DATA_TYPE = REGLAMENT_DATA_ELEM_TYPE[]
 // ]
 
 export const REGLAMENT_DATA: REGLAMENT_DATA_TYPE = [
-  [1, "8:30", "9:50"],
+  [1, "08:30", "09:50"],
   [2, "10:05", "11:25"],
   [3, "11:40", "13:00"],
   [4, "13:15", "14:35"],

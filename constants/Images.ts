@@ -37,4 +37,5 @@ export const drawerMenuImages = {
 export const imageIcons = {
   museum: require("../assets/image_icons/museum.png"),
   tiktok: require("../assets/image_icons/tiktok.png"),
+  warning_triangle: require("../assets/image_icons/warning-triangle.png"),
 }
