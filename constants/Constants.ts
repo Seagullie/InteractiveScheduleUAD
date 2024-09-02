@@ -1,4 +1,4 @@
-export type REGLAMENT_DATA_ELEM_TYPE = [number, string, string, string]
+export type REGLAMENT_DATA_ELEM_TYPE = [number, string, string]
 export type REGLAMENT_DATA_TYPE = REGLAMENT_DATA_ELEM_TYPE[]
 
 // export const REGLAMENT_DATA_OLD: REGLAMENT_DATA_TYPE = [
@@ -11,14 +11,14 @@ export type REGLAMENT_DATA_TYPE = REGLAMENT_DATA_ELEM_TYPE[]
 // ]
 
 export const REGLAMENT_DATA: REGLAMENT_DATA_TYPE = [
-  [1, "8:30", "9:50", "🤔"],
-  [2, "10:05", "11:25", "🤔"],
-  [3, "11:40", "13:00", "🤔"],
-  [4, "13:15", "14:35", "🤔"],
-  [5, "14:50", "16:10", "🤔"],
-  [6, "16:25", "17:45", "🤔"],
-  [7, "18:00", "19:20", "🤔"],
-  [8, "19:30", "20:50", "🤔"],
+  [1, "8:30", "9:50"],
+  [2, "10:05", "11:25"],
+  [3, "11:40", "13:00"],
+  [4, "13:15", "14:35"],
+  [5, "14:50", "16:10"],
+  [6, "16:25", "17:45"],
+  [7, "18:00", "19:20"],
+  [8, "19:30", "20:50"],
 ]
 
 export const suffixesForNumbers = {
@@ -34,3 +34,6 @@ export const SEMESTER_MONTHS = 6
 export const MAX_CLASSES_PER_DAY = 6
 
 export const NOTIFICATIONS_CHANNEL_ID = "interactive-schedule-notifications"
+
+export const WEB_VERSION_NAME = "scheduleuad.live"
+export const LINK_TO_WEB_VERSION = `https://${WEB_VERSION_NAME}`

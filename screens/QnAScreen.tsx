@@ -3,6 +3,7 @@ import AppText from "../components/shared/AppText"
 import Table from "../components/Table"
 import { ScrollView } from "react-native-gesture-handler"
 import UnfoldableCard, { UCStyles } from "../components/UnfoldableCard"
+import { LINK_TO_WEB_VERSION, WEB_VERSION_NAME } from "../constants/Constants"
 
 export default function QnAScreen() {
   return (
@@ -101,11 +102,11 @@ export default function QnAScreen() {
             Альтернативою iOS версії є веб версія:{" "}
             <AppText
               onPress={() => {
-                Linking.openURL("https://schedule-uad.live")
+                Linking.openURL(LINK_TO_WEB_VERSION)
               }}
             >
               {" "}
-              schedule-uad.live
+              {`${WEB_VERSION_NAME}`}
             </AppText>
           </AppText>
         }

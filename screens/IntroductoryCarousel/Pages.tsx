@@ -4,7 +4,6 @@ import { palette } from "../../styles/global"
 import { previewImagesFull } from "../../constants/Images"
 import { isRunningInBrowser } from "../../utilities/utilities"
 
-
 // Import Swiper React components
 import { SwiperSlide } from "swiper/react"
 
@@ -118,7 +117,8 @@ const styles = StyleSheet.create({
 
   imageContainer: {
     borderRadius: 10,
-    height: "55%",
+    // bump to 65% on web. Not sure if it's okay to do so on mobile
+    height: isRunningInBrowser() ? "65%" : "55%",
     // width: "100%",
     // flex: 1,
     alignSelf: "stretch",
