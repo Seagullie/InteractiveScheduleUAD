@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.noid.InteractiveSchedule"
+      "package": "com.noid.InteractiveScheduleUAP"
     },
     "notification": {
       "icon": "./assets/images/notification-icon.png",
