@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
 
   startAndEndTimesContainer: {
     alignItems: "flex-start",
-    width: "10%",
+    width: "11%",
     marginRight: "4%",
   },
 

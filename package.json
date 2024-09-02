@@ -13,7 +13,7 @@
     "rm-cache": "del /S /Q .\\node_modules\\.cache\\web\\web-development\\* ",
     "test": "jest --watchAll --silent --noStackTrace",
     "expo-doctor": "npx expo-doctor",
-    "eas-build-preview": "echo ⚠ You're expected to un-ignore .env before this command && eas build -p android --profile preview",
+    "eas-build-preview": "echo ⚠ Un-ignore .env before this command && eas build -p android --profile preview",
     "eas-preview-build-archive": "eas build:inspect --stage archive -p android --profile preview --output ./build-archive-preview",
     "check-circular": "npx madge --circular --extensions ts,tsx ."
   },
