@@ -9,10 +9,12 @@ import { ScrollView } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
 import { DrawerRoutes } from "../routes/DrawerRoutes"
 import { FontName } from "../constants/Fonts"
+import appJson from "../app.json"
 
 export default function AboutScreen() {
   // TODO: read from config file
-  const appVersion = "1.1.0"
+  // const appVersion = "1.1.0"
+  const appVersion = appJson.expo.version
   const navigation = useNavigation()
 
   return (

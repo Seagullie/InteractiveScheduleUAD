@@ -7,5 +7,8 @@ module.exports = async function (env, argv) {
   config.resolve.alias["react-native$"] = "react-native-web"
   // // config.resolve.extensions = [".tsx", ".ts", ".js", ".ios.js", ".android.js", ".web.js"]
 
+  // do not import crypto polyfill
+  config.resolve.fallback = { crypto: false }
+
   return config
 }
