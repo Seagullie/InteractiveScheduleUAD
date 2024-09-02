@@ -9,8 +9,8 @@
   "related_applications": [
     {
       "platform": "play",
-      "url": "http://play.google.com/store/apps/details?id=com.noid.InteractiveSchedule",
-      "id": "com.noid.InteractiveSchedule"
+      "url": "http://play.google.com/store/apps/details?id=com.noid.InteractiveScheduleUAP",
+      "id": "com.noid.InteractiveScheduleUAP"
     }
   ],
   "prefer_related_applications": true

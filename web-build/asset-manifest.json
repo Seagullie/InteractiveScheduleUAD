@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.0122ce01.css",
-    "main.js": "/static/js/main.49521b59.js",
+    "main.js": "/static/js/main.f7264c76.js",
     "static/js/793.f2ddfdae.js": "/static/js/793.f2ddfdae.js",
     "static/media/Ionicons.ttf": "/static/media/Ionicons.9b6b1954a5eb6efeaf11.ttf",
     "static/media/lightbulb-nontrasparent-fixed.png": "/static/media/lightbulb-nontrasparent-fixed.c11b98c980e0ff68bfdb.png",
@@ -41,6 +41,7 @@
     "static/media/FontAwesome5_Regular.ttf": "/static/media/FontAwesome5_Regular.1017bce89c72f95bcf8e.ttf",
     "favicon.ico": "/favicon.ico",
     "static/media/tiktok.png": "/static/media/tiktok.d4e2500fd93b16b6cfa8.png",
+    "static/media/warning-triangle.png": "/static/media/warning-triangle.bf842d00c7be3f96a4f0.png",
     "index.html": "/index.html",
     "static/media/uad_logo_text_not_vector.png": "/static/media/uad_logo_text_not_vector.02992db040c613011468.png",
     "static/media/rocket.png": "/static/media/rocket.d2f3bf41d5e4515c39a9.png",
@@ -53,12 +54,12 @@
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
     "main.0122ce01.css.map": "/static/css/main.0122ce01.css.map",
-    "main.49521b59.js.map": "/static/js/main.49521b59.js.map",
+    "main.f7264c76.js.map": "/static/js/main.f7264c76.js.map",
     "793.f2ddfdae.js.map": "/static/js/793.f2ddfdae.js.map"
   },
   "entrypoints": [
     "static/js/793.f2ddfdae.js",
     "static/css/main.0122ce01.css",
-    "static/js/main.49521b59.js"
+    "static/js/main.f7264c76.js"
   ]
 }
