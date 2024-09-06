@@ -100,7 +100,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
             <AppText style={styles.pageTitle}>Розклад</AppText>
             <View style={styles.pageDescriptionText}>
               <AppText style={styles.centeredDescriptionText}>
-                Розклад занять в академії чергується тижнями: чисельник, знаменник.
+                Розклад занять у вищих навчальних закладах чергується тижнями: чисельник, знаменник.
               </AppText>
               <Text />
               <AppText style={styles.centeredDescriptionText}>

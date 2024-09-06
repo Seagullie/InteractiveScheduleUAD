@@ -12,7 +12,7 @@ export default function QnAScreen() {
         bodyComponent={
           <View style={{ marginTop: 15 }}>
             <Table
-              headers={["Адреса корпусу УАД", "Позначення аудиторії в розкладі"]}
+              headers={["Адреса корпусу", "Позначення аудиторії в розкладі"]}
               data={[
                 ["вул. Під Голоском 19", "а. ХХХ"],
                 ["вул. Підвальна 17", "a. Х або а. XX"],

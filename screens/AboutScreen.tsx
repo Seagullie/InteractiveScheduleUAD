@@ -279,7 +279,7 @@ export default function AboutScreen() {
 
       <View style={[styles.copyrightContainer]}>
         <AppText style={[{ textAlign: "center", fontFamily: FontName.CenturyGothic }]}>
-          Авторські права 2023 © Українська Академія Друкарства. Усі права захищені
+          Авторські права 2023-2025 © Українська Академія Друкарства. Усі права захищені
         </AppText>
       </View>
 
