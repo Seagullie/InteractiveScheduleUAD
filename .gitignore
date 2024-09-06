@@ -9,6 +9,9 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 
+# asset design files
+*.psd
+
 # web build is checked in as well for Digital Ocean deployment
 # web-build/
 
