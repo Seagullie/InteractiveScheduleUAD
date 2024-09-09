@@ -14,11 +14,11 @@ import "swiper/css"
 // TODO: adapt settings page to web
 
 export function getPageOne() {
+  const image = <img style={styles.previewImage} src={previewImagesFull.schedule} loading="eager" />
+
   const pageOne = (
     <SwiperSlide style={styles.page} key="1">
-      <View style={styles.imageContainer}>
-        <img style={styles.previewImage} src={previewImagesFull.schedule} />
-      </View>
+      <View style={styles.imageContainer}>{image}</View>
       <AppText style={styles.pageTitle}>Розклад</AppText>
       <View style={styles.pageDescriptionText}>
         <AppText style={styles.centeredDescriptionText}>
@@ -40,7 +40,7 @@ export function getPageTwo() {
   const pageTwo = (
     <SwiperSlide style={styles.page} key="2">
       <View style={{ ...styles.imageContainer }}>
-        <img style={styles.previewImage} src={previewImagesFull.reglamentPreview} />
+        <img style={styles.previewImage} src={previewImagesFull.reglamentPreview} loading="eager" />
       </View>
       <AppText style={styles.pageTitle}>Регламент</AppText>
       <View style={styles.pageDescriptionText}>
@@ -59,7 +59,7 @@ export function getPageThree() {
   const pageThree = (
     <SwiperSlide style={styles.page} key="3">
       <View style={styles.imageContainer}>
-        <img style={styles.previewImage} src={previewImagesFull.editorPreview} />
+        <img style={styles.previewImage} src={previewImagesFull.editorPreview} loading="eager" />
       </View>
       <AppText style={styles.pageTitle}>Редактор</AppText>
       <View style={styles.pageDescriptionText}>
@@ -77,7 +77,7 @@ export function getPageFour() {
   const pageFour = (
     <SwiperSlide style={styles.page} key="4">
       <View style={styles.imageContainer}>
-        <img style={styles.previewImage} src={previewImagesFull.settingsPreview} />
+        <img style={styles.previewImage} src={previewImagesFull.settingsPreview} loading="eager" />
       </View>
       <AppText style={styles.pageTitle}>Налаштування</AppText>
       <View style={styles.pageDescriptionText}>
@@ -91,12 +91,6 @@ export function getPageFour() {
 
 const styles = StyleSheet.create({
   page: {
-    // height: "80vh",
-    // width: "100vw",
-    // alignSelf: "stretch",
-
-    // marginHorizontal: "5%",
-    // marginLeft: "5%",
     marginBottom: 20,
     marginHorizontal: 20,
 
@@ -144,6 +138,7 @@ const styles = StyleSheet.create({
 
   pageDescriptionText: {
     flex: 1,
+    flexGrow: 1,
     alignItems: "center",
     justifyContent: "center",
   },

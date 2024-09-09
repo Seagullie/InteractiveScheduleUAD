@@ -24,7 +24,6 @@ import { FontName } from "../../constants/Fonts"
 import { styles, swiperWidth } from "./IntroductoryCarouselWebStyles"
 
 // TODO: move shared logic to a separate file. As of now, lots if it is a copypaste from IntroductoryCarousel.native.tsx
-// TODO: fix navigation falling out of viewport on firefox
 
 // TODO: get replace document height with viewport height
 
@@ -86,7 +85,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
 
       <Swiper
         initialSlide={currentPage}
-        style={{ display: "flex", width: swiperWidth, flexGrow: 0, maxHeight: "85%" }}
+        style={{ display: "flex", width: swiperWidth, flexGrow: 1, maxHeight: "85%" }}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         onSlideChange={(swiper) => {
           setCurrentPage(swiper.activeIndex)
