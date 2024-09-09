@@ -15,7 +15,7 @@ npm-debug.*
 # web build is checked in as well for Digital Ocean deployment
 # web-build/
 
-package-lock.json
+# package-lock.json
 
 # macOS
 .DS_Store
