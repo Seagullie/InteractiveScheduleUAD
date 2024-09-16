@@ -5,8 +5,11 @@ import { Ionicons } from "@expo/vector-icons"
 import { globalStyles, palette } from "../../styles/global"
 
 // TODO: hide this component children right when hide animation starts
-// TODO: make sure that class start and class end block gets completely hidden when main content is shifted to the side
+// TODO: make sure that class start&end block gets completely hidden when main content is shifted to the side
 
+/**
+ * Component that is shown when user swipes an item (Class Row) to the left
+ */
 export default function UnderlayRightSide({
   onDeleteButtonPress: onDeleteButtonPress,
 }: {

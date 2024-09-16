@@ -67,6 +67,10 @@ export default function ScheduleDayComponent({
   let [classes, setClasses] = useState<ScheduleClass[]>([])
   let dayNameEnRef = useRef(mapUkrWorkDayToEnWorkDay(dayName).toLowerCase())
 
+  /**
+   * Saves edited classes to the schedule
+   * @param classes
+   */
   function saveEditedClasses(classes: ScheduleClass[]) {
     console.log("saving edited classes")
     let updatedSchedule = scheduleObject
@@ -106,7 +110,9 @@ export default function ScheduleDayComponent({
     console.log("mounting schedule day component")
   }, [])
 
-  // pads classes array with placeholder classes in order to have MAX_CLASSES_PER_DAY classes total for editing purposes
+  /**
+   * Pads classes array with placeholder classes in order to have MAX_CLASSES_PER_DAY classes total for editing purposes.
+   */
   function addPlaceholders(classes: ScheduleClass[]) {
     if (!isEditable) {
       return classes
@@ -215,6 +221,7 @@ export default function ScheduleDayComponent({
                       currentlyViewedWeek: weekType,
                       onFormDataUpdated: (values: ScheduleClassFields) => {
                         let updatedClasses = classes.map((class_) => {
+                          // get class associated with this component
                           if (class_.index == idx + 1) {
                             // process the values
                             let teacher = values.teacher.split(",").map((t: string) => t.trim())
@@ -237,6 +244,15 @@ export default function ScheduleDayComponent({
                               { ...class_, ...values, teacher, room, isBiweekly },
                               dayNameEnRef.current
                             )
+                          } else {
+                            return class_
+                          }
+                        })
+
+                        // assume that if user completely erases class name, the intent is to delete the class completely. In this case, replace the class with a placeholder
+                        updatedClasses = updatedClasses.map((class_) => {
+                          if (class_.name == "") {
+                            return ScheduleClass.GetPlaceholder(class_.day, class_.index, class_.week)
                           } else {
                             return class_
                           }

@@ -5,6 +5,10 @@ init(AptabaseAppKey)
 
 export class AnalyticsService {
   static async trackEvent(eventName: string, props?: Record<string, string | number | boolean>) {
-    return trackEvent(eventName, props)
+    try {
+      trackEvent(eventName, props)
+    } catch (e) {
+      console.error("Failed to track event", e)
+    }
   }
 }

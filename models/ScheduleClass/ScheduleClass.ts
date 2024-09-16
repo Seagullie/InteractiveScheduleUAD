@@ -52,6 +52,9 @@ export class ScheduleClass implements IScheduleClass {
   static sampleTeacher = "Викладач не зазначений"
   static sampleRoom = "..."
 
+  /**
+   * Returns a placeholder class. Relies on sample data, defined in the class
+   */
   static GetPlaceholder(day: string, index: number, week: 1 | 2) {
     return new ScheduleClass(
       {
@@ -67,11 +70,22 @@ export class ScheduleClass implements IScheduleClass {
     )
   }
 
+  /**
+   * Replaces the class with a placeholder class
+   */
+  static ReplaceWithPlaceholder(class_: ScheduleClass): ScheduleClass {
+    return this.GetPlaceholder(class_.day, class_.index, class_.week)
+  }
+
   setWeek(week: 1 | 2) {
     this.week = week
     this.weekName = this.isBiweekly ? (this.week === 1 ? "Чисельник" : "Знаменник") : ""
   }
 
+  // TODO: extend the doc
+  /**
+   * Returns a unique string identifier for the class.
+   */
   getUniqueStringSignature(): string {
     return `[${this.day} * ${this.index}] ${this.name} * ${this.teacher} * ${this.room} <${this.weekName}>})`
   }
