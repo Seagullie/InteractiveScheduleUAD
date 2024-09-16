@@ -8,7 +8,7 @@ export default function UnfoldableCard({ title, bodyComponent }: { title: string
   let [isBodyRevealed, setIsBodyRevealed] = useState(false)
 
   return (
-    <View style={{ marginBottom: 12 }}>
+    <TouchableOpacity style={{ marginBottom: 12 }} onPress={() => setIsBodyRevealed(!isBodyRevealed)}>
       <View style={UCStyles.unfoldableCard}>
         {/* title | question */}
 
@@ -29,7 +29,7 @@ export default function UnfoldableCard({ title, bodyComponent }: { title: string
 
         {isBodyRevealed ? bodyComponent : <></>}
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

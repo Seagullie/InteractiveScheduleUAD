@@ -4,6 +4,8 @@ import Table from "../components/Table"
 import { ScrollView } from "react-native-gesture-handler"
 import UnfoldableCard, { UCStyles } from "../components/UnfoldableCard"
 import { LINK_TO_WEB_VERSION, WEB_VERSION_NAME } from "../constants/Constants"
+import { Ionicons } from "@expo/vector-icons"
+import { palette } from "../styles/global"
 
 export default function QnAScreen() {
   return (
@@ -78,6 +80,17 @@ export default function QnAScreen() {
           </AppText>
         }
         title={"Звідки беруться розклади?"}
+      />
+
+      <UnfoldableCard
+        bodyComponent={
+          <AppText style={UCStyles.unfoldableCardText}>
+            Свайпніть пару вліво, а потім натисніть на іконку смітника{" "}
+            {"("}<Ionicons name="trash-outline" size={14} color={palette.grayedOut} />{")"}, що з'явилась справа.{"\n\n"}
+            Або натисніть на пару та видаліть весь текст в полі "Предмет".
+          </AppText>
+        }
+        title={"Як видалити пару в редакторі?"}
       />
 
       <UnfoldableCard
