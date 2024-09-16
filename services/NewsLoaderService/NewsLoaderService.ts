@@ -24,6 +24,9 @@ export default class NewsLoaderService {
 
   protected async init() {}
 
+  /**
+   * Retrieves news from Contentful. If news are already cached, returns them.
+   */
   async getNewsFromContentful(): Promise<NewsArticle[]> {
     // retrieve schedules from contentful
     console.log(`[News Loader] retrieving news from contentful`)
@@ -56,6 +59,9 @@ export default class NewsLoaderService {
     return news
   }
 
+  /**
+   * Fetches raw news entries from Contentful.
+   */
   async fetchContentfulEntries() {
     const client = getContentfulClient()
 

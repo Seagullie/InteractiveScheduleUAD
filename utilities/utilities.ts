@@ -8,12 +8,14 @@ import contentful from "contentful/dist/contentful.browser.min.js"
 import { createClient } from "contentful/dist/contentful.browser.min.js"
 import { ContentfulClientApi } from "contentful"
 import { Platform } from "react-native"
-import * as FileSystem from "expo-file-system"
 
 import { ContentfulContentDeliveryAccessToken, ContentfulSpace } from "../constants/Keys"
 
 import { REGLAMENT_DATA_ELEM_TYPE, REGLAMENT_DATA } from "../constants/Constants"
 
+/**
+ * Calculates the difference between two dates in hours, minutes and seconds.
+ */
 export const GetTimeDifference = (earlier: Date, later: Date) => {
   let momentA = moment(earlier)
   let momentB = moment(later)
@@ -28,6 +30,9 @@ export const GetTimeDifference = (earlier: Date, later: Date) => {
   }
 }
 
+/**
+ * Creates a sequence of dates, starting from the given date and spaced by the given amount of seconds.
+ */
 export function createEvenlySpacedTimeSequence(sequenceSize: number, spacingInSeconds: number, start: Date): Date[] {
   const sequence = []
   let next = start
@@ -55,7 +60,9 @@ function isInRange(value: Date, start: Date, end: Date) {
   return value <= end && value >= start
 }
 
-// get time slot of a timepoint
+/**
+ * Gets time slot of a timepoint. In this case, each time slot represents a class start and end time.
+ */
 export function determineInterval(timepoint = new Date()): false | REGLAMENT_DATA_ELEM_TYPE {
   let interval: false | REGLAMENT_DATA_ELEM_TYPE = false
 
@@ -84,9 +91,6 @@ export function determineInterval(timepoint = new Date()): false | REGLAMENT_DAT
 console.log("[utilities] current interval is ", determineInterval())
 
 export function getContentfulClient() {
-  console.log("contentful module: ", contentful)
-  console.log("create contentful client: ", createClient)
-
   const client: ContentfulClientApi = createClient({
     space: ContentfulSpace,
     environment: "master", // defaults to 'master' if not set
@@ -96,18 +100,27 @@ export function getContentfulClient() {
   return client
 }
 
+/**
+ * Ensures that the filename has the given extension by appending it if it doesn't.
+ */
 export function ensureExtension(filename: string, extension: string) {
   if (filename.endsWith(extension)) return filename
 
   return filename + extension
 }
 
+/**
+ * Ensures that the filename doesn't have the given extension by removing it if it does.
+ */
 export function ensureNoExtension(filename: string, extension: string) {
   if (!filename.endsWith(extension)) return filename
 
   return filename.slice(0, -extension.length)
 }
 
+/**
+ * Ensures that the text ends with the given ending by appending it if it doesn't.
+ */
 export function ensureEnding(text: string, ending: string) {
   if (text.endsWith(ending)) return text
 
@@ -118,9 +131,12 @@ export const isMail = (text: string) => {
   return text.includes("@") && !text.includes("http")
 }
 
+/**
+ * Returns true if the app is running in Expo Go.
+ */
 export function isRunningInExpoGo() {
-  const isRunningInExpo = constants.executionEnvironment == ExecutionEnvironment.StoreClient
-  return isRunningInExpo
+  const _isRunningInExpo = constants.executionEnvironment == ExecutionEnvironment.StoreClient
+  return _isRunningInExpo
 }
 
 export function isRunningInBrowser() {
@@ -128,10 +144,13 @@ export function isRunningInBrowser() {
 
   // debugger
 
-  const isRunningInBrowser = Platform.OS === "web"
-  return isRunningInBrowser
+  const _isRunningInBrowser = Platform.OS === "web"
+  return _isRunningInBrowser
 }
 
+/**
+ * Returns true if the device is in horizontal orientation.
+ */
 export function isHorizontalOrientation() {
   if (isRunningInBrowser()) {
     return window.innerWidth > window.innerHeight
@@ -145,21 +164,6 @@ export function isHorizontalOrientation() {
 
 export function isLandscapeWeb() {
   return isRunningInBrowser() && isHorizontalOrientation()
-}
-
-export const loadJSON = async (pathToJSONFile: string) => {
-  const fileName = pathToJSONFile // Replace with the name of your JSON file
-  const filePath =
-    Platform.OS === "android" ? FileSystem.documentDirectory + fileName : FileSystem.documentDirectory + "/" + fileName
-
-  try {
-    const fileContents = await FileSystem.readAsStringAsync(filePath)
-
-    const data = JSON.parse(fileContents)
-    return data
-  } catch (e) {
-    console.log(e)
-  }
 }
 
 export function truncateText(text: string, maxLength: number) {

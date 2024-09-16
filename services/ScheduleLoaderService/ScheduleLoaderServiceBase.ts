@@ -31,15 +31,15 @@ export default class ScheduleLoaderServiceBase {
   // this function also properly returns child instance in child classes as well via dynamic access of class (.this is class here)
   static async GetInstance(): Promise<ScheduleLoaderServiceBase> {
     if (!this.instance) {
-      console.log(`[ScheduleLoader] Constructing instance of class ${this.name}`)
+      console.log(`⏳ [ScheduleLoader] Constructing instance of class ${this.name}`)
 
       this.instance = new this()
       await this.instance.init()
 
       // log loaded schedule files
-      console.log(`[${this.name}] schedule loader service instance constructed successfully`)
+      console.log(`[✔ ${this.name}] schedule loader service instance constructed successfully`)
       console.log(`[${this.name}] schedule loader files:`)
-      this.instance.scheduleFiles.forEach((file) => console.log(`[${this.name}] file: ${file.filename}`))
+      this.instance.scheduleFiles.forEach((file) => console.log(`📝 [${this.name}] file: ${file.filename}`))
     }
 
     return this.instance
@@ -47,6 +47,12 @@ export default class ScheduleLoaderServiceBase {
 
   protected constructor() {}
 
+  /**
+   * Initializes the service. Retrieves schedules from local storage or contentful.
+   * If schedules are available locally, checks for updates.
+   * If schedules are not available locally, gets them from Contentful.
+   *
+   */
   protected async init() {
     // check whether schedules are available locally
     const schedulesAvailableLocally = (await FileSystem.getInfoAsync(this.pathToScheduleFolder)).exists
@@ -77,6 +83,9 @@ export default class ScheduleLoaderServiceBase {
     this.scheduleFiles = _.sortBy(this.scheduleFiles, (sf) => sf.filename)
   }
 
+  /**
+   * Reads schedules from local storage and sets them to .scheduleFiles.
+   */
   async getSchedulesFromFileSystem() {
     console.log(`[Schedule Loader] schedules are available locally. loading...`)
     let allScheduleFileNames = await FileSystem.readDirectoryAsync(this.pathToScheduleFolder)
@@ -103,8 +112,9 @@ export default class ScheduleLoaderServiceBase {
     return scheduleFiles
   }
 
+  // TODO: Shrink by splitting into two functions
   /**
-   * Downloads schedules from contentful and sets them to .scheduleFiles.
+   * Downloads schedules from Contentful and sets them to .scheduleFiles.
    * Also saves them to schedules folder (android only).
    */
   async getSchedulesFromContentful() {
@@ -167,6 +177,9 @@ export default class ScheduleLoaderServiceBase {
     this.scheduleFiles = scheduleFiles
   }
 
+  /**
+   * Retrieves example schedules from assets. The assets are hardcoded json files.
+   */
   getExampleSchedules() {
     console.log(`[Schedule Loader] retrieving example schedules`)
 
@@ -204,7 +217,10 @@ export default class ScheduleLoaderServiceBase {
     return this.scheduleFiles.find((sf) => sf.filename === fileName)
   }
 
-  // checks for updates and updates schedules if they are outdated
+  // TODO: split into two functions
+  /**
+   * Checks for updates and updates schedules if they are outdated.
+   */
   async checkForUpdatesAsync() {
     let netInfo = await NetInfo.fetch()
 
@@ -304,6 +320,9 @@ export default class ScheduleLoaderServiceBase {
     this.scheduleFiles = updatedScheduleFiles
   }
 
+  /**
+   * Plucks metadata from given ScheduleFile and into separate metadata object.
+   */
   getScheduleFileMetadata(scheduleFile: ScheduleFile): ScheduleFileMetadata | undefined {
     if (!scheduleFile) {
       return undefined
@@ -317,7 +336,9 @@ export default class ScheduleLoaderServiceBase {
     }
   }
 
-  // persists schedule model into file
+  /**
+   * Persists given schedule model into file. Is overridden in child classes.
+   */
   async dumpSchedule(schedule: IScheduleModel) {
     // get corresponding schedule file
     let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))

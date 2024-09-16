@@ -31,7 +31,7 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
   cancelScheduledNotificationAsync(identifier: string): Promise<void> {
     return Notifications.cancelScheduledNotificationAsync(identifier)
   }
-
+  // a bunch of wrappers for expo-notifications methods. Perhaps I will delete them later
   cancelAllScheduledNotificationsAsync(): Promise<void> {
     return Notifications.cancelAllScheduledNotificationsAsync()
   }

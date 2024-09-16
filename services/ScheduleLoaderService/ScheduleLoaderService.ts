@@ -15,9 +15,13 @@ export default class ScheduleLoaderService extends ScheduleLoaderServiceBase {
     // replace contentful schedules with their user edited versions
     await this.replaceContentfulSchedulesWithEditedVersions()
 
+    // sort schedules by filename
     this.scheduleFiles = _.sortBy(this.scheduleFiles, (sf) => sf.filename)
   }
 
+  /**
+   * Replaces Contentful schedules with their user-edited counterparts.
+   */
   async replaceContentfulSchedulesWithEditedVersions() {
     const editedSchedulesStorage = await EditedSchedulesStorageService.GetInstance()
 
@@ -36,7 +40,9 @@ export default class ScheduleLoaderService extends ScheduleLoaderServiceBase {
     this.scheduleFiles = editedCounterparts
   }
 
-  // persists schedule model into file
+  /**
+   * Persists given schedule model into local storage. Overrides parent class' method.
+   */
   override async dumpSchedule(schedule: IScheduleModel) {
     // get corresponding schedule file
     let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))

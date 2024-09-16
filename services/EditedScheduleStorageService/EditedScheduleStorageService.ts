@@ -1,8 +1,6 @@
 // web only.
 // service for saving edited schedules to local storage
 
-// TODO: resolve require cycle: EditedScheduleStorageService.ts -> services\ScheduleLoaderService.ts -> EditedScheduleStorageService.ts
-
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import { workDaysEnLower } from "../../constants/Days"
@@ -12,7 +10,9 @@ import { ensureExtension } from "../../utilities/utilities"
 import { IEditedScheduleStorageService, ScheduleWithMetadata } from "./Types"
 import { IScheduleModel } from "../../models/ScheduleModel/Types"
 
-// singleton service
+/**
+ * [Web only] Singleton service for saving edited schedules to local storage.
+ */
 export default class EditedSchedulesStorageService implements IEditedScheduleStorageService {
   private static instance: EditedSchedulesStorageService
 
@@ -40,14 +40,18 @@ export default class EditedSchedulesStorageService implements IEditedScheduleSto
     await Promise.all(results)
   }
 
-  // copies regular schedule to local storage
+  /**
+   * Copies regular schedule to local storage
+   */
   async createVersionForEdits(schedule: IScheduleModel) {
     // I wonder if this is enough
     await this.saveEditedSchedule(schedule)
     return schedule
   }
 
-  // saves schedule with its metadata to local storage
+  /**
+   * Saves schedule with its metadata to local storage.
+   */
   async saveEditedSchedule(schedule: IScheduleModel): Promise<void> {
     const scheduleLoader = await ScheduleLoaderService.GetInstance()
     const scheduleMetadata = scheduleLoader.getScheduleFileMetadata(

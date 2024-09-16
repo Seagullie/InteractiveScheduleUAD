@@ -57,7 +57,7 @@ export default class SettingsService implements ISettingsService {
 
     console.log("settings fetched. Populating properties...")
     for (const [key, value] of Object.entries(fetchedSettings)) {
-      console.log(`[fetched settings] ${key}: ${value}`)
+      console.log(`🛠 [Fetched settings] ${key}: ${value}`)
       let key_ = key as keyof ScheduleAppSettings
       ;(this[key_] as any) = value
     }
