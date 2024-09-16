@@ -8,7 +8,12 @@ export default function UnfoldableCard({ title, bodyComponent }: { title: string
   let [isBodyRevealed, setIsBodyRevealed] = useState(false)
 
   return (
-    <TouchableOpacity style={{ marginBottom: 12 }} onPress={() => setIsBodyRevealed(!isBodyRevealed)}>
+    <TouchableOpacity
+      style={{ marginBottom: 12 }}
+      onPress={() => setIsBodyRevealed(!isBodyRevealed)}
+      // avoid opacity animation when body is revealed (needed for distraction-free scrolling through long content)
+      activeOpacity={isBodyRevealed ? 1 : 0.2}
+    >
       <View style={UCStyles.unfoldableCard}>
         {/* title | question */}
 
