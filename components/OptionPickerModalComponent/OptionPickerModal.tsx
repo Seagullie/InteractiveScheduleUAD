@@ -6,7 +6,6 @@ import { Ionicons } from "@expo/vector-icons"
 import AppText from "../shared/AppText"
 import { styles } from "./Styles"
 import { OptionPickerModalProps } from "./Types"
-import { render } from "@testing-library/react-native"
 
 // TODO: fix modal content overflowing when keyboard is shown
 // TODO: refactor onClose to something more understandable

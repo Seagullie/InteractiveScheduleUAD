@@ -13,30 +13,30 @@ export class ScheduleDay implements IScheduleDay {
   }
 
   getCurrentWeekClasses(): ScheduleClass[] {
-    let currentWeekType = GetWeekType() + 1
-    let currentWeekClasses = this.classes.filter((class_) => !class_.isBiweekly || class_.week == currentWeekType)
+    const currentWeekType = GetWeekType() + 1
+    const currentWeekClasses = this.classes.filter((class_) => !class_.isBiweekly || class_.week == currentWeekType)
     return currentWeekClasses
   }
 
   // пари по чисельнику
   getNominatorClasses(): ScheduleClass[] {
-    let nominatorClasses = this.classes.filter((class_) => !class_.isBiweekly || class_.week == 1)
+    const nominatorClasses = this.classes.filter((class_) => !class_.isBiweekly || class_.week == 1)
     return nominatorClasses
   }
 
   // пари по знаменнику
   getDenominatorClasses(): ScheduleClass[] {
-    let denominatorClasses = this.classes.filter((class_) => !class_.isBiweekly || class_.week == 2)
+    const denominatorClasses = this.classes.filter((class_) => !class_.isBiweekly || class_.week == 2)
     return denominatorClasses
   }
 
   getMatchingClassOfOtherWeek(class_: ScheduleClass) {
     if (!class_.isBiweekly) return null
 
-    let otherWeek = class_.week == 1 ? 2 : 1
-    let index = class_.index
+    const otherWeek = class_.week == 1 ? 2 : 1
+    const index = class_.index
 
-    let matchingClass = this.classes.find((class_) => class_.index == index && class_.week == otherWeek)
+    const matchingClass = this.classes.find((class_) => class_.index == index && class_.week == otherWeek) ?? null
 
     return matchingClass
   }

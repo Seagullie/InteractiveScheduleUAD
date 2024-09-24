@@ -5,7 +5,7 @@ import { getContentfulClient } from "../../utilities/utilities"
 import { NewsArticle, ContentfulNewsArticleFields } from "./Types"
 
 export default class NewsLoaderService {
-  protected static instance: NewsLoaderService
+  protected static instance: NewsLoaderService | null
 
   protected _newsCached: NewsArticle[] = []
 
@@ -65,9 +65,9 @@ export default class NewsLoaderService {
   async fetchContentfulEntries() {
     const client = getContentfulClient()
 
-    const content_type = "newsArticle"
+    const contentType = "newsArticle"
     const entries = await client.getEntries({
-      content_type,
+      content_type: contentType,
     })
 
     return entries
@@ -79,7 +79,7 @@ export default class NewsLoaderService {
 
   // TODO: move to utilities
   async getNewestArticleDate(): Promise<Date> {
-    let news = await this.getNewsFromContentful()
+    const news = await this.getNewsFromContentful()
     return new Date(news[0].createdAt)
   }
 }

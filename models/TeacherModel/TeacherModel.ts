@@ -12,7 +12,7 @@ export default class TeacherModel {
     threshold: 0.3,
   })
 
-  private static instance: TeacherModel
+  private static instance: TeacherModel | null = null
 
   static GetInstance(): TeacherModel {
     if (!TeacherModel.instance) {
@@ -29,7 +29,7 @@ export default class TeacherModel {
   getTeacherBySurname(surname: string): Teacher | string {
     if (typeof surname != "string") return TEACHER_NOT_FOUND_STRING
 
-    let match = this.teachersFuse.search(surname)
+    const match = this.teachersFuse.search(surname)
 
     if (match.length == 0) return TEACHER_NOT_FOUND_STRING
 
@@ -37,7 +37,7 @@ export default class TeacherModel {
   }
 
   getFullNameBySurname(surname: string): string {
-    let teacher = this.getTeacherBySurname(surname)
+    const teacher = this.getTeacherBySurname(surname)
     if (teacher == TEACHER_NOT_FOUND_STRING) return surname
 
     if (typeof teacher == "string") return teacher
@@ -45,7 +45,7 @@ export default class TeacherModel {
   }
 
   getSurnameAndInitialsBySurname(surname: string): string {
-    let teacher = this.getTeacherBySurname(surname)
+    const teacher = this.getTeacherBySurname(surname)
 
     // handle case of user-provided teacher name (via editor)
     let teacherFullNameBits: string[]
@@ -56,12 +56,12 @@ export default class TeacherModel {
     }
 
     surname = teacherFullNameBits[0]
-    let name = teacherFullNameBits[1]
-    let patronymic = teacherFullNameBits[2]
+    const name = teacherFullNameBits[1]
+    const patronymic = teacherFullNameBits[2]
 
     // sometimes data is not consistent, e.g. Kolosivska O.V. instead of full name, so additional checks are needed
-    let nameInitial = name ? ensureEnding(name[0], ".") : ""
-    let patronymicInitial = patronymic ? ensureEnding(patronymic[0], ".") : ""
+    const nameInitial = name ? ensureEnding(name[0], ".") : ""
+    const patronymicInitial = patronymic ? ensureEnding(patronymic[0], ".") : ""
 
     return `${surname} ${nameInitial} ${patronymicInitial}`
   }

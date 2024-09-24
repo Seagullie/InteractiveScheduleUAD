@@ -49,11 +49,11 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
   const [_, setState] = useState({})
   const [isFirstTimeLaunch, setIsFirstTimeLaunch] = useState<string | null>("false") // async storage can't store anything other than strings
 
-  let scheduleRef = useRef<ScheduleModel | null>(null)
-  let scheduleFileRef = useRef<ScheduleFile | null>(null)
-  let settingsServiceRef = useRef<SettingsService>(null)
+  const scheduleRef = useRef<ScheduleModel | null>(null)
+  const scheduleFileRef = useRef<ScheduleFile | null>(null)
+  const settingsServiceRef = useRef<SettingsService>(null)
 
-  let scrollViewContainerRef = useRef<ScrollView | null>(null)
+  const scrollViewContainerRef = useRef<ScrollView | null>(null)
 
   const [scheduleLoaded, setScheduleLoaded] = useState(false)
   const [scheduleName, setScheduleName] = useState("")
@@ -68,8 +68,8 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
     async (settingsService: SettingsService) => {
       // if schedule didn't change then there is nothing to do here
       console.log(" - - - deciding whether to update schedule or not - - -")
-      let settingsScheduleName = ensureNoExtension(settingsService.currentScheduleName, ".json")
-      let currentScheduleName = ensureNoExtension(scheduleNameRef.current, ".json")
+      const settingsScheduleName = ensureNoExtension(settingsService.currentScheduleName, ".json")
+      const currentScheduleName = ensureNoExtension(scheduleNameRef.current, ".json")
       console.log("settings schedule name: ", settingsScheduleName)
       console.log("schedule name: ", currentScheduleName)
 
@@ -88,8 +88,8 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
         }
 
         scheduleRef.current = newSchedule
-        let scheduleLoaderService = await ScheduleLoaderService.GetInstance()
-        let updatedSchedule = scheduleLoaderService.getScheduleFileByFileName(
+        const scheduleLoaderService = await ScheduleLoaderService.GetInstance()
+        const updatedSchedule = scheduleLoaderService.getScheduleFileByFileName(
           ensureExtension(settingsService.currentScheduleName, ".json")
         )
         // TODO: Refactor XD
@@ -108,18 +108,18 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
   useEffect(() => {
     async function onMount() {
-      let settingsService = await SettingsService.GetInstance()
+      const settingsService = await SettingsService.GetInstance()
       settingsServiceRef.current = settingsService
 
       console.log("[Schedule.tsx] settingsService instance: ", settingsService)
 
-      let scheduleLoaderInstance = await ScheduleLoaderService.GetInstance()
+      const scheduleLoaderInstance = await ScheduleLoaderService.GetInstance()
 
-      let schedule = new ScheduleModel("groupname_groupyear", "groupname", 5)
+      const schedule = new ScheduleModel("groupname_groupyear", "groupname", 5)
 
       // check whether the schedule that settings service is referencing exists. Otherwise load first available schedule
-      let scheduleFile = scheduleLoaderInstance.getScheduleFileByFileName(settingsService.currentScheduleName)
-      let firstScheduleFile = scheduleLoaderInstance.scheduleFiles[0]
+      const scheduleFile = scheduleLoaderInstance.getScheduleFileByFileName(settingsService.currentScheduleName)
+      const firstScheduleFile = scheduleLoaderInstance.scheduleFiles[0]
 
       scheduleFileRef.current = ldash.cloneDeep(scheduleFile ?? firstScheduleFile)
 
@@ -187,9 +187,9 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
         return
       }
 
-      let currentScheduleFile = scheduleFileRef.current
+      const currentScheduleFile = scheduleFileRef.current
       ScheduleLoaderService.GetInstance().then((instance) => {
-        let scheduleFile = instance.getScheduleFileByFileName(currentScheduleFile!.filename)
+        const scheduleFile = instance.getScheduleFileByFileName(currentScheduleFile!.filename)
         // debugger
 
         // have to compare them this way because the objects themselves have different ids
@@ -200,7 +200,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
           // update refs
           scheduleFileRef.current = ldash.cloneDeep(scheduleFile) ?? null
 
-          let newSchedule = new ScheduleModel("groupname_groupyear", "groupname", 5)
+          const newSchedule = new ScheduleModel("groupname_groupyear", "groupname", 5)
           scheduleRef.current! = newSchedule
           newSchedule.getScheduleFromScheduleLoader(scheduleFile!.filename).then(() => {
             setState({})
@@ -285,7 +285,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
                 return <View style={globalStyles.noDisplay} key={day + weekType}></View>
               }
 
-              let classes = weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
+              const classes = weekType == 0 ? scheduleDay.getNominatorClasses() : scheduleDay.getDenominatorClasses()
 
               return (
                 <View

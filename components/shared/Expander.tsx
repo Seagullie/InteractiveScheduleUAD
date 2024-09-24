@@ -5,7 +5,7 @@ import Collapsible from "react-native-collapsible"
 import AppText from "./AppText"
 
 export default function Expander({ header, children }: { header: string; children: React.ReactNode }) {
-  let [collapsed, setCollapsed] = React.useState(true)
+  const [collapsed, setCollapsed] = React.useState(true)
   //   console.log("[Expander] expander recieved these children:")
   //   console.log(children)
 

@@ -16,6 +16,7 @@ export default class ScheduleModel implements IScheduleModel {
     day.toLowerCase()
   )
   weekendDays = ["saturday", "sunday"]
+  // eslint-disable-next-line no-array-constructor -- won't get same type hints with []
   scheduleDays = new Array<ScheduleDay>()
 
   constructor(name: string, specialtyName: string, year: number) {
@@ -33,8 +34,8 @@ export default class ScheduleModel implements IScheduleModel {
     this.dayNames.forEach((day) => {
       if (this.weekendDays.includes(day)) return
 
-      let dayClasses: IScheduleClass[] = data[day].classes
-      let scheduleDay = new ScheduleDay(day, dayClasses)
+      const dayClasses: IScheduleClass[] = data[day].classes
+      const scheduleDay = new ScheduleDay(day, dayClasses)
       this.scheduleDays.push(scheduleDay)
     })
 
@@ -47,8 +48,8 @@ export default class ScheduleModel implements IScheduleModel {
   }
 
   async getScheduleFromScheduleLoader(scheduleFileName: string) {
-    let scheduleLoader = await ScheduleLoaderService.GetInstance()
-    let scheduleFile = scheduleLoader.scheduleFiles.find((file) => file.filename.startsWith(scheduleFileName))
+    const scheduleLoader = await ScheduleLoaderService.GetInstance()
+    const scheduleFile = scheduleLoader.scheduleFiles.find((file) => file.filename.startsWith(scheduleFileName))
 
     if (!scheduleFile) {
       console.log(`[Schedule Model] schedule file ${scheduleFileName} not found`)
@@ -63,14 +64,14 @@ export default class ScheduleModel implements IScheduleModel {
     console.log(`[Schedule Model] loading schedule from Schedule Loader: ${this.name}`)
 
     // @ts-expect-error
-    let data: ScheduleDaysJson = scheduleFile.json_parsed
+    const data: ScheduleDaysJson = scheduleFile.json_parsed
 
     this.setSchedule(data)
   }
 
   async getScheduleFromEditedSchedulesStorage(scheduleFileName: string) {
-    let editedScheduleService = await EditedSchedulesStorageService.GetInstance()
-    let schedule = await editedScheduleService.loadEditedSchedule(scheduleFileName)
+    const editedScheduleService = await EditedSchedulesStorageService.GetInstance()
+    const schedule = await editedScheduleService.loadEditedSchedule(scheduleFileName)
 
     if (!schedule) {
       console.log(`[Schedule Model] schedule file ${scheduleFileName} not found`)

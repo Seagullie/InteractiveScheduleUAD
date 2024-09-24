@@ -56,16 +56,16 @@ export default function ScheduleDayComponent({
   const configureNotificationsCallback = useCallback(
     // debounce to prevent multiple calls in short period of time
     _.debounce(async (updatedSchedule) => {
-      let scheduleNotificationService = await ScheduleNotificationsService.GetInstance()
+      const scheduleNotificationService = await ScheduleNotificationsService.GetInstance()
       scheduleNotificationService.configureNotificationsForSchedule(updatedSchedule)
     }, 3000),
     []
   )
 
-  let navigation = useNavigation()
+  const navigation = useNavigation()
 
-  let [classes, setClasses] = useState<ScheduleClass[]>([])
-  let dayNameEnRef = useRef(mapUkrWorkDayToEnWorkDay(dayName).toLowerCase())
+  const [classes, setClasses] = useState<ScheduleClass[]>([])
+  const dayNameEnRef = useRef(mapUkrWorkDayToEnWorkDay(dayName).toLowerCase())
 
   /**
    * Saves edited classes to the schedule
@@ -73,13 +73,13 @@ export default function ScheduleDayComponent({
    */
   function saveEditedClasses(classes: ScheduleClass[]) {
     console.log("saving edited classes")
-    let updatedSchedule = scheduleObject
-    let classesWithoutPlaceholders = classes.filter((class_) => !class_.isSampleClass())
+    const updatedSchedule = scheduleObject
+    const classesWithoutPlaceholders = classes.filter((class_) => !class_.isSampleClass())
 
-    let thisDay = updatedSchedule.scheduleDays.find((day) => day.name == dayNameEnRef.current)
+    const thisDay = updatedSchedule.scheduleDays.find((day) => day.name == dayNameEnRef.current)
     // construct new classes array with classes of other week preserved
 
-    let biweeklyClassesOfOtherWeek = thisDay!.classes.filter(
+    const biweeklyClassesOfOtherWeek = thisDay!.classes.filter(
       (class_) => class_.isBiweekly && class_.week != weekType + 1
     )
 
@@ -99,9 +99,9 @@ export default function ScheduleDayComponent({
   // any time new updated classes collection prop is passed, add placeholders to it and update state
   // it also initializes classes state on first render
   useEffect(() => {
-    let placeholderClasses = addPlaceholders(classesCollection)
+    const placeholderClasses = addPlaceholders(classesCollection)
     // sort by index in ascending order
-    let sortedClasses = _.sortBy(placeholderClasses, (class_) => class_.index)
+    const sortedClasses = _.sortBy(placeholderClasses, (class_) => class_.index)
 
     setClasses(sortedClasses)
   }, [classesCollection])
@@ -120,7 +120,7 @@ export default function ScheduleDayComponent({
 
     let extendedContainer: ScheduleClass[] = new Array(MAX_CLASSES_PER_DAY).fill(undefined)
     extendedContainer = extendedContainer.map((_, idx) => {
-      let class_ = classes.find((class_) => class_.index == idx + 1)
+      const class_ = classes.find((class_) => class_.index == idx + 1)
       const shouldCreatePlaceholderClass = class_ == undefined
 
       if (shouldCreatePlaceholderClass) {
@@ -175,11 +175,11 @@ export default function ScheduleDayComponent({
           }}
           // @ts-ignore
           renderItem={({ item, drag, isActive }) => {
-            let class_ = item
-            let idx = item.index - 1
+            const class_ = item
+            const idx = item.index - 1
 
             // normal class component
-            let scheduleClassComponent = (
+            const scheduleClassComponent = (
               <ScheduleClassComponent
                 displayRoomNumber={displayRoomNumber}
                 idx={idx}
@@ -191,14 +191,14 @@ export default function ScheduleDayComponent({
             )
 
             const onDeleteButtonPressed = () => {
-              let filteredClasses = classes.filter((class_) => class_.index != idx + 1)
-              let filteredClassesWithPlaceholders = addPlaceholders(filteredClasses)
+              const filteredClasses = classes.filter((class_) => class_.index != idx + 1)
+              const filteredClassesWithPlaceholders = addPlaceholders(filteredClasses)
               setClasses(filteredClassesWithPlaceholders)
               saveEditedClasses(filteredClassesWithPlaceholders)
             }
 
             // editable class component
-            let editableScheduleClassWrapper = (
+            const editableScheduleClassWrapper = (
               <SwipeableItem
                 key={idx + "" + class_.week}
                 // item={item}
@@ -224,12 +224,12 @@ export default function ScheduleDayComponent({
                           // get class associated with this component
                           if (class_.index == idx + 1) {
                             // process the values
-                            let teacher = values.teacher.split(",").map((t: string) => t.trim())
-                            let room = values.room.split(",").map((r: string) => r.trim())
-                            let isBiweekly =
+                            const teacher = values.teacher.split(",").map((t: string) => t.trim())
+                            const room = values.room.split(",").map((r: string) => r.trim())
+                            const isBiweekly =
                               typeof values.isBiweekly == "string" ? JSON.parse(values.isBiweekly) : values.isBiweekly
 
-                            let wasBiweekly = class_.isBiweekly
+                            const wasBiweekly = class_.isBiweekly
 
                             // if class wasn't biweekly and now it is, update week to currently viewed week
                             if (!wasBiweekly && isBiweekly) {

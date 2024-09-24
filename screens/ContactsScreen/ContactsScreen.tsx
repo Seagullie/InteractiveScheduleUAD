@@ -30,10 +30,10 @@ import WarningBar from "../../components/WarningBar"
 
 type CategoryProps = {
   title: string
-  titleIcon: JSX.Element
+  titleIcon: React.JSX.Element
   subcategories?: string[]
   onPress?: () => void
-  children?: JSX.Element[]
+  children?: React.JSX.Element[]
 }
 
 function Category({ title, titleIcon, subcategories, onPress, children }: CategoryProps) {
@@ -54,7 +54,6 @@ function Category({ title, titleIcon, subcategories, onPress, children }: Catego
           const itemOnPress = item.props.onPress
           const ItemType = item.type
 
-          // @ts-expect-error
           const itemWithoutOnPress = <ItemType {...item.props} onPress={() => null} />
 
           return (
@@ -123,21 +122,21 @@ function constructContentPresenterModal(
 export default function ContactsScreen() {
   const navigation = useNavigation()
 
-  let [corpsModalIsOpen, setCorpsModalIsOpen] = React.useState(false)
+  const [corpsModalIsOpen, setCorpsModalIsOpen] = React.useState(false)
 
-  let [rectorateModalIsOpen, setRectorateModalIsOpen] = React.useState(false)
-  let [admissionCommitteeModalIsOpen, setAdmissionCommitteeModalIsOpen] = React.useState(false)
-  let [preparationDepartmentModalIsOpen, setPreparationDepartmentModalIsOpen] = React.useState(false)
-  let [
+  const [rectorateModalIsOpen, setRectorateModalIsOpen] = React.useState(false)
+  const [admissionCommitteeModalIsOpen, setAdmissionCommitteeModalIsOpen] = React.useState(false)
+  const [preparationDepartmentModalIsOpen, setPreparationDepartmentModalIsOpen] = React.useState(false)
+  const [
     internationalAffairsAndInformationDepartmentModalIsOpen,
     setInternationalAffairsAndInformationDepartmentModalIsOpen,
   ] = React.useState(false)
 
-  let [accountingModalIsOpen, setAccountingModalIsOpen] = React.useState(false)
-  let [contractEducationModalIsOpen, setContractEducationModalIsOpen] = React.useState(false)
-  let [studentUnionModalIsOpen, setStudentUnionModalIsOpen] = React.useState(false)
-  let [studentCouncilModalIsOpen, setStudentCouncilModalIsOpen] = React.useState(false)
-  let [socialMediaModalIsOpen, setSocialMediaModalIsOpen] = React.useState(false)
+  const [accountingModalIsOpen, setAccountingModalIsOpen] = React.useState(false)
+  const [contractEducationModalIsOpen, setContractEducationModalIsOpen] = React.useState(false)
+  const [studentUnionModalIsOpen, setStudentUnionModalIsOpen] = React.useState(false)
+  const [studentCouncilModalIsOpen, setStudentCouncilModalIsOpen] = React.useState(false)
+  const [socialMediaModalIsOpen, setSocialMediaModalIsOpen] = React.useState(false)
 
   const structureAndSubdivisionsSubcategories = [
     "Ректорат",

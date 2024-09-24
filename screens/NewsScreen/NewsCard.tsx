@@ -11,16 +11,16 @@ import { CustomAutolink } from "../../components/shared/ExtendedAutoLink"
 
 export function NewsCard({ date, title, body }: { date: string; title: string; body: string }) {
   // convert date into day/month/year format
-  let dateObj = new Date(date)
-  let day = dateObj.getDate()
-  let month = dateObj.getMonth() + 1
-  let year = dateObj.getFullYear()
+  const dateObj = new Date(date)
+  const day = dateObj.getDate()
+  const month = dateObj.getMonth() + 1
+  const year = dateObj.getFullYear()
   date = `${day}.${month}.${year}`
 
-  let [isBodyExpanded, setIsBodyExpanded] = useState(false)
-  let bodyStateAdjustedText = isBodyExpanded ? body : truncateText(body, 280)
+  const [isBodyExpanded, setIsBodyExpanded] = useState(false)
+  const bodyStateAdjustedText = isBodyExpanded ? body : truncateText(body, 280)
 
-  let shouldShowLengthControlButton = body.length > 280
+  const shouldShowLengthControlButton = body.length > 280
   const lengthControlButton = (
     <TouchableOpacity onPress={() => setIsBodyExpanded(!isBodyExpanded)} style={styles.moreButton}>
       <AppText style={{ fontFamily: FontName.MontserratSemiBold, color: palette.navigationBackground }}>

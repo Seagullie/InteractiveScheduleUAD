@@ -26,14 +26,14 @@ export class ScheduleClass implements IScheduleClass {
 
     // here you make assumptions as you parse the data (that separator character is pipe).
     // Perhaps that's not the right place for such things
-    let teacherSeparator = "|"
+    const teacherSeparator = "|"
     if (typeof data.teacher == "string" && data.teacher.includes(teacherSeparator)) {
       this.teacher = data.teacher.split(teacherSeparator)
     } else {
       this.teacher = data.teacher
     }
 
-    let roomSeparator = "|"
+    const roomSeparator = "|"
     if (typeof data.room == "string" && data.room.includes(roomSeparator)) {
       this.room = data.room.split(roomSeparator)
     } else {
@@ -93,20 +93,20 @@ export class ScheduleClass implements IScheduleClass {
   isCurrent() {
     // debugger
     // return this.index == 3
-    let isInCurrentDay = this.day == workDaysEnLower[new Date().getDay() - 1]
+    const isInCurrentDay = this.day == workDaysEnLower[new Date().getDay() - 1]
 
     if (!isInCurrentDay) return false
 
-    let isInCurrentTimeSlot = determineInterval() == getStrict(REGLAMENT_DATA, this.index - 1)
-    let isMatchingWeekType = GetWeekType() + 1 == this.week
-    let isOngoingClass = isInCurrentTimeSlot && (!this.isBiweekly || isMatchingWeekType)
+    const isInCurrentTimeSlot = determineInterval() == getStrict(REGLAMENT_DATA, this.index - 1)
+    const isMatchingWeekType = GetWeekType() + 1 == this.week
+    const isOngoingClass = isInCurrentTimeSlot && (!this.isBiweekly || isMatchingWeekType)
 
     return isOngoingClass
   }
 
   isSampleClass() {
     // TODO: find better way to compare lists
-    let isSample =
+    const isSample =
       this.name == ScheduleClass.sampleName &&
       this.room == ScheduleClass.sampleRoom &&
       this.teacher.toString() == [ScheduleClass.sampleTeacher].toString()

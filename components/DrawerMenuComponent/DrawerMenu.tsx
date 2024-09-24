@@ -28,9 +28,9 @@ let shouldDisplayYellowCircle = true
 // yellow circle is displayed if there are new news
 function determineIfShouldDisplayYellowCircle() {
   NewsLoaderService.GetInstance().then(async (instance) => {
-    let newestArticleDate = await instance.getNewestArticleDate()
-    let lastSeenArticle = await AsyncStorage.getItem(ASYNC_STORAGE_KEY_NEWS_CHECKED_DATE)
-    let lastSeenArticleDate = lastSeenArticle ? new Date(lastSeenArticle) : null
+    const newestArticleDate = await instance.getNewestArticleDate()
+    const lastSeenArticle = await AsyncStorage.getItem(ASYNC_STORAGE_KEY_NEWS_CHECKED_DATE)
+    const lastSeenArticleDate = lastSeenArticle ? new Date(lastSeenArticle) : null
 
     console.log("newestArticleDate", newestArticleDate)
     console.log("lastSeenArticleDate", lastSeenArticleDate)
@@ -108,18 +108,18 @@ export default function DrawerMenu() {
   const routeNameToIconRef = useRef(RouteIcons)
 
   // Get all routes from the navigation state
-  let routesContainer = useNavigationState((state) => state)
+  const routesContainer = useNavigationState((state): typeof state | null => state)
   //   console.log("routes", routesContainer)
 
-  if (routesContainer && routesContainer.routes) {
+  if (routesContainer && routesContainer.routes.length > 0) {
     const isRunningInExpoGo_ = isRunningInExpoGo()
 
-    let routes = routesContainer.routes
+    const routes = routesContainer.routes
 
     // Split routes by breakpoint into top and bottom parts
-    let breakpoint = routes.length - 5
-    let topRoutes = routes.slice(0, breakpoint)
-    let bottomRoutes = routes.slice(breakpoint, routes.length)
+    const breakpoint = routes.length - 5
+    const topRoutes = routes.slice(0, breakpoint)
+    const bottomRoutes = routes.slice(breakpoint, routes.length)
 
     // Remove tests route if app is running outside Expo Go
     if (!isRunningInExpoGo_) {
@@ -127,8 +127,8 @@ export default function DrawerMenu() {
     }
 
     // get current route
-    let currentRouteIndex = routesContainer.index
-    let currentRoute = routes[currentRouteIndex]
+    const currentRouteIndex = routesContainer.index
+    const currentRoute = routes[currentRouteIndex]
 
     // create RouteButton component
     const RouteButton = RouteButtonFactory(currentRoute, routeNameToIconRef)

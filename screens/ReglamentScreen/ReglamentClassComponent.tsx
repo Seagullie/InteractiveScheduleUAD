@@ -9,13 +9,13 @@ import { REGLAMENT_DATA_ELEM_TYPE, REGLAMENT_DATA } from "../../constants/Consta
 export const ReglamentClass = ({ index }: { index: number }) => {
   const classData = getReglamentClass(index)
   //   let classTimeInterval = classData[1]
-  let classStartTime = classData[1]
-  let classEndTime = classData[2]
+  const classStartTime = classData[1]
+  const classEndTime = classData[2]
 
-  let currentTimeInterval = determineInterval()
-  let isCurrentClassRef = useRef(currentTimeInterval == classData)
+  const currentTimeInterval = determineInterval()
+  const isCurrentClassRef = useRef(currentTimeInterval == classData)
 
-  let [_, setState] = useState({})
+  const [_, setState] = useState({})
   // rerender component if it's not current class anymore or became current class
   // mount effect
   useEffect(() => {
@@ -23,8 +23,8 @@ export const ReglamentClass = ({ index }: { index: number }) => {
 
     // update current time slot every 15 seconds
     const interval = setInterval(() => {
-      let wasCurrent = isCurrentClassRef.current
-      let isCurrent = determineInterval() == classData
+      const wasCurrent = isCurrentClassRef.current
+      const isCurrent = determineInterval() == classData
       if (wasCurrent != isCurrent) {
         isCurrentClassRef.current = isCurrent
         setState({})
@@ -37,7 +37,7 @@ export const ReglamentClass = ({ index }: { index: number }) => {
     }
   }, [])
 
-  let isCurrentClass = isCurrentClassRef.current
+  const isCurrentClass = isCurrentClassRef.current
 
   return (
     <View style={styles.reglamentClassContainer}>

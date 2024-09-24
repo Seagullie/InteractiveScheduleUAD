@@ -7,7 +7,7 @@ import { styles } from "./Styles"
 import { NewsCard } from "./NewsCard"
 
 export default function NewsScreen() {
-  let [news, setNews] = useState<NewsArticle[]>([
+  const [news, setNews] = useState<NewsArticle[]>([
     //     {
     //       //   createdAt: "14.04.2023",
     //       createdAt: new Date().toDateString(),

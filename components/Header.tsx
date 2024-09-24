@@ -9,7 +9,7 @@ import RouteIcons from "../constants/RouteIcons"
 import { FontName } from "../constants/Fonts"
 import { DrawerRoutes } from "../routes/DrawerRoutes"
 
-//@ts-expect-error
+// @ts-expect-error
 export function getRouteIcon(navigation, headerText: DrawerRoutes) {
   const RouteIconConstructor = RouteIcons[headerText].type
   const RouteIcon = <RouteIconConstructor {...RouteIcons[headerText].props} style={globalStyles.navIcon} />

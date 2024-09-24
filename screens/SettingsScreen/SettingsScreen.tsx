@@ -40,11 +40,11 @@ export default function Settings() {
 
   // REACTIVE VARIABLES
 
-  let [schedulePickerData, setSchedulePickerData] = useState<string[]>([])
+  const [schedulePickerData, setSchedulePickerData] = useState<string[]>([])
 
   // Note: Update place 0
   // TODO: use a type for settingsValues
-  let [settingsValues, setSettingsValues] = useState<SettingFields>({
+  const [settingsValues, setSettingsValues] = useState<SettingFields>({
     selectedSchedule: "",
     displayRoomNumber: false,
     notifyBeforeClass: false,
@@ -53,13 +53,13 @@ export default function Settings() {
     notifyBeforeClassOffsetMinutes: 0,
   })
 
-  let [schedulePickerModalVisible, setSchedulePickerModalVisible] = useState(false)
-  let [schedulePickerModalDisabled, setSchedulePickerModalDisabled] = useState(false)
+  const [schedulePickerModalVisible, setSchedulePickerModalVisible] = useState(false)
+  const [schedulePickerModalDisabled, setSchedulePickerModalDisabled] = useState(false)
 
-  let [emptyDayDisplayModalVisible, setEmptyDayDisplayModalVisible] = useState(false)
+  const [emptyDayDisplayModalVisible, setEmptyDayDisplayModalVisible] = useState(false)
 
-  let [displayTeacherModeModalVisible, setDisplayTeacherModeModalVisible] = useState(false)
-  let [notifyBeforehandModalVisible, setNotifyBeforehandModalVisible] = useState(false)
+  const [displayTeacherModeModalVisible, setDisplayTeacherModeModalVisible] = useState(false)
+  const [notifyBeforehandModalVisible, setNotifyBeforehandModalVisible] = useState(false)
 
   const [isReady, setIsReady] = useState(false)
 
@@ -73,7 +73,7 @@ export default function Settings() {
 
       // Note: Update place 1
 
-      let {
+      const {
         currentScheduleName,
         displayRoomNumber,
         notifyBeforeClass,
@@ -106,9 +106,11 @@ export default function Settings() {
         // ToastAndroid.show("Notifications have been configured", ToastAndroid.SHORT)
       }
 
-      let scheduleLodaderInstance = await ScheduleLoaderService.GetInstance()
+      const scheduleLodaderInstance = await ScheduleLoaderService.GetInstance()
 
-      let schedulePickerData = scheduleLodaderInstance.scheduleFiles.map((f) => ensureNoExtension(f.filename, ".json"))
+      const schedulePickerData = scheduleLodaderInstance.scheduleFiles.map((f) =>
+        ensureNoExtension(f.filename, ".json")
+      )
       setSchedulePickerData(schedulePickerData)
 
       setIsReady(true)
@@ -122,7 +124,7 @@ export default function Settings() {
     if (!isReady) return
 
     // Note: Update place 2
-    let {
+    const {
       selectedSchedule,
       displayRoomNumber,
       notifyBeforeClass,
@@ -132,7 +134,7 @@ export default function Settings() {
     } = settingsValues
 
     // TODO: Refactor this
-    let settingsService = settingsServiceRef.current!
+    const settingsService = settingsServiceRef.current!
     settingsService.currentScheduleName = ensureExtension(selectedSchedule, ".json")
     settingsService.displayRoomNumber = displayRoomNumber
     settingsService.notifyBeforeClass = notifyBeforeClass
@@ -145,10 +147,10 @@ export default function Settings() {
 
   // Used in corresponding onPress callback. Enables or disables schedule notifications
   async function toggleNotifs(enable: boolean) {
-    let scheduleNotifService = await ScheduleNotificationsService.GetInstance()
+    const scheduleNotifService = await ScheduleNotificationsService.GetInstance()
     if (enable) {
       // TODO: Refactor. Find a way to reference currently selected schedule in ScheduleScreen
-      let schedule = new ScheduleModel("foo", "bar", 99)
+      const schedule = new ScheduleModel("foo", "bar", 99)
       schedule.getScheduleFromScheduleLoader(settingsServiceRef.current!.currentScheduleName)
       scheduleNotifService.configureNotificationsForSchedule(schedule)
     } else {
@@ -166,7 +168,7 @@ export default function Settings() {
   // }, 500)
 
   // notifications aren't implemented in browser (although they could have been)
-  let notificationsSection = !isRunningInBrowser() ? (
+  const notificationsSection = !isRunningInBrowser() ? (
     <View>
       {constructCategoryHeader(
         "Сповіщення",
@@ -208,7 +210,7 @@ export default function Settings() {
               selectedOption={settingsValues.notifyBeforeClassOffsetMinutes + " хв."}
               onCloseModal={() => setNotifyBeforehandModalVisible(false)}
               onSelected={(selected) => {
-                let selectedInt = parseInt(selected)
+                const selectedInt = parseInt(selected)
                 setSettingsValues({
                   ...settingsValues,
                   notifyBeforeClassOffsetMinutes: selectedInt,

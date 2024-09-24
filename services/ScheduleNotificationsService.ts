@@ -26,6 +26,8 @@ export default class ScheduleNotificationsService extends LocalNotificationsServ
     return this.instance
   }
 
+  // TODO split the function
+  // eslint-disable-next-line max-lines-per-function
   async configureNotificationsForSchedule(schedule: ScheduleModel) {
     console.log(`[configure notifications] configuring notifications for schedule ${schedule.name}`)
     this.onConfigureNotificationsForScheduleStart?.call(this)
@@ -42,7 +44,7 @@ export default class ScheduleNotificationsService extends LocalNotificationsServ
 
       const configureDays = schedule.scheduleDays.map(async (day) => {
         const configureDayClasses = day.classes.map(async (class_) => {
-          let notifBuilder = new ClassNotificationBuilder(
+          const notifBuilder = new ClassNotificationBuilder(
             schedule,
             class_,
             notificationsService,
@@ -50,7 +52,7 @@ export default class ScheduleNotificationsService extends LocalNotificationsServ
           )
 
           if (class_.isBiweekly) {
-            let notifications = notifBuilder.constructBiweeklyNotificationsSequence(day)
+            const notifications = notifBuilder.constructBiweeklyNotificationsSequence(day)
 
             await Promise.all(
               notifications.map((notif) => {
@@ -58,7 +60,7 @@ export default class ScheduleNotificationsService extends LocalNotificationsServ
               })
             )
           } else {
-            let weeklyNotif = notifBuilder.constructWeeklyNotification(day)
+            const weeklyNotif = notifBuilder.constructWeeklyNotification(day)
 
             return await notificationsService.scheduleNotification(weeklyNotif.content, weeklyNotif.trigger)
           }

@@ -1,11 +1,13 @@
 import { useState } from "react"
 import { View, TouchableOpacity, StyleSheet } from "react-native"
+import React from "react"
+
 import AppText from "./shared/AppText"
 import { globalStyles, palette } from "../styles/global"
 import { FontName } from "../constants/Fonts"
 
-export default function UnfoldableCard({ title, bodyComponent }: { title: string; bodyComponent: JSX.Element }) {
-  let [isBodyRevealed, setIsBodyRevealed] = useState(false)
+export default function UnfoldableCard({ title, bodyComponent }: { title: string; bodyComponent: React.JSX.Element }) {
+  const [isBodyRevealed, setIsBodyRevealed] = useState(false)
 
   return (
     <TouchableOpacity

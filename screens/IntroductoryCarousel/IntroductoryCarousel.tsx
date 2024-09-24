@@ -34,12 +34,12 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
   const [currentPage, setCurrentPage] = React.useState(0)
   const swiperRef = useRef<SwiperType>()
 
-  let [isVisible, setIsVisible] = useState(true)
-  let [isReady, setIsReady] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [isReady, setIsReady] = useState(false)
 
-  let [schedulePickerModalVisible, setSchedulePickerModalVisible] = useState(false)
+  const [schedulePickerModalVisible, setSchedulePickerModalVisible] = useState(false)
 
-  let [schedulePickerData, setSchedulePickerData] = useState<string[]>([])
+  const [schedulePickerData, setSchedulePickerData] = useState<string[]>([])
 
   const navigation = useNavigation()
 
@@ -48,9 +48,11 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
   // mount effect
   useEffect(() => {
     async function init() {
-      let scheduleLodaderInstance = await ScheduleLoaderService.GetInstance()
+      const scheduleLodaderInstance = await ScheduleLoaderService.GetInstance()
 
-      let schedulePickerData = scheduleLodaderInstance.scheduleFiles.map((f) => ensureNoExtension(f.filename, ".json"))
+      const schedulePickerData = scheduleLodaderInstance.scheduleFiles.map((f) =>
+        ensureNoExtension(f.filename, ".json")
+      )
       setSchedulePickerData(schedulePickerData)
 
       setIsReady(true)
@@ -121,7 +123,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
                 i.currentScheduleName = ensureExtension(selected, ".json")
                 i.saveToStorage()
 
-                let newCurrentPage = _.clamp(currentPage + 1, 0, lastPageIndex)
+                const newCurrentPage = _.clamp(currentPage + 1, 0, lastPageIndex)
                 setCurrentPage(newCurrentPage)
               })
             }}
@@ -132,7 +134,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           <TouchableOpacity
             style={[styles.navigationButton, styles.backButton]}
             onPress={() => {
-              let newCurrentPage = _.clamp(currentPage - 1, 0, 999)
+              const newCurrentPage = _.clamp(currentPage - 1, 0, 999)
 
               setCurrentPage(newCurrentPage)
             }}
@@ -150,7 +152,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
           <TouchableOpacity
             style={styles.navigationButton}
             onPress={() => {
-              let isCloseButton = currentPage == lastPageIndex
+              const isCloseButton = currentPage == lastPageIndex
 
               if (isCloseButton) {
                 setStatusBarHidden(false, "fade")
@@ -160,7 +162,7 @@ export default function InroductoryCarouselScreen({ onClose }: { onClose?: () =>
                 navigation.navigate(DrawerRoutes.VIEWER)
               }
 
-              let newCurrentPage = _.clamp(currentPage + 1, 0, lastPageIndex)
+              const newCurrentPage = _.clamp(currentPage + 1, 0, lastPageIndex)
               setCurrentPage(newCurrentPage)
             }}
           >
