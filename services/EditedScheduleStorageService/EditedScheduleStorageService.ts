@@ -29,7 +29,7 @@ export default class EditedSchedulesStorageService implements IEditedScheduleSto
   }
 
   async init() {
-    let scheduleLoader = await ScheduleLoaderService.GetInstance()
+    const scheduleLoader = await ScheduleLoaderService.GetInstance()
     // invalidate outdated edited schedules
     const results = scheduleLoader.scheduleFiles.map(async (scheduleFile) => {
       if (await this.isOutdated(scheduleFile.filename)) {
@@ -58,7 +58,7 @@ export default class EditedSchedulesStorageService implements IEditedScheduleSto
       scheduleLoader.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
     )
 
-    let jsonToDump: ScheduleWithMetadata = {
+    const jsonToDump: ScheduleWithMetadata = {
       metadata: scheduleMetadata,
       scheduleDays: {},
     }
@@ -82,17 +82,17 @@ export default class EditedSchedulesStorageService implements IEditedScheduleSto
   }
 
   async isOutdated(scheduleFileName: string) {
-    let scheduleLoader = await ScheduleLoaderService.GetInstance()
-    let contentfulScheduleFile = scheduleLoader.getScheduleFileByFileName(scheduleFileName)
+    const scheduleLoader = await ScheduleLoaderService.GetInstance()
+    const contentfulScheduleFile = scheduleLoader.getScheduleFileByFileName(scheduleFileName)
 
-    let editVer = await this.loadEditedSchedule(scheduleFileName)
+    const editVer = await this.loadEditedSchedule(scheduleFileName)
     if (!editVer) return false
 
     // debugger
 
-    let editVerMetadata = editVer.metadata
+    const editVerMetadata = editVer.metadata
 
-    let contentfulVerMetadata = scheduleLoader.getScheduleFileMetadata(contentfulScheduleFile)
+    const contentfulVerMetadata = scheduleLoader.getScheduleFileMetadata(contentfulScheduleFile)
 
     return !_.isEqual(editVerMetadata, contentfulVerMetadata)
   }

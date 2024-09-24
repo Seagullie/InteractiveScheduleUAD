@@ -54,7 +54,7 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
     await this.registerNotificationsChannel()
 
     if (!isRunningInBrowser()) {
-      let permissionsGranted = (await this.checkPermissionsAsync()).granted
+      const permissionsGranted = (await this.checkPermissionsAsync()).granted
       if (!permissionsGranted) await Notifications.requestPermissionsAsync()
 
       console.log(`[Local Notifications] permissions granted: ${permissionsGranted}`)
@@ -112,7 +112,7 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
     // TODO: pass channel id to trigger
 
     // random unique identifier will be generated if not specified
-    let notificationId = undefined
+    const notificationId = undefined
 
     const message: Notifications.NotificationRequestInput = {
       identifier: notificationId,
@@ -123,8 +123,8 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
       trigger: trigger,
     }
 
-    let nextTriggerDate = await Notifications.getNextTriggerDateAsync(trigger)
-    let now = new Date()
+    const nextTriggerDate = await Notifications.getNextTriggerDateAsync(trigger)
+    const now = new Date()
 
     if (nextTriggerDate == null && trigger.date >= now) {
       throw new Error("nextTriggerDate is null for this notification: " + trigger.date)
@@ -141,7 +141,7 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
   }
 
   async scheduleExampleNotificationViaDate(secondsFromNow = 5) {
-    let trigger: Notifications.NotificationTriggerInput = {
+    const trigger: Notifications.NotificationTriggerInput = {
       date: new Date(Date.now() + secondsFromNow * 1000),
       channelId: this.notificationChannelId,
     }
@@ -150,7 +150,7 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
   }
 
   async scheduleRepeatableExampleNotification() {
-    let trigger: Notifications.NotificationTriggerInput = {
+    const trigger: Notifications.NotificationTriggerInput = {
       seconds: 5,
       repeats: true,
       channelId: this.notificationChannelId,
@@ -160,7 +160,7 @@ export default class LocalNotificationsService implements ILocalNotificationsSer
   }
 
   async scheduleRepeatableDailyExampleNotification() {
-    let trigger: Notifications.DailyTriggerInput = {
+    const trigger: Notifications.DailyTriggerInput = {
       hour: 14,
       minute: 41,
       repeats: true,

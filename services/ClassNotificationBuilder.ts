@@ -34,7 +34,7 @@ export default class ClassNotificationBuilder {
     this.signature = class_.getUniqueStringSignature()
 
     // use reglament to determine hour and minute
-    let hourAndMinute = REGLAMENT_DATA[class_.index - 1][1]
+    const hourAndMinute = REGLAMENT_DATA[class_.index - 1][1]
 
     this.hour = parseInt(hourAndMinute.split(":")[0])
     this.minute = parseInt(hourAndMinute.split(":")[1])
@@ -46,29 +46,31 @@ export default class ClassNotificationBuilder {
     }
   }
 
+  // TODO: split this method into two separate methods
+  // eslint-disable-next-line max-lines-per-function
   constructBiweeklyNotificationsSequence(scheduleDay: ScheduleDay) {
     // we need to generate lots of periodic biweekly notifications. Here a period is two weeks
     // we need approx this number of notifications: n of months in semester * 2. n of months in semester = ~6
 
     // construct notification date
-    let now = new Date()
+    const now = new Date()
 
-    let monthDay = now.getDate()
+    const monthDay = now.getDate()
     let notificationDate = new Date(now.getFullYear(), now.getMonth(), monthDay, this.hour, this.minute)
     notificationDate = setDayOnDate(notificationDate, this.schedule.dayNames.indexOf(scheduleDay.name))
 
     // construct future notification dates
-    let twoWeeksInSeconds = 60 * 60 * 24 * 7 * 2
+    const twoWeeksInSeconds = 60 * 60 * 24 * 7 * 2
     // add additional week of offset if week types don't match. It's important to add 1 to week type enum returned by GetWeekType() because it's 0-indexed
-    let offset = GetWeekType() + 1 == this.class_.week ? 0 : twoWeeksInSeconds / 2
-    let offsetInMillis = offset * 1000
+    const offset = GetWeekType() + 1 == this.class_.week ? 0 : twoWeeksInSeconds / 2
+    const offsetInMillis = offset * 1000
     notificationDate = new Date(offsetInMillis + notificationDate.getTime())
 
-    let notificationDates = createEvenlySpacedTimeSequence(SEMESTER_MONTHS * 2, twoWeeksInSeconds, notificationDate)
+    const notificationDates = createEvenlySpacedTimeSequence(SEMESTER_MONTHS * 2, twoWeeksInSeconds, notificationDate)
 
     // construct future notification objects for expo-notifications
-    let notificationObjects = notificationDates.map((notifDate) => {
-      let trigger: DateTriggerInput = {
+    const notificationObjects = notificationDates.map((notifDate) => {
+      const trigger: DateTriggerInput = {
         date: notifDate,
         channelId: this.notificationsService.notificationChannelId,
       }
@@ -83,11 +85,11 @@ export default class ClassNotificationBuilder {
       }
 
       // pad hour and minute with 0 if they consist of only one digit
-      let hourPadded = this.hour < 10 ? "0" + this.hour : this.hour
-      let minutePadded = this.minute < 10 ? "0" + this.minute : this.minute
+      const hourPadded = this.hour < 10 ? "0" + this.hour : this.hour
+      const minutePadded = this.minute < 10 ? "0" + this.minute : this.minute
 
       // construct notification object that will be passed to expo-notifications
-      let content: NotificationContentInput = {
+      const content: NotificationContentInput = {
         title: this.class_.name,
         body: teacherName,
         subtitle: `[${hourPadded}:${minutePadded}] Пара починається`,
@@ -101,7 +103,7 @@ export default class ClassNotificationBuilder {
 
   constructWeeklyNotification(scheduleDay: ScheduleDay) {
     // construct trigger object that will be passed to expo-notifications
-    let trigger: WeeklyTriggerInput = {
+    const trigger: WeeklyTriggerInput = {
       weekday: this.schedule.dayNames.indexOf(scheduleDay.name) + 1, // why do we add + 1 here? because weekday is 1-indexed, but dayNames is 0-indexed
       hour: this.hour,
       minute: this.minute,
@@ -120,8 +122,8 @@ export default class ClassNotificationBuilder {
     }
 
     // pad hour and minute with 0 if they consist of only one digit
-    let hourPadded = this.hour < 10 ? "0" + this.hour : this.hour
-    let minutePadded = this.minute < 10 ? "0" + this.minute : this.minute
+    const hourPadded = this.hour < 10 ? "0" + this.hour : this.hour
+    const minutePadded = this.minute < 10 ? "0" + this.minute : this.minute
 
     // construct notification object that will be passed to expo-notifications
     const weeklyNotif = {

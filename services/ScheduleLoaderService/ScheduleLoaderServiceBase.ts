@@ -88,16 +88,16 @@ export default class ScheduleLoaderServiceBase {
    */
   async getSchedulesFromFileSystem() {
     console.log(`[Schedule Loader] schedules are available locally. loading...`)
-    let allScheduleFileNames = await FileSystem.readDirectoryAsync(this.pathToScheduleFolder)
+    const allScheduleFileNames = await FileSystem.readDirectoryAsync(this.pathToScheduleFolder)
     // sort the filenames alphabetically
     allScheduleFileNames.sort()
 
     console.log(`[Schedule Loader] allScheduleFileNames: ${allScheduleFileNames}`)
     const scheduleFiles: ScheduleFile[] = await Promise.all(
       allScheduleFileNames.map(async (filename) => {
-        let file = await FileSystem.readAsStringAsync(`${this.pathToScheduleFolder}${filename}`)
-        let json = JSON.parse(file)
-        let { revision, createdAt, updatedAt, json_parsed } = json
+        const file = await FileSystem.readAsStringAsync(`${this.pathToScheduleFolder}${filename}`)
+        const json = JSON.parse(file)
+        const { revision, createdAt, updatedAt, json_parsed } = json
         return {
           filename,
           revision,
@@ -117,6 +117,8 @@ export default class ScheduleLoaderServiceBase {
    * Downloads schedules from Contentful and sets them to .scheduleFiles.
    * Also saves them to schedules folder (android only).
    */
+
+  // eslint-disable-next-line max-lines-per-function
   async getSchedulesFromContentful() {
     // retrieve schedules from contentful
     console.log(`[Schedule Loader] retrieving schedules from contentful`)
@@ -149,7 +151,7 @@ export default class ScheduleLoaderServiceBase {
           await FileSystem.downloadAsync(linkToFile, linkToDestFile)
           scheduleClassesJson = await FileSystem.readAsStringAsync(linkToDestFile)
         } else {
-          let res = await fetch(linkToFile)
+          const res = await fetch(linkToFile)
 
           const blob = await res.blob()
           const data = await blob.text()
@@ -157,7 +159,7 @@ export default class ScheduleLoaderServiceBase {
           scheduleClassesJson = data
         }
 
-        let scheduleFile: ScheduleFile = {
+        const scheduleFile: ScheduleFile = {
           filename: file.fileName,
           revision: a.sys.revision,
           createdAt: a.sys.createdAt,
@@ -221,8 +223,10 @@ export default class ScheduleLoaderServiceBase {
   /**
    * Checks for updates and updates schedules if they are outdated.
    */
+
+  // eslint-disable-next-line max-lines-per-function
   async checkForUpdatesAsync() {
-    let netInfo = await NetInfo.fetch()
+    const netInfo = await NetInfo.fetch()
 
     if (!netInfo.isConnected || !netInfo.isInternetReachable) {
       console.log(`[Schedule Loader] no internet connection. skipping update check`)
@@ -248,7 +252,7 @@ export default class ScheduleLoaderServiceBase {
         const protocol = "https:"
         const linkToFile = protocol + file.url
 
-        let scheduleFileMetadata: ScheduleFileMetadata & {
+        const scheduleFileMetadata: ScheduleFileMetadata & {
           linkToFile: string
         } = {
           filename: file.fileName,
@@ -264,14 +268,16 @@ export default class ScheduleLoaderServiceBase {
 
     // update whatever schedules are outdated
     const updatedScheduleFiles: ScheduleFile[] = await Promise.all(
+      // TODO: split into two functions
+      // eslint-disable-next-line max-lines-per-function
       scheduleFileMetadatas.map(async (sfm) => {
-        let oldSchedule = this.getScheduleFileByFileName(sfm.filename)
+        const oldSchedule = this.getScheduleFileByFileName(sfm.filename)
         if (!oldSchedule) {
           // schedule is new, download it
           const linkToDestFile = `${this.pathToScheduleFolder}${sfm.filename}`
           await FileSystem.downloadAsync(sfm.linkToFile, linkToDestFile)
 
-          let scheduleFile: ScheduleFile = {
+          const scheduleFile: ScheduleFile = {
             filename: sfm.filename,
             revision: sfm.revision,
             createdAt: sfm.createdAt,
@@ -297,7 +303,7 @@ export default class ScheduleLoaderServiceBase {
             const linkToDestFile = `${this.pathToScheduleFolder}${sfm.filename}`
             await FileSystem.downloadAsync(sfm.linkToFile, linkToDestFile)
 
-            let scheduleFile: ScheduleFile = {
+            const scheduleFile: ScheduleFile = {
               json_parsed: JSON.parse(await FileSystem.readAsStringAsync(linkToDestFile)),
               filename: sfm.filename,
               revision: sfm.revision,
@@ -341,9 +347,9 @@ export default class ScheduleLoaderServiceBase {
    */
   async dumpSchedule(schedule: IScheduleModel) {
     // get corresponding schedule file
-    let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
+    const scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
 
-    let jsonToDump: {
+    const jsonToDump: {
       [key: string]: ScheduleDay
     } = {}
 
@@ -361,7 +367,7 @@ export default class ScheduleLoaderServiceBase {
     //   return Promise.resolve()
     // }
 
-    console.log(`[Schedule Loader] dumping schedule ${scheduleFile?.filename} to file`)
+    console.log(`[Schedule Loader] dumping schedule ${scheduleFile.filename} to file`)
     // write to file
     return FileSystem.writeAsStringAsync(
       `${this.pathToScheduleFolder}${scheduleFile!.filename}`,

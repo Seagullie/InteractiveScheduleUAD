@@ -25,7 +25,7 @@ export default class ScheduleLoaderService extends ScheduleLoaderServiceBase {
   async replaceContentfulSchedulesWithEditedVersions() {
     const editedSchedulesStorage = await EditedSchedulesStorageService.GetInstance()
 
-    let editedCounterpartsPromises = this.scheduleFiles.map(async (sf) => {
+    const editedCounterpartsPromises = this.scheduleFiles.map(async (sf) => {
       // patch contentful schedules with edited versions
       const editedSchedule = await editedSchedulesStorage.loadEditedSchedule(sf.filename)
       if (editedSchedule) {
@@ -35,7 +35,7 @@ export default class ScheduleLoaderService extends ScheduleLoaderServiceBase {
       return sf
     })
 
-    let editedCounterparts = await Promise.all(editedCounterpartsPromises)
+    const editedCounterparts = await Promise.all(editedCounterpartsPromises)
 
     this.scheduleFiles = editedCounterparts
   }
@@ -45,9 +45,9 @@ export default class ScheduleLoaderService extends ScheduleLoaderServiceBase {
    */
   override async dumpSchedule(schedule: IScheduleModel) {
     // get corresponding schedule file
-    let scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
+    const scheduleFile = this.getScheduleFileByFileName(ensureExtension(schedule.name, ".json"))
 
-    let jsonToDump: {
+    const jsonToDump: {
       [key: string]: ScheduleDay
     } = {}
 

@@ -44,7 +44,7 @@ export default class SettingsService implements ISettingsService {
   private async init() {
     // get first schedule from ScheduleLoaderService and use it as default
 
-    let scheduleLoader = await ScheduleLoaderService.GetInstance()
+    const scheduleLoader = await ScheduleLoaderService.GetInstance()
     this.currentScheduleName = scheduleLoader.scheduleFiles[0].filename
 
     const fetchedSettings = await this.readFromStorage()
@@ -58,7 +58,7 @@ export default class SettingsService implements ISettingsService {
     console.log("settings fetched. Populating properties...")
     for (const [key, value] of Object.entries(fetchedSettings)) {
       console.log(`🛠 [Fetched settings] ${key}: ${value}`)
-      let key_ = key as keyof ScheduleAppSettings
+      const key_ = key as keyof ScheduleAppSettings
       ;(this[key_] as any) = value
     }
 
@@ -74,7 +74,7 @@ export default class SettingsService implements ISettingsService {
 
   // TODO: move all settings to separate object
   constructSettingsObjectFromProperties(): ScheduleAppSettings {
-    let settingsObject = { ...this }
+    const settingsObject = { ...this }
 
     // exclude event emitter from settings object
 
