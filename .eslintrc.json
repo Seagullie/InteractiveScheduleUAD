@@ -1,0 +1,53 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["google"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "require-jsdoc": "off",
+    "indent": "off",
+    "quote-props": "off",
+    "quotes": "off",
+    "linebreak-style": "off",
+    "object-curly-spacing": "off",
+    "comma-dangle": "off",
+    "no-unused-vars": "off",
+    "prefer-const": "warn",
+    "no-var": "off",
+    "no-undef": "warn",
+    "no-trailing-spaces": "off",
+    "curly": "off",
+    "operator-linebreak": "off",
+    "brace-style": "off",
+    "semi": "off",
+    "max-len": "off",
+    "valid-jsdoc": "off",
+    "max-lines-per-function": ["warn", { "max": 40 }],
+    "space-before-function-paren": "off",
+    "new-cap": "off",
+    "no-invalid-this": "error",
+    "no-unneeded-ternary": "error",
+    "@typescript-eslint/no-unnecessary-condition": "error",
+    "no-constant-condition": ["error", { "checkLoops": false }],
+    "no-self-compare": "error",
+    "no-unreachable": "error",
+    "no-useless-return": "error",
+    "no-empty": "error",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-self-assign": "error",
+    "no-unused-expressions": "error",
+    "no-constant-binary-expression": "error",
+    "no-useless-computed-key": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
+  }
+}
