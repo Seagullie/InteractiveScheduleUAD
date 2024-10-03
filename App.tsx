@@ -49,6 +49,7 @@ import { AnalyticsService } from "./services/AnalyticsService/AnalyticsService"
 import { showErrorView } from "./components/shared/FailureView"
 import { AppStyles } from "./styles/AppStyles"
 ;("use client")
+// TODO: annotate
 
 console.log("[IMPORTS] Imported all internal dependencies")
 
