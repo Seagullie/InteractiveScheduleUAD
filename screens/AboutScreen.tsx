@@ -203,7 +203,7 @@ export default function AboutScreen() {
               {/* team member description */}
               <View style={styles.teamMemberDescription}>
                 <AppText style={[styles.teamMemberName, styles.regularLetterSpacing]}>Шепіта Юлія</AppText>
-                <AppText style={[styles.teamMemberDetails]}>Робота з контентом</AppText>
+                <AppText style={[styles.teamMemberDetails]}>Робота з контентом{"\n"}Google Play Store</AppText>
               </View>
             </View>
 
