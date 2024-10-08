@@ -43,7 +43,7 @@ export default function ScheduleDayComponent({
     // if schedule day is not loaded yet, display loading indicator
     return (
       <View style={SDstyles.scheduleDayCard}>
-        <Text style={globalStyles.dayNameHeader}>{dayName}</Text>
+        <Text>{dayName}</Text>
         <View>
           <View style={globalStyles.centered}>
             <ActivityIndicator size="large" color={palette.navigationBackground} />

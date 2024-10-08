@@ -30,6 +30,7 @@ import DateOverviewCard from "../../components/ScheduleComponents/DateOverviewCa
 import { WeekTypeContext } from "../../contexts/weekTypeContext"
 import { styles } from "./Styles"
 import { IS_FIRST_TIME_LAUNCH_KEY } from "../../constants/AsyncStorageKeys"
+import { OnLayoutChange } from "./Utils/OnLayoutChange"
 
 // TODO: scroll to current day on mount only instead of doing so on every rerender?
 
@@ -43,8 +44,6 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
     navigation.closeDrawer()
   }
 
-  const todayIndex = ldash.clamp(new Date().getDay() - 1, 0, 4)
-
   // state for unconditional rerendering
   const [_, setState] = useState({})
   const [isFirstTimeLaunch, setIsFirstTimeLaunch] = useState<string | null>("false") // async storage can't store anything other than strings
@@ -55,9 +54,10 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
 
   const scrollViewContainerRef = useRef<ScrollView | null>(null)
 
-  const [scheduleLoaded, setScheduleLoaded] = useState(false)
+  const [isScheduleLoaded, setScheduleLoaded] = useState(false)
   const [scheduleName, setScheduleName] = useState("")
-  const [dataSourceCords, setDataSourceCords] = useState<any[]>([])
+  // y coords of each day card
+  const [dataSourceCoords, setDataSourceCoords] = useState<number[]>([])
 
   const scheduleNameRef = useRef<string>()
   scheduleNameRef.current = scheduleName
@@ -219,7 +219,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
     }, [])
   )
 
-  if (!scheduleLoaded) {
+  if (!isScheduleLoaded) {
     return (
       <View style={styles.rootContainer}>
         <ScheduleHeader title="Розклад" onWeekTypeChanged={onWeekTypeChanged} />
@@ -290,32 +290,18 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
                 <View
                   style={styles.cardContainer}
                   key={day + weekType}
+                  // runs twice for each day.
                   onLayout={(event) => {
+                    // gather coords data
                     const layout = event.nativeEvent.layout
-                    dataSourceCords[idx] = layout.y
-                    setDataSourceCords(dataSourceCords)
-                    // console.log("- - - component layout data (start) - - - ")
-                    // console.log(dataSourceCords)
-                    // console.log("height:", layout.height)
-                    // console.log("width:", layout.width)
-                    // console.log("x:", layout.x)
-                    // console.log("y:", layout.y)
-                    // console.log("- - - component layout data (end) - - - ")
+                    dataSourceCoords[idx] = layout.y
+                    setDataSourceCoords(dataSourceCoords)
 
-                    if (dataSourceCords.length < todayIndex) return
-                    if (this.scrolledToToday == true) return
-
-                    // this should happen only once
-                    scrollViewContainerRef.current!.scrollTo({
-                      x: 0,
-                      y: dataSourceCords[todayIndex],
-                      animated: true,
+                    // try to scroll to today
+                    OnLayoutChange({
+                      dataSourceCoords,
+                      scrollViewContainerRef,
                     })
-
-                    // TODO: Refactor
-                    if (dataSourceCords.length == 5) {
-                      this.scrolledToToday = true
-                    }
                   }}
                 >
                   <ScheduleDayComponent
