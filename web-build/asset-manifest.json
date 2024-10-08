@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.0122ce01.css",
-    "main.js": "/static/js/main.7cd48310.js",
-    "static/js/793.b51b7d62.js": "/static/js/793.b51b7d62.js",
+    "main.js": "/static/js/main.18d8635c.js",
+    "static/js/793.957a9e0c.js": "/static/js/793.957a9e0c.js",
     "static/media/Ionicons.ttf": "/static/media/Ionicons.9b6b1954a5eb6efeaf11.ttf",
     "static/media/lightbulb-nontrasparent-fixed.png": "/static/media/lightbulb-nontrasparent-fixed.c11b98c980e0ff68bfdb.png",
     "static/media/MaterialIcons.ttf": "/static/media/MaterialIcons.f20305dee9d396fea5c7.ttf",
@@ -54,12 +54,12 @@
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
     "main.0122ce01.css.map": "/static/css/main.0122ce01.css.map",
-    "main.7cd48310.js.map": "/static/js/main.7cd48310.js.map",
-    "793.b51b7d62.js.map": "/static/js/793.b51b7d62.js.map"
+    "main.18d8635c.js.map": "/static/js/main.18d8635c.js.map",
+    "793.957a9e0c.js.map": "/static/js/793.957a9e0c.js.map"
   },
   "entrypoints": [
-    "static/js/793.b51b7d62.js",
+    "static/js/793.957a9e0c.js",
     "static/css/main.0122ce01.css",
-    "static/js/main.7cd48310.js"
+    "static/js/main.18d8635c.js"
   ]
 }
