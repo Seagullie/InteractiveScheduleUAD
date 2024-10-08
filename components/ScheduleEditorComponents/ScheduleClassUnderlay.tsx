@@ -1,5 +1,6 @@
 import React from "react"
-import { useSwipeableItemParams } from "react-native-swipeable-item"
+// import { useSwipeableItemParams } from "react-native-swipeable-item"
+import { useSwipeableItemParams } from "../shared/SwipeableItem/SwipeableItem"
 import { TouchableOpacity, View, StyleSheet } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 import { globalStyles, palette } from "../../styles/global"

@@ -268,8 +268,7 @@ export default function ScheduleScreen({ isEditable = false }: { isEditable: boo
             {/* explanatory card if in editor, otherwise date overview card */}
 
             {isEditable ? <EditActionsExplanatoryCard /> : <DateOverviewCard />}
-            {/* temp slice for performance reasons */}
-            {workDays.slice(0, 111).map((day, idx) => {
+            {workDays.map((day, idx) => {
               const item = day
 
               const schedule = scheduleRef.current!
