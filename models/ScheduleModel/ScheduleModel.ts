@@ -9,6 +9,7 @@ import { IScheduleModel, ScheduleDaysJson } from "./Types"
 export default class ScheduleModel implements IScheduleModel {
   name: string
   specialtyName: string
+  // TODO: delete the attribute
   year: number
 
   // TODO: move to constants

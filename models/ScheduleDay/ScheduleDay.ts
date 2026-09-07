@@ -30,7 +30,10 @@ export class ScheduleDay implements IScheduleDay {
     return denominatorClasses
   }
 
-  getMatchingClassOfOtherWeek(class_: ScheduleClass) {
+  /**
+   * Returns the class of the other week that matches index of given class
+   */
+  getMatchingClassOfOtherWeek(class_: ScheduleClass): ScheduleClass | null {
     if (!class_.isBiweekly) return null
 
     const otherWeek = class_.week == 1 ? 2 : 1

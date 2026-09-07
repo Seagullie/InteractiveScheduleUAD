@@ -7,14 +7,14 @@ export enum WeekType {
 
 // month/day/year
 // const SEMESTER_START = new Date("10/3/2022") // such string notation doesn't work in react native
-const SEMESTER_START = new Date(2022, 9, 3) // month is 0-based
-const SEMESTER_START_TYPE = WeekType.Denominator
+let SEMESTER_START = new Date(2026, 8, 7) // month is 0-based
+let SEMESTER_START_TYPE = WeekType.Denominator
 
 export default function GetWeekType(timepoint = new Date()): WeekType {
   // let timepoint = new Date()
-  let timeDifferenceInHours = GetTimeDifference(SEMESTER_START, timepoint).hours
-  let timeDifferenceInDays = timeDifferenceInHours / 24
-  let timeDifferenceInWeeks = Math.trunc(timeDifferenceInDays / 7)
+  const timeDifferenceInHours = GetTimeDifference(SEMESTER_START, timepoint).hours
+  const timeDifferenceInDays = timeDifferenceInHours / 24
+  const timeDifferenceInWeeks = Math.trunc(timeDifferenceInDays / 7)
 
   if (timeDifferenceInWeeks % 2 == 0) {
     if (SEMESTER_START_TYPE === WeekType.Denominator) {
